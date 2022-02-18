@@ -144,11 +144,7 @@ module.exports = {
     libraryTarget: "dist",
     library: "CookieConsent",
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      path: "./src/index.html",
-    }),
-  ],
+
   optimization: {
     // Even in production, export clean output. Expect users to minify as needed with their own bundler
     minimize: true,
@@ -183,16 +179,7 @@ module.exports = {
       //   test: /\.(s(a|c)ss)$/,
       //   use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
       // },
-      { test: /\.html$/, use: ["html-loader"] },
-      {
-        test: /\.(svg|png|jpg|gif)$/,
-        use: {
-          options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "imgs",
-          },
-        },
-      },
+
     ],
   },
 };

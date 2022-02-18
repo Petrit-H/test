@@ -6,6 +6,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 
 module.exports = {
   mode: "production",
@@ -33,12 +35,25 @@ module.exports = {
           "postcss-loader",
         ],
       },
+      { test: /\.html$/, use: ["html-loader"] },
+      {
+        test: /\.(svg|png|jpg|gif)$/,
+        use: {
+          options: {
+            name: "[name].[hash].[ext]",
+            outputPath: "imgs",
+          },
+        },
+      },
     ],
   },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      path: "./src/index.html",
+    }),
     new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
     new CleanWebpackPlugin(),
   ],
