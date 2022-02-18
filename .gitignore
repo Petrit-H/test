@@ -1,0 +1,13 @@
+node_modules/
+.idea
+.vscode
+.npmrc
+CHANGELOG.md
+*.code-workspace
+vscode.code-workspace
+.DS_Store
+build-verify/
+coverage/
+coverage/**
+build/cookieconsent.min.js
+/dist/

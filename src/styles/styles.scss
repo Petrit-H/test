@@ -1,0 +1,117 @@
+// @import "./main.scss";
+
+/* EXAMPLE 3  */
+/* Checkbox style */
+// @tailwind base;
+// @tailwind utilities;
+// @tailwind components;
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
+
+.contentWrapper {
+  // max-height: 100%;
+  // max-height: calc(100% - 210px);
+  // height: calc(100% - 120px);
+
+  height: 500px;
+  @media only screen and (min-width: 1536px) {
+    // max-height: calc(100% - 130px);
+  }
+}
+.cookieModal {
+  // max-height: 80vh;
+  height: 100%;
+  // max-height: calc(100vh - 330px);
+  @media only screen and (min-width: 480px) {
+    // max-height: calc(100% - 330px);
+  }
+  @media only screen and (min-width: 1536px) {
+    // max-height: calc(100% - 330px);
+  }
+}
+
+input[type="checkbox"]:checked ~ .dot {
+  transform: translateX(12px);
+  background-color: #1c79f2;
+}
+
+.switch-toggle input  {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.switch-toggle .cc-btn {
+  border: 0;
+  padding: 0;
+}
+
+// .categoryChecked{
+//   transform: translateX(12px);
+//   background-color: #1c79f2;
+// }
+
+input[type="checkbox"]:disabled + .switch-holder {
+  cursor: default;
+}
+
+input[type="checkbox"]:disabled ~ .dot {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// .checkbox:hover div {
+//   @apply border-gray-500;
+// }
+
+// .checkbox-wrapper input:checked + .icon {
+//   background-color: red;
+//   border-color: blue;
+
+//   /* background-color: blue; */
+//   /* */
+//   /*
+//   @a*/
+// }
+// .checkbox-wrapper input:checked ~ .dot {
+//   transform: translateX(0.75rem);
+//   background-color: red;
+// }
+
+//! spinner on loading
+#spinner:not([hidden]) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid #1c79f2;
+  border-radius: 100%;
+  will-change: transform;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
