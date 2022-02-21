@@ -1,1 +1,36 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Webpack App</title><meta name="viewport" content="width=device-width,initial-scale=1"><script defer="defer" src="index.min.js"></script><link href="main.d1dc9ab0b09618917951.css" rel="stylesheet"></head><body></body></html>
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+   <base href=./>
+   <meta charset=UTF-8>
+   <meta name=viewport content="width=device-width,initial-scale=1">
+   <title>CMP</title>
+   <link rel=preconnect href=https://fonts.googleapis.com>
+   <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+   <link rel=stylesheet href=2bbe6543e0630213c071.css>
+   <link rel=stylesheet href=7dced3db4ccc729d40f1.css>
+
+<body class="example3 text-primary" role=document>
+   <div id=test></div>
+   <div class="form-controls container max-w-xl text-center">
+      <div class=example-selector></div><select id=location class=selectbox></select>
+      <div id=message></div>
+      <div id=options></div><br><button id=toggleType class="bg-red-300 typeChange"
+         onclick=typeToggleFunction(event)>toggle</button>
+   </div>
+   <div id=CMP></div>
+   <script src=https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js></script>
+   <script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin=anonymous referrerpolicy=no-referrer></script>
+   <script src=c44d8eb87733f7b6f039.js></script>
+   <script src=31919f599445f0ab1de0.js></script>
+   <script src=6242d596e94296eb96c5.js></script>
+   <script>const COUNTRY_CODES = { AT: "Austria", BE: "Belgium", BG: "Bulgaria", CY: "Cyprus ", CZ: "Czech Republic", DK: "Denmark", EE: "Estonia", FI: "Finland", FR: "France", DE: "Germany", GR: "Greece", HU: "Hungary", IE: "Ireland", IT: "Italy ", LV: "Latvia", LT: "Lithuania ", LU: "Luxembourg", MT: "Malta ", NL: "The Netherlands", PL: "Poland", PT: "Portugal ", RO: "Romania ", SK: "Slovakia ", SI: "Slovenia ", ES: "Spain ", SE: "Sweden ", GB: "United Kingdom " }; let testType = "info"; const optionsObj = (e, o) => { console.log("CODE ", e); return { cookieconsent: CookieConsent, selector: document.querySelector(".example-selector"), container: document.getElementById("CMP"), type: o, regionalLaw: !0, legal: e, law: { regionalLaw: !0 }, location: !0, revokable: !0, palette: { categories: { display: "flex", "flex-direction": "column", height: "100vh" } } } }; console.log("🚀 ~ OPTIONS", optionsObj()); const locationElement = document.getElementById("location"), categoriesType = document.querySelector(".cc-window"), infoType = document.querySelector(".cc-window.cc-type-info"); let ccInstance; const draw = function (e) { ccInstance = new CookieConsent(optionsObj(e, testType)), ccInstance.autoOpen = !1, console.log("🚀 ~ ccInstance.autoOpen ", ccInstance.autoOpen), ccInstance.on("initialized", (function (e) { console.log("🚀 ~ POPUP INIT", e) })).on("popupOpened", ((...e) => console.log("Popup Open", e))).on("popupClosed", ((...e) => { console.log("Popup Closed", e) })).on("error", console.error); const o = ccInstance.getCountryLaws(e); console.log("🚀 ~ file: scripts.js ~ line 156 ~ countryOpts", o), document.getElementById("message").innerHTML = o.hasLaw ? CMP_Section.tabularObject({ "Has cookie law?": o.hasLaw ? "yes" : "no", "Choice has to be revokable?": o.revokable ? "yes" : "no", "Can be automatically dismissed?": o.explicitAction ? "no" : "yes", "Option tye:": testType }) : "Has cookie law? no" }; CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES), locationElement.selectedIndex >= 0 && console.log("🚀 ~ LOCATION =>", locationElement[locationElement.selectedIndex].value); const toggleType = document.querySelector(".typeChange"), typeToggleFunction = e => { if (timeStamp(), console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType), console.log("🚀 ~ file: index.html ~ line 204 ~ categoriesType => ", categoriesType), console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType), "info" === testType) testType = "categories", optionsObj(locationElement[locationElement.selectedIndex].value, "categories"), ccInstance.clearStatuses().destroy(), draw(locationElement[locationElement.selectedIndex].value), bannerAccordionToggle(), showModal(), console.log("🚀 ~ TYPE-> options.type", testType); else { if ("categories" !== testType) return this; testType = "info", optionsObj(locationElement[locationElement.selectedIndex].value, "info"), ccInstance.clearStatuses().destroy(), draw(locationElement[locationElement.selectedIndex].value), console.log("🚀 ~TYPE->  options.type", testType) } }; draw(locationElement[locationElement.selectedIndex].value), locationElement.focus()</script>
+</body>
+<script defer=defer src=index.c75abb7e5039ab52ec40.min.js></script>
+<link href=index.43b9d423c00ea823504c.css rel=stylesheet>
+</head>
+
+</html>

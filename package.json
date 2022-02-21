@@ -1,8 +1,8 @@
 {
   "name": "gjirafa-cmp",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "FORK OF Osano cookie consent tool.",
-  "main": "dist/umd/index.min.js",
+  "main": "dist/index.min.js",
   "types": "types/index.d.ts",
   "files": [
     "dist/**/*",
@@ -10,6 +10,31 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://github.com/Petrit-H/test.git",
+  "scripts": {
+    "start": "npx tailwindcss -o tailwind.css && webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "test": "jest ./src --verbose --coverage && rm -rf coverage/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Petrit-H/test.git.git"
+  },
+  "author": "Scott Willeke (forked from Osano, Inc., a Public Benefit Corporation)",
+  "license": "MIT",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "\\.(css|less|scss)$": "<rootDir>/src/__mocks__/styleMock.js"
+    },
+    "setupFiles": [
+      "<rootDir>/src/__mocks__/client.js"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
@@ -42,6 +67,8 @@
     "postcss-cli": "^9.1.0",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.3.3",
+    "postcss-import": "^14.0.2",
+    "postcss-nesting": "^10.1.2",
     "rimraf": "^3.0.2",
     "sass": "^1.49.7",
     "sass-loader": "^12.6.0",
@@ -53,33 +80,6 @@
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
     "webpack-merge": "^5.8.0"
-  },
-  "homepage": "https://github.com/Petrit-H/test.git",
-  "scripts": {
-    "start": "npx tailwindcss -o tailwind.css && webpack --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
-    "test": "jest ./src --verbose --coverage && rm -rf coverage/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Petrit-H/test.git.git"
-  },
-  "author": "Scott Willeke (forked from Osano, Inc., a Public Benefit Corporation)",
-  "license": "MIT",
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|less|scss)$": "<rootDir>/src/__mocks__/styleMock.js"
-    },
-    "setupFiles": [
-      "<rootDir>/src/__mocks__/client.js"
-    ]
-  },
-  "dependencies": {
-    "axios": "^0.26.0",
-    "babel-runtime": "^6.26.0",
-    "postcss-import": "^14.0.2",
-    "postcss-nesting": "^10.1.2"
   },
   "bugs": {
     "url": "https://github.com/Petrit-H/test.git/issues"

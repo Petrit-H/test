@@ -1,0 +1,21 @@
+//!  FILL THE COOKIE SETTINGS SECTION
+
+//! Fetch data from the CATEGORIES endpoint
+
+//! Fetch data from the DOMAIN endpoint
+
+//! Handle the dropdown show and hide(FOR THE CATEGORIE DETAILS)
+
+//! Handle the dropdown show and hide(FOR THE CATEGORIES OF COOKIES w/caret down)
+
+//! TOGGLE OSANO BANNER'S ACCORDION
+
+//! display the Cookie Details modal/data-injection
+
+//! execute the necessary functions on document load
+
+//! fetch category cookies
+
+//! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
+
+//! toggle injected button ON/OFF

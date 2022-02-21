@@ -1,0 +1,5 @@
+//! check if the user has selected any option
+
+//! handle the clicks in the modal, where ever they might be
+
+//! show the consent banner on window load and after x seconds
