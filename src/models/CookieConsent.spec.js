@@ -1,4 +1,4 @@
-"use strict"
+
 
 import CookieConsent from "./CookieConsent"
 import Base from "./Base"

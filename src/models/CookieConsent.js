@@ -1,4 +1,4 @@
-"use strict";
+;
 
 import Base from "./Base";
 import Legal from "./Legal";

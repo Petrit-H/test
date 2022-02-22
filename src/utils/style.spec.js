@@ -1,4 +1,4 @@
-"use strict"
+
 
 import {
   normalizeHex,
@@ -15,15 +15,15 @@ describe( "Utils::Style", () => {
     test( "getHoverColor", () => expect( getHoverColor ).toBeInstanceOf( Function ) )
   })
   test( "normalizeHex returns propper value", () => {
-    expect( normalizeHex( "#123DEF" ) ).toEqual( "123DEF" ) 
+    expect( normalizeHex( "#123DEF" ) ).toEqual( "123DEF" )
   })
   test( "getContrast returns propper value", () => {
-    expect( getContrast( "#123DEF" ) ).toEqual( "#fff" ) 
+    expect( getContrast( "#123DEF" ) ).toEqual( "#fff" )
   })
   test( "getLuminance returns propper value", () => {
-    expect( getLuminance( "#123DEF" ) ).toEqual( "#3863ff" ) 
+    expect( getLuminance( "#123DEF" ) ).toEqual( "#3863ff" )
   })
   test( "getHoverColor returns propper value", () => {
-    expect( getHoverColor( "#123DEF" ) ).toEqual( "#3863ff" ) 
+    expect( getHoverColor( "#123DEF" ) ).toEqual( "#3863ff" )
   })
 })

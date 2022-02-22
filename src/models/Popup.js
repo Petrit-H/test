@@ -1,4 +1,4 @@
-"use strict";
+;
 
 import Base from "./Base";
 import defaultOptions from "../options/popup";

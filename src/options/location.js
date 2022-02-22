@@ -1,4 +1,4 @@
-"use strict";
+;
 
 const toError = (obj) => {
   console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
@@ -88,7 +88,7 @@ export default {
 };
 
 //! =======================================
-// "use strict";
+// ;
 
 // const toError = (obj) =>
 //   new Error("Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error);
@@ -209,7 +209,7 @@ export default {
 
 // !===========================
 
-// "use strict";
+// ;
 
 // const toError = (obj) =>
 //   new Error("Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error);

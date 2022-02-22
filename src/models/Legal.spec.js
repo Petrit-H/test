@@ -1,4 +1,4 @@
-"use strict"
+
 
 import Legal from "./Legal"
 import Base from "./Base"

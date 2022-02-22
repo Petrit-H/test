@@ -1,4 +1,4 @@
-"use strict"
+
 
 import Popup from "./Popup"
 import Base from "./Base"

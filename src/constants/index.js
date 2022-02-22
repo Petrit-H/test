@@ -1,4 +1,4 @@
-"use strict";
+;
 
 export const statuses = ["DENY", "ALLOW", "DISMISS"];
 export const statusDeny = "DENY";

@@ -1,4 +1,4 @@
-"use strict"
+
 
 import Location from "./Location"
 import Base from "./Base"

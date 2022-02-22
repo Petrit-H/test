@@ -1,4 +1,4 @@
-"use strict"
+
 
 import * as cookie from "./cookie"
 export const getCookie = cookie.getCookie
@@ -66,7 +66,7 @@ const loopProperties = overwrites => (obj, [key, value]) => {
     if ( overwrites.hasOwnProperty( key ) ) {
       obj[ key ] = overwrites[ key ]
     }else {
-      obj[ key ] = value 
+      obj[ key ] = value
     }
   }
   return obj

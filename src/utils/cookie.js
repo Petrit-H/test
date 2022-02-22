@@ -1,4 +1,4 @@
-"use strict"
+
 
 export const getCookie = name => {
   const value = ' ' + document.cookie

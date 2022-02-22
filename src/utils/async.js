@@ -1,4 +1,4 @@
-"use strict"
+
 
 export const getScript = ( url, callback, timeout ) => {
   let timeoutIdx

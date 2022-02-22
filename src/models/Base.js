@@ -1,4 +1,4 @@
-"use strict"
+
 
 import { mergeOptions } from "../utils"
 import EventEmitter from "events"

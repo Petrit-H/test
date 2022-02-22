@@ -1,4 +1,4 @@
-"use strict"
+
 
 const CookieConsent = require( "./models/CookieConsent" ).default
 const CC = require( "./" ).default
@@ -8,4 +8,3 @@ describe( "Plugin", () => {
     expect( new CC() ).toBeInstanceOf( CookieConsent )
   })
 })
-

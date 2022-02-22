@@ -1,4 +1,4 @@
-"use strict"
+
 
 export const normalizeHex = hex =>
   hex[0] == '#'

@@ -1,4 +1,4 @@
-"use strict"
+
 
 import { getContrast, getHoverColor } from './style'
 
