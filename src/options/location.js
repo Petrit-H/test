@@ -1,4 +1,5 @@
-;
+import axios from 'axios'
+
 
 const toError = (obj) => {
   console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
