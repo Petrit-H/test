@@ -2,11 +2,10 @@
   "name": "gjirafa-cmp",
   "version": "4.0.8",
   "description": "FORK OF Osano cookie consent tool.",
-  "main": "dist/umd/index.min.js",
+  "main": "./dist/index.min.js",
   "types": "types/index.d.ts",
   "files": [
-    "dist/**/*",
-    "types/**/*"
+    "dist/*"
   ],
   "publishConfig": {
     "access": "public"
@@ -15,6 +14,7 @@
   "scripts": {
     "start": "npx tailwindcss -o tailwind.css && webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "serve": "webpack --config webpack.config.js",
     "test": "jest ./src --verbose --coverage && rm -rf coverage/"
   },
   "repository": {
@@ -77,10 +77,12 @@
     "string-replace-loader": "^3.1.0",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.0.22",
+    "url-loader": "^4.1.1",
     "version-bump-prompt": "^6.1.0",
     "webpack": "^5.69.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0"
   },
   "bugs": {

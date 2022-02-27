@@ -44,6 +44,9 @@ window.addEventListener("load", function (event) {
   const noData = document.getElementById("noData");
   const goBack = document.getElementById("goBack");
   console.log("🚀 ~ file: cookies.js ~ line 38 ~ goBack", goBack);
+
+
+
   // const cookieSectionInject = document.querySelector(".cookieSectionInject");
   const cookieSectionInject = document.getElementById("cookieSectionInject");
   //! execute the necessary functions on document load
@@ -98,6 +101,7 @@ window.addEventListener("load", function (event) {
     // console.log("==================vvv=====================");
     // console.log("🚀 ~ categories", categories);
     // console.log("🚀 ~ responseData", responseData);
+
     console.log("🚀 ~ DATA-4-BALA", dataForBala);
     // console.log("==================^^^=====================");
 
@@ -106,7 +110,10 @@ window.addEventListener("load", function (event) {
     // }
   }, 200);
   // };
+
 });
+
+
 
 //! Handle the dropdown show and hide(FOR THE CATEGORIES OF COOKIES w/caret down)
 function homepageAccordionToggle() {

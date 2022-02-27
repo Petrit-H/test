@@ -1,4 +1,4 @@
-window["CMP_Section"] = {
+module.exports = CMP_Section = {
   // Fill a select element with options (html can be configured using `cb`)
   fillSelect: function (select, options, selected, cb) {
     if (typeof cb != "function") {
@@ -199,17 +199,8 @@ window["CMP_Section"] = {
   },
 };
 
-function timeStamp() {
-  const now = new Date();
-  const time = [now.getHours(), now.getMinutes(), now.getSeconds()];
-  for (let i = 1; i < 3; i++) {
-    if (time[i] < 10) {
-      time[i] = "0" + time[i];
-    }
-  }
-  console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
-  return "[" + time.join(":") + "] ";
-}
+
+
 
 //! Handles the tabs and its content
 function openCity(evt, cityName) {

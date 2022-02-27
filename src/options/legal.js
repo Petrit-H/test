@@ -1,4 +1,3 @@
-;
 
 export default {
   // Make this false if you want to disable all regional overrides for settings.

@@ -137,6 +137,7 @@ const commonConfig = require('./webpack.common');
 module.exports = merge(commonConfig, {
   mode: 'development',
   devtool: 'source-map',
+  watch:true,
   module: {
     rules: [
       {
@@ -173,14 +174,7 @@ module.exports = merge(commonConfig, {
           },
         },
       }),
-      new TerserPlugin({
-        // Use multi-process parallel running to improve the build speed
-        // Default number of concurrent runs: os.cpus().length - 1
-        parallel: true,
-        // Enable file caching
-        cache: true,
-        sourceMap: true,
-      }),
+      new TerserPlugin(),
     ],
   },
 });

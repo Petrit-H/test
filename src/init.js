@@ -1,5 +1,5 @@
 import CookieConsent from "./models/CookieConsent";
-
+import CMP_Section from "./scripts";
 
 const COUNTRY_CODES = {
   // Representative group of countries with key differences
@@ -74,6 +74,19 @@ const categoriesType = document.querySelector(".cc-window");
 const infoType = document.querySelector(".cc-window.cc-type-info");
 let ccInstance;
 
+function timeStamp() {
+  const now = new Date();
+  const time = [now.getHours(), now.getMinutes(), now.getSeconds()];
+  for (let i = 1; i < 3; i++) {
+    if (time[i] < 10) {
+      time[i] = "0" + time[i];
+    }
+  }
+  console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
+  return "[" + time.join(":") + "] ";
+}
+
+
 const draw = function (countryCode) {
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = false;
@@ -121,40 +134,123 @@ if (locationElement.selectedIndex >= 0) {
 // };
 const toggleType = document.querySelector(".typeChange");
 // const toggleType = document.getElementById("toggleType");
+setTimeout(() => {
+  const toggleType = document.querySelectorAll(".typeChange");
+  console.log("🚀 ~ ", toggleType);
 
-const typeToggleFunction = (e) => {
-  timeStamp();
-  console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
-  // toggleType.addEventListener("click", (e) => {
-  console.log(
-    "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
-    categoriesType
-  );
-  console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
-  // debugger
-  // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
-  if (testType === "info") {
-    testType = "categories";
-    optionsObj(
-      locationElement[locationElement.selectedIndex].value,
-      "categories"
+  // for (const key in toggleType) {
+  //   toggleType[key].addEventListener("click", (event) => {
+  //     timeStamp();
+  //     console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+  //     // toggleType.addEventListener("click", (e) => {
+  //     console.log(
+  //       "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
+  //       categoriesType
+  //     );
+  //     console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
+  //     // debugger
+  //     // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
+  //     if (testType === "info") {
+  //       testType = "categories";
+  //       optionsObj(
+  //         locationElement[locationElement.selectedIndex].value,
+  //         "categories"
+  //       );
+  //       ccInstance.clearStatuses().destroy();
+  //       draw(locationElement[locationElement.selectedIndex].value);
+  //       bannerAccordionToggle();
+  //       showModal();
+  //       console.log("🚀 ~ TYPE-> options.type", testType);
+  //     } else if (testType === "categories") {
+  //       testType = "info";
+  //       optionsObj(
+  //         locationElement[locationElement.selectedIndex].value,
+  //         "info"
+  //       );
+  //       ccInstance.clearStatuses().destroy();
+  //       draw(locationElement[locationElement.selectedIndex].value);
+  //       console.log("🚀 ~TYPE->  options.type", testType);
+  //     } else {
+  //       return this;
+  //     }
+  //   });
+  // }
+}, 500);
+setTimeout(() => {
+  const toggleType = document.querySelectorAll(".typeChange");
+  console.log("🚀 ~ ", toggleType);
+
+for (const key of toggleType) {
+  console.log(key)
+  key.addEventListener("click",event=>{
+    timeStamp();
+    console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+    // toggleType.addEventListener("click", (e) => {
+    console.log(
+      "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
+      categoriesType
     );
-    ccInstance.clearStatuses().destroy();
-    draw(locationElement[locationElement.selectedIndex].value);
-    bannerAccordionToggle();
-    showModal();
-    console.log("🚀 ~ TYPE-> options.type", testType);
-  } else if (testType === "categories") {
-    testType = "info";
-    optionsObj(locationElement[locationElement.selectedIndex].value, "info");
-    ccInstance.clearStatuses().destroy();
-    draw(locationElement[locationElement.selectedIndex].value);
-    console.log("🚀 ~TYPE->  options.type", testType);
-  } else {
-    return this;
-  }
-  // })
-};
+    console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
+    // debugger
+    // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
+    if (testType === "info") {
+      testType = "categories";
+      optionsObj(
+        locationElement[locationElement.selectedIndex].value,
+        "categories"
+      );
+      ccInstance.clearStatuses().destroy();
+      draw(locationElement[locationElement.selectedIndex].value);
+      bannerAccordionToggle();
+      showModal();
+      console.log("🚀 ~ TYPE-> options.type", testType);
+    } else if (testType === "categories") {
+      testType = "info";
+      optionsObj(locationElement[locationElement.selectedIndex].value, "info");
+      ccInstance.clearStatuses().destroy();
+      draw(locationElement[locationElement.selectedIndex].value);
+      console.log("🚀 ~TYPE->  options.type", testType);
+    } else {
+      return this;
+    }
+  })
+}
+
+}, 500);
+
+// const typeToggleFunction = (e) => {
+//   timeStamp();
+//   console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+//   // toggleType.addEventListener("click", (e) => {
+//   console.log(
+//     "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
+//     categoriesType
+//   );
+//   console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
+//   // debugger
+//   // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
+//   if (testType === "info") {
+//     testType = "categories";
+//     optionsObj(
+//       locationElement[locationElement.selectedIndex].value,
+//       "categories"
+//     );
+//     ccInstance.clearStatuses().destroy();
+//     draw(locationElement[locationElement.selectedIndex].value);
+//     bannerAccordionToggle();
+//     showModal();
+//     console.log("🚀 ~ TYPE-> options.type", testType);
+//   } else if (testType === "categories") {
+//     testType = "info";
+//     optionsObj(locationElement[locationElement.selectedIndex].value, "info");
+//     ccInstance.clearStatuses().destroy();
+//     draw(locationElement[locationElement.selectedIndex].value);
+//     console.log("🚀 ~TYPE->  options.type", testType);
+//   } else {
+//     return this;
+//   }
+//   // })
+// };
 
 // draw("XK");
 draw(locationElement[locationElement.selectedIndex].value);

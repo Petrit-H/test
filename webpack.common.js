@@ -120,28 +120,70 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // entry: './src',
+  // entry: [
+  //   "./src/index.js",
+  //   "./src/total.js",
+  // , [
+  //   "./src/scripts.js",
+  //   "./src/cookies.js",
+  //   "./src/homeBanner.js",
+  //   "./src/init.js",
+
+  // ],
+  // ],
+
+  // entry: "./src/total.js",
+  // entry: {
+  //   "index.min.js": [
+  //     // join(__dirname, "src", "index.js"),
+  //     path.resolve(__dirname, "src/init.js"),
+  //     // join(__dirname, "src", "init.js"),
+  //     path.resolve(__dirname, "src/scripts.js"),
+  //     // join(__dirname, "src", "scripts.js"),
+  //     path.resolve(__dirname, "src/cookies.js"),
+  //     // join(__dirname, "src", "cookies.js"),
+  //     path.resolve(__dirname, "src/homeBanner.js"),
+  //     // join(__dirname, "src", "homeBanner.js")
+  //   ],
+  // },
   entry: {
-    "index.min": [
+    "index.min.js": [
+      "./src/index.js",
+      "./src/init.js",
       "./src/scripts.js",
       "./src/cookies.js",
       "./src/homeBanner.js",
-      "./src/index.js",
-      "./src/init.js",
     ],
   },
+  // entry:{
+  //   a:"./src/index.js",
+  //   c:"./src/scripts.js",
+  //   d:"./src/cookies.js",
+  //   e:"./src/homeBanner.js",
+  //   b:"/src/init.js",
+  // },
+  watch: true,
   output: {
-    // filename: "[name].js",
+    // filename: "index.min.js",
+    filename: "[name]",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "./dist",
     libraryExport: "default",
     libraryTarget: "umd",
     library: "CookieConsent",
+    // library: ["MyLibrary", "[name]"],
   },
+  // experiments: {
+  //   outputModule: true,
+  // },
+  // output: {
+  //   module: true,
+  // },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      inject: true,
+      inject: false,
       template: path.resolve(__dirname, "src", "index.html"),
     }),
   ],
@@ -152,8 +194,52 @@ module.exports = {
         exclude: /[\\/]node_modules[\\/]/,
         use: {
           loader: "babel-loader",
+          // options: {
+          //   presets: ["@babel/preset-env", "es2015", "es2016"],
+          // },
         },
       },
+      {
+        test: /\.svg$/,
+        use: "file-loader",
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+      // {
+      //   test: /\.png$/,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         mimetype: 'image/png'
+      //       }
+      //     }
+      //   ]
+      // },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
     ],
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    compress: true,
+    port: 5500,
   },
 };
