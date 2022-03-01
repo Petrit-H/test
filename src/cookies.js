@@ -1,3 +1,5 @@
+import CMP_Section from "./scripts";
+
 function create_UUID() {
   var dt = new Date().getTime();
   var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
@@ -45,32 +47,24 @@ window.addEventListener("load", function (event) {
   const goBack = document.getElementById("goBack");
   console.log("🚀 ~ file: cookies.js ~ line 38 ~ goBack", goBack);
 
-
-
   // const cookieSectionInject = document.querySelector(".cookieSectionInject");
   const cookieSectionInject = document.getElementById("cookieSectionInject");
   //! execute the necessary functions on document load
   // window.onload = () => {
   fetchDataFromAPI();
   fetchCategoriesFromAPI();
+  // bannerAccordionToggle()
 
   setTimeout(() => {
     // filterCategories(categories, responseData);
     // fillCookies();
-    // bannerAccordionToggle();
     //  fillCookieSettingItem();
     // accordionToggle();
     // stopParent();
     // homepageAccordionToggle();
     toggleInjected();
+    // bannerAccordionToggle()
     // showModal();
-    // console.log("==================vvv=====================");
-    // filterCookiesByCategory(responseData, 5, NECESSARY, "NECESSARY");
-    // filterCookiesByCategory(responseData, 4, PREFERENCES, "PREFERENCES");
-    // filterCookiesByCategory(responseData, 3, ANALYTICAL, "ANALYTICAL");
-    // filterCookiesByCategory(responseData, 2, MARKETING, "MARKETING");
-    // filterCookiesByCategory(responseData, 1, OTHER, "OTHER");
-    // console.log("==================^^^=====================");
 
     //todo allowAllCookies();
     //todo allowAllCookiesHandler();
@@ -79,15 +73,6 @@ window.addEventListener("load", function (event) {
     //todo   "🚀 ~ file: cookies.js ~ cookieSectionInject",
     //todo   cookieSectionInject
     //todo );
-    // dataForBala = [
-    //   create_UUID(),
-    //   responseData,
-    //   NECESSARY,
-    //   PREFERENCES,
-    //   ANALYTICAL,
-    //   MARKETING,
-    //   OTHER,
-    // ];
 
     dataForBala = {
       id: create_UUID(),
@@ -108,95 +93,94 @@ window.addEventListener("load", function (event) {
     // if (responseData.length === 0) {
     //   noData.classList.remove("hidden");
     // }
-  }, 200);
+  }, 500);
   // };
-
 });
 
-
-
 //! Handle the dropdown show and hide(FOR THE CATEGORIES OF COOKIES w/caret down)
-function homepageAccordionToggle() {
-  let header = document.querySelectorAll(".homepageAccordion .accordionHeader");
-  console.log(
-    "🚀 ~ file: cookies.js ~ line 68 ~ homepageAccordionToggle ~ header",
-    header
-  );
-  let accordionContent = document.querySelectorAll(
-    ".homepageAccordion .accordionContent"
-  );
-  const carretToggle = document.querySelectorAll(".toggleAccordion");
+// function homepageAccordionToggle() {
+//   let header = document.querySelectorAll(".homepageAccordion .accordionHeader");
+//   console.log(
+//     "🚀 ~ file: cookies.js ~ line 68 ~ homepageAccordionToggle ~ header",
+//     header
+//   );
+//   let accordionContent = document.querySelectorAll(
+//     ".homepageAccordion .accordionContent"
+//   );
+//   const carretToggle = document.querySelectorAll(".toggleAccordion");
 
-  //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
-  for (let item = 0; item <= header.length - 1; item++) {
-    header[item].addEventListener("click", (event) => {
-      // debugger;
-      event.target.stopPropagation();
-      // event.preventDefault();
-      ["h-auto", "hidden"].map((i) =>
-        accordionContent[item]?.classList?.toggle(i)
-      );
-      carretToggle[item]?.classList?.toggle("rotate-180");
-      const children = accordionContent[item].children;
-      for (element in children) {
-        children[element]?.classList?.toggle("opacity-0");
-      }
-      console.log("click");
-    });
-  }
-}
+//   //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
+//   for (let item = 0; item <= header.length - 1; item++) {
+//     header[item].addEventListener("click", (event) => {
+//       // debugger;
+//       event.target.stopPropagation();
+//       // event.preventDefault();
+//       ["h-auto", "hidden"].map((i) =>
+//         accordionContent[item]?.classList?.toggle(i)
+//       );
+//       carretToggle[item]?.classList?.toggle("rotate-180");
+//       const children = accordionContent[item].children;
+//       for (element in children) {
+//         children[element]?.classList?.toggle("opacity-0");
+//       }
+//       console.log("click");
+//     });
+//   }
+// }
 
 //! Handle the dropdown show and hide(FOR THE CATEGORIE DETAILS)
-function settingsAccordionToggle() {
-  let header = document.querySelectorAll(".settingAccordion .accordionHeader");
-  console.log("🚀 ~ Settings Accordion Elements", header.length);
-  let accordionContent = document.querySelectorAll(
-    ".settingAccordion .accordionContent"
-  );
-  const carretToggle = document.querySelectorAll(".toggleAccordion");
-  //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
-  for (let item = 0; item <= header.length - 1; item++) {
-    header[item].addEventListener("click", (event) => {
-      event.stopPropagation();
-      ["h-auto", "hidden"].map((i) =>
-        accordionContent[item]?.classList?.toggle(i)
-      );
-      carretToggle[item]?.classList?.toggle("rotate-180");
-      const children = accordionContent[item].children;
-      for (element in children) {
-        children[element]?.classList?.toggle("opacity-0");
-      }
-      console.log("click");
-    });
-  }
-}
-
-//! TOGGLE OSANO BANNER'S ACCORDION
-function bannerAccordionToggle() {
-  let header = document.querySelectorAll(".cc-category .accordionHeader");
-  let accordionContent = document.querySelectorAll(
-    ".cc-category .accordionContent"
-  );
-  console.log("🚀 ~ HEADER LENGTH => ", header.length);
-  console.log("🚀 ~ ALL CONTENT => ", accordionContent.length);
-  for (let item = 0; item < header.length; item++) {
-    header[item].addEventListener("click", (event) => {
-      event.stopPropagation();
-      ["h-auto", "hidden"].map((i) =>
-        accordionContent[item]?.classList?.toggle(i)
-      );
-      // carretToggle[item]?.classList?.toggle("rotate-180");
-      const children = accordionContent[item].children;
-      console.log("🚀 ~ children", children.length);
-      for (element in children) {
-        children[element]?.classList?.toggle("opacity-0");
-      }
-      console.log("BANNER CLICK ACCORDION TOGGLE");
-    });
-  }
-}
+// function settingsAccordionToggle() {
+//   let header = document.querySelectorAll(".settingAccordion .accordionHeader");
+//   console.log("🚀 ~ Settings Accordion Elements", header.length);
+//   let accordionContent = document.querySelectorAll(
+//     ".settingAccordion .accordionContent"
+//   );
+//   const carretToggle = document.querySelectorAll(".toggleAccordion");
+//   //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
+//   for (let item = 0; item <= header.length - 1; item++) {
+//     header[item].addEventListener("click", (event) => {
+//       event.stopPropagation();
+//       ["h-auto", "hidden"].map((i) =>
+//         accordionContent[item]?.classList?.toggle(i)
+//       );
+//       carretToggle[item]?.classList?.toggle("rotate-180");
+//       const children = accordionContent[item].children;
+//       for (element in children) {
+//         children[element]?.classList?.toggle("opacity-0");
+//       }
+//       console.log("click");
+//     });
+//   }
+// }
 
 //! Fetch data from the DOMAIN endpoint
+
+// const bannerAccordionToggle = function () {
+//   let header = document.querySelectorAll(".cc-category .accordionHeader");
+//   let accordionContent = document.querySelectorAll(
+//     ".cc-category .accordionContent"
+//   );
+//   // const test = event;
+//   // console.log("🚀 ~ TEST", test);
+
+//   console.log("🚀 ~ HEADER LENGTH => ", header.length);
+//   console.log("🚀 ~ ALL CONTENT => ", accordionContent.length);
+//   for (let item = 0; item < accordionContent.length; item++) {
+//     header[item].addEventListener("click", (event) => {
+//     event.stopPropagation();
+//     // debugger;
+//     ["h-0", "hidden"].map((i) => accordionContent[item]?.classList?.toggle(i));
+//     // carretToggle[item]?.classList?.toggle("rotate-180");
+//     const children = accordionContent[item].children;
+//     console.log("🚀 ~ children", children.length);
+//     for (element in children) {
+//       children[element]?.classList?.toggle("opacity-0");
+//     }
+//     console.log("BANNER CLICK ACCORDION TOGGLE");
+//     });
+//   }
+// };
+
 const fetchDataFromAPI = () => {
   let config = {
     method: "get",
@@ -272,7 +256,7 @@ function stopParent() {
 
     // console.log(qyqeInput.checked);
     qyqe[key].addEventListener("click", (e) => {
-      e.stopPropagation();
+      // e.stopPropagation();
       // qyqeInput.checked = qyqeInput.checked ^ 1;
       qyqeInput.setAttribute("checked", 1);
 
@@ -414,36 +398,36 @@ function categoryCookieFetch(id, storeVariable) {
 }
 
 //! display the Cookie Details modal/data-injection
-function showModal() {
-  let id;
-  const toggle = document.querySelectorAll(".cookieDetails");
-  for (const elmnt of toggle) {
-    elmnt.addEventListener("click", (event) => {
-      id = event.target.attributes.value.value;
-      console.log("CATEGORY ID CLIKED: ", id);
-      COOKIE_SETTINGS.classList.remove("hidden");
-      COOKIE_DISPLAY.classList.add("hidden");
-      filterCookiesByCategory(
-        responseData,
-        +id,
-        cookiesPerCategory,
-        "CLICKED ON"
-      );
-      settingsAccordionToggle();
-      fillCookieSettingItem();
-    });
-  }
-  // if (
-  //   NECESSARY.length === 0 ||
-  //   PREFERENCES.length === 0 ||
-  //   MARKETING.length === 0 ||
-  //   ANALYTICAL.length === 0  ||
-  //   OTHER.lenght === 0
-  // ) {
-  //   //todo noData.classList.remove("hidden");
-  //   console.log("~~~NO DATA TO DISPLAY~~~");
-  // }
-}
+// function showModal() {
+//   let id;
+//   const toggle = document.querySelectorAll(".cookieDetails");
+//   for (const elmnt of toggle) {
+//     elmnt.addEventListener("click", (event) => {
+//       id = event.target.attributes.value.value;
+//       console.log("CATEGORY ID CLIKED: ", id);
+//       COOKIE_SETTINGS.classList.remove("hidden");
+//       COOKIE_DISPLAY.classList.add("hidden");
+//       filterCookiesByCategory(
+//         responseData,
+//         +id,
+//         cookiesPerCategory,
+//         "CLICKED ON"
+//       );
+//       settingsAccordionToggle();
+//       fillCookieSettingItem();
+//     });
+//   }
+//   // if (
+//   //   NECESSARY.length === 0 ||
+//   //   PREFERENCES.length === 0 ||
+//   //   MARKETING.length === 0 ||
+//   //   ANALYTICAL.length === 0  ||
+//   //   OTHER.lenght === 0
+//   // ) {
+//   //   //todo noData.classList.remove("hidden");
+//   //   console.log("~~~NO DATA TO DISPLAY~~~");
+//   // }
+// }
 const goBackFunc = () => {
   // goBack.addEventListener("click", () => {
   console.log("GO BACK");

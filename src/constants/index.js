@@ -1,14 +1,15 @@
-;
+export const COOKIES_STATUSES = ["DENY", "ALLOW", "DISMISS"];
+export const STATUS_DENY = "DENY";
+export const STATUS_ALLOW = "ALLOW";
+export const STATUS_DISMISS = "DISMISS";
 
-export const statuses = ["DENY", "ALLOW", "DISMISS"];
-export const statusDeny = "DENY";
-export const statusAllow = "ALLOW";
-export const statusDismiss = "DISMISS";
-
-export const categories = [
+export const COOKIES_CATEGORIES = [
   "NECESSARY",
   "PREFERENCES",
   "ANALYTICAL",
   "MARKETING",
   "OTHER",
 ];
+
+export const CLIENT_GEOLOCATION_API_URL = "https://cmp.gjirafa.dev/GetPublicIp";
+export const USER_COOKIE_DATA = [];

@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import {CLIENT_GEOLOCATION_API_URL} from '../constants'
 
 const toError = (obj) => {
   console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
@@ -18,7 +18,7 @@ let url = "";
 const fetchAPI = () => {
   let config = {
     method: "get",
-    url: "https://cmp.gjirafa.dev/GetPublicIp",
+    url: CLIENT_GEOLOCATION_API_URL,
     headers: {},
   };
 
@@ -43,14 +43,14 @@ export default {
   // Otherwise there is no easy way to catch JSONP errors. That means that if a JSONP fails, the
   // app will take `timeout` milliseconds to react to a JSONP network error.
 
-  timeout: 5000,
+  timeout: 1000,
 
   // the order that services will be attempted in
   serviceDefinitions: {
     ipinfo: function (options) {
       fetchAPI();
       return {
-        url: "https://cmp.gjirafa.dev/GetPublicIp",
+        url: CLIENT_GEOLOCATION_API_URL,
         callback: function (done, response) {
           // console.log("🚀 ~ file: location.js ~ line 19 ~ done", done);
           try {

@@ -86,7 +86,6 @@ function timeStamp() {
   return "[" + time.join(":") + "] ";
 }
 
-
 const draw = function (countryCode) {
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = false;
@@ -123,100 +122,82 @@ const draw = function (countryCode) {
 //fill the countries dropdown
 CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
 
+// function allowAllCookies() {
+//   const allowAllCookies = document.getElementById("allowAll");
+//   console.log("🚀 ~ ALLOW ALL", allowAllCookies);
+//   console.log(e);
+//   const radioButtons = document.querySelectorAll(".radioButtonCookie");
+//   const cookieRadioButton = document.querySelectorAll(".cc-btn");
+
+//   // allowAllCookies.addEventListener("click", () => {
+//   console.log("click allow all");
+//   for (let index = 0; index < radioButtons.length; index++) {
+//     const element = radioButtons[index];
+//     element.checked = true;
+//     // setTimeout(() => {
+//     console.log(element.checked);
+//     // cookieRadioButton[index].change()
+//     element.addEventListener("change", console.log("change"));
+//     const event = new Event("change");
+//     element.dispatchEvent(event);
+//     // }, 500);
+//   }
+//   // });
+
+//   // console.log(radioButtons);
+// }
+
 // locationElement.onchange = function () {
-if (locationElement.selectedIndex >= 0) {
-  // draw(locationElement[locationElement.selectedIndex].value);
-  console.log(
-    "🚀 ~ LOCATION =>",
-    locationElement[locationElement.selectedIndex].value
-  );
-}
+
 // };
-const toggleType = document.querySelector(".typeChange");
 // const toggleType = document.getElementById("toggleType");
+
 setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
+
   console.log("🚀 ~ ", toggleType);
 
-  // for (const key in toggleType) {
-  //   toggleType[key].addEventListener("click", (event) => {
-  //     timeStamp();
-  //     console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
-  //     // toggleType.addEventListener("click", (e) => {
-  //     console.log(
-  //       "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
-  //       categoriesType
-  //     );
-  //     console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
-  //     // debugger
-  //     // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
-  //     if (testType === "info") {
-  //       testType = "categories";
-  //       optionsObj(
-  //         locationElement[locationElement.selectedIndex].value,
-  //         "categories"
-  //       );
-  //       ccInstance.clearStatuses().destroy();
-  //       draw(locationElement[locationElement.selectedIndex].value);
-  //       bannerAccordionToggle();
-  //       showModal();
-  //       console.log("🚀 ~ TYPE-> options.type", testType);
-  //     } else if (testType === "categories") {
-  //       testType = "info";
-  //       optionsObj(
-  //         locationElement[locationElement.selectedIndex].value,
-  //         "info"
-  //       );
-  //       ccInstance.clearStatuses().destroy();
-  //       draw(locationElement[locationElement.selectedIndex].value);
-  //       console.log("🚀 ~TYPE->  options.type", testType);
-  //     } else {
-  //       return this;
-  //     }
-  //   });
-  // }
-}, 500);
-setTimeout(() => {
-  const toggleType = document.querySelectorAll(".typeChange");
-  console.log("🚀 ~ ", toggleType);
-
-for (const key of toggleType) {
-  console.log(key)
-  key.addEventListener("click",event=>{
-    timeStamp();
-    console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
-    // toggleType.addEventListener("click", (e) => {
-    console.log(
-      "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
-      categoriesType
-    );
-    console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
-    // debugger
-    // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
-    if (testType === "info") {
-      testType = "categories";
-      optionsObj(
-        locationElement[locationElement.selectedIndex].value,
-        "categories"
+  for (const key of toggleType) {
+    console.log(key);
+    key.addEventListener("click", (event) => {
+      timeStamp();
+      console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+      // toggleType.addEventListener("click", (e) => {
+      console.log(
+        "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
+        categoriesType
       );
-      ccInstance.clearStatuses().destroy();
-      draw(locationElement[locationElement.selectedIndex].value);
-      bannerAccordionToggle();
-      showModal();
-      console.log("🚀 ~ TYPE-> options.type", testType);
-    } else if (testType === "categories") {
-      testType = "info";
-      optionsObj(locationElement[locationElement.selectedIndex].value, "info");
-      ccInstance.clearStatuses().destroy();
-      draw(locationElement[locationElement.selectedIndex].value);
-      console.log("🚀 ~TYPE->  options.type", testType);
-    } else {
-      return this;
-    }
-  })
-}
+      console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
+      // debugger
+      // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
+      if (testType === "info") {
+        testType = "categories";
+        optionsObj(
+          locationElement[locationElement.selectedIndex].value,
+          "categories"
+        );
+        ccInstance.clearStatuses().destroy();
+        draw(locationElement[locationElement.selectedIndex].value);
+        // CMP_Section.bannerAccordionToggle();
+        CMP_Section.showModal();
+        console.log("🚀 ~ TYPE-> options.type", testType);
+      } else if (testType === "categories") {
+        testType = "info";
+        optionsObj(
+          locationElement[locationElement.selectedIndex].value,
+          "info"
+        );
+        ccInstance.clearStatuses().destroy();
+        draw(locationElement[locationElement.selectedIndex].value);
+        console.log("🚀 ~TYPE->  options.type", testType);
+        CMP_Section.allowAllCookies();
+      } else {
+        return this;
+      }
+    });
+  }
+}, 300);
 
-}, 500);
 
 // const typeToggleFunction = (e) => {
 //   timeStamp();

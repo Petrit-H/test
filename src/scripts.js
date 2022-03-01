@@ -8,7 +8,6 @@ module.exports = CMP_Section = {
       return str + cb(options[key], key, key == selected);
     }, "");
   },
-
   getSimpleOption: function (label, value, selected) {
     return (
       "<option " +
@@ -20,7 +19,6 @@ module.exports = CMP_Section = {
       "</option>"
     );
   },
-
   tabularObject: function (obj, formatVal, formatKey) {
     if (typeof formatKey !== "function")
       formatKey = function () {
@@ -42,7 +40,6 @@ module.exports = CMP_Section = {
       }, "<ul>") + "</ul>"
     );
   },
-
   initialisePopupSelector: function (options) {
     const itemOpen = "<li><span>";
     const itemClose = "</span></li>";
@@ -197,10 +194,143 @@ module.exports = CMP_Section = {
 
     return instances;
   },
+  allowAllCookies: function (event) {
+    setTimeout(() => {
+      console.log("🚀 ~ ALLOW ALL", event);
+      // const allowAllCookiesButton = document.querySelectorAll("allowAll");
+      // console.log("🚀 ~ ALLOW ALL", allowAllCookiesButton);
+      const radioButtons = document.querySelectorAll(".radioButtonCookie");
+      const cookieRadioButton = document.querySelectorAll(".cc-btn");
+
+      // allowAllCookiesButton.forEach((element) => {
+      // event.target.addEventListener("click", () => {
+      console.log("click allow all");
+      for (let index = 0; index < radioButtons.length; index++) {
+        const element = radioButtons[index];
+        element.checked = true;
+        // setTimeout(() => {
+        console.log(element.checked);
+        // cookieRadioButton[index].change()
+        element.addEventListener("change", console.log("change"));
+        const event = new Event("change");
+        element.dispatchEvent(event);
+        // }, 500);
+      }
+      // });
+      // });
+    }, 200);
+    // console.log(radioButtons);
+    document.removeEventListener("click", event.target);
+  },
+  bannerAccordionToggle: function (index) {
+    debugger;
+    let header = document.querySelectorAll(".cc-category .accordionHeader");
+    let accordionContent = document.querySelectorAll(
+      ".cc-category .accordionContent"
+    );
+    console.log("🚀 ~ ACCORDION-HEADER", header);
+    console.log("🚀 ~ACCORDION-CONTENT", accordionContent);
+
+    console.log("🚀 ~ HEADER LENGTH => ", header.length);
+    console.log("🚀 ~ CONTENT LENGTH => ", accordionContent.length);
+
+    ["h-0", "hidden"].map((i) => accordionContent[index]?.classList?.toggle(i));
+    const children = accordionContent[index].children;
+    console.log("🚀 ~ children", children.length);
+    for (element in children) {
+      children[element]?.classList?.toggle("opacity-0");
+    }
+    console.log("BANNER CLICK ACCORDION TOGGLE");
+  },
+  showModal: function () {
+    let id;
+    const toggle = document.querySelectorAll(".cookieDetails");
+    for (const elmnt of toggle) {
+      elmnt.addEventListener("click", (event) => {
+        id = event.target.attributes.value.value;
+        console.log("CATEGORY ID CLIKED: ", id);
+        COOKIE_SETTINGS.classList.remove("hidden");
+        COOKIE_DISPLAY.classList.add("hidden");
+        filterCookiesByCategory(
+          responseData,
+          +id,
+          cookiesPerCategory,
+          "CLICKED ON"
+        );
+        settingsAccordionToggle();
+        fillCookieSettingItem();
+      });
+    }
+    // if (
+    //   NECESSARY.length === 0 ||
+    //   PREFERENCES.length === 0 ||
+    //   MARKETING.length === 0 ||
+    //   ANALYTICAL.length === 0  ||
+    //   OTHER.lenght === 0
+    // ) {
+    //   //todo noData.classList.remove("hidden");
+    //   console.log("~~~NO DATA TO DISPLAY~~~");
+    // }
+  },
+
+  // typeToggleFunction: function () {
+  //   let testType = "info";
+  //   const locationElement = document.getElementById("location");
+  //   const categoriesType = document.querySelector(".cc-window");
+  //   const infoType = document.querySelector(".cc-window.cc-type-info");
+  //   let ccInstance;
+
+  //   console.log("TOGGGGGGLE");
+  //   setTimeout(() => {
+  //     const toggleType = document.querySelectorAll(".typeChange");
+
+  //     console.log("🚀 ~ ", toggleType);
+
+  //     for (const key of toggleType) {
+  //       console.log(key);
+  //       // key.addEventListener("click", (event) => {
+  //         // timeStamp();
+  //         console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+  //         // toggleType.addEventListener("click", (e) => {
+  //         console.log(
+  //           "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
+  //           categoriesType
+  //         );
+  //         console.log(
+  //           "🚀 ~ file: index.html ~ line 205 ~ infoType => ",
+  //           infoType
+  //         );
+  //         // debugger
+  //         // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
+  //         if (testType === "info") {
+  //           testType = "categories";
+  //           optionsObj(
+  //             locationElement[locationElement.selectedIndex].value,
+  //             "categories"
+  //           );
+  //           ccInstance.clearStatuses().destroy();
+  //           draw(locationElement[locationElement.selectedIndex].value);
+  //           CMP_Section.bannerAccordionToggle();
+  //           CMP_Section.showModal();
+  //           console.log("🚀 ~ TYPE-> options.type", testType);
+  //         } else if (testType === "categories") {
+  //           testType = "info";
+  //           optionsObj(
+  //             locationElement[locationElement.selectedIndex].value,
+  //             "info"
+  //           );
+  //           ccInstance.clearStatuses().destroy();
+  //           draw(locationElement[locationElement.selectedIndex].value);
+  //           console.log("🚀 ~TYPE->  options.type", testType);
+  //           CMP_Section.allowAllCookies();
+  //         } else {
+  //           return this;
+  //         }
+  //       // });
+  //     }
+  //   }, 500);
+  // },
 };
-
-
-
 
 //! Handles the tabs and its content
 function openCity(evt, cityName) {
@@ -235,26 +365,3 @@ function openCity(evt, cityName) {
     });
   }
 })();
-
-function allowAllCookies() {
-  const radioButtons = document.querySelectorAll(".radioButtonCookie");
-  const cookieRadioButton = document.querySelectorAll(".cc-btn");
-  const allowAllCookies = document.getElementById("allowAll");
-
-  allowAllCookies.addEventListener("click", () => {
-    console.log("click allow all");
-    for (let index = 0; index < radioButtons.length; index++) {
-      const element = radioButtons[index];
-      element.checked = true;
-      // setTimeout(() => {
-      console.log(element.checked);
-      // cookieRadioButton[index].change()
-      element.addEventListener("change", console.log("change"));
-      const event = new Event("change");
-      element.dispatchEvent(event);
-      // }, 500);
-    }
-  });
-
-  // console.log(radioButtons);
-}

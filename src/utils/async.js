@@ -1,3 +1,4 @@
+import { CLIENT_GEOLOCATION_API_URL } from "../constants"
 
 
 export const getScript = ( url, callback, timeout ) => {
@@ -56,5 +57,5 @@ console.log("UNE",postData)
       }
     }
   }
-xhr.send("https://cmp.gjirafa.dev/GetPublicIp")
+xhr.send(CLIENT_GEOLOCATION_API_URL)
 }

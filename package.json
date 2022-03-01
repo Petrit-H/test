@@ -14,7 +14,6 @@
   "scripts": {
     "start": "npx tailwindcss -o tailwind.css && webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "serve": "webpack --config webpack.config.js",
     "test": "jest ./src --verbose --coverage && rm -rf coverage/"
   },
   "repository": {
