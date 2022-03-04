@@ -72,12 +72,12 @@ window.addEventListener("load", function (event) {
       MARKETING: MARKETING,
       OTHER: OTHER,
     };
-    console.log("==================vvv=====================");
+    console.log("==================🧲🧲🧲🧲====================");
     console.log("🚀 ~ categories", categories);
     console.log("🚀 ~ responseData", responseData);
 
     console.log("🚀 ~ DATA-4-BALA", dataForBala);
-    console.log("==================^^^=====================");
+    console.log("==================🧲🧲🧲🧲=====================");
 
     // if (responseData.length === 0) {
     //   noData.classList.remove("hidden");

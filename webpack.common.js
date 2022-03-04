@@ -2,7 +2,6 @@ const join = require("path").join;
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -46,32 +45,32 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        type: "asset",
+        test: /\.(jpe?g|png|gif)$/,
+        loader: 'url-loader',
+        options: {
+          // Images larger than 10 KB won’t be inlined
+          limit: 10 * 1024
+        }
       },
-      // We recommend using only for the "production" mode
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          {
-            loader: ImageMinimizerPlugin.loader,
-            // enforce: "pre",
-            options: {
-              minimizer: {
-                implementation: ImageMinimizerPlugin.imageminMinify,
-                options: {
-                  plugins: [
-                    "imagemin-gifsicle",
-                    "imagemin-mozjpeg",
-                    "imagemin-pngquant",
-                    "imagemin-svgo",
-                  ],
-                },
-              },
-            },
-          },
-        ],
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        options: {
+          // Images larger than 10 KB won’t be inlined
+          limit: 10 * 1024,
+          // Remove quotes around the encoded URL –
+          // they’re rarely useful
+          noquotes: true,
+        }
       },
+      //! {
+      //!   test: /\.(jpg|png|gif|svg)$/,
+      //!   loader: 'image-webpack-loader',
+      //!   // Specify enforce: 'pre' to apply the loader
+      //!   // before url-loader/svg-url-loader
+      //!   // and not duplicate it in rules with them
+      //!   enforce: 'pre'
+      //! },
       // {
       //   test: /\.svg$/,
       //   use: "file-loader",

@@ -4,6 +4,10 @@ import {
   STATUS_DISMISS,
   COOKIES_CATEGORIES,
 } from "../constants/index.js";
+const CLOSE_ICON = "../src/assets/images/close-icon.svg",
+      CLOSE_ICON_WHITE="../../src/assets/images/close-icon-white.svg",
+      COOKIE_WIDGET_ICON="../../src/assets/images/cookie.svg",
+      CARET_DOWN_ICON="../../src/assets/images/caretDown.png"
 
 export default {
   // if false, this prevents the popup from showing (useful for giving to control to another piece of code)
@@ -42,12 +46,12 @@ export default {
     link: "Learn more",
     href: "https://www.cookiesandyou.com",
     close:
-      '<img src="../src/assets/images/close-icon.svg" class="cc-close" alt="close button"/>',
+      `<img src=${CLOSE_ICON} class="cc-close" alt="close button"/>`,
     closeWhite:
-      '<img src="../../src/assets/images/close-icon-white.svg" class="cc-close" alt="close button"/>',
+      `<img src=${CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
     target: "_blank",
     widgetImage:
-      '<img src="../../src/assets/images/cookie.svg" class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>',
+      `<img src=${COOKIE_WIDGET_ICON} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
     policy: "Cookie Policy",
     settings: "Cookie Preferences",
   },
@@ -155,7 +159,7 @@ export default {
           <div class="contentWrapper overflow-y-scroll my-3">
             <div class="descSectoin px-4 py-3">
               <p id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5" onclick="CMP_Section.goBackFunc()">
-                <img src="../../src/assets/images/caretDown.png" alt="caret left back " class="rotate-90 transform mr-3">
+                <img src=${CARET_DOWN_ICON} alt="caret left back " class="rotate-90 transform mr-3">
                 <span class="text-black">Back</span>
               </p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel
