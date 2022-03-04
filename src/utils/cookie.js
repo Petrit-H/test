@@ -20,5 +20,4 @@ export const setCookie = function ( name, value, expiryDays, domain, path, secur
                     ( domain ? ';domain=' + domain : '' ) +
                     ( secure ? ';secure' : '' )
 
-  const testCOOKIES=[]
 }

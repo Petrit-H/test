@@ -319,7 +319,6 @@ export default class Popup extends Base {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
       console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
-    document.cookie();
   }
 
   canUseCookies() {
