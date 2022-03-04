@@ -76,7 +76,7 @@ export default {
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
-        <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_DISMISS}" id="declineCookies">{{dismiss}}</button>
+        <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies">{{dismiss}}</button>
         <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md cc-${STATUS_DISMISS}" id="acceptCookies">{{settings}}</button>
       </div>
     </div>
@@ -125,7 +125,7 @@ export default {
                   <p class="category-description opacity-0 mb-4 transition duration-300 ease-in-out transform">
                     ${category}
                   </p>
-                  <div class="opacity-0" onclick="showModal()">
+                  <div class="opacity-0" onclick="CMP_Section.showModal(event,${index})">
                     <p value=${index}
                       class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
                       Cookies Details</p>
@@ -140,8 +140,8 @@ export default {
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
             <button
-              class="cc-btn cc-save  allowAll border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" onclick="CMP_Section.allowAllCookies(event)" >{{allowAll}}</button>
-            <button class="cc-btn cc-save border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
+              class="cc-btn cc-save cc-${STATUS_ALLOW}  allowAll border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" onclick="CMP_Section.allowAllCookies(event)" >{{allowAll}}</button>
+            <button class="cc-btn cc-save cc-btn cc-${STATUS_ALLOW} border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
               My Choices</button>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default {
           </div>
           <div class="contentWrapper overflow-y-scroll my-3">
             <div class="descSectoin px-4 py-3">
-              <p id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5" onclick="goBackFunc()">
+              <p id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5" onclick="CMP_Section.goBackFunc()">
                 <img src="../../src/assets/images/caretDown.png" alt="caret left back " class="rotate-90 transform mr-3">
                 <span class="text-black">Back</span>
               </p>

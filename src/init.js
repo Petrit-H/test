@@ -1,5 +1,5 @@
 import CookieConsent from "./models/CookieConsent";
-import CMP_Section from "./scripts";
+import CMP_Section from "./cookies";
 
 const COUNTRY_CODES = {
   // Representative group of countries with key differences
@@ -42,6 +42,9 @@ const optionsObj = (countryCode, type) => {
     selector: document.querySelector(".example-selector"),
     container: document.getElementById("CMP"),
     type: type,
+    // cookie:{
+    //   name:"gjir"
+    // },
     // type: "opt-in",
     regionalLaw: true,
     legal: countryCode,
@@ -122,35 +125,6 @@ const draw = function (countryCode) {
 //fill the countries dropdown
 CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
 
-// function allowAllCookies() {
-//   const allowAllCookies = document.getElementById("allowAll");
-//   console.log("🚀 ~ ALLOW ALL", allowAllCookies);
-//   console.log(e);
-//   const radioButtons = document.querySelectorAll(".radioButtonCookie");
-//   const cookieRadioButton = document.querySelectorAll(".cc-btn");
-
-//   // allowAllCookies.addEventListener("click", () => {
-//   console.log("click allow all");
-//   for (let index = 0; index < radioButtons.length; index++) {
-//     const element = radioButtons[index];
-//     element.checked = true;
-//     // setTimeout(() => {
-//     console.log(element.checked);
-//     // cookieRadioButton[index].change()
-//     element.addEventListener("change", console.log("change"));
-//     const event = new Event("change");
-//     element.dispatchEvent(event);
-//     // }, 500);
-//   }
-//   // });
-
-//   // console.log(radioButtons);
-// }
-
-// locationElement.onchange = function () {
-
-// };
-// const toggleType = document.getElementById("toggleType");
 
 setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
@@ -177,6 +151,7 @@ setTimeout(() => {
           "categories"
         );
         ccInstance.clearStatuses().destroy();
+        console.log("IS OPENNNNNNNNNNNN",ccInstance.isOpen())
         draw(locationElement[locationElement.selectedIndex].value);
         // CMP_Section.bannerAccordionToggle();
         CMP_Section.showModal();

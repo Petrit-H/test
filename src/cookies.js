@@ -1,4 +1,4 @@
-import CMP_Section from "./scripts";
+// import CMP_Section from "./scripts";
 
 function create_UUID() {
   var dt = new Date().getTime();
@@ -27,17 +27,6 @@ let responseForCookies = []; //?{ cookie_name: "", cookie_status: "" }
 let cookiesPerCategory = [];
 // let dataForBala = [];
 let dataForBala = {};
-//*data to be sent to Bala
-
-// let dataForBala = {
-//   id: create_UUID(),
-//   domains: responseData,
-//   NECESSARY: NECESSARY,
-//   PREFERENCES: PREFERENCES,
-//   ANALYTICAL: ANALYTICAL,
-//   MARKETING: MARKETING,
-//   OTHER: OTHER,
-// };
 
 window.addEventListener("load", function (event) {
   const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
@@ -83,12 +72,12 @@ window.addEventListener("load", function (event) {
       MARKETING: MARKETING,
       OTHER: OTHER,
     };
-    // console.log("==================vvv=====================");
-    // console.log("🚀 ~ categories", categories);
-    // console.log("🚀 ~ responseData", responseData);
+    console.log("==================vvv=====================");
+    console.log("🚀 ~ categories", categories);
+    console.log("🚀 ~ responseData", responseData);
 
     console.log("🚀 ~ DATA-4-BALA", dataForBala);
-    // console.log("==================^^^=====================");
+    console.log("==================^^^=====================");
 
     // if (responseData.length === 0) {
     //   noData.classList.remove("hidden");
@@ -96,90 +85,6 @@ window.addEventListener("load", function (event) {
   }, 500);
   // };
 });
-
-//! Handle the dropdown show and hide(FOR THE CATEGORIES OF COOKIES w/caret down)
-// function homepageAccordionToggle() {
-//   let header = document.querySelectorAll(".homepageAccordion .accordionHeader");
-//   console.log(
-//     "🚀 ~ file: cookies.js ~ line 68 ~ homepageAccordionToggle ~ header",
-//     header
-//   );
-//   let accordionContent = document.querySelectorAll(
-//     ".homepageAccordion .accordionContent"
-//   );
-//   const carretToggle = document.querySelectorAll(".toggleAccordion");
-
-//   //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
-//   for (let item = 0; item <= header.length - 1; item++) {
-//     header[item].addEventListener("click", (event) => {
-//       // debugger;
-//       event.target.stopPropagation();
-//       // event.preventDefault();
-//       ["h-auto", "hidden"].map((i) =>
-//         accordionContent[item]?.classList?.toggle(i)
-//       );
-//       carretToggle[item]?.classList?.toggle("rotate-180");
-//       const children = accordionContent[item].children;
-//       for (element in children) {
-//         children[element]?.classList?.toggle("opacity-0");
-//       }
-//       console.log("click");
-//     });
-//   }
-// }
-
-//! Handle the dropdown show and hide(FOR THE CATEGORIE DETAILS)
-// function settingsAccordionToggle() {
-//   let header = document.querySelectorAll(".settingAccordion .accordionHeader");
-//   console.log("🚀 ~ Settings Accordion Elements", header.length);
-//   let accordionContent = document.querySelectorAll(
-//     ".settingAccordion .accordionContent"
-//   );
-//   const carretToggle = document.querySelectorAll(".toggleAccordion");
-//   //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
-//   for (let item = 0; item <= header.length - 1; item++) {
-//     header[item].addEventListener("click", (event) => {
-//       event.stopPropagation();
-//       ["h-auto", "hidden"].map((i) =>
-//         accordionContent[item]?.classList?.toggle(i)
-//       );
-//       carretToggle[item]?.classList?.toggle("rotate-180");
-//       const children = accordionContent[item].children;
-//       for (element in children) {
-//         children[element]?.classList?.toggle("opacity-0");
-//       }
-//       console.log("click");
-//     });
-//   }
-// }
-
-//! Fetch data from the DOMAIN endpoint
-
-// const bannerAccordionToggle = function () {
-//   let header = document.querySelectorAll(".cc-category .accordionHeader");
-//   let accordionContent = document.querySelectorAll(
-//     ".cc-category .accordionContent"
-//   );
-//   // const test = event;
-//   // console.log("🚀 ~ TEST", test);
-
-//   console.log("🚀 ~ HEADER LENGTH => ", header.length);
-//   console.log("🚀 ~ ALL CONTENT => ", accordionContent.length);
-//   for (let item = 0; item < accordionContent.length; item++) {
-//     header[item].addEventListener("click", (event) => {
-//     event.stopPropagation();
-//     // debugger;
-//     ["h-0", "hidden"].map((i) => accordionContent[item]?.classList?.toggle(i));
-//     // carretToggle[item]?.classList?.toggle("rotate-180");
-//     const children = accordionContent[item].children;
-//     console.log("🚀 ~ children", children.length);
-//     for (element in children) {
-//       children[element]?.classList?.toggle("opacity-0");
-//     }
-//     console.log("BANNER CLICK ACCORDION TOGGLE");
-//     });
-//   }
-// };
 
 const fetchDataFromAPI = () => {
   let config = {
@@ -199,11 +104,31 @@ const fetchDataFromAPI = () => {
       console.log("🚀 ~ responseData", responseData);
       // console.log("🚀 ~ dataForBala", dataForBala);
       console.log("==========xxx==========");
-      filterCookiesByCategory(response.data, 5, NECESSARY, "NECESSARY");
-      filterCookiesByCategory(response.data, 4, PREFERENCES, "PREFERENCES");
-      filterCookiesByCategory(response.data, 3, ANALYTICAL, "ANALYTICAL");
-      filterCookiesByCategory(response.data, 2, MARKETING, "MARKETING");
-      filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
+      CMP_Section.filterCookiesByCategory(
+        response.data,
+        5,
+        NECESSARY,
+        "NECESSARY"
+      );
+      CMP_Section.filterCookiesByCategory(
+        response.data,
+        4,
+        PREFERENCES,
+        "PREFERENCES"
+      );
+      CMP_Section.filterCookiesByCategory(
+        response.data,
+        3,
+        ANALYTICAL,
+        "ANALYTICAL"
+      );
+      CMP_Section.filterCookiesByCategory(
+        response.data,
+        2,
+        MARKETING,
+        "MARKETING"
+      );
+      CMP_Section.filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
       console.log("==========︽==========");
     })
     .catch(function (error) {
@@ -227,23 +152,6 @@ const fetchCategoriesFromAPI = () => {
     .catch(function (error) {
       console.log(error);
     });
-};
-
-//! filter data by categories
-const filterCookiesByCategory = (arr, id, storeVariable, category) => {
-  // let res=[];
-  arr.filter((el) => {
-    // console.log("1st", storeVariable);
-    el.cookies.filter((item) => {
-      if (item.categoryId === id) {
-        storeVariable.push(item);
-      }
-    });
-    // console.log("2nd", storeVariable);
-  });
-  console.log(`🚀 ~ ${category} id:`, id, `=> ${storeVariable.length}`);
-
-  // fillCookieSettingItem();
 };
 
 function stopParent() {
@@ -331,17 +239,14 @@ function fillCookieSettingItem() {
   // console.log(COOKIE_DISPLAY);
 
   const cookieSettingsInject = document.querySelector(".cookieSettingsInject");
-  console.log(
-    "🚀 ~  fillCookieSettingItem ~ cookieSettingsInject",
-    cookieSettingsInject
-  );
+  console.log("🚀 ~  FILL COOKIES w/INJECT", cookieSettingsInject);
   // debugger
   cookieSettingsInject.innerHTML = cookiesPerCategory
-    .map((item) => {
+    .map((item,index) => {
       let expirationDate = moment(item.expiration).endOf("day").fromNow();
       // console.log(item);
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
-      <div class="accordionHeader cursor-pointer flex justify-between p-4">
+      <div class="accordionHeader cursor-pointer flex justify-between p-4" onclick="CMP_Section.settingsAccordionToggle(${index})">
         <p class="category-title font-medium">${item.name}</p>
         <div class="controlButtons flex">
         <div id="closeIcon" class="carret closeIcon cursor-pointer my-auto"><img src="../../src/assets/images/caretDown.png"
@@ -378,6 +283,31 @@ function fillCookieSettingItem() {
     })
     .join("");
 }
+
+//! Handle the dropdown show and hide(FOR THE CATEGORIE DETAILS)
+// function settingsAccordionToggle() {
+//   let header = document.querySelectorAll(".settingAccordion .accordionHeader");
+//   console.log("🚀 ~ Settings Accordion Elements", header.length);
+//   let accordionContent = document.querySelectorAll(
+//     ".settingAccordion .accordionContent"
+//   );
+//   const carretToggle = document.querySelectorAll(".toggleAccordion");
+//   //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
+//   for (let item = 0; item <= header.length - 1; item++) {
+//     header[item].addEventListener("click", (event) => {
+//       event.stopPropagation();
+//       ["h-auto", "hidden"].map((i) =>
+//         accordionContent[item]?.classList?.toggle(i)
+//       );
+//       carretToggle[item]?.classList?.toggle("rotate-180");
+//       const children = accordionContent[item].children;
+//       for (element in children) {
+//         children[element]?.classList?.toggle("opacity-0");
+//       }
+//       console.log("click");
+//     });
+//   }
+// }
 
 //! fetch category cookies
 function categoryCookieFetch(id, storeVariable) {
@@ -428,15 +358,9 @@ function categoryCookieFetch(id, storeVariable) {
 //   //   console.log("~~~NO DATA TO DISPLAY~~~");
 //   // }
 // }
-const goBackFunc = () => {
-  // goBack.addEventListener("click", () => {
-  console.log("GO BACK");
-  COOKIE_DISPLAY.classList.remove("hidden");
-  COOKIE_SETTINGS.classList.add("hidden");
-  cookiesPerCategory = [];
-  // });
-};
+
 //! toggle injected button ON/OFF
+
 function toggleInjected() {
   const injectedLabel = document.querySelectorAll(".dotWrapper");
   // console.log("🚀 ~ file: cookies.js ~ line 290 ~ toggleInjected ~ dot", dot);
@@ -466,3 +390,202 @@ function toggleInjected() {
     }, 500);
   }
 }
+
+module.exports = CMP_Section = {
+  // Fill a select element with options (html can be configured using `cb`)
+  fillSelect: function (select, options, selected, cb) {
+    if (typeof cb != "function") {
+      cb = this.getSimpleOption;
+    }
+    select.innerHTML = Object.keys(options).reduce(function (str, key) {
+      return str + cb(options[key], key, key == selected);
+    }, "");
+  },
+  getSimpleOption: function (label, value, selected) {
+    return (
+      "<option " +
+      (selected ? 'selected="selected"' : "") +
+      ' value="' +
+      value +
+      '">' +
+      label +
+      "</option>"
+    );
+  },
+  tabularObject: function (obj, formatVal, formatKey) {
+    if (typeof formatKey !== "function")
+      formatKey = function () {
+        return arguments[0];
+      };
+    if (typeof formatVal !== "function")
+      formatVal = function () {
+        return arguments[0];
+      };
+
+    return (
+      Object.keys(obj).reduce(function (str, key) {
+        return (str +=
+          "<li><em>" +
+          formatKey(key, obj[key]) +
+          "</em> " +
+          formatVal(obj[key], key) +
+          "</li>");
+      }, "<ul>") + "</ul>"
+    );
+  },
+  initialisePopupSelector: function (options) {
+    const itemOpen = "<li><span>";
+    const itemClose = "</span></li>";
+    // const itemOpen = "<li><span>";
+    // const itemClose = "</span></li>";
+    const instances = [];
+    const index = 0;
+    window.addEventListener("unload", () => {
+      console.log("CLOSE");
+      instances.forEach((instance) => {
+        instance.clearStatuses();
+        instance.destroy();
+      });
+    });
+
+    return instances;
+  },
+  allowAllCookies: function (event) {
+    setTimeout(() => {
+      console.log("🚀 ~ ALLOW ALL", event);
+      // const allowAllCookiesButton = document.querySelectorAll("allowAll");
+      // console.log("🚀 ~ ALLOW ALL", allowAllCookiesButton);
+      const radioButtons = document.querySelectorAll(".radioButtonCookie");
+      const cookieRadioButton = document.querySelectorAll(".cc-btn");
+
+      // allowAllCookiesButton.forEach((element) => {
+      // event.target.addEventListener("click", () => {
+      console.log("click allow all");
+      for (let index = 0; index < radioButtons.length; index++) {
+        const element = radioButtons[index];
+        element.checked = true;
+        // setTimeout(() => {
+        console.log(element.checked);
+        // cookieRadioButton[index].change()
+        element.addEventListener("change", console.log("change"));
+        const event = new Event("change");
+        element.dispatchEvent(event);
+        // }, 500);
+      }
+      // });
+      // });
+    }, 200);
+    // console.log(radioButtons);
+    document.removeEventListener("click", event.target);
+  },
+  bannerAccordionToggle: function (index) {
+    // debugger;
+    let header = document.querySelectorAll(".cc-category .accordionHeader");
+    let accordionContent = document.querySelectorAll(
+      ".cc-category .accordionContent"
+    );
+    // console.log("🚀 ~ ACCORDION-HEADER", header);
+    // console.log("🚀 ~ACCORDION-CONTENT", accordionContent);
+
+    console.log("🚀 ~ HEADER LENGTH => ", header.length);
+    console.log("🚀 ~ CONTENT LENGTH => ", accordionContent.length);
+
+    ["h-0", "hidden"].map((i) => accordionContent[index]?.classList?.toggle(i));
+    const children = accordionContent[index].children;
+    console.log("🚀 ~ CHILDREN", accordionContent[index]);
+    for (element of children) {
+      element?.classList?.toggle("opacity-0");
+      console.log(
+        "🚀 ~ file: cookies.js ~ line 497 ~ toggleInjected ~ children[element]",
+        element
+      );
+    }
+    // children.forEach((element) => {
+    //   element?.classList?.toggle("opacity-0");
+    //   console.log(
+    //     "🚀 ~ file: cookies.js ~ line 497 ~ toggleInjected ~ children[element]",
+    //     element
+    //   );
+    // });
+
+    console.log("BANNER CLICK ACCORDION ", index, " TOGGLE");
+  },
+  showModal: function (event, index) {
+    let id;
+    const toggle = document.querySelectorAll(".cookieDetails");
+    // for (const elmnt of toggle) {
+    // elmnt.addEventListener("click", (event) => {
+    // id = event.target.attributes.value.value;
+    console.log("CATEGORY ID CLIKED: ", index);
+    COOKIE_SETTINGS.classList.remove("hidden");
+    COOKIE_DISPLAY.classList.add("hidden");
+    CMP_Section.filterCookiesByCategory(
+      responseData,
+      index,
+      cookiesPerCategory,
+      "CLICKED ON"
+    );
+    // settingsAccordionToggle();
+    fillCookieSettingItem();
+    // });
+    // }§
+    // if (
+    //   NECESSARY.length === 0 ||
+    //   PREFERENCES.length === 0 ||
+    //   MARKETING.length === 0 ||
+    //   ANALYTICAL.length === 0  ||
+    //   OTHER.lenght === 0
+    // ) {
+    //   //todo noData.classList.remove("hidden");
+    //   console.log("~~~NO DATA TO DISPLAY~~~");
+    // }
+  },
+  goBackFunc: function () {
+    // goBack.addEventListener("click", () => {
+    console.log("GO BACK");
+    COOKIE_DISPLAY.classList.remove("hidden");
+    COOKIE_SETTINGS.classList.add("hidden");
+    cookiesPerCategory = [];
+    // });
+  },
+  filterCookiesByCategory: function (arr, id, storeVariable, category) {
+    // let res=[];
+    arr.filter((el) => {
+      // console.log("1st", storeVariable);
+      el.cookies.filter((item) => {
+        if (item.categoryId === id) {
+          storeVariable.push(item);
+        }
+      });
+      // console.log("2nd", storeVariable);
+    });
+    console.log(`🚀 ~ ${category} id:`, id, `=> ${storeVariable.length}`);
+
+    // fillCookieSettingItem();
+  },
+  settingsAccordionToggle: function (index) {
+    let header = document.querySelectorAll(
+      ".settingAccordion .accordionHeader"
+    );
+    console.log("🚀 ~ Settings Accordion Elements", header.length);
+    let accordionContent = document.querySelectorAll(
+      ".settingAccordion .accordionContent"
+    );
+    const carretToggle = document.querySelectorAll(".toggleAccordion");
+    //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
+    // for (let item = 0; item <= header.length - 1; item++) {
+      // header[item].addEventListener("click", (event) => {
+        // event.stopPropagation();
+        ["h-0", "hidden"].map((i) =>
+          accordionContent[index]?.classList?.toggle(i)
+        );
+        carretToggle[index]?.classList?.toggle("rotate-180");
+        const children = accordionContent[index].children;
+        for (element in children) {
+          children[element]?.classList?.toggle("opacity-0");
+        }
+        console.log("click");
+      // });
+    // }
+  },
+};

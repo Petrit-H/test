@@ -247,13 +247,14 @@ export default class Popup extends Base {
    */
   hasConsented() {
     return this.getStatuses().map(
-      (status) => status === statusAllow || status === STATUS_DISMISS
+      (status) => status === STATUS_ALLOW || status === STATUS_DISMISS
     );
   }
 
   // opens the popup if no answer has been given
   autoOpen() {
     const hasAnswered = this.hasAnswered();
+    console.log("🚀 ~ HASS ANSWEREDDDDDDD", hasAnswered);
     if (!hasAnswered && this.options.enabled) {
       this.open();
     } else if (hasAnswered && this.options.revokable) {
@@ -316,7 +317,9 @@ export default class Popup extends Base {
     const { name, domain, path } = this.options.cookie;
     COOKIES_CATEGORIES.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
+      console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
+    document.cookie();
   }
 
   canUseCookies() {
@@ -617,7 +620,7 @@ export default class Popup extends Base {
         this.onKeyPress = (event) => {
           const { keyCode } = event;
           if (keyCode === 13) {
-            this.setStatuses(statusAllow);
+            this.setStatuses(STATUS_ALLOW);
             this.close(true);
           } else if (keyCode === 27) {
             this.setStatuses(STATUS_DISMISS);
