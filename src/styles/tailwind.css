@@ -646,10 +646,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-auto {
-  height: auto;
-}
-
 .h-full {
   height: 100%;
 }
@@ -664,6 +660,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-0 {
   height: 0px;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .w-full {

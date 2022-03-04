@@ -1,6 +1,6 @@
 {
   "name": "gjirafa-cmp",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "FORK OF Osano cookie consent tool.",
   "main": "./dist/index.min.js",
   "types": "types/index.d.ts",
@@ -13,7 +13,7 @@
   "homepage": "https://github.com/Petrit-H/test.git",
   "scripts": {
     "start": "npx tailwindcss -o tailwind.css && webpack --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "npx tailwindcss -o ./src/styles/tailwind.css && webpack --config webpack.prod.js",
     "test": "jest ./src --verbose --coverage && rm -rf coverage/"
   },
   "repository": {
