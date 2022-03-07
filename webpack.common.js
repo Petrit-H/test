@@ -1,4 +1,3 @@
-const join = require("path").join;
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -44,25 +43,25 @@ module.exports = {
           // },
         },
       },
-      {
-        test: /\.(jpe?g|png|gif)$/,
-        loader: 'url-loader',
-        options: {
-          // Images larger than 10 KB won’t be inlined
-          limit: 10 * 1024
-        }
-      },
-      {
-        test: /\.svg$/,
-        loader: 'svg-url-loader',
-        options: {
-          // Images larger than 10 KB won’t be inlined
-          limit: 10 * 1024,
-          // Remove quotes around the encoded URL –
-          // they’re rarely useful
-          noquotes: true,
-        }
-      },
+      // {
+      //   test: /\.(jpe?g|png|gif)$/,
+      //   loader: 'url-loader',
+      //   options: {
+      //     // Images larger than 10 KB won’t be inlined
+      //     limit: 10 * 1024
+      //   }
+      // },
+      // {
+      //   test: /\.svg$/,
+      //   loader: 'svg-url-loader',
+      //   options: {
+      //     // Images larger than 10 KB won’t be inlined
+      //     limit: 10 * 1024,
+      //     // Remove quotes around the encoded URL –
+      //     // they’re rarely useful
+      //     noquotes: true,
+      //   }
+      // },
       //! {
       //!   test: /\.(jpg|png|gif|svg)$/,
       //!   loader: 'image-webpack-loader',

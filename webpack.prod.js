@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const commonConfig = require("./webpack.common");
+const ImageminPlugin = require("imagemin-webpack-plugin").default;
+const glob = require("glob");
 
 module.exports = merge(commonConfig, {
   mode: "production",
@@ -31,6 +33,14 @@ module.exports = merge(commonConfig, {
     ],
   },
   plugins: [
+    new ImageminPlugin({
+      externalImages: {
+        context: ".",
+        sources: glob.sync("./src/assets/images/**.{png,jpg,jpeg,gif,svg}"),
+        destination: "dist/images",
+        fileName: "[name].[ext]",
+      },
+    }),
     new MiniCssExtractPlugin({
       filename: "main.css",
     }),

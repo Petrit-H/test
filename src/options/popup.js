@@ -3,11 +3,11 @@ import {
   STATUS_ALLOW,
   STATUS_DISMISS,
   COOKIES_CATEGORIES,
+  CLOSE_ICON,
+  CLOSE_ICON_WHITE,
+  COOKIE_WIDGET_ICON,
+  CARET_DOWN_ICON,
 } from "../constants/index.js";
-const CLOSE_ICON = "../src/assets/images/close-icon.svg",
-      CLOSE_ICON_WHITE="../../src/assets/images/close-icon-white.svg",
-      COOKIE_WIDGET_ICON="../../src/assets/images/cookie.svg",
-      CARET_DOWN_ICON="../../src/assets/images/caretDown.png"
 
 export default {
   // if false, this prevents the popup from showing (useful for giving to control to another piece of code)
@@ -45,13 +45,10 @@ export default {
     deny: "Decline",
     link: "Learn more",
     href: "https://www.cookiesandyou.com",
-    close:
-      `<img src=${CLOSE_ICON} class="cc-close" alt="close button"/>`,
-    closeWhite:
-      `<img src=${CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
+    close: `<img src=${CLOSE_ICON} class="cc-close" alt="close button"/>`,
+    closeWhite: `<img src=${CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
     target: "_blank",
-    widgetImage:
-      `<img src=${COOKIE_WIDGET_ICON} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
+    widgetImage: `<img src=${COOKIE_WIDGET_ICON} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
     policy: "Cookie Policy",
     settings: "Cookie Preferences",
   },
@@ -108,20 +105,27 @@ export default {
               <p class="my-auto">No Data Available</p>
             </div>
             <ul class="cc-categories px-4">` +
-            COOKIES_CATEGORIES
-              .map(
-              (category, index) => `
+      COOKIES_CATEGORIES.map(
+        (category, index) => `
               <li class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer"  >
                 <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" onclick="CMP_Section.bannerAccordionToggle(${index})">
                   <p class=" category-title font-medium">${category}</p>
                   <label for=${category.toLowerCase()} class="switch-toggle relative dotWrapper inline-flex cursor-pointer" tabindex=${index}>
                   <button class="cc-btn qyqe group relative">
                     <input type="checkbox" id="${index}" class="radioButtonCookie" name="${category}"
-                      value="${category.toLowerCase()}" ${ category.toLowerCase()==="necessary" && "disabled checked" } />
+                      value="${category.toLowerCase()}" ${
+          category.toLowerCase() === "necessary" && "disabled checked"
+        } />
                     <div class="switch-holder block border border-primary-stroke  w-9 h-6 rounded-full transition"></div>
-                    <div class="${category.toLowerCase() === " necessary" && "translate-x-3 transform cursor-not-allowed"
-                      } dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition
-                      ${category.toLowerCase()==="necessary" ? "bg-red-700" : "bg-gray-400" }"></div>
+                    <div class="${
+                      category.toLowerCase() === " necessary" &&
+                      "translate-x-3 transform cursor-not-allowed"
+                    } dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition
+                      ${
+                        category.toLowerCase() === "necessary"
+                          ? "bg-red-700"
+                          : "bg-gray-400"
+                      }"></div>
                   </button>
                   </label>
                 </div>
@@ -137,9 +141,8 @@ export default {
                 </div>
               </li>
               `
-              )
-              .join("") +
-              `
+      ).join("") +
+      `
             </ul>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
