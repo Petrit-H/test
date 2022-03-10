@@ -19,12 +19,13 @@ export default {
   // defaults cookie options - it is RECOMMENDED to set these values to correspond with your server
   cookie: {
     // This is the name of this cookie - you can ignore this
-    name: "gjirafa_cookies_",
+    name: "gjir-cmp_",
     // This is the url path that the cookie 'name' belongs to. The cookie can only be read at this location
     path: "/",
     // This is the domain that the cookie 'name' belongs to. The cookie can only be read on this domain.
     //  - Guide to cookie domains - https://www.mxsasha.eu/blog/2014/03/04/definitive-guide-to-cookie-domains/
-    domain: "localhost",
+    // domain: "https://www.mxsasha.eu/blog/2014/03/04/definitive-guide-to-cookie-domains",
+    domain: "",
     // The cookies expire date, specified in days (specify -1 for no expiry)
     expiryDays: 365,
     // If true the cookie will be created with the secure flag. Secure cookies will only be transmitted via HTTPS.
@@ -162,7 +163,7 @@ export default {
           <div class="contentWrapper overflow-y-scroll my-3">
             <div class="descSectoin px-4 py-3">
               <p id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5" onclick="CMP_Section.goBackFunc()">
-                <img src=${CARET_DOWN_ICON} alt="caret left back " class="rotate-90 transform mr-3">
+                <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 transform mr-3">
                 <span class="text-black">Back</span>
               </p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel
@@ -207,7 +208,7 @@ export default {
   // This is the html for the revoke button. This only shows up after the user has selected their level of consent
   // It can be enabled of disabled using the `revokable` option
   revokeBtn:
-    '<button type="button" class="cc-revoke {{classes}}">{{widgetImage}}</button>',
+    '<button type="button" class="cc-revoke ">{{widgetImage}}</button>',
 
   // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
   compliance: {

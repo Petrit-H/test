@@ -12,7 +12,7 @@ module.exports = {
       "./src/homeBanner.js",
     ],
   },
-  watch: true,
+  // watch: true,
   output: {
     // filename: "index.min.js",
     filename: "[name]",
@@ -43,25 +43,10 @@ module.exports = {
           // },
         },
       },
-      // {
-      //   test: /\.(jpe?g|png|gif)$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     // Images larger than 10 KB won’t be inlined
-      //     limit: 10 * 1024
-      //   }
-      // },
-      // {
-      //   test: /\.svg$/,
-      //   loader: 'svg-url-loader',
-      //   options: {
-      //     // Images larger than 10 KB won’t be inlined
-      //     limit: 10 * 1024,
-      //     // Remove quotes around the encoded URL –
-      //     // they’re rarely useful
-      //     noquotes: true,
-      //   }
-      // },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
       //! {
       //!   test: /\.(jpg|png|gif|svg)$/,
       //!   loader: 'image-webpack-loader',
@@ -74,15 +59,10 @@ module.exports = {
       //   test: /\.svg$/,
       //   use: "file-loader",
       // },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-
-      {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: ["style-loader", "css-loader"],
+      // },
     ],
-  }
+  },
 };

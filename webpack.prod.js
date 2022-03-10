@@ -9,12 +9,13 @@ const glob = require("glob");
 module.exports = merge(commonConfig, {
   mode: "production",
   devtool: "source-map",
+  watch:true,
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: [MiniCssExtractPlugin.loader, "css-loader"],
+      // },
       {
         test: /\.s[ac]ss$/i,
         use: [
@@ -36,7 +37,7 @@ module.exports = merge(commonConfig, {
     new ImageminPlugin({
       externalImages: {
         context: ".",
-        sources: glob.sync("./src/assets/images/**.{png,jpg,jpeg,gif,svg}"),
+        sources:glob.sync("./src/assets/images/**.{png,jpg,jpeg,gif,svg}"),
         destination: "dist/images",
         fileName: "[name].[ext]",
       },

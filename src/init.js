@@ -55,7 +55,7 @@ const optionsObj = (countryCode, type) => {
       regionalLaw: true,
     },
     location: true,
-    // position: 'bottom',
+    position: 'top-right',
     revokable: true,
     palette: {
       categories: {
@@ -129,7 +129,7 @@ CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
 setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
 
-  console.log("🚀 ~ ", toggleType);
+  console.log("🚀 ~ TOGGLE TYPE", toggleType);
 
   for (const key of toggleType) {
     console.log(key);

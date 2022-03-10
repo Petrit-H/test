@@ -1,0 +1,57 @@
+{
+  "bannerPosition": {
+    "top": false,
+    "bottom": true,
+    "topRight": false,
+    "topLeft": false,
+    "bottomLeft": false,
+    "bottomRight": false
+  },
+  "bannerWidget": {
+    "show": true,
+    "position": { "right": false, "left": true },
+    "style": {
+      "word": {
+        "title": "Change",
+        "fontWeight": 200,
+        "fontSize": 20,
+        "color": "#ffffff",
+        "backgroundColor": "#fddeef"
+      },
+      "standard": "",
+      "triangle": ""
+    }
+  },
+  "bannerContent": {
+    "closeButton": true,
+    "bannerTitle": {
+      "title": "title stuff",
+      "fontWeight": 200,
+      "fontSize": 20,
+      "color": "#ffffff"
+    },
+    "bannerDescription": {
+      "title": "title stuff",
+      "fontWeight": 200,
+      "fontSize": 20,
+      "color": "#ffffff"
+    },
+    "readMore": {
+      "show": true,
+      "linkTitle": "Learn More",
+      "linkURL": "https://google.com"
+    },
+    "acceptButton": {
+      "title": "Accept All",
+      "fontWeight": 200,
+      "fontSize": 20,
+      "buttonColor": "#ffkkll"
+    },
+    "alternateButton": {
+      "title": "Customize Settings",
+      "fontWeight": 200,
+      "fontSize": 20,
+      "buttonColor": "#ffkkll"
+    }
+  }
+}

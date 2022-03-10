@@ -54,8 +54,6 @@
 
 /**************************************** BANNER ****************************************/
 
-
-
 .cc-window.cc-banner {
   align-items: center;
 }
@@ -95,32 +93,32 @@
 
 /* Categories Layout */
 .cc-window.cc-type-categories {
-  display       : inline-flex;
+  display: inline-flex;
   flex-direction: column;
-  overflow      : visible;
-  .form{
+  overflow: visible;
+  .form {
     // text-align: right;
   }
   .cc-btn {
     margin: 0;
     &.cc-save {
-      margin        : 0;
-      display       : inline-block;
+      margin: 0;
+      display: inline-block;
     }
   }
 }
 .cc-categories {
   display: flex;
   flex-direction: column;
-  .cc-category{
-    display  : flex;
+  .cc-category {
+    display: flex;
     max-width: 100%;
     // margin   : 0 2px;
-    position : relative;
+    position: relative;
   }
   .cc-btn {
     border-right: none;
-    outline     : none;
+    outline: none;
     text-transform: capitalize;
     // input[type=checkbox]{
     //   float: left;
@@ -132,37 +130,37 @@
     //   left: 2px;
     //   cursor: pointer;
     // }
-    &:not(.cc-info):not(.cc-save){
+    &:not(.cc-info):not(.cc-save) {
       // padding-left: 26px;
     }
   }
   .cc-info {
-    border-left : none;
+    border-left: none;
     border-right: 2px solid lightgrey;
-    padding     : 4px;
+    padding: 4px;
     font-variant: all-small-caps;
-    &:focus + .cc-tooltip{
+    &:focus + .cc-tooltip {
       display: block;
     }
   }
-  .cc-tooltip{
-    display      : none;
-    position     : absolute;
-    z-index      : 3;
-    width        : 190px;
-    bottom       : 46px;
-    padding      : 8px;
-    border       : thin solid lightgrey;
-    box-shadow: 1px 1px 4px rgba( 150, 150, 150, .7 );
-    &:after{
-      content   : "";
-      width     : 10px;
-      height    : 10px;
-      transform : rotate(45deg);
-      position  : absolute;
-      bottom    : -7px;
-      left      : 10px;
-      box-shadow: 2px 1px 1px rgba( 200, 200, 200, .5 );
+  .cc-tooltip {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    width: 190px;
+    bottom: 46px;
+    padding: 8px;
+    border: thin solid lightgrey;
+    box-shadow: 1px 1px 4px rgba(150, 150, 150, 0.7);
+    &:after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: rotate(45deg);
+      position: absolute;
+      bottom: -7px;
+      left: 10px;
+      box-shadow: 2px 1px 1px rgba(200, 200, 200, 0.5);
     }
     p {
       margin: 0;
