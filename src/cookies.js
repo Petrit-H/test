@@ -1,28 +1,22 @@
 // import CMP_Section from "./scripts";
 
-function create_UUID() {
-  var dt = new Date().getTime();
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      var r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
-  return uuid;
-}
-
 console.log(create_UUID());
+const OTHER = [];
+const MARKETING = [];
+const ANALYTICAL = [];
+const PREFERENCES = [];
+const NECESSARY = [];
+// import {
+//   OTHER,
+//   MARKETING,
+//   ANALYTICAL,
+//   PREFERENCES,
+//   NECESSARY,
+// } from "./constants";
 
 let responseData = [];
 let categories = [];
 // let filteredCookies = [];
-let OTHER = [];
-let MARKETING = [];
-let ANALYTICAL = [];
-let PREFERENCES = [];
-let NECESSARY = [];
 let responseForCookies = []; //?{ cookie_name: "", cookie_status: "" }
 let cookiesPerCategory = [];
 // let dataForBala = [];
@@ -86,6 +80,18 @@ window.addEventListener("load", function (event) {
   // };
 });
 
+function create_UUID() {
+  var dt = new Date().getTime();
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      var r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
+  return uuid;
+}
 const fetchDataFromAPI = () => {
   let config = {
     method: "get",
@@ -242,7 +248,7 @@ function fillCookieSettingItem() {
   console.log("🚀 ~  FILL COOKIES w/INJECT", cookieSettingsInject);
   // debugger
   cookieSettingsInject.innerHTML = cookiesPerCategory
-    .map((item,index) => {
+    .map((item, index) => {
       let expirationDate = moment(item.expiration).endOf("day").fromNow();
       // console.log(item);
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
@@ -284,31 +290,6 @@ function fillCookieSettingItem() {
     .join("");
 }
 
-//! Handle the dropdown show and hide(FOR THE CATEGORIE DETAILS)
-// function settingsAccordionToggle() {
-//   let header = document.querySelectorAll(".settingAccordion .accordionHeader");
-//   console.log("🚀 ~ Settings Accordion Elements", header.length);
-//   let accordionContent = document.querySelectorAll(
-//     ".settingAccordion .accordionContent"
-//   );
-//   const carretToggle = document.querySelectorAll(".toggleAccordion");
-//   //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
-//   for (let item = 0; item <= header.length - 1; item++) {
-//     header[item].addEventListener("click", (event) => {
-//       event.stopPropagation();
-//       ["h-auto", "hidden"].map((i) =>
-//         accordionContent[item]?.classList?.toggle(i)
-//       );
-//       carretToggle[item]?.classList?.toggle("rotate-180");
-//       const children = accordionContent[item].children;
-//       for (element in children) {
-//         children[element]?.classList?.toggle("opacity-0");
-//       }
-//       console.log("click");
-//     });
-//   }
-// }
-
 //! fetch category cookies
 function categoryCookieFetch(id, storeVariable) {
   // let cookies = categories.filter((item) => item.id === id);
@@ -327,40 +308,7 @@ function categoryCookieFetch(id, storeVariable) {
   console.log("🚀 ~ cookiesPerCategory", storeVariable);
 }
 
-//! display the Cookie Details modal/data-injection
-// function showModal() {
-//   let id;
-//   const toggle = document.querySelectorAll(".cookieDetails");
-//   for (const elmnt of toggle) {
-//     elmnt.addEventListener("click", (event) => {
-//       id = event.target.attributes.value.value;
-//       console.log("CATEGORY ID CLIKED: ", id);
-//       COOKIE_SETTINGS.classList.remove("hidden");
-//       COOKIE_DISPLAY.classList.add("hidden");
-//       filterCookiesByCategory(
-//         responseData,
-//         +id,
-//         cookiesPerCategory,
-//         "CLICKED ON"
-//       );
-//       settingsAccordionToggle();
-//       fillCookieSettingItem();
-//     });
-//   }
-//   // if (
-//   //   NECESSARY.length === 0 ||
-//   //   PREFERENCES.length === 0 ||
-//   //   MARKETING.length === 0 ||
-//   //   ANALYTICAL.length === 0  ||
-//   //   OTHER.lenght === 0
-//   // ) {
-//   //   //todo noData.classList.remove("hidden");
-//   //   console.log("~~~NO DATA TO DISPLAY~~~");
-//   // }
-// }
-
 //! toggle injected button ON/OFF
-
 function toggleInjected() {
   const injectedLabel = document.querySelectorAll(".dotWrapper");
   // console.log("🚀 ~ file: cookies.js ~ line 290 ~ toggleInjected ~ dot", dot);
@@ -392,6 +340,7 @@ function toggleInjected() {
 }
 
 module.exports = CMP_Section = {
+  // export const CMP_Section = {
   // Fill a select element with options (html can be configured using `cb`)
   fillSelect: function (select, options, selected, cb) {
     if (typeof cb != "function") {
@@ -474,7 +423,7 @@ module.exports = CMP_Section = {
       }
       // });
       // });
-    }, 200);
+    }, 300);
     // console.log(radioButtons);
     document.removeEventListener("click", event.target);
   },
@@ -557,9 +506,12 @@ module.exports = CMP_Section = {
           storeVariable.push(item);
         }
       });
-      // console.log("2nd", storeVariable);
     });
-    console.log(`🚀 ~ ${category} id:`, id, `=> ${storeVariable.length}`);
+    // if (category.toLowerCase().indexOf("necessary") !== -1) {
+    //   NECESSARY = storeVariable;
+    // }
+    // console.log(`🚀 ~ ${category} id:`, id, `=> ${storeVariable.length}`);
+    console.log(`🚀 ~ ${category} id:`, id, `=> `, storeVariable);
 
     // fillCookieSettingItem();
   },
@@ -574,18 +526,65 @@ module.exports = CMP_Section = {
     const carretToggle = document.querySelectorAll(".toggleAccordion");
     //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
     // for (let item = 0; item <= header.length - 1; item++) {
-      // header[item].addEventListener("click", (event) => {
-        // event.stopPropagation();
-        ["h-0", "hidden"].map((i) =>
-          accordionContent[index]?.classList?.toggle(i)
-        );
-        carretToggle[index]?.classList?.toggle("rotate-180");
-        const children = accordionContent[index].children;
-        for (element in children) {
-          children[element]?.classList?.toggle("opacity-0");
-        }
-        console.log("click");
-      // });
+    // header[item].addEventListener("click", (event) => {
+    // event.stopPropagation();
+    ["h-0", "hidden"].map((i) => accordionContent[index]?.classList?.toggle(i));
+    carretToggle[index]?.classList?.toggle("rotate-180");
+    const children = accordionContent[index].children;
+    for (element in children) {
+      children[element]?.classList?.toggle("opacity-0");
+    }
+    console.log("click");
+    // });
     // }
   },
+  // typeChange: function (locationElement, ccInstance, categoriesType, testType) {
+  //   const toggleType = document.querySelectorAll(".typeChange");
+
+  //   console.log("🚀 ~ TOGGLE TYPE", toggleType);
+
+  //   for (const key of toggleType) {
+  //     console.log(key);
+  //     key.addEventListener("click", (event) => {
+  //       timeStamp();
+  //       console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+  //       // toggleType.addEventListener("click", (e) => {
+  //       console.log(
+  //         "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
+  //         categoriesType
+  //       );
+  //       console.log(
+  //         "🚀 ~ file: index.html ~ line 205 ~ infoType => ",
+  //         infoType
+  //       );
+  //       // debugger
+  //       // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
+  //       if (testType === "info") {
+  //         testType = "categories";
+  //         optionsObj(
+  //           locationElement[locationElement.selectedIndex].value,
+  //           "categories"
+  //         );
+  //         ccInstance.clearStatuses().destroy();
+  //         console.log("IS OPENNNNNNNNNNNN", ccInstance.isOpen());
+  //         draw(locationElement[locationElement.selectedIndex].value);
+  //         // CMP_Section.bannerAccordionToggle();
+  //         CMP_Section.showModal();
+  //         console.log("🚀 ~ TYPE-> options.type", testType);
+  //       } else if (testType === "categories") {
+  //         testType = "info";
+  //         optionsObj(
+  //           locationElement[locationElement.selectedIndex].value,
+  //           "info"
+  //         );
+  //         ccInstance.clearStatuses().destroy();
+  //         draw(locationElement[locationElement.selectedIndex].value);
+  //         console.log("🚀 ~TYPE->  options.type", testType);
+  //         CMP_Section.allowAllCookies();
+  //       } else {
+  //         return this;
+  //       }
+  //     });
+  //   }
+  // },
 };

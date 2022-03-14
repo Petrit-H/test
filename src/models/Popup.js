@@ -225,6 +225,7 @@ export default class Popup extends Base {
 
   revokeChoice(preventOpen) {
     this.options.enabled = true;
+    //!==========
     this.clearStatuses();
 
     this.emit("revokeChoice");
@@ -319,6 +320,7 @@ export default class Popup extends Base {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
       console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
+
   }
 
   canUseCookies() {
@@ -483,8 +485,9 @@ export default class Popup extends Base {
     if (btn.classList.contains("cc-btn") && btn.classList.contains("cc-save")) {
       this.setStatuses();
       setTimeout(() => {
+        //!==========
         this.close(true);
-        console.log(this.userCategories);
+        console.log("TEST PETRIT",this.userCategories);
       }, 200);
       return;
     }

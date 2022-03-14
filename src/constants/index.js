@@ -11,6 +11,14 @@ export const COOKIES_CATEGORIES = [
   "OTHER",
 ];
 
+export const DOMAINS = [];
+
+export let NECESSARY = [];
+export let PREFERENCES = [];
+export let ANALYTICAL = [];
+export let MARKETING = [];
+export let OTHER = [];
+
 export const CLIENT_GEOLOCATION_API_URL = "https://cmp.gjirafa.dev/GetPublicIp";
 export const USER_COOKIE_DATA = [];
 

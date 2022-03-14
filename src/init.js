@@ -55,7 +55,7 @@ const optionsObj = (countryCode, type) => {
       regionalLaw: true,
     },
     location: true,
-    position: 'top-right',
+    // position: 'top-right',
     revokable: true,
     palette: {
       categories: {
@@ -98,9 +98,9 @@ const draw = function (countryCode) {
       console.log("🚀 ~ POPUP INIT", popup);
       // ccInstance.popup?.open();
     })
-    .on("popupOpened", (...args) => console.log("Popup Open", args))
+    .on("popupOpened", (...args) => console.log("POPUP OPENED", args))
     .on("popupClosed", (...args) => {
-      console.log("Popup Closed", args);
+      console.log("POPUP CLOSED", args);
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
@@ -126,6 +126,7 @@ const draw = function (countryCode) {
 CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
 
 
+// CMP_Section.typeChange(locationElement, ccInstance, categoriesType, testType)
 setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
 
@@ -171,7 +172,7 @@ setTimeout(() => {
       }
     });
   }
-}, 300);
+}, 500);
 
 
 // const typeToggleFunction = (e) => {
