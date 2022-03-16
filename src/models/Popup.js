@@ -320,7 +320,6 @@ export default class Popup extends Base {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
       console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
-
   }
 
   canUseCookies() {
@@ -487,7 +486,7 @@ export default class Popup extends Base {
       setTimeout(() => {
         //!==========
         this.close(true);
-        console.log("TEST PETRIT",this.userCategories);
+        console.log("TEST PETRIT", this.userCategories);
       }, 200);
       return;
     }

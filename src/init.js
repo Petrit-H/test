@@ -39,12 +39,10 @@ const optionsObj = (countryCode, type) => {
   console.log("CODE ", countryCode);
   const options = {
     cookieconsent: CookieConsent,
-    selector: document.querySelector(".example-selector"),
-    container: document.getElementById("CMP"),
+    // selector: document.querySelector(".example-selector"),
+    container: document.getElementById(".CMP_Selector"),
+    // container: document.getElementById("CMP"),
     type: type,
-    // cookie:{
-    //   name:"gjir"
-    // },
     // type: "opt-in",
     regionalLaw: true,
     legal: countryCode,
@@ -125,7 +123,6 @@ const draw = function (countryCode) {
 //fill the countries dropdown
 CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
 
-
 // CMP_Section.typeChange(locationElement, ccInstance, categoriesType, testType)
 setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
@@ -152,7 +149,7 @@ setTimeout(() => {
           "categories"
         );
         ccInstance.clearStatuses().destroy();
-        console.log("IS OPENNNNNNNNNNNN",ccInstance.isOpen())
+        console.log("IS OPENNNNNNNNNNNN", ccInstance.isOpen());
         draw(locationElement[locationElement.selectedIndex].value);
         // CMP_Section.bannerAccordionToggle();
         CMP_Section.showModal();
@@ -173,7 +170,6 @@ setTimeout(() => {
     });
   }
 }, 500);
-
 
 // const typeToggleFunction = (e) => {
 //   timeStamp();

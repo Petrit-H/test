@@ -28,7 +28,25 @@ window.addEventListener("load", function (event) {
   const spinner = document.getElementById("spinner");
   const noData = document.getElementById("noData");
   const goBack = document.getElementById("goBack");
-  console.log("🚀 ~ file: cookies.js ~ line 38 ~ goBack", goBack);
+
+  console.log("welcome to🔐 \n",`
+      CCCCCCCCCCCCC MMMMMMMM              MMMMMMMMM PPPPPPPPPPPPPPP
+    CCC:::::::::::C M:::::::M             M:::::::M P:::::::::::::::P
+  CC::::::::::::::C M::::::::M           M::::::::M P:::::PPPPPP:::::P
+ C:::::CCCCCCCC:::C M:::::::::M         M:::::::::M P:::::P     P:::::P
+C:::::C       CCCCC M::::::::::M       M::::::::::M P:::::P     P:::::P
+C:::::C              M::::::::::M     M::::::::::M   P::::P     P:::::P
+C:::::C              M::::::M::::M   M::::M::::::M   P::::PPPPPP:::::P
+C:::::C              M:::::M M::::M M::::M M:::::M   P:::::::::::::PP
+C:::::C              M:::::M  M::::M::::M  M:::::M   P::::PPPPPPPPP
+C:::::C              M:::::M   M:::::::M   M:::::M   P::::P
+C:::::C              M:::::M    M:::::M    M:::::M   P::::P
+C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
+ C:::::CCCCCCCC:::C M::::::M               M::::::M P::::::P
+  CC::::::::::::::C M::::::M               M::::::M P::::::P
+    CCC:::::::::::C M::::::M               M::::::M P::::::P
+       CCCCCCCCCCCC MMMMMMMM               MMMMMMMP PPPPPPPP
+    `);
 
   // const cookieSectionInject = document.querySelector(".cookieSectionInject");
   const cookieSectionInject = document.getElementById("cookieSectionInject");
@@ -39,23 +57,9 @@ window.addEventListener("load", function (event) {
   // bannerAccordionToggle()
 
   setTimeout(() => {
-    // filterCategories(categories, responseData);
-    // fillCookies();
-    //  fillCookieSettingItem();
-    // accordionToggle();
-    // stopParent();
-    // homepageAccordionToggle();
     toggleInjected();
     // bannerAccordionToggle()
     // showModal();
-
-    //todo allowAllCookies();
-    //todo allowAllCookiesHandler();
-    //todo console.log("🚀 ~ file: cookies.js ~ goBack", goBack);
-    //todo console.log(
-    //todo   "🚀 ~ file: cookies.js ~ cookieSectionInject",
-    //todo   cookieSectionInject
-    //todo );
 
     dataForBala = {
       id: create_UUID(),

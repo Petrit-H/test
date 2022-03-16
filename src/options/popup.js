@@ -8,6 +8,8 @@ import {
   COOKIE_WIDGET_ICON,
   CARET_DOWN_ICON,
 } from "../constants/index.js";
+import {PITI} from "../test1.js"
+
 
 export default {
   // if false, this prevents the popup from showing (useful for giving to control to another piece of code)
@@ -19,7 +21,8 @@ export default {
   // defaults cookie options - it is RECOMMENDED to set these values to correspond with your server
   cookie: {
     // This is the name of this cookie - you can ignore this
-    name: "gjir-cmp_",
+    name: `${PITI()}`,
+    // name: "gjir-cmp_",
     // This is the url path that the cookie 'name' belongs to. The cookie can only be read at this location
     path: "/",
     // This is the domain that the cookie 'name' belongs to. The cookie can only be read on this domain.
@@ -67,11 +70,11 @@ export default {
       '<span id="cookieconsent:desc" class="cc-message">{{policy}} <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a></span>',
     // dismiss: `<a aria-label="dismiss cookie message" role=button tabindex="0" class="cc-btn cc-${STATUS_DISMISS}">{{dismiss}}</a>`,
     dismiss: `
+
+    <div id="CMP" class=" transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
     <div class="controlSection z-50 fixed top-0 right-0 pt-2 pr-2 flex justify-between items-center ">
       <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhite}}</span>
     </div>
-
-    <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
           <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
             <button class="text-white typeChange">Cookie Settings</button>
@@ -217,7 +220,7 @@ export default {
       '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}{{customize}}</div>',
     "opt-out":
       '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
-    categories: '<div class="form">{{categories}}</div>',
+    categories: '<div class="CMPCategories flex items-center">{{categories}}</div>',
   },
 
   // select your type of popup here

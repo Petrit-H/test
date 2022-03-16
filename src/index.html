@@ -14,10 +14,10 @@
   <!-- <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="testStyles.css"> -->
 
-<body class="example3 text-primary" role="document">
+<body class="example3 text-primary fixed w-screen h-full top-0 left-0" role="document">
   <div id="test"></div>
   <!-- <div id="content"></div> -->
-  <div class="form-controls container max-w-xl text-center">
+  <div class="form-controls hidden container max-w-xl text-center">
     <select id="location" class="selectbox"></select>
     <!-- <div id="location" class="selectbox"></div> -->
     <div id="message"></div>
@@ -25,8 +25,10 @@
     <br>
     <button id="toggleType" class="bg-red-300 typeChange">toggle</button>
   </div>
-  <div class="example-selector"></div>
-  <div id="CMP"></div>
+  <div id="CMP" class="">
+    <div id="CMP_Selector"></div>
+
+  </div>
 
 
   <!-- <script src="https://unpkg.com/@activescott/cookieconsent@>=5"></script> -->
@@ -38,3 +40,4 @@
 
   <!-- <script src="../dist/index.min.js"></script> -->
   <script src="../dist/index.min.js"></script>
+  <!-- <script type="module" src="test2.js"></script> -->

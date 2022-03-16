@@ -11,11 +11,6 @@ html {
   // background: radial-gradient(ellipse at center, #3f4f79 0%, #1d1d2b 100%);
 }
 
-body.example2 {
-  background: #5f4f59;
-  background: radial-gradient(ellipse at center, #5f4f59 0%, #2d1d2b 100%);
-}
-
 body.example3 {
   // background: #7f5f49;
   height: auto;
@@ -25,26 +20,6 @@ body.example3 {
   z-index: 0;
   /* background: #FFFFFF; */
   // background: radial-gradient(ellipse at center, #5f7f49 0%, #1d1d2b 100%);
-}
-
-body.example4 {
-  background: #7f5f49;
-  background: radial-gradient(ellipse at center, #7f5f49 0%, #1d1d2b 100%);
-}
-
-body.example5 {
-  background: #7f3f49;
-  background: radial-gradient(ellipse at center, #7f3f49 0%, #1d1d2b 100%);
-}
-
-body.example6 {
-  background: #3f5f59;
-  background: radial-gradient(ellipse at center, #3f5f59 0%, #1d1d2b 100%);
-}
-
-body.example7 {
-  background: #604060;
-  background: radial-gradient(ellipse at center, #604060 0%, #1d1d2b 100%);
 }
 
 pre {
@@ -334,14 +309,16 @@ ul {
 
 //! small consent banner visible on page load
 .CMPWrapper {
-  background-color: #052d61;
+  // background-color: #052d61;
   // position: absolute;
   // top: 0;
   // transform: translateY(100%);
-  transition: all 500ms ease-in-out;
+  // transition: all 500ms ease-in-out;
   .bannerWrapper {
     color: #ffffff;
     font-weight: 500;
+    padding: 2em 1.8em;
+    position: relative;
     // font-size: 14px;
     line-height: 18px;
     &__description {
@@ -381,5 +358,14 @@ ul {
   }
   &.showModal {
     // transform: translateY(0);
+  }
+}
+
+//!CATEGORIES BANNER STYLES
+.CMPCategories {
+  margin: auto;
+  height: 100vh;
+  & > * {
+    // margin: auto;
   }
 }

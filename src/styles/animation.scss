@@ -1,22 +1,22 @@
 .cc-window {
   opacity: 1;
 
-  -webkit-transition: opacity 1s ease;
-  -moz-transition: opacity 1s ease;
-  -ms-transition: opacity 1s ease;
-  -o-transition: opacity 1s ease;
-  transition: opacity 1s ease;
+  // -webkit-transition: opacity 1s ease;
+  // -moz-transition: opacity 1s ease;
+  // -ms-transition: opacity 1s ease;
+  // -o-transition: opacity 1s ease;
+  // transition: opacity 1s ease;
 }
 
 .cc-window {
-  transition: opacity .3s ease, transform .3s ease;
+  // transition: opacity .3s ease, transform .3s ease;
   opacity: 1;
-  transform: scale(1);
+  // transform: scale(1);
   pointer-events: all;
 }
 
 .cc-window.cc-invisible {
-  transform: scale(1.03);
+  // transform: scale(1.03);
   opacity: 0;
   pointer-events: none;
   // display: none !important;
@@ -24,11 +24,11 @@
 
 /* only animate ifhas class 'cc-animate' */
 .cc-animate.cc-revoke {
-  -webkit-transition: transform 1s ease;
-  -moz-transition: transform 1s ease;
-  -ms-transition: transform 1s ease;
-  -o-transition: transform 1s ease;
-  transition: transform 1s ease;
+  // -webkit-transition: transform 1s ease;
+  // -moz-transition: transform 1s ease;
+  // -ms-transition: transform 1s ease;
+  // -o-transition: transform 1s ease;
+  // transition: transform 1s ease;
 }
 .cc-animate.cc-revoke.cc-top {
   // transform: translateY(-2em);
