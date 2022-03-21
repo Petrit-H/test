@@ -5,6 +5,7 @@ import {
   COOKIES_STATUSES,
   STATUS_ALLOW,
   STATUS_DISMISS,
+  // ALL_DATA
 } from "../constants";
 import {
   addCustomStylesheet,
@@ -18,11 +19,11 @@ import {
   throttle,
   traverseDOMPath,
 } from "../utils";
-
+import { getResponseData } from "../test1";
+import CMP_Section from "../cookies.js";
 export default class Popup extends Base {
   constructor(options) {
     super(defaultOptions, options);
-    // console.log("🚀 ~ file: Popup.js ~ line 22 ~ Popup ~ constructor ~ options", options)
     this.userCategories = {
       NECESSARY: STATUS_ALLOW,
       PREFERENCES: STATUS_DISMISS,
@@ -273,7 +274,10 @@ export default class Popup extends Base {
    * @return { undefined }
    */
   setStatuses() {
+    let ALL_DATA = [];
     const { name, expiryDays, domain, path, secure } = this.options.cookie;
+    const radioButtons = document.querySelectorAll(".radioButtonCookie");
+    const cookieRadioButton = document.querySelectorAll(".cc-btn");
 
     const updateCategoryStatus = (categoryName, status) => {
       if (isValidStatus(status)) {
@@ -281,6 +285,39 @@ export default class Popup extends Base {
         const chosenBefore =
           COOKIES_STATUSES.indexOf(getCookie(cookieName)) >= 0;
         setCookie(cookieName, status, expiryDays, domain, path, secure);
+
+        for (let index = 0; index < radioButtons.length; index++) {
+          console.log(
+            "🚀 ~ file: Popup.js ~ line 281 ~ Popup ~ setStatuses ~ radioButtons",
+            radioButtons
+          );
+          const element = radioButtons[index];
+          // setTimeout(() => {
+
+          if (element.checked) {
+            console.log("KIZJA KAQURRELE", element.id);
+            getResponseData(+element.id).then((data) => {
+              // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
+              console.log("DATaAaaaaaaaaa", data);
+              for (const cookie of data) {
+                setCookie(
+                  cookie.name, //name
+                  "", //value
+                  cookie.expiryDays, //expiration day
+                  "", //domain
+                  cookie.path, //path
+                  // "/",
+                  cookie.is_secure //is secure
+                );
+              }
+            });
+            console.log(
+              "🚀 ~ file: Popup.js ~ line 302 ~ Popup ~ getResponseData ~ getResponseData(element.id)",
+              getResponseData(element.id)
+            );
+          }
+          // }, 100);
+        }
         this.emit("statusChanged", cookieName, status, chosenBefore);
       } else {
         this.clearStatuses();
@@ -442,15 +479,22 @@ export default class Popup extends Base {
     }
 
     el.addEventListener("click", (event) => this.handleButtonClick(event));
-    el.querySelectorAll('.cc-btn [type="checkbox"]').forEach((checkbox) => {
-      checkbox.addEventListener("change", () => {
-        // debugger;
-        this.userCategories[checkbox.name] = checkbox.checked
-          ? "ALLOW"
-          : "DENY";
-      });
-      checkbox.addEventListener("click", (event) => event.stopPropagation());
-    });
+    el.querySelectorAll('.cc-btn [type="checkbox"]').forEach(
+      (checkbox, index) => {
+        checkbox.addEventListener("change", () => {
+          // debugger;
+          this.userCategories[checkbox.name] = checkbox.checked
+            ? "ALLOW"
+            : "DENY";
+          checkbox.checked
+            ? console.log(`BUTTON CLICKED AND ALLOWED STUFF ${index}`)
+            : "";
+        });
+
+        checkbox.addEventListener("click", (event) => event.stopPropagation());
+      }
+    );
+
     el.querySelectorAll(".cc-info").forEach((showInfo) => {
       showInfo.addEventListener("mousedown", function (event) {
         if (this === document.activeElement) {
@@ -508,6 +552,7 @@ export default class Popup extends Base {
       return;
     }
     if (btn.classList.contains("cc-close")) {
+      //!=========
       this.setStatuses(STATUS_DISMISS);
       this.close(true);
       return;

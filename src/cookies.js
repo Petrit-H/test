@@ -1,18 +1,15 @@
 // import CMP_Section from "./scripts";
 
+const { CARET_DOWN_ICON, COOKIES_CATEGORIES } = require("./constants");
+const { getResponseData } = require("./test1");
+const { setCookie } = require("./utils/cookie");
+
 console.log(create_UUID());
 const OTHER = [];
 const MARKETING = [];
 const ANALYTICAL = [];
 const PREFERENCES = [];
 const NECESSARY = [];
-// import {
-//   OTHER,
-//   MARKETING,
-//   ANALYTICAL,
-//   PREFERENCES,
-//   NECESSARY,
-// } from "./constants";
 
 let responseData = [];
 let categories = [];
@@ -23,13 +20,9 @@ let cookiesPerCategory = [];
 let dataForBala = {};
 
 window.addEventListener("load", function (event) {
-  const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
-  const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
-  const spinner = document.getElementById("spinner");
-  const noData = document.getElementById("noData");
-  const goBack = document.getElementById("goBack");
-
-  console.log("welcome to🔐 \n",`
+  console.log(
+    "welcome to🔐 \n",
+    `
       CCCCCCCCCCCCC MMMMMMMM              MMMMMMMMM PPPPPPPPPPPPPPP
     CCC:::::::::::C M:::::::M             M:::::::M P:::::::::::::::P
   CC::::::::::::::C M::::::::M           M::::::::M P:::::PPPPPP:::::P
@@ -45,8 +38,14 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
  C:::::CCCCCCCC:::C M::::::M               M::::::M P::::::P
   CC::::::::::::::C M::::::M               M::::::M P::::::P
     CCC:::::::::::C M::::::M               M::::::M P::::::P
-       CCCCCCCCCCCC MMMMMMMM               MMMMMMMP PPPPPPPP
-    `);
+       CCCCCCCCCCCC MMMMMMMM               MMMMMMMM PPPPPPPP
+    `
+  );
+  const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
+  const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
+  const spinner = document.getElementById("spinner");
+  const noData = document.getElementById("noData");
+  const goBack = document.getElementById("goBack");
 
   // const cookieSectionInject = document.querySelector(".cookieSectionInject");
   const cookieSectionInject = document.getElementById("cookieSectionInject");
@@ -58,6 +57,7 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
 
   setTimeout(() => {
     toggleInjected();
+
     // bannerAccordionToggle()
     // showModal();
 
@@ -80,7 +80,7 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
     // if (responseData.length === 0) {
     //   noData.classList.remove("hidden");
     // }
-  }, 500);
+  }, 300);
   // };
 });
 
@@ -164,84 +164,6 @@ const fetchCategoriesFromAPI = () => {
     });
 };
 
-function stopParent() {
-  const qyqe = document.querySelectorAll(".qyqe");
-  console.log("🚀 ~ file: cookies.js ~ line 281 ~ stopParent ~ qyqe", qyqe);
-  for (const key in qyqe) {
-    const qyqeInput = qyqe[key].children[0];
-    const dot = qyqe[key].children[2];
-    // qyqeInput.style = `width:100%; height:100%; position:absolute; top:0; left:0`;
-
-    // console.log(qyqeInput.checked);
-    qyqe[key].addEventListener("click", (e) => {
-      // e.stopPropagation();
-      // qyqeInput.checked = qyqeInput.checked ^ 1;
-      qyqeInput.setAttribute("checked", 1);
-
-      // console.log(qyqeInput.checked);
-      dot.style = `transform: translateX(12px);
-                          background-color: #1c79f2;`;
-      // dot.classList.toggle("categoryChecked")
-
-      // console.log(
-      //   "🚀 ~ file: cookies.js ~ line 283 ~ stopParent ~ qyqeInput",
-      //   qyqeInput
-      // );
-      // debugger;
-    });
-  }
-}
-
-function fillCookies() {
-  // const event = new Event("this");
-
-  console.log(
-    "🚀 ~ file: scripts.js ~ line 416 ~ fillCookies ~ cookieSectionInject",
-    cookieSectionInject
-  );
-
-  cookieSectionInject.innerHTML = categories
-    .slice(0)
-    .reverse()
-    .map((item) => {
-      // console.log(item);
-      const isNecessaryCat = item.name.toLowerCase() === "necessary";
-      return `
-            <div class="homepageAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md ">
-              <div class="accordionHeader cursor-pointer flex justify-between p-3.5">
-                <p class="category-title font-medium">${item.name}</p>
-                <label for="${
-                  item.id
-                }" class="dotWrapper inline-flex cursor-pointer">
-                  <div class="qyqe group relative">
-                    <input type="checkbox" id="${
-                      item.id
-                    }" class="sr-only absolute top-0 left-0 w-full h-full" ${
-        isNecessaryCat && "disabled checked"
-      }
-                      value="${item.name.toLowerCase()}">
-                    <div class="switch-holder block border border-primary-stroke  w-9 h-6 rounded-full transition">
-                    </div>
-                    <div class="dot absolute left-1 top-1 w-4 h-4 rounded-full transition bg-gray-400"></div>
-                  </div>
-                </label>
-              </div>
-              <div class="accordionContent border-t mx-4 py-4 h-0 px-2 hidden transition-all duration-500 ease-in-out">
-                <p class="category-description opacity-0 mb-4 transition duration-300 ease-in-out transform">
-                  ${item.description}
-                </p>
-                <div class="opacity-0">
-                  <p value=${item?.id}
-                    class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
-                    Cookies Details</p>
-                </div>
-              </div>
-            </div>
-    `;
-    })
-    .join("");
-}
-
 //!  FILL THE COOKIE SETTINGS SECTION
 function fillCookieSettingItem() {
   console.log("fillCookieSettingItem()");
@@ -259,7 +181,7 @@ function fillCookieSettingItem() {
       <div class="accordionHeader cursor-pointer flex justify-between p-4" onclick="CMP_Section.settingsAccordionToggle(${index})">
         <p class="category-title font-medium">${item.name}</p>
         <div class="controlButtons flex">
-        <div id="closeIcon" class="carret closeIcon cursor-pointer my-auto"><img src="../../src/assets/images/caretDown.png"
+        <div id="closeIcon" class="carret closeIcon cursor-pointer my-auto"><img src="${CARET_DOWN_ICON}"
             class="toggleAccordion transition transform duration-500 ease-in-out " alt="caret up/down"/></div>
         </div>
       </div>
@@ -427,40 +349,69 @@ module.exports = CMP_Section = {
       }
       // });
       // });
-    }, 300);
+      for (let i = 0; i < COOKIES_CATEGORIES.length; i++) {
+        // getResponseData(i + 1);
+        getResponseData(i + 1).then((data) => {
+          // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
+          console.log("ALL COOKIES ", data);
+          for (const cookie of data) {
+            setCookie(
+              cookie.name, //name
+              "", //value
+              cookie.expiryDays, //expiration day
+              "", //domain
+              cookie.path, //path
+              // "/",
+              cookie.is_secure //is secure
+            );
+          }
+        });
+      }
+      // saveAllCookies();
+    }, 500);
     // console.log(radioButtons);
     document.removeEventListener("click", event.target);
   },
+  acceptNecassary: function () {
+    let ALL_DATA = [];
+    getResponseData(5).then((data) => {
+      // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
+      console.log("NECESSARY COOKIES ONLY", data);
+      for (const cookie of data) {
+        setCookie(
+          cookie.name, //name
+          "", //value
+          cookie.expiryDays, //expiration day
+          "", //domain
+          cookie.path, //path
+          // "/",
+          cookie.is_secure //is secure
+        );
+      }
+    });
+  },
+
   bannerAccordionToggle: function (index) {
+    console.log("🚀 ~ IDDDDD", index);
     // debugger;
     let header = document.querySelectorAll(".cc-category .accordionHeader");
     let accordionContent = document.querySelectorAll(
       ".cc-category .accordionContent"
     );
-    // console.log("🚀 ~ ACCORDION-HEADER", header);
-    // console.log("🚀 ~ACCORDION-CONTENT", accordionContent);
 
-    console.log("🚀 ~ HEADER LENGTH => ", header.length);
-    console.log("🚀 ~ CONTENT LENGTH => ", accordionContent.length);
-
-    ["h-0", "hidden"].map((i) => accordionContent[index]?.classList?.toggle(i));
-    const children = accordionContent[index].children;
+    // document.getElementById(``)
+    ["h-0", "hidden"].map((i) => {
+      console.log(i);
+      document
+        .getElementById(`CATEGORY_CONTENT_${index}`)
+        ?.classList?.toggle(i);
+    });
+    const children = accordionContent[index]?.children;
     console.log("🚀 ~ CHILDREN", accordionContent[index]);
     for (element of children) {
       element?.classList?.toggle("opacity-0");
-      console.log(
-        "🚀 ~ file: cookies.js ~ line 497 ~ toggleInjected ~ children[element]",
-        element
-      );
+      console.log("🚀 ~ children[element]", element);
     }
-    // children.forEach((element) => {
-    //   element?.classList?.toggle("opacity-0");
-    //   console.log(
-    //     "🚀 ~ file: cookies.js ~ line 497 ~ toggleInjected ~ children[element]",
-    //     element
-    //   );
-    // });
-
     console.log("BANNER CLICK ACCORDION ", index, " TOGGLE");
   },
   showModal: function (event, index) {
@@ -480,18 +431,6 @@ module.exports = CMP_Section = {
     );
     // settingsAccordionToggle();
     fillCookieSettingItem();
-    // });
-    // }§
-    // if (
-    //   NECESSARY.length === 0 ||
-    //   PREFERENCES.length === 0 ||
-    //   MARKETING.length === 0 ||
-    //   ANALYTICAL.length === 0  ||
-    //   OTHER.lenght === 0
-    // ) {
-    //   //todo noData.classList.remove("hidden");
-    //   console.log("~~~NO DATA TO DISPLAY~~~");
-    // }
   },
   goBackFunc: function () {
     // goBack.addEventListener("click", () => {
@@ -542,53 +481,76 @@ module.exports = CMP_Section = {
     // });
     // }
   },
-  // typeChange: function (locationElement, ccInstance, categoriesType, testType) {
-  //   const toggleType = document.querySelectorAll(".typeChange");
+  fillCookies: function () {
+    setTimeout(() => {
+      console.log("fillCookie()");
+      // console.log(COOKIE_SETTINGS);
+      // console.log(COOKIE_DISPLAY);
 
-  //   console.log("🚀 ~ TOGGLE TYPE", toggleType);
+      const cookieCategoriesInject = document.querySelector(
+        ".cookieCategoriesInject"
+      );
+      console.log("🚀 ~  FILL COOKIES w/INJECT PETRIT", cookieCategoriesInject);
 
-  //   for (const key of toggleType) {
-  //     console.log(key);
-  //     key.addEventListener("click", (event) => {
-  //       timeStamp();
-  //       console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
-  //       // toggleType.addEventListener("click", (e) => {
-  //       console.log(
-  //         "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
-  //         categoriesType
-  //       );
-  //       console.log(
-  //         "🚀 ~ file: index.html ~ line 205 ~ infoType => ",
-  //         infoType
-  //       );
-  //       // debugger
-  //       // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
-  //       if (testType === "info") {
-  //         testType = "categories";
-  //         optionsObj(
-  //           locationElement[locationElement.selectedIndex].value,
-  //           "categories"
-  //         );
-  //         ccInstance.clearStatuses().destroy();
-  //         console.log("IS OPENNNNNNNNNNNN", ccInstance.isOpen());
-  //         draw(locationElement[locationElement.selectedIndex].value);
-  //         // CMP_Section.bannerAccordionToggle();
-  //         CMP_Section.showModal();
-  //         console.log("🚀 ~ TYPE-> options.type", testType);
-  //       } else if (testType === "categories") {
-  //         testType = "info";
-  //         optionsObj(
-  //           locationElement[locationElement.selectedIndex].value,
-  //           "info"
-  //         );
-  //         ccInstance.clearStatuses().destroy();
-  //         draw(locationElement[locationElement.selectedIndex].value);
-  //         console.log("🚀 ~TYPE->  options.type", testType);
-  //         CMP_Section.allowAllCookies();
-  //       } else {
-  //         return this;
-  //       }
-  //     });
-  //   }
-  // },
+      console.log(
+        "🚀 ~ file: scripts.js ~ line 416 ~ fillCookies ~ cookieCategoriesInject",
+        cookieCategoriesInject
+      );
+      console.log("========================================================");
+      cookieCategoriesInject.innerHTML = categories
+        ?.slice(0)
+        ?.reverse()
+        ?.map((item) => {
+          console.log("ID", item.id);
+          return `<li class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer"  >
+          <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" onclick="CMP_Section.bannerAccordionToggle(${
+            item.id
+          })">
+            <p class=" category-title font-medium">${item.name}</p>
+            <label for=${item.name.toLowerCase()} class="switch-toggle relative dotWrapper inline-flex cursor-pointer" tabindex=${
+            item.id
+          }>
+            <button class="cc-btn  group relative" onclick="CMP_Section.stopParent(event)">
+              <input type="checkbox" id="${
+                item.id
+              }" class="radioButtonCookie" name="${item.name}"
+                value="${item.name.toLowerCase()}" ${
+            item.name.toLowerCase() === "necessary" && "disabled checked"
+          } />
+              <div class="switch-holder block border border-primary-stroke  w-9 h-6 rounded-full transition"></div>
+              <div class="${
+                item.name.toLowerCase() === "necessary" &&
+                "translate-x-3 transform cursor-not-allowed"
+              } dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition
+                ${
+                  item.name.toLowerCase() === "necessary"
+                    ? "bg-red-700"
+                    : "bg-gray-400"
+                }"></div>
+            </button>
+            </label>
+          </div>
+          <div class="accordionContent border-t h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${
+            item.id
+          }">
+          <div class="mx-4 py-4 px-2">
+          <p class="category-description mb-4 transition duration-300 ease-in-out transform">
+          ${item.name}
+        </p>
+        <div onclick="CMP_Section.showModal(event,${item.id})">
+          <p value=${item.id}
+            class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
+            Cookies Details</p>
+        </div>
+          </div>
+
+          </div>
+        </li>`;
+        })
+        .join("");
+    }, 400);
+  },
+  stopParent: function (event) {
+    event.stopPropagation();
+  },
 };

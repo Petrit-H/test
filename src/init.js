@@ -1,5 +1,7 @@
 import CookieConsent from "./models/CookieConsent";
 import CMP_Section from "./cookies";
+import { fetchAPI } from "./options/location";
+// import {fillCookies} from './cookies'
 
 const COUNTRY_CODES = {
   // Representative group of countries with key differences
@@ -31,8 +33,8 @@ const COUNTRY_CODES = {
   SE: "Sweden ",
   GB: "United Kingdom ",
 };
-
 let testType = "info";
+let CountryCode = "";
 // debugger
 const optionsObj = (countryCode, type) => {
   // debugger;
@@ -133,6 +135,7 @@ setTimeout(() => {
     console.log(key);
     key.addEventListener("click", (event) => {
       timeStamp();
+      CMP_Section.fillCookies();
       console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
       console.log(
@@ -169,44 +172,13 @@ setTimeout(() => {
       }
     });
   }
-}, 500);
+  CountryCode = fetchAPI();
+  // console.log("🚀 ~ LOCATIONNNNNNN ", fetchAPI())
+}, 200);
+console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
+draw("XK");
 
-// const typeToggleFunction = (e) => {
-//   timeStamp();
-//   console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
-//   // toggleType.addEventListener("click", (e) => {
-//   console.log(
-//     "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
-//     categoriesType
-//   );
-//   console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
-//   // debugger
-//   // console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType)
-//   if (testType === "info") {
-//     testType = "categories";
-//     optionsObj(
-//       locationElement[locationElement.selectedIndex].value,
-//       "categories"
-//     );
-//     ccInstance.clearStatuses().destroy();
-//     draw(locationElement[locationElement.selectedIndex].value);
-//     bannerAccordionToggle();
-//     showModal();
-//     console.log("🚀 ~ TYPE-> options.type", testType);
-//   } else if (testType === "categories") {
-//     testType = "info";
-//     optionsObj(locationElement[locationElement.selectedIndex].value, "info");
-//     ccInstance.clearStatuses().destroy();
-//     draw(locationElement[locationElement.selectedIndex].value);
-//     console.log("🚀 ~TYPE->  options.type", testType);
-//   } else {
-//     return this;
-//   }
-//   // })
-// };
-
-// draw("XK");
-draw(locationElement[locationElement.selectedIndex].value);
+// draw(locationElement[locationElement.selectedIndex].value);
 // draw(locationElement[2].value);
 // console.log("🚀 ~ locationElement[0].value", locationElement[0].value)
 locationElement.focus();

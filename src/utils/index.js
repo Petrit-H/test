@@ -1,7 +1,7 @@
 
 
 import * as cookie from "./cookie"
-export const getCookie = cookie.getCookie
+export const  getCookie = cookie.getCookie
 export const setCookie = cookie.setCookie
 
 

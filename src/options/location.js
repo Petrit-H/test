@@ -1,5 +1,6 @@
-import axios from 'axios'
-import {CLIENT_GEOLOCATION_API_URL} from '../constants'
+import axios from "axios";
+import { CLIENT_GEOLOCATION_API_URL } from "../constants";
+let countryCode = "";
 
 const toError = (obj) => {
   console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
@@ -13,9 +14,8 @@ const toError = (obj) => {
 
 // console.log("PITI 1");
 
-let url = "";
-
-const fetchAPI = () => {
+export const fetchAPI = () => {
+  let url = "";
   let config = {
     method: "get",
     url: CLIENT_GEOLOCATION_API_URL,
@@ -25,17 +25,22 @@ const fetchAPI = () => {
   axios(config)
     .then(function (response) {
       url = response.data;
+      countryCode = response.data.CountryCode;
+
+      console.log("🚀 ~ ", countryCode);
       console.log("==========︾==========");
+      console.log("🚀 ~ ", url);
       console.log("🚀 ~ ", url.Country);
       console.log("🚀 ~ ", url.CountryCode);
       console.log("🚀 ~ ", url.Timezone);
       console.log("🚀 ~ ", url.CountryID);
       console.log("==========︽==========");
-      toError({ code: url.CountryCode, error: "Invalid response" });
+      // toError({ code: url.CountryCode, error: "Invalid response" });
     })
     .catch(function (error) {
       console.log(error);
     });
+  return countryCode;
 };
 
 export default {

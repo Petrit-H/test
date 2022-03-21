@@ -5,11 +5,10 @@ import {
   COOKIES_CATEGORIES,
   CLOSE_ICON,
   CLOSE_ICON_WHITE,
-  COOKIE_WIDGET_ICON,
+  COOKIE_WIDGET_ICON_CIRCLE,
+  COOKIE_WIDGET_ICON_TRIANGLE,
   CARET_DOWN_ICON,
 } from "../constants/index.js";
-import {PITI} from "../test1.js"
-
 
 export default {
   // if false, this prevents the popup from showing (useful for giving to control to another piece of code)
@@ -20,9 +19,10 @@ export default {
 
   // defaults cookie options - it is RECOMMENDED to set these values to correspond with your server
   cookie: {
+    // data: ALL_DATA,
     // This is the name of this cookie - you can ignore this
-    name: `${PITI()}`,
-    // name: "gjir-cmp_",
+    // name: `${PITI()}`,
+    name: "gjir-cmp",
     // This is the url path that the cookie 'name' belongs to. The cookie can only be read at this location
     path: "/",
     // This is the domain that the cookie 'name' belongs to. The cookie can only be read on this domain.
@@ -52,7 +52,7 @@ export default {
     close: `<img src=${CLOSE_ICON} class="cc-close" alt="close button"/>`,
     closeWhite: `<img src=${CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
     target: "_blank",
-    widgetImage: `<img src=${COOKIE_WIDGET_ICON} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
+    widgetImage: `<img src=${COOKIE_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
     policy: "Cookie Policy",
     settings: "Cookie Preferences",
   },
@@ -71,17 +71,17 @@ export default {
     // dismiss: `<a aria-label="dismiss cookie message" role=button tabindex="0" class="cc-btn cc-${STATUS_DISMISS}">{{dismiss}}</a>`,
     dismiss: `
 
-    <div id="CMP" class=" transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
     <div class="controlSection z-50 fixed top-0 right-0 pt-2 pr-2 flex justify-between items-center ">
       <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhite}}</span>
     </div>
+    <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
           <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
             <button class="text-white typeChange">Cookie Settings</button>
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
-        <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies">{{dismiss}}</button>
+        <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" onclick="CMP_Section.acceptNecassary()">{{dismiss}}</button>
         <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
       </div>
     </div>
@@ -90,15 +90,14 @@ export default {
     deny: `<a aria-label="deny cookies" role=button tabindex="0" class="cc-btn cc-${STATUS_DENY}">{{deny}}</a>`,
     link: `<a aria-label="learn more about cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a>`,
     close: `<span aria-label="dismiss cookie message" role=button tabindex="0" class="cc-close">{{close}}</span>`,
-    categories:
-      `
+    categories: `
       <div class="max-w-lg xl:max-w-xl min-w-sm  w-full mx-auto z-10 flex flex-col justify-center items-center ">
         <i class="hidden">COOKIE_DISPLAY</i>
         <div id="COOKIE_DISPLAY" class="cookieModal  relative overflow-hidden rounded-lg bg-white w-full">
           <div class="controlSection z-50 sticky top-0 p-4 flex justify-between items-center border-b-2 border-gray-200">
             <div class="title">Cookie Settings</div>
             <span aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</span>
-          </div>
+           </div>
           <div class="contentWrapper overflow-y-auto my-3">
             <div class="descSectoin px-4 py-3">
               <p class="2xl:pt-4 pb-2">{{title}}</p>
@@ -108,51 +107,14 @@ export default {
               class="absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 z-50 hidden">
               <p class="my-auto">No Data Available</p>
             </div>
-            <ul class="cc-categories px-4">` +
-      COOKIES_CATEGORIES.map(
-        (category, index) => `
-              <li class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer"  >
-                <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" onclick="CMP_Section.bannerAccordionToggle(${index})">
-                  <p class=" category-title font-medium">${category}</p>
-                  <label for=${category.toLowerCase()} class="switch-toggle relative dotWrapper inline-flex cursor-pointer" tabindex=${index}>
-                  <button class="cc-btn qyqe group relative">
-                    <input type="checkbox" id="${index}" class="radioButtonCookie" name="${category}"
-                      value="${category.toLowerCase()}" ${
-          category.toLowerCase() === "necessary" && "disabled checked"
-        } />
-                    <div class="switch-holder block border border-primary-stroke  w-9 h-6 rounded-full transition"></div>
-                    <div class="${
-                      category.toLowerCase() === " necessary" &&
-                      "translate-x-3 transform cursor-not-allowed"
-                    } dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition
-                      ${
-                        category.toLowerCase() === "necessary"
-                          ? "bg-red-700"
-                          : "bg-gray-400"
-                      }"></div>
-                  </button>
-                  </label>
-                </div>
-                <div class="accordionContent border-t mx-4 py-4 h-0 px-2 hidden transition-all duration-500 ease-in-out">
-                  <p class="category-description opacity-0 mb-4 transition duration-300 ease-in-out transform">
-                    ${category}
-                  </p>
-                  <div class="opacity-0" onclick="CMP_Section.showModal(event,${index})">
-                    <p value=${index}
-                      class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
-                      Cookies Details</p>
-                  </div>
-                </div>
-              </li>
-              `
-      ).join("") +
-      `
+            <ul class="cc-categories px-4 cookieCategoriesInject">
+
             </ul>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
             <button
               class="cc-btn cc-save cc-${STATUS_ALLOW}  allowAll border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" onclick="CMP_Section.allowAllCookies(event)" >{{allowAll}}</button>
-            <button class="cc-btn cc-save cc-btn cc-${STATUS_ALLOW} border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
+            <button class="cc-btn cc-save  cc-${STATUS_ALLOW} border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
               My Choices</button>
           </div>
         </div>
@@ -220,7 +182,8 @@ export default {
       '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}{{customize}}</div>',
     "opt-out":
       '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
-    categories: '<div class="CMPCategories flex items-center">{{categories}}</div>',
+    categories:
+      '<div class="CMPCategories flex items-center">{{categories}}</div>',
   },
 
   // select your type of popup here
