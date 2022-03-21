@@ -3,6 +3,7 @@
 const { CARET_DOWN_ICON, COOKIES_CATEGORIES } = require("./constants");
 const { getResponseData } = require("./test1");
 const { setCookie } = require("./utils/cookie");
+const axios = require('axios')
 
 console.log(create_UUID());
 const OTHER = [];
@@ -548,7 +549,7 @@ module.exports = CMP_Section = {
         </li>`;
         })
         .join("");
-    }, 500);
+    }, 300);
   },
   stopParent: function (event) {
     event.stopPropagation();
