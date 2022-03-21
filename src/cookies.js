@@ -553,4 +553,7 @@ module.exports = CMP_Section = {
   stopParent: function (event) {
     event.stopPropagation();
   },
+  testClick: function (event) {
+    console.log("TEST SETTINGS CLICK", event.target);
+  },
 };

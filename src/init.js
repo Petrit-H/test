@@ -174,7 +174,7 @@ setTimeout(() => {
   }
   CountryCode = fetchAPI();
   // console.log("🚀 ~ LOCATIONNNNNNN ", fetchAPI())
-}, 200);
+}, 300);
 console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
 draw("XK");
 

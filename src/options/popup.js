@@ -77,12 +77,12 @@ export default {
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
           <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-white typeChange">Cookie Settings</button>
+            <button class="text-white typeChange" onclick="CMP_Section.testClick(event)">Cookie Settings</button>
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
         <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" onclick="CMP_Section.acceptNecassary()">{{dismiss}}</button>
-        <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
+        <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies" onclick="CMP_Section.testClick(event)">{{settings}}</button>
       </div>
     </div>
     `,
