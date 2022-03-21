@@ -4,6 +4,7 @@ const { CARET_DOWN_ICON, COOKIES_CATEGORIES } = require("./constants");
 const { getResponseData } = require("./test1");
 const { setCookie } = require("./utils/cookie");
 const axios = require('axios')
+const moment = require('moment')
 
 console.log(create_UUID());
 const OTHER = [];
