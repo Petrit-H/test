@@ -548,7 +548,7 @@ module.exports = CMP_Section = {
         </li>`;
         })
         .join("");
-    }, 400);
+    }, 500);
   },
   stopParent: function (event) {
     event.stopPropagation();
