@@ -1,6 +1,7 @@
-import CookieConsent from "./models/CookieConsent";
+// import CookieConsent from "./models/CookieConsent";
+import CookieConsent from "./index.js";
 import CMP_Section from "./cookies";
-import { fetchAPI } from "./options/location";
+import { fetchClientIp } from "./options/location";
 // import {fillCookies} from './cookies'
 
 const COUNTRY_CODES = {
@@ -93,9 +94,10 @@ const draw = function (countryCode) {
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = false;
   console.log("🚀 ~ ccInstance.autoOpen ", ccInstance.autoOpen);
-  ccInstance
+  /* ccInstance
     .on("initialized", function (popup) {
       console.log("🚀 ~ POPUP INIT", popup);
+
       // ccInstance.popup?.open();
     })
     .on("popupOpened", (...args) => console.log("POPUP OPENED", args))
@@ -104,28 +106,28 @@ const draw = function (countryCode) {
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
-  const countryOpts = ccInstance.getCountryLaws(countryCode);
+    */
+  // const countryOpts = ccInstance.getCountryLaws(countryCode);
   // const countryOpts = instances[index].getCountryLaws("EN");
-  console.log("🚀 ~ file: scripts.js ~ line 156 ~ countryOpts", countryOpts);
+  // console.log("🚀 ~ file: scripts.js ~ line 156 ~ countryOpts", countryOpts);
   // ccInstance.popup.open();
 
   // show country options on screen (so user knows how this country affected the settings)
-  document.getElementById("message").innerHTML = !countryOpts.hasLaw
-    ? "Has cookie law? no"
-    : CMP_Section.tabularObject({
-        "Has cookie law?": countryOpts.hasLaw ? "yes" : "no",
-        "Choice has to be revokable?": countryOpts.revokable ? "yes" : "no",
-        "Can be automatically dismissed?": countryOpts.explicitAction
-          ? "no"
-          : "yes",
-        "Option tye:": testType,
-      });
+//   document.getElementById("message").innerHTML = !countryOpts.hasLaw
+//     ? "Has cookie law? no"
+//     : CMP_Section.tabularObject({
+//         "Has cookie law?": countryOpts.hasLaw ? "yes" : "no",
+//         "Choice has to be revokable?": countryOpts.revokable ? "yes" : "no",
+//         "Can be automatically dismissed?": countryOpts.explicitAction
+//           ? "no"
+//           : "yes",
+//         "Option tye:": testType,
+//       });
 };
 
 //fill the countries dropdown
-CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
+// CMP_Section.fillSelect(locationElement, COUNTRY_CODES, COUNTRY_CODES);
 
-// CMP_Section.typeChange(locationElement, ccInstance, categoriesType, testType)
 setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
 
@@ -148,23 +150,27 @@ setTimeout(() => {
       if (testType === "info") {
         testType = "categories";
         optionsObj(
-          locationElement[locationElement.selectedIndex].value,
+          // locationElement[locationElement.selectedIndex].value,
+          "XK",
           "categories"
         );
         ccInstance.clearStatuses().destroy();
         console.log("IS OPENNNNNNNNNNNN", ccInstance.isOpen());
-        draw(locationElement[locationElement.selectedIndex].value);
+        // draw(locationElement[locationElement.selectedIndex].value);
+        draw("XK");
         // CMP_Section.bannerAccordionToggle();
         CMP_Section.showModal();
         console.log("🚀 ~ TYPE-> options.type", testType);
       } else if (testType === "categories") {
         testType = "info";
         optionsObj(
-          locationElement[locationElement.selectedIndex].value,
+          // locationElement[locationElement.selectedIndex].value,
+          "XK",
           "info"
         );
         ccInstance.clearStatuses().destroy();
-        draw(locationElement[locationElement.selectedIndex].value);
+        // draw(locationElement[locationElement.selectedIndex].value);
+        draw("XK");
         console.log("🚀 ~TYPE->  options.type", testType);
         CMP_Section.allowAllCookies();
       } else {
@@ -172,13 +178,13 @@ setTimeout(() => {
       }
     });
   }
-  CountryCode = fetchAPI();
-  // console.log("🚀 ~ LOCATIONNNNNNN ", fetchAPI())
+  CountryCode = fetchClientIp();
+  console.log("🚀 ~ LOCATIONNNNNNN ", fetchClientIp());
+  console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
 }, 300);
-console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
 draw("XK");
 
 // draw(locationElement[locationElement.selectedIndex].value);
 // draw(locationElement[2].value);
 // console.log("🚀 ~ locationElement[0].value", locationElement[0].value)
-locationElement.focus();
+// locationElement.focus();

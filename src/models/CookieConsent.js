@@ -19,6 +19,7 @@ export default class CookieConsent extends Base {
           ? this.options.cookie.name
           : "gjirafa_";
       const answer = getCookie(cookieName + category);
+      console.log("IS VALID AND STUFF",isValidStatus(answer) ? { [category]: answer } : undefined)
       return isValidStatus(answer) ? { [category]: answer } : undefined;
     }).filter((obj) => (obj ? obj[Object.keys(obj)[0]] : false));
 

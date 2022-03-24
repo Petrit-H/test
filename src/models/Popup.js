@@ -19,7 +19,7 @@ import {
   throttle,
   traverseDOMPath,
 } from "../utils";
-import { getResponseData } from "../test1";
+import { getCookiesData } from "../getDomainsWithCookies";
 import CMP_Section from "../cookies.js";
 export default class Popup extends Base {
   constructor(options) {
@@ -243,6 +243,7 @@ export default class Popup extends Base {
   hasAnswered() {
     return this.getStatuses().some((status) => !!status);
   }
+
   /**
    * Indicates if the user has given consent to all of the COOKIES_CATEGORIES
    * @return { array<boolean> } - true if consent has been given
@@ -287,16 +288,12 @@ export default class Popup extends Base {
         setCookie(cookieName, status, expiryDays, domain, path, secure);
 
         for (let index = 0; index < radioButtons.length; index++) {
-          console.log(
-            "🚀 ~ file: Popup.js ~ line 281 ~ Popup ~ setStatuses ~ radioButtons",
-            radioButtons
-          );
           const element = radioButtons[index];
           // setTimeout(() => {
 
           if (element.checked) {
-            console.log("KIZJA KAQURRELE", element.id);
-            getResponseData(+element.id).then((data) => {
+            console.log("RADIO BUTTON CLICKED ", element.id);
+            getCookiesData(+element.id).then((data) => {
               // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
               console.log("DATaAaaaaaaaaa", data);
               for (const cookie of data) {
@@ -312,8 +309,8 @@ export default class Popup extends Base {
               }
             });
             console.log(
-              "🚀 ~ file: Popup.js ~ line 302 ~ Popup ~ getResponseData ~ getResponseData(element.id)",
-              getResponseData(element.id)
+              "🚀 ~ file: Popup.js ~ line 302 ~ Popup ~ getCookiesData ~ getCookiesData(element.id)",
+              getCookiesData(element.id)
             );
           }
           // }, 100);
@@ -332,6 +329,7 @@ export default class Popup extends Base {
         updateCategoryStatus(category, arguments[0])
       );
     } else if (arguments.length > 1) {
+      // COOKIES_CATEGORIES.forEach((categoryStatus, index) => {
       arguments.forEach((categoryStatus, index) => {
         updateCategoryStatus(this.userCategories[index], categoryStatus);
       });
@@ -737,18 +735,18 @@ export default class Popup extends Base {
     if (this.revokeBtn) {
       this.revokeBtn.remove();
     }
-    if (this.onWindowScroll) {
-      window.removeEventListener("scroll", this.onWindowScroll);
-    }
-    if (this.onWindowClick) {
-      window.removeEventListener("click", this.onWindowClick);
-      window.removeEventListener("touchend", this.onWindowClick);
-    }
-    if (this.onLinkClick) {
-      window.removeEventListener("click", this.onLinkClick);
-    }
-    if (this.onKeyPress) {
-      window.addEventListener("onkeypress", this.onKeyPress);
-    }
+    // if (this.onWindowScroll) {
+    //   window.removeEventListener("scroll", this.onWindowScroll);
+    // }
+    // if (this.onWindowClick) {
+    //   window.removeEventListener("click", this.onWindowClick);
+    //   window.removeEventListener("touchend", this.onWindowClick);
+    // }
+    // if (this.onLinkClick) {
+    //   window.removeEventListener("click", this.onLinkClick);
+    // }
+    // if (this.onKeyPress) {
+    //   window.addEventListener("onkeypress", this.onKeyPress);
+    // }
   }
 }

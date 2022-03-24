@@ -1,10 +1,10 @@
 // import CMP_Section from "./scripts";
 
 const { CARET_DOWN_ICON, COOKIES_CATEGORIES } = require("./constants");
-const { getResponseData } = require("./test1");
+const { getCookiesData } = require("./getDomainsWithCookies");
 const { setCookie } = require("./utils/cookie");
-const axios = require('axios')
-const moment = require('moment')
+const axios = require("axios");
+const moment = require("moment");
 
 console.log(create_UUID());
 const OTHER = [];
@@ -53,12 +53,12 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
   const cookieSectionInject = document.getElementById("cookieSectionInject");
   //! execute the necessary functions on document load
   // window.onload = () => {
-  fetchDataFromAPI();
+  fetchDomainsFromAPI();
   fetchCategoriesFromAPI();
   // bannerAccordionToggle()
 
   setTimeout(() => {
-    toggleInjected();
+    toggleInjectedRadioButtons();
 
     // bannerAccordionToggle()
     // showModal();
@@ -98,7 +98,9 @@ function create_UUID() {
   );
   return uuid;
 }
-const fetchDataFromAPI = () => {
+
+//! fetch all the domains, their cookies and filter cookies for categories
+const fetchDomainsFromAPI = () => {
   let config = {
     method: "get",
     url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
@@ -220,8 +222,6 @@ function fillCookieSettingItem() {
 
 //! fetch category cookies
 function categoryCookieFetch(id, storeVariable) {
-  // let cookies = categories.filter((item) => item.id === id);
-  // let cookiesPerCategory = [];
   responseData.filter((el) => {
     el.cookies.filter((item) => {
       if (item.categoryId === id) {
@@ -236,29 +236,16 @@ function categoryCookieFetch(id, storeVariable) {
   console.log("🚀 ~ cookiesPerCategory", storeVariable);
 }
 
-//! toggle injected button ON/OFF
-function toggleInjected() {
+//! toggle injected radio button ON/OFF to accept and/or decline cookies
+function toggleInjectedRadioButtons() {
   const injectedLabel = document.querySelectorAll(".dotWrapper");
-  // console.log("🚀 ~ file: cookies.js ~ line 290 ~ toggleInjected ~ dot", dot);
-
-  // for (const item of injectedLabel) {
   for (let i = 0; i < injectedLabel.length; i++) {
-    console.log("🚀 ~ toggleInjected ~ item", i);
+    console.log("🚀 ~ toggleInjectedRadioButtons ~ item", i);
     const injectedInput = injectedLabel[i].getElementsByTagName("input");
-    // console.log("=========cheched dots==========");
-    // console.log(
-    //   "🚀 ~ file: cookies.js ~ line 280 ~ toggleInjected ~ injectedInput",
-    //   injectedInput[0].checked
-    // );
     responseForCookies.push({
       cookie_name: injectedInput[0].value,
       cookie_status: injectedInput[0].checked,
     });
-    // console.log(
-    //   "🚀 ~ file: scripts.js ~ line 220 ~ onCheck ~ responseForCookies",
-    //   responseForCookies
-    // );
-    // console.log("=========cheched dots==========");
     setTimeout(() => {
       for (const iterator of inputCheckout) {
         console.log(iterator.value, "-->", iterator.checked);
@@ -268,8 +255,6 @@ function toggleInjected() {
 }
 
 module.exports = CMP_Section = {
-  // export const CMP_Section = {
-  // Fill a select element with options (html can be configured using `cb`)
   fillSelect: function (select, options, selected, cb) {
     if (typeof cb != "function") {
       cb = this.getSimpleOption;
@@ -289,44 +274,44 @@ module.exports = CMP_Section = {
       "</option>"
     );
   },
-  tabularObject: function (obj, formatVal, formatKey) {
-    if (typeof formatKey !== "function")
-      formatKey = function () {
-        return arguments[0];
-      };
-    if (typeof formatVal !== "function")
-      formatVal = function () {
-        return arguments[0];
-      };
+  // tabularObject: function (obj, formatVal, formatKey) {
+  //   if (typeof formatKey !== "function")
+  //     formatKey = function () {
+  //       return arguments[0];
+  //     };
+  //   if (typeof formatVal !== "function")
+  //     formatVal = function () {
+  //       return arguments[0];
+  //     };
 
-    return (
-      Object.keys(obj).reduce(function (str, key) {
-        return (str +=
-          "<li><em>" +
-          formatKey(key, obj[key]) +
-          "</em> " +
-          formatVal(obj[key], key) +
-          "</li>");
-      }, "<ul>") + "</ul>"
-    );
-  },
-  initialisePopupSelector: function (options) {
-    const itemOpen = "<li><span>";
-    const itemClose = "</span></li>";
-    // const itemOpen = "<li><span>";
-    // const itemClose = "</span></li>";
-    const instances = [];
-    const index = 0;
-    window.addEventListener("unload", () => {
-      console.log("CLOSE");
-      instances.forEach((instance) => {
-        instance.clearStatuses();
-        instance.destroy();
-      });
-    });
+  //   return (
+  //     Object.keys(obj).reduce(function (str, key) {
+  //       return (str +=
+  //         "<li><em>" +
+  //         formatKey(key, obj[key]) +
+  //         "</em> " +
+  //         formatVal(obj[key], key) +
+  //         "</li>");
+  //     }, "<ul>") + "</ul>"
+  //   );
+  // },
+  // initialisePopupSelector: function (options) {
+  //   const itemOpen = "<li><span>";
+  //   const itemClose = "</span></li>";
+  //   // const itemOpen = "<li><span>";
+  //   // const itemClose = "</span></li>";
+  //   const instances = [];
+  //   const index = 0;
+  //   window.addEventListener("unload", () => {
+  //     console.log("CLOSE");
+  //     instances.forEach((instance) => {
+  //       instance.clearStatuses();
+  //       instance.destroy();
+  //     });
+  //   });
 
-    return instances;
-  },
+  //   return instances;
+  // },
   allowAllCookies: function (event) {
     setTimeout(() => {
       console.log("🚀 ~ ALLOW ALL", event);
@@ -352,8 +337,8 @@ module.exports = CMP_Section = {
       // });
       // });
       for (let i = 0; i < COOKIES_CATEGORIES.length; i++) {
-        // getResponseData(i + 1);
-        getResponseData(i + 1).then((data) => {
+        // getCookiesData(i + 1);
+        getCookiesData(i + 1).then((data) => {
           // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
           console.log("ALL COOKIES ", data);
           for (const cookie of data) {
@@ -374,9 +359,9 @@ module.exports = CMP_Section = {
     // console.log(radioButtons);
     document.removeEventListener("click", event.target);
   },
-  acceptNecassary: function () {
+  acceptNecessary: function () {
     let ALL_DATA = [];
-    getResponseData(5).then((data) => {
+    getCookiesData(5).then((data) => {
       // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
       console.log("NECESSARY COOKIES ONLY", data);
       for (const cookie of data) {
@@ -396,12 +381,13 @@ module.exports = CMP_Section = {
   bannerAccordionToggle: function (index) {
     console.log("🚀 ~ IDDDDD", index);
     // debugger;
-    let header = document.querySelectorAll(".cc-category .accordionHeader");
+    let accordionHeader = document.querySelectorAll(
+      ".cc-category .accordionHeader"
+    );
     let accordionContent = document.querySelectorAll(
       ".cc-category .accordionContent"
     );
 
-    // document.getElementById(``)
     ["h-0", "hidden"].map((i) => {
       console.log(i);
       document
@@ -410,18 +396,12 @@ module.exports = CMP_Section = {
     });
     const children = accordionContent[index]?.children;
     console.log("🚀 ~ CHILDREN", accordionContent[index]);
-    for (element of children) {
-      element?.classList?.toggle("opacity-0");
-      console.log("🚀 ~ children[element]", element);
-    }
     console.log("BANNER CLICK ACCORDION ", index, " TOGGLE");
   },
+
   showModal: function (event, index) {
     let id;
     const toggle = document.querySelectorAll(".cookieDetails");
-    // for (const elmnt of toggle) {
-    // elmnt.addEventListener("click", (event) => {
-    // id = event.target.attributes.value.value;
     console.log("CATEGORY ID CLIKED: ", index);
     COOKIE_SETTINGS.classList.remove("hidden");
     COOKIE_DISPLAY.classList.add("hidden");
@@ -452,27 +432,17 @@ module.exports = CMP_Section = {
         }
       });
     });
-    // if (category.toLowerCase().indexOf("necessary") !== -1) {
-    //   NECESSARY = storeVariable;
-    // }
-    // console.log(`🚀 ~ ${category} id:`, id, `=> ${storeVariable.length}`);
     console.log(`🚀 ~ ${category} id:`, id, `=> `, storeVariable);
-
-    // fillCookieSettingItem();
   },
   settingsAccordionToggle: function (index) {
-    let header = document.querySelectorAll(
+    let accordionHeader = document.querySelectorAll(
       ".settingAccordion .accordionHeader"
     );
-    console.log("🚀 ~ Settings Accordion Elements", header.length);
+    console.log("🚀 ~ Settings Accordion Elements", accordionHeader.length);
     let accordionContent = document.querySelectorAll(
       ".settingAccordion .accordionContent"
     );
     const carretToggle = document.querySelectorAll(".toggleAccordion");
-    //! fetchDataFromAPI(); THIS MIGHT BE NEEDED LATER
-    // for (let item = 0; item <= header.length - 1; item++) {
-    // header[item].addEventListener("click", (event) => {
-    // event.stopPropagation();
     ["h-0", "hidden"].map((i) => accordionContent[index]?.classList?.toggle(i));
     carretToggle[index]?.classList?.toggle("rotate-180");
     const children = accordionContent[index].children;
@@ -480,8 +450,6 @@ module.exports = CMP_Section = {
       children[element]?.classList?.toggle("opacity-0");
     }
     console.log("click");
-    // });
-    // }
   },
   fillCookies: function () {
     setTimeout(() => {
@@ -550,7 +518,7 @@ module.exports = CMP_Section = {
         </li>`;
         })
         .join("");
-    }, 300);
+    }, 400);
   },
   stopParent: function (event) {
     event.stopPropagation();

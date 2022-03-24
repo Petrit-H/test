@@ -24,14 +24,7 @@ export const CLIENT_GEOLOCATION_API_URL = "https://cmp.gjirafa.dev/GetPublicIp";
 export const USER_COOKIE_DATA = [];
 
 export const CLOSE_ICON = "https://tojnhu4mvp.gjirafa.net/CMP/closeIcon.svg";
-// export const CLOSE_ICON = "../../dist/images/closeIcon.svg";
 export const CLOSE_ICON_WHITE = "https://tojnhu4mvp.gjirafa.net/CMP/closeIconWhite.svg";
-// export const CLOSE_ICON_WHITE = "../../dist/images/closeIconWhite.svg";
 export const COOKIE_WIDGET_ICON_CIRCLE = "https://tojnhu4mvp.gjirafa.net/CMP/widgetCircle.svg";
-// export const COOKIE_WIDGET_ICON_CIRCLE = "../../dist/images/widgetCircle.svg";
 export const COOKIE_WIDGET_ICON_TRIANGLE = "https://tojnhu4mvp.gjirafa.net/CMP/widgetTriangle.svg";
-// export const COOKIE_WIDGET_ICON_TRIANGLE = "../../dist/images/widgetTriangle.svg";
-// export const COOKIE_WIDGET_ICON = "../../dist/images/cookie.svg";
 export const CARET_DOWN_ICON = "https://tojnhu4mvp.gjirafa.net/CMP/caretDown.svg";
-// export const CARET_DOWN_ICON = "../../dist/images/caretDown.svg";
-// export const CARET_DOWN_ICON = "../../dist/images/caretDown.png";

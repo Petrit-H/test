@@ -680,10 +680,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: max-content;
 }
 
-.max-w-xl {
-  max-width: 36rem;
-}
-
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -817,11 +813,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-gray-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
-.bg-red-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 
 .bg-white {

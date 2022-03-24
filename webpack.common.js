@@ -4,24 +4,40 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    "index.min.js": [
+    "index": [
       "./src/index.js",
       "./src/init.js",
+      "./src/getDomainsWithCookies.js",
       "./src/scripts.js",
       "./src/cookies.js",
       "./src/homeBanner.js",
     ],
+    // index: { import: "./src/index.js", dependOn: "shared" },
+    // index2: { import: "./src/init.js", dependOn: "shared" },
+    // index3: { import: "./src/scripts.js", dependOn: "shared" },
+    // index4: { import: "./src/cookies.js", dependOn: "shared" },
+    // index5: { import: "./src/homeBanner.js", dependOn: "shared" },
+    // shared: "lodash",
   },
   // watch: true,
   output: {
-    // filename: "index.min.js",
-    filename: "[name]",
+    filename: "[name].min.js",
+    // filename: "[name]",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "./dist",
+    publicPath: "dist",
     libraryExport: "default",
     libraryTarget: "umd",
     library: "CookieConsent",
     // library: ["MyLibrary", "[name]"],
+  },
+  optimization: {
+    splitChunks: {
+      minSize: 10000,
+      maxSize: 250000,
+    },
+  },
+  performance: {
+    hints: false,
   },
   plugins: [
     new CleanWebpackPlugin(),

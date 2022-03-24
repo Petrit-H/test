@@ -8,8 +8,9 @@ const glob = require("glob");
 
 module.exports = merge(commonConfig, {
   mode: "production",
+  // devtool: false,
   devtool: "source-map",
-  watch:true,
+  watch: true,
   module: {
     rules: [
       // {
@@ -34,14 +35,14 @@ module.exports = merge(commonConfig, {
     ],
   },
   plugins: [
-    new ImageminPlugin({
-      externalImages: {
-        context: ".",
-        sources:glob.sync("./src/assets/images/**.{png,jpg,jpeg,gif,svg}"),
-        destination: "dist/images",
-        fileName: "[name].[ext]",
-      },
-    }),
+    // new ImageminPlugin({
+    //   externalImages: {
+    //     context: ".",
+    //     sources:glob.sync("./src/assets/images/**.{png,jpg,jpeg,gif,svg}"),
+    //     destination: "dist/images",
+    //     fileName: "[name].[ext]",
+    //   },
+    // }),
     new MiniCssExtractPlugin({
       filename: "main.css",
     }),
@@ -58,5 +59,10 @@ module.exports = merge(commonConfig, {
       }),
       new TerserPlugin(),
     ],
+    // splitChunks: {
+    //   minSize: 10000,
+    //   maxSize: 250000,
+    // },
   },
+
 });

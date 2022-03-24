@@ -1,5 +1,3 @@
-
-
 //! Handles the tabs and its content
 function openCity(evt, cityName) {
   // Declare all variables

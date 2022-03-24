@@ -19,15 +19,10 @@ export default {
 
   // defaults cookie options - it is RECOMMENDED to set these values to correspond with your server
   cookie: {
-    // data: ALL_DATA,
     // This is the name of this cookie - you can ignore this
-    // name: `${PITI()}`,
     name: "gjir-cmp",
     // This is the url path that the cookie 'name' belongs to. The cookie can only be read at this location
     path: "/",
-    // This is the domain that the cookie 'name' belongs to. The cookie can only be read on this domain.
-    //  - Guide to cookie domains - https://www.mxsasha.eu/blog/2014/03/04/definitive-guide-to-cookie-domains/
-    // domain: "https://www.mxsasha.eu/blog/2014/03/04/definitive-guide-to-cookie-domains",
     domain: "",
     // The cookies expire date, specified in days (specify -1 for no expiry)
     expiryDays: 365,
@@ -81,7 +76,7 @@ export default {
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
-        <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" onclick="CMP_Section.acceptNecassary()">{{dismiss}}</button>
+        <button class="px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" onclick="CMP_Section.acceptNecessary()">{{dismiss}}</button>
         <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies" onclick="CMP_Section.testClick(event)">{{settings}}</button>
       </div>
     </div>
