@@ -286,7 +286,7 @@ export default class Popup extends Base {
         const chosenBefore =
           COOKIES_STATUSES.indexOf(getCookie(cookieName)) >= 0;
         setCookie(cookieName, status, expiryDays, domain, path, secure);
-
+        // console.log("ON LOAD STUFFFFFFFFFF");
         for (let index = 0; index < radioButtons.length; index++) {
           const element = radioButtons[index];
           // setTimeout(() => {
@@ -308,10 +308,7 @@ export default class Popup extends Base {
                 );
               }
             });
-            console.log(
-              "🚀 ~ file: Popup.js ~ line 302 ~ Popup ~ getCookiesData ~ getCookiesData(element.id)",
-              getCookiesData(element.id)
-            );
+
           }
           // }, 100);
         }

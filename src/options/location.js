@@ -41,6 +41,7 @@ export const fetchClientIp = () => {
   return countryCode;
 };
 
+
 export default {
   // The default timeout is 5 seconds. This is mainly needed to catch JSONP requests that error.
   // Otherwise there is no easy way to catch JSONP errors. That means that if a JSONP fails, the

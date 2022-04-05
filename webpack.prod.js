@@ -10,7 +10,7 @@ module.exports = merge(commonConfig, {
   mode: "production",
   // devtool: false,
   devtool: "source-map",
-  watch: true,
+  // watch: true,
   module: {
     rules: [
       // {
@@ -59,10 +59,18 @@ module.exports = merge(commonConfig, {
       }),
       new TerserPlugin(),
     ],
-    // splitChunks: {
-    //   minSize: 10000,
-    //   maxSize: 250000,
+    splitChunks: {
+      // minSize: 10000,
+      // maxSize: 250000,
+      // minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      // enforceSizeThreshold: 50000,
+    },
+    // runtimeChunk: {
+    //   name: "single",
     // },
-  },
-
+  }
 });

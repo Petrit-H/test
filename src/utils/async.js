@@ -32,6 +32,8 @@ export const getScript = ( url, callback, timeout ) => {
     scriptTag.onreadystatechange = scriptTag.onload = null
   }, timeout)
 }
+
+
 export const makeAsyncRequest = ( url, onComplete, timeout, postData, requestHeaders ) => {
   // debugger;
 console.log("UNE",postData)

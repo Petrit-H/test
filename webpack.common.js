@@ -3,20 +3,17 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  // entry: "./src/index.js",
   entry: {
-    "index": [
-      "./src/index.js",
-      "./src/init.js",
+    index: [
+      // "./src/test.js",
+      "./src/initFile.js",
       "./src/getDomainsWithCookies.js",
-      "./src/scripts.js",
       "./src/cookies.js",
-      "./src/homeBanner.js",
     ],
-    // index: { import: "./src/index.js", dependOn: "shared" },
-    // index2: { import: "./src/init.js", dependOn: "shared" },
-    // index3: { import: "./src/scripts.js", dependOn: "shared" },
-    // index4: { import: "./src/cookies.js", dependOn: "shared" },
-    // index5: { import: "./src/homeBanner.js", dependOn: "shared" },
+    // index2: { import: "./src/initFile.js" },
+    // index3: { import: "./src/getDomainsWithCookies.js" },
+    // index4: { import: "./src/cookies.js" },
     // shared: "lodash",
   },
   // watch: true,
@@ -24,28 +21,28 @@ module.exports = {
     filename: "[name].min.js",
     // filename: "[name]",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "dist",
+    publicPath: "./",
     libraryExport: "default",
     libraryTarget: "umd",
-    library: "CookieConsent",
+    // library: "CookieConsent",
     // library: ["MyLibrary", "[name]"],
   },
-  optimization: {
-    splitChunks: {
-      minSize: 10000,
-      maxSize: 250000,
-    },
-  },
+  // optimization: {
+  // splitChunks: {
+  //   minSize: 10000,
+  //   maxSize: 250000,
+  // },
+  // },
   performance: {
     hints: false,
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      inject: false,
-      template: path.resolve(__dirname, "src", "index.html"),
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: "index.html",
+    //   inject: "body",
+    //   template: path.resolve(__dirname, "src", "index.html"),
+    // }),
   ],
   module: {
     rules: [
