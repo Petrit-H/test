@@ -3,7 +3,13 @@ import CookieConsent from "../src/models/CookieConsent";
 // import CMP_Section from "./utils/logic";
 import { fetchClientIp } from "./options/location";
 import "./styles/main.scss";
-import { allowAllCookies, bannerAccordionToggle, fillCookies, showModal } from "./utils/logic";
+import {
+  acceptNecessary,
+  allowAllCookies,
+  bannerAccordionToggle,
+  fillCookies,
+  showModal,
+} from "./utils/logic";
 // import {fillCookies} from './cookies'
 
 let testType = "info";
@@ -80,8 +86,9 @@ const draw = function (countryCode) {
 };
 
 setTimeout(() => {
-  const toggleType = document.querySelectorAll(".typeChange");
+  acceptNecessary();
 
+  const toggleType = document.querySelectorAll(".typeChange");
   console.log("🚀 ~ TOGGLE TYPE", toggleType);
 
   for (const key of toggleType) {
@@ -89,6 +96,7 @@ setTimeout(() => {
     key.addEventListener("click", (event) => {
       timeStamp();
       fillCookies();
+      allowAllCookies()
       console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
       console.log(
@@ -120,7 +128,6 @@ setTimeout(() => {
         // draw(locationElement[locationElement.selectedIndex].value);
         draw("XK");
         console.log("🚀 ~TYPE->  options.type", testType);
-        allowAllCookies();
       } else {
         return this;
       }
@@ -131,10 +138,6 @@ setTimeout(() => {
   // console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
 }, 500);
 draw("XK");
-
-
-
-
 
 // import CookieConsent from "../src/models/CookieConsent";
 // // import CookieConsent from "./models/CookieConsent";

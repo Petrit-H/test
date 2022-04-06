@@ -10,7 +10,7 @@ module.exports = merge(commonConfig, {
   mode: "production",
   // devtool: false,
   devtool: "source-map",
-  // watch: true,
+  watch: true,
   module: {
     rules: [
       // {

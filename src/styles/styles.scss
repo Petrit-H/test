@@ -48,6 +48,7 @@ input[type="checkbox"]:checked ~ .dot {
 }
 
 .switch-toggle .cc-btn {
+  width: auto !important;
   border: 0;
   padding: 0;
 }

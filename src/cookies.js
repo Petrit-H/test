@@ -243,9 +243,14 @@ function toggleInjectedRadioButtons() {
   for (let i = 0; i < injectedLabel.length; i++) {
     console.log("🚀 ~ toggleInjectedRadioButtons ~ item", i);
     const injectedInput = injectedLabel[i].getElementsByTagName("input");
+    const injectedInputButton =
+      injectedLabel[i].getElementsByClassName("consentButton");
     responseForCookies.push({
       cookie_name: injectedInput[0].value,
       cookie_status: injectedInput[0].checked,
+    });
+    injectedInputButton.addEventListener("click", (event) => {
+      event.stopPropagation();
     });
     setTimeout(() => {
       for (const iterator of inputCheckout) {
@@ -253,13 +258,9 @@ function toggleInjectedRadioButtons() {
       }
     }, 500);
   }
+  console.log("responseForCookies", responseForCookies);
 }
-
-
-
-
-
-
+// !============================================================================================================
 
 // // import CMP_Section from "./scripts";
 
@@ -268,7 +269,6 @@ function toggleInjectedRadioButtons() {
 // const { setCookie } = require("./utils/cookie");
 // const axios = require("axios");
 // const moment = require("moment");
-
 
 // console.log(create_UUID());
 // const OTHER = [];
@@ -569,13 +569,13 @@ function toggleInjectedRadioButtons() {
 //           console.log("ALL COOKIES ", data);
 //           for (const cookie of data) {
 //             setCookie(
-//               cookie.name, //name
-//               "", //value
-//               cookie.expiryDays, //expiration day
-//               "", //domain
-//               cookie.path, //path
-//               // "/",
-//               cookie.is_secure //is secure
+              // cookie.name, //name
+              // "", //value
+              // cookie.expiryDays, //expiration day
+              // "", //domain
+              // cookie.path, //path
+              // // "/",
+              // cookie.is_secure //is secure
 //             );
 //           }
 //         });
