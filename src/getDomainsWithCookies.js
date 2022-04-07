@@ -5,6 +5,7 @@ import axios from "axios";
 
 export let categories = [];
 export let responseData = [];
+export let cookiesPerCategory = [];
 //
 export const getCookiesData = async function (id) {
   let filteredCookiesPerCategory = [];
@@ -18,6 +19,7 @@ export const getCookiesData = async function (id) {
       el.cookies.filter((item) => {
         if (item.categoryId === id) {
           filteredCookiesPerCategory.push(item);
+          cookiesPerCategory=filteredCookiesPerCategory
           // filteredCookiesPerCategory.concat(item)
         }
       });
