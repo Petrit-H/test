@@ -8,7 +8,7 @@ import {
   allowAllCookies,
   bannerAccordionToggle,
   fillCookies,
-  showModal,
+  // showModal,
 } from "./utils/logic";
 // import {fillCookies} from './cookies'
 
@@ -115,15 +115,9 @@ setTimeout(() => {
         ccInstance.destroy();
         // draw(locationElement[locationElement.selectedIndex].value);
         draw("XK");
-        bannerAccordionToggle()
-        console.log(
-          "accordionHeader222",
-          document.querySelectorAll(
-            ".cc-category .accordionHeader"
-          )
-        );
-        showModal();
-        console.log("🚀 ~ TYPE-> options.type", testType);
+        bannerAccordionToggle();
+        document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
+        document.getElementById("COOKIE_DISPLAY").classList.add("hidden");
       } else if (testType === "categories") {
         testType = "info ";
         optionsObj(

@@ -28,8 +28,6 @@ let cookiesPerCategory = [];
 // let dataForBala = [];
 let dataForBala = {};
 
-
-
 window.addEventListener("load", function (event) {
   console.log(
     "welcome to🔐 \n",
@@ -66,7 +64,7 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
   setTimeout(() => {
     let categories = fetchCategoriesFromAPI();
     let responseData = fetchDomainsFromAPI();
-    toggleInjectedRadioButtons();
+    // toggleInjectedRadioButtons();
 
     // bannerAccordionToggle()
     // showModal();
@@ -105,44 +103,5 @@ function createUUID() {
   return uuid;
 }
 
-
-
-//! fetch category cookies
-function categoryCookieFetch(id, storeVariable) {
-  responseData.filter((el) => {
-    el.cookies.filter((item) => {
-      if (item.categoryId === id) {
-        storeVariable.push(item);
-      }
-    });
-  });
-  console.log(
-    "🚀 ~ file: cookies.js ~ line 377 ~ categoryCookieFetch ~ id",
-    id
-  );
-  console.log("🚀 ~ cookiesPerCategory", storeVariable);
-}
-
-//! toggle injected radio button ON/OFF to accept and/or decline cookies
-function toggleInjectedRadioButtons() {
-  const injectedLabel = document.querySelectorAll(".dotWrapper");
-  for (let i = 0; i < injectedLabel.length; i++) {
-    console.log("🚀 ~ toggleInjectedRadioButtons ~ item", i);
-    const injectedInput = injectedLabel[i].getElementsByTagName("input");
-    const injectedInputButton =
-      injectedLabel[i].getElementsByClassName("consentButton");
-    responseForCookies.push({
-      cookie_name: injectedInput[0].value,
-      cookie_status: injectedInput[0].checked,
-    });
-    injectedInputButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-    });
-    setTimeout(() => {
-      for (const iterator of inputCheckout) {
-        console.log(iterator.value, "-->", iterator.checked);
-      }
-    }, 500);
-  }
-  console.log("responseForCookies", responseForCookies);
-}
+//   }
+// }

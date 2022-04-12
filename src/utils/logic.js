@@ -1,144 +1,43 @@
-// const { getCookiesData } = require("../getDomainsWithCookies");
-// import { getCookiesData } from "../getDomainsWithCookies";
-
 import moment from "moment";
 import { CARET_DOWN_ICON, COOKIES_CATEGORIES } from "../constants";
 import {
+  acceptAllTheCookies,
   categories,
   cookiesPerCategory,
   fetchCategoriesFromAPI,
   getCookiesData,
   responseData,
 } from "../getDomainsWithCookies";
+
 import { setCookie } from "./cookie";
-// let categories = fetchCategoriesFromAPI();
 const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
 const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
-// let cookiesPerCategory = [];
-// const CMP_Section = {
-const bannerAccordionToggle = function () {
+let data = [];
+// //!  FILL THE COOKIE SETTINGS SECTION
+const fillCookieSettingItem = (index) => {
+  // getCookiesData( function (res) {
+  //   console.log("firstfirstfirst", res);
+  //   data=res;
+  //   // data.concat(res)
+  // });
   setTimeout(() => {
-    // console.log("🚀 ~ IDDDDD", index);
-    const accordionHeaders = document.querySelectorAll(
-      ".cc-category .accordionHeader"
-    );
-    const accordionContents = document.querySelectorAll(
-      ".cc-category .accordionContent"
-    );
-    const categoryDescription =
-      document.getElementsByClassName("cookieDetails");
-    console.log("🚀 ~~~~~~~~~~ categoryDescription", categoryDescription);
-    console.log(
-      "🚀 ~ file: logic.js ~ line 22 ~ bannerAccordionToggle ~ accordionHeaders",
-      accordionHeaders
-    );
-    console.log(
-      "🚀 ~ file: logic.js ~ line 26 ~ bannerAccordionToggle ~ accordionContent",
-      accordionContents
-    );
-    for (let i = 0; i < accordionHeaders.length; i++) {
-      const categoryID = accordionHeaders[i].dataset.id;
-      accordionHeaders[i].addEventListener("click", () => {
-        const contentData = document.getElementById(
-          `CATEGORY_CONTENT_${categoryID}`
-        );
-        console.log("🚀 ~ categoryID", categoryID);
-        ["h-0", "hidden"].map((cssClass) => {
-          console.log("🚀 ~ cssClass", cssClass);
-          contentData?.classList?.toggle(cssClass);
-        });
-        const children = accordionContents[i].childNodes;
-        console.log("🚀 ~ CHILDREN", children);
-        console.log("BANNER CLICK ACCORDION ", categoryID, " TOGGLE");
-      });
-      categoryDescription[i].addEventListener("click", () => {
-        console.log(categoryDescription[i].dataset);
-        showModal(categoryID);
-      });
-    }
-  }, 300);
-};
-// //! fetch all the domains, their cookies and filter cookies for categories
-// const fetchDomainsFromAPI = () => {
-//   let config = {
-//     method: "get",
-//     url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
-//     headers: {},
-//   };
+    data = getCookiesData();
+    // console.warn("🔆", data);
+    console.warn("🔆", getCookiesData());
 
-//   axios(config)
-//     .then(function (response) {
-//       responseData = response.data;
-//       console.log("==========︾==========");
-//       console.log("🚀 ~ categories", categories);
-//       console.log("🚀 ~ responseData", responseData);
-//       // console.log("🚀 ~ dataForBala", dataForBala);
-//       // console.log("==========xxx==========");
-//       filterCookiesByCategory(
-//         response.data,
-//         5,
-//         NECESSARY,
-//         "NECESSARY"
-//       );
-//       filterCookiesByCategory(
-//         response.data,
-//         4,
-//         PREFERENCES,
-//         "PREFERENCES"
-//       );
-//       filterCookiesByCategory(
-//         response.data,
-//         3,
-//         ANALYTICAL,
-//         "ANALYTICAL"
-//       );
-//       filterCookiesByCategory(
-//         response.data,
-//         2,
-//         MARKETING,
-//         "MARKETING"
-//       );
-//       filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
-//       console.log("==========︽==========");
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-// };
+    const cookieSettingsInject = document.querySelector(
+      ".cookieSettingsInject"
+    );
 
-// //! Fetch data from the CATEGORIES endpoint
-// const fetchCategoriesFromAPI = () => {
-//   let config = {
-//     method: "get",
-//     url: "https://cmp.gjirafa.dev/CategoryListView",
-//     headers: {},
-//   };
-//   axios(config)
-//     .then(function (response) {
-//       // console.log(response.data);
-//       categories = response.data;
-//       // createCategoriesContent();
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-// };
-
-//!  FILL THE COOKIE SETTINGS SECTION
-const fillCookieSettingItem = () => {
-  console.log("fillCookieSettingItem()");
-  // console.log(COOKIE_SETTINGS);
-  // console.log(COOKIE_DISPLAY);
-
-  const cookieSettingsInject = document.getElementsByClassName("cookieSettingsInject");
-  console.log("🚀 ~  FILL COOKIES w/INJECT", cookieSettingsInject);
-  // debugger
-  cookieSettingsInject.innerHTML = cookiesPerCategory
-    .map((item, index) => {
-      let expirationDate = moment(item.expiration).endOf("day").fromNow();
-      // console.log(item);
-      return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
-      <div class="accordionHeader cursor-pointer flex justify-between p-4" data-modal-settings-id=${index} onclick="settingsAccordionToggle(${index})">
+    console.log("🚀 ~  FILL COOKIES w/INJECT", cookieSettingsInject);
+    // debugger
+    cookieSettingsInject.innerHTML = data
+      ?.map((item, index) => {
+        settingsAccordionToggle(index);
+        let expirationDate = moment(item.expiration).endOf("day").fromNow();
+        console.log("✅ item", item);
+        return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
+      <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${index}>
         <p class="category-title font-medium">${item.name}</p>
         <div class="controlButtons flex">
         <div id="closeIcon" class="carret closeIcon cursor-pointer my-auto"><img src="${CARET_DOWN_ICON}"
@@ -146,7 +45,7 @@ const fillCookieSettingItem = () => {
         </div>
       </div>
       <div class="accordionContent border-t mx-4 h-0 hidden transition-all duration-500 ease-in-out">
-        <ul class="w-full h-auto bg-gray-100 opacity-0 mb-4 transition duration-300 ease-in-out transform ">
+        <ul class="w-full h-auto bg-gray-100  mb-4 transition duration-300 ease-in-out transform ">
             <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Name</span>
               <span class="flex-1" id="cookieName">${item.name}</span>
@@ -172,10 +71,10 @@ const fillCookieSettingItem = () => {
     </div>
     </div>
     `;
-    })
-    .join("");
+      })
+      .join("");
+  }, 200);
 };
-
 const filterCookiesByCategory = function (arr, id, storeVariable, category) {
   arr.filter((el) => {
     el.cookies.filter((item) => {
@@ -184,7 +83,43 @@ const filterCookiesByCategory = function (arr, id, storeVariable, category) {
       }
     });
   });
+  console.log(`🚀 ~ ${category} id:`, id, `=> `, storeVariable);
   return storeVariable;
+};
+const bannerAccordionToggle = function () {
+  setTimeout(() => {
+    const accordionHeaders = document.querySelectorAll(
+      ".cc-category .accordionHeader"
+    );
+    const accordionContents = document.querySelectorAll(
+      ".cc-category .accordionContent"
+    );
+    const categoryDescription =
+      document.getElementsByClassName("cookieDetails");
+    const injectedLabel = document.querySelectorAll(".dot-wrapper");
+
+    for (let i = 0; i < accordionHeaders.length; i++) {
+      const categoryID = accordionHeaders[i].dataset.categoryId;
+      injectedLabel[i].addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+      accordionHeaders[i].addEventListener("click", () => {
+        acceptAllTheCookies(categoryID);
+        const contentData = document.getElementById(
+          `CATEGORY_CONTENT_${categoryID}`
+        );
+        ["h-0", "hidden"].map((cssClass) => {
+          contentData?.classList?.toggle(cssClass);
+        });
+        const children = accordionContents[i].childNodes;
+        console.log("BANNER CLICK ACCORDION ", categoryID, " TOGGLE");
+      });
+      categoryDescription[i].addEventListener("click", () => {
+        console.log("dataset", categoryDescription[i].dataset);
+        showModal(categoryID);
+      });
+    }
+  }, 300);
 };
 const goBackFunc = function () {
   console.log("GO BACK");
@@ -193,45 +128,49 @@ const goBackFunc = function () {
   document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
   // COOKIE_DISPLAY.classList.add("hidden");
   // cookiesPerCategory = [];
+  data = [];
   // });
 };
+
 const showModal = function (index) {
   document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
-  // COOKIE_SETTINGS.classList.remove("hidden");
   document.getElementById("COOKIE_DISPLAY").classList.add("hidden");
-  // COOKIE_DISPLAY.classList.add("hidden");
-  // filterCookiesByCategory(
-  //   responseData,
-  //   index,
-  //   cookiesPerCategory,
-  //   "CLICKED ON"
-  // );
-  // settingsAccordionToggle();
-  fillCookieSettingItem();
   const goBack = document.getElementById("goBack");
   goBack.addEventListener("click", () => {
     goBackFunc();
   });
-};
+  fillCookieSettingItem(index);
 
+  // console.log("PETRIT", getCookiesData(3));
+};
 const settingsAccordionToggle = function (index) {
-  const accordionHeader = document.querySelectorAll(
-    ".settingAccordion .accordionHeader"
-  );
-  console.warn("🚀 ~ Settings Accordion Elements", accordionHeader.length);
-  const accordionContent = document.querySelectorAll(
-    ".settingAccordion .accordionContent"
-  );
-  const carretToggle = document.querySelectorAll(".toggleAccordion");
-  ["h-0", "hidden"].map((i) => accordionContent[index]?.classList?.toggle(i));
-  carretToggle[index]?.classList?.toggle("rotate-180");
-  const { children } = accordionContent[index];
-  for (element in children) {
-    children[element]?.classList?.toggle("opacity-0");
-  }
-  console.log("click");
+  setTimeout(() => {
+    console.dir("🚀 ~ settingsAccordionToggle ~ index", index);
+    const accordionHeader = document.querySelectorAll(
+      ".settingAccordion .accordionHeader"
+    );
+    console.warn("🚀 ~ Settings Accordion Elements", accordionHeader.length);
+    const accordionContent = document.querySelectorAll(
+      ".settingAccordion .accordionContent"
+    );
+    const carretToggle = document.querySelectorAll(".toggleAccordion");
+    // for (const item of accordionHeader) {
+    for (let i = 0; i < accordionHeader.length; i++) {
+      accordionHeader[i].addEventListener("click", () => {
+        ["h-0", "hidden"].map((cssClass) =>
+          accordionContent[i]?.classList?.toggle(cssClass)
+        );
+        carretToggle[i]?.classList?.toggle("rotate-180");
+        const { children } = accordionContent[index];
+        console.log("✅ children", children);
+        // for (element in children) {
+        //   children[element]?.classList?.toggle("opacity-0");
+        // }
+        console.log("click");
+      });
+    }
+  }, 200);
 };
-
 const fillCookies = function () {
   setTimeout(() => {
     console.log("fillCookie()");
@@ -246,12 +185,12 @@ const fillCookies = function () {
       ?.map((item) => {
         console.log("ID", item.id);
         return `<li class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer"  >
-           <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" data-id=${
+           <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" data-category-id=${
              item.id
            }
            >
              <p class=" category-title font-medium">${item.name}</p>
-             <label for=${item.name.toLowerCase()} class="switch-toggle relative dotWrapper inline-flex cursor-pointer" tabindex=${
+             <label for=${item.name.toLowerCase()} class="switch-toggle relative dot-wrapper inline-flex cursor-pointer" tabindex=${
           item.id
         }>
              <button class="cc-btn w-auto group relative consentButton " >
@@ -281,7 +220,7 @@ const fillCookies = function () {
            <p class="category-description mb-4 transition duration-300 ease-in-out transform">
            ${item.name}
          </p>
-           <p value=${item.id} data-modal-settings-show-id=${item.id}
+           <p value=${item.id} data-settings-details-id=${item.id}
              class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
              Cookies Details</p>
            </div>
@@ -362,7 +301,6 @@ const stopParentClick = function (event) {
 const testClick = function (event) {
   console.log("TEST SETTINGS CLICK", event.target);
 };
-// };
 
 export {
   bannerAccordionToggle,
