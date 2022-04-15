@@ -19,7 +19,11 @@ import {
   throttle,
   traverseDOMPath,
 } from "../utils";
-import { getCookiesData } from "../getDomainsWithCookies";
+import {
+  getCookiesData,
+  saveNecessaryCookiesData,
+  saveSpecificCookiesData,
+} from "../getDomainsWithCookies";
 import CMP_Section from "../cookies.js";
 const { toBinary } = require("../utils/encryptToBinary.js");
 
@@ -303,21 +307,23 @@ export default class Popup extends Base {
 
           if (element.checked) {
             console.log("RADIO BUTTON CLICKED ", element.id);
-            getCookiesData(+element.id).then((data) => {
-              // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
-              console.log("DATaAaaaaaaaaa", data);
-              for (const cookie of data) {
-                setCookie(
-                  cookie.name, // name
-                  // cookie.value, // value
-                  "", // value
-                  cookie.expiryDays, // expiration day
-                  cookie.domain, // domain
-                  cookie.path, // path
-                  cookie.is_secure // is secure
-                );
-              }
-            });
+            //! SAVE THE CHECKED COOKIES
+            saveSpecificCookiesData(+element.id);
+            // getCookiesData(+element.id).then((data) => {
+            //   // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
+            //   console.log("DATaAaaaaaaaaa", data);
+            //   for (const cookie of data) {
+            //     setCookie(
+            //       cookie.name, // name
+            //       // cookie.value, // value
+            //       "", // value
+            //       cookie.expiryDays, // expiration day
+            //       cookie.domain, // domain
+            //       cookie.path, // path
+            //       cookie.is_secure // is secure
+            //     );
+            //   }
+            // });
           }
           // }, 100);
         }
@@ -327,43 +333,6 @@ export default class Popup extends Base {
       }
     };
 
-    // const updateCategoryStatus = (categoryName, status) => {
-    //   if (isValidStatus(status)) {
-    //     const cookieName = name + "_" + categoryName;
-    //     const chosenBefore =
-    //       COOKIES_STATUSES.indexOf(getCookie(cookieName)) >= 0;
-    //     setCookie(cookieName, status, expiryDays, domain, path, secure);
-    //     // console.log("ON LOAD STUFFFFFFFFFF");
-    //     for (let index = 0; index < radioButtons.length; index++) {
-    //       const element = radioButtons[index];
-    //       // setTimeout(() => {
-
-    //       if (element.checked) {
-    //         console.log("RADIO BUTTON CLICKED ", element.id);
-    //         getCookiesData(+element.id).then((data) => {
-    //           // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
-    //           console.log("DATaAaaaaaaaaa", data);
-    //           for (const cookie of data) {
-    //             setCookie(
-    //               cookie.name, //name
-    //               "", //value
-    //               cookie.expiryDays, //expiration day
-    //               "", //domain
-    //               cookie.path, //path
-    //               // "/",
-    //               cookie.is_secure //is secure
-    //             );
-    //           }
-    //         });
-
-    //       }
-    //       // }, 100);
-    //     }
-    //     this.emit("statusChanged", cookieName, status, chosenBefore);
-    //   } else {
-    //     this.clearStatuses();
-    //   }
-    // };
     if (arguments.length === 0) {
       COOKIES_CATEGORIES.forEach((category) =>
         updateCategoryStatus(category, this.userCategories[category])
@@ -397,22 +366,25 @@ export default class Popup extends Base {
     const { name, domain, path } = this.options.cookie;
     COOKIES_CATEGORIES.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
-      getCookiesData(5).then((data) => {
-        console.log("NECESSARY COOKIES ONLY", data);
-        for (const cookie of data) {
-          setCookie(
-            cookie.name, // name
-            // cookie.value, // value
-            "", // value
-            cookie.expiryDays, // expiration day
-            cookie.domain, // domain
-            "", // domain
-            cookie.path, // path
-            // "/",
-            cookie.is_secure // is secure
-          );
-        }
-      });
+
+      //! SAVE THE NECESSARY COOKIES
+      saveNecessaryCookiesData();
+      // getCookiesData(5).then((data) => {
+      //   console.log("NECESSARY COOKIES ONLY", data);
+      //   for (const cookie of data) {
+      //     setCookie(
+      //       cookie.name, // name
+      //       // cookie.value, // value
+      //       "", // value
+      //       cookie.expiryDays, // expiration day
+      //       cookie.domain, // domain
+      //       "", // domain
+      //       cookie.path, // path
+      //       // "/",
+      //       cookie.is_secure // is secure
+      //     );
+      //   }
+      // });
       console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
   }

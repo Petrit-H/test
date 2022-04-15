@@ -15,7 +15,8 @@ import { filterCookiesByCategory } from "./utils/logic";
 export let categories = [];
 export let responseData = [];
 export let cookiesPerCategory = [];
-//
+export let filteredCookiesPerDomain = [];
+
 // export const getCookiesData = async function (id) {
 //   let filteredCookiesPerCategory = [];
 //   try {
@@ -42,26 +43,107 @@ export let cookiesPerCategory = [];
 //     console.log(error.message);
 //   }
 // };
-export const getCookiesData = () => {
+
+export const getCookiesData = async () => {
   let filteredCookiesPerCategory = [];
   let config = {
     method: "GET",
-    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=1",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
     // headers: { "Access-Control-Allow-Origin": "*" },
+  };
+  try {
+    const response = await axios(config);
+    cookiesPerCategory = response.data;
+    // const data = response.data;
+    console.log("🚀 ~~~~ getCookiesData ~ data", cookiesPerCategory);
+    // console.log("DATA", response.data);
+    // callback(filteredCookiesPerCategory);
+    return cookiesPerCategory;
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  //  axios(config)
+  //     .then(function (response) {
+  //       cookiesPerCategory = response.data;
+  //       // const data = response.data;
+  //       console.log("🚀 ~~~~ getCookiesData ~ data", cookiesPerCategory);
+  //       // console.log("DATA", response.data);
+  //       // callback(filteredCookiesPerCategory);
+  //       return cookiesPerCategory;
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err.message);
+  //     });
+  return cookiesPerCategory;
+};
+export const saveNecessaryCookiesData = () => {
+  let config = {
+    method: "GET",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    // url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
   };
   axios(config)
     .then(function (response) {
-      cookiesPerCategory = response.data;
-      // const data = response.data;
-      console.log("🚀 ~~~~ getCookiesData ~ data", cookiesPerCategory);
+      const data = response.data;
+      console.log("🚀 ~~~~ getCookiesData ~ data", data);
+      console.log("🟥 🟥 🟥", 5);
+      data.filter((cookie) => {
+        if (cookie.categoryId === 5) {
+          // filteredCookiesPerDomain.push(cookie);
+          setCookie(
+            cookie.name, // name
+            cookie.value, // value
+            // "", // value
+            cookie.expiryDays, // expiration day
+            cookie.domain, // domain
+            cookie.path, // path
+            cookie.is_secure // is secure
+          );
+        } else {
+          return;
+        }
+      });
+      // console.log("🇽🇰🇽🇰🇽🇰🇽🇰", filteredCookiesPerDomain);
       console.log("DATA", response.data);
-      // callback(filteredCookiesPerCategory);
-      return cookiesPerCategory;
+      return filteredCookiesPerDomain;
     })
     .catch(function (err) {
-      console.log(err.message);
+      console.log(err);
     });
-  return cookiesPerCategory;
+};
+export const saveSpecificCookiesData = (id) => {
+  let config = {
+    method: "GET",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    // url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
+  };
+  axios(config)
+    .then(function (response) {
+      const data = response.data;
+      console.log("🚀 ~~~~ getCookiesData ~ data", data);
+      console.log("🟥 🟥 🟥", +id);
+      data.filter((cookie) => {
+        if (cookie.categoryId === +id) {
+          // filteredCookiesPerDomain.push(cookie);
+          setCookie(
+            cookie.name, // name
+            cookie.value, // value
+            // "", // value
+            cookie.expiryDays, // expiration day
+            cookie.domain, // domain
+            cookie.path, // path
+            cookie.is_secure // is secure
+          );
+        }
+      });
+      console.log("🇽🇰🇽🇰🇽🇰🇽🇰", filteredCookiesPerDomain);
+      console.log("DATA", response.data);
+      return filteredCookiesPerDomain;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 };
 // export const getCookiesData = async (id, callback) => {
 //   let filteredCookiesPerCategory = [];
@@ -128,8 +210,8 @@ export const getCookiesData = () => {
 export const fetchDomainsFromAPI = () => {
   let config = {
     method: "GET",
-    // url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=1",
-    url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    // url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
     // headers: { "Access-Control-Allow-Origin": "*" },
   };
 
@@ -140,12 +222,12 @@ export const fetchDomainsFromAPI = () => {
       console.log("🚀 ~ categories", categories);
       console.log("🚀 ~ responseData", responseData);
       // console.log("🚀 ~ dataForBala", dataForBala);
-      // console.log("==========xxx==========");
+      console.log("==========xxx==========");
       filterCookiesByCategory(response.data, 5, NECESSARY, "NECESSARY");
       filterCookiesByCategory(response.data, 4, PREFERENCES, "PREFERENCES");
       filterCookiesByCategory(response.data, 3, ANALYTICAL, "ANALYTICAL");
       filterCookiesByCategory(response.data, 2, MARKETING, "MARKETING");
-      filterCookiesByCategory(response.data, 0, OTHER, "OTHER");
+      filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
       console.log("==========︽==========");
       return responseData;
     })
@@ -154,7 +236,6 @@ export const fetchDomainsFromAPI = () => {
     });
   console.log("DOMAINS LIST", responseData);
 };
-
 //! Fetch data from the CATEGORIES endpoint
 export const fetchCategoriesFromAPI = () => {
   let config = {
@@ -175,48 +256,3 @@ export const fetchCategoriesFromAPI = () => {
   console.log("CATEGORIES: ", categories);
   return categories;
 };
-
-export const acceptAllTheCookies = (index) => {
-  console.info("🔞ALL COOKIES INDEX", index);
-  let dataTest = getCookiesData();
-  console.info("🔞ALL COOKIES ", dataTest);
-  console.info("🔞ALL COOKIES INDEX", index);
-  for (const cookie of dataTest) {
-    console.log("🅿️", cookie);
-    // setCookie(
-    //   cookie.name, // name
-    //   // cookie.value, // value
-    //   "", // value
-    //   cookie.expiryDays, // expiration day
-    //   cookie.domain, // domain
-    //   "", // domain
-    //   cookie.path, // path
-    //   // "/",
-    //   cookie.is_secure // is secure
-    // );
-  }
-};
-// export let categories = [];
-// export let domains = [];
-
-// export const getCookiesData = async function (id) {
-//   let filteredCookiesPerCategory = [];
-//   try {
-//     const response = await fetch(
-//       "https://cmp.gjirafa.dev/DomainListViewTestHalabaku"
-//     );
-//     const data = await response.json();
-//     console.log("🚀 ~ file: test1.js ~ line 34 ~ getCookiesData ~ data", data);
-//     data.filter((el) => {
-//       el.cookies.filter((item) => {
-//         if (item.categoryId === id) {
-//           filteredCookiesPerCategory.push(item);
-//           // filteredCookiesPerCategory.concat(item)
-//         }
-//       });
-//     });
-//     return filteredCookiesPerCategory;
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };

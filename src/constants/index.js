@@ -12,7 +12,8 @@ export const COOKIES_CATEGORIES = [
 ];
 
 export const DOMAINS = [];
-
+export let FILTERED_COOKIES = []
+export const COOKIES_PER_CATEGORY = []
 export let ALL_DATA = [];
 export let NECESSARY = [];
 export let PREFERENCES = [];

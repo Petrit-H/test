@@ -97,7 +97,7 @@ setTimeout(() => {
     key.addEventListener("click", (event) => {
       timeStamp();
       fillCookies();
-      // allowAllCookies()
+      allowAllCookies()
       console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
       console.log(
