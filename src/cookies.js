@@ -12,7 +12,6 @@ import {
 } from "./getDomainsWithCookies";
 import { setCookie } from "./utils/cookie";
 import axios from "axios";
-import moment from "moment";
 
 console.log(createUUID());
 const OTHER = [];
@@ -78,12 +77,12 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
       MARKETING: MARKETING,
       OTHER: OTHER,
     };
-    console.log("==================🧲🧲🧲🧲====================");
+   /*  console.log("==================🧲🧲🧲🧲====================");
     console.log("🚀 ~ categories", categories);
     console.log("🚀 ~ responseData", responseData);
     console.log("🚀 ~ DATA-4-BALA", dataForBala);
     console.log("==================🧲🧲🧲🧲=====================");
-
+ */
     // if (responseData.length === 0) {
     //   noData.classList.remove("hidden");
     // }

@@ -10,7 +10,6 @@ import {
   fillCookies,
   // showModal,
 } from "./utils/logic";
-// import {fillCookies} from './cookies'
 
 let testType = "info";
 let CountryCode = "";
@@ -74,7 +73,7 @@ const draw = function (countryCode) {
   console.log("🚀 ~ ccInstance.autoOpen ", ccInstance.autoOpen);
   ccInstance
     .on("initialized", function (popup) {
-      console.log("🚀 ~ POPUP INIT", popup);
+      // console.log("🚀 ~ POPUP INIT", popup);
       // ccInstance.popup?.open();
     })
     .on("popupOpened", (...args) => console.log("Popup Open", args))
@@ -90,14 +89,14 @@ setTimeout(() => {
   // bannerAccordionToggle(1);
 
   const toggleType = document.querySelectorAll(".typeChange");
-  console.log("🚀 ~ TOGGLE TYPE", toggleType);
+  // console.log("🚀 ~ TOGGLE TYPE", toggleType);
 
   for (const key of toggleType) {
     console.log(key);
     key.addEventListener("click", (event) => {
+      console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
       timeStamp();
-      fillCookies();
-      allowAllCookies()
+
       console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
       console.log(
@@ -115,9 +114,13 @@ setTimeout(() => {
         ccInstance.destroy();
         // draw(locationElement[locationElement.selectedIndex].value);
         draw("XK");
-        bannerAccordionToggle();
-        document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
-        document.getElementById("COOKIE_DISPLAY").classList.add("hidden");
+        setTimeout(() => {
+          fillCookies();
+          bannerAccordionToggle();
+          allowAllCookies();
+          // document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
+          // document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
+        }, 250);
       } else if (testType === "categories") {
         testType = "info ";
         optionsObj(
@@ -126,6 +129,7 @@ setTimeout(() => {
           "info"
         );
         ccInstance.destroy();
+        // ccInstance.clearStatuses().destroy();
         // draw(locationElement[locationElement.selectedIndex].value);
         draw("XK");
         console.log("🚀 ~TYPE->  options.type", testType);
@@ -133,7 +137,6 @@ setTimeout(() => {
         return this;
       }
     });
-    console.log("LISTA NR 4", document.getElementById("list-4"));
   }
   // CountryCode = fetchClientIp();
   console.log("🚀 ~ LOCATIONNNNNNN ", fetchClientIp());

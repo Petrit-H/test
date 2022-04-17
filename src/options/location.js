@@ -25,14 +25,14 @@ export const fetchClientIp = () => {
       url = response.data;
       countryCode = response.data.CountryCode;
 
-      console.log("🚀 ~ ", countryCode);
+      /* console.log("🚀 ~ ", countryCode);
       console.log("==========︾==========");
       console.log("🚀 ~ ", url);
       console.log("🚀 ~ ", url.Country);
       console.log("🚀 ~ ", url.CountryCode);
       console.log("🚀 ~ ", url.Timezone);
       console.log("🚀 ~ ", url.CountryID);
-      console.log("==========︽==========");
+      console.log("==========︽=========="); */
       // toError({ code: url.CountryCode, error: "Invalid response" });
     })
     .catch(function (error) {
@@ -58,7 +58,7 @@ export default {
         callback: function (done, response) {
           try {
             var json = JSON.parse(response);
-            console.log("🚀 ~ JSON ", json);
+            // console.log("🚀 ~ JSON ", json);
             if (json.CountryCode) {
               return { code: json.CountryCode };
             }

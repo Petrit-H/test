@@ -1,4 +1,4 @@
-import moment from "moment";
+import { format, formatDistance, fromUnixTime, subDays } from "date-fns";
 import {
   CARET_DOWN_ICON,
   COOKIES_CATEGORIES,
@@ -27,15 +27,8 @@ let COOKIES = [];
 // let FILTERED_COOKIES = []
 // //!  FILL THE COOKIE SETTINGS SECTION
 const fillCookieSettingItem = (index) => {
-  // getCookiesData( function (res) {
-  //   console.log("firstfirstfirst", res);
-  //   data=res;
-  //   // data.concat(res)
-  // });
   getCookiesData().then((cookieData) => {
     COOKIES = cookieData;
-    console.log("⬆️⬆️⬆️2", COOKIES);
-    // console.log("⬆️⬆️⬆️2", COOKIES_PER_CATEGORY);
   });
   setTimeout(() => {
     // data = getCookiesData();
@@ -49,8 +42,12 @@ const fillCookieSettingItem = (index) => {
     // debugger
     cookieSettingsInject.innerHTML = COOKIES?.map((item) => {
       settingsAccordionToggle(index);
-      let expirationDate = moment(item.expiration).endOf("day").fromNow();
-      console.log("✅ item", item);
+      const valid = new Date(item.expiration).getTime();
+      let expirationDate = !!valid
+        ? formatDistance(new Date(fromUnixTime(valid)), new Date(), {
+            addSuffix: true,
+          })
+        : "Unknown date";
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
         <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${index}>
         <p class="category-title font-medium">${item.name}</p>
@@ -87,9 +84,6 @@ const fillCookieSettingItem = (index) => {
               </div>
               `;
     }).join("");
-    console.log("🔄🔄🔄", cookieSettingsInject.innerHTML);
-    console.log("⬆️⬆️⬆️", COOKIES);
-    // console.log("⬆️⬆️⬆️", COOKIES_PER_CATEGORY);
   }, 200);
 };
 const filterCookiesByCategory = function (arr, id, storeVariable, category) {
@@ -162,7 +156,7 @@ const showModal = function (index) {
 };
 const settingsAccordionToggle = function (index) {
   setTimeout(() => {
-    console.dir("🚀 ~ settingsAccordionToggle ~ index", index);
+    // console.dir("🚀 ~ settingsAccordionToggle ~ index", index);
     const accordionHeader = document.querySelectorAll(
       ".settingAccordion .accordionHeader"
     );
@@ -179,11 +173,10 @@ const settingsAccordionToggle = function (index) {
         );
         carretToggle[i]?.classList?.toggle("rotate-180");
         const { children } = accordionContent[index];
-        console.log("✅ children", children);
+        // console.log("✅ children", children);
         // for (element in children) {
         //   children[element]?.classList?.toggle("opacity-0");
         // }
-        console.log("click");
       });
     }
   }, 200);
@@ -195,7 +188,7 @@ const fillCookies = function () {
       ".cookie-categories-inject"
     );
     console.log("🚀 ~  FILL COOKIES w/INJECT PETRIT", cookieCategoriesInject);
-    console.log("🚀 ~ cookie-categories-inject", cookieCategoriesInject);
+    // console.log("🚀 ~ cookie-categories-inject", cookieCategoriesInject);
     cookieCategoriesInject.innerHTML = categories
       ?.slice(0)
       ?.reverse()

@@ -38,11 +38,11 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // new HtmlWebpackPlugin({
-    //   filename: "index.html",
-    //   inject: "body",
-    //   template: path.resolve(__dirname, "src", "index.html"),
-    // }),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      inject: "body",
+      template: path.resolve(__dirname, "src", "index.html"),
+    }),
   ],
   module: {
     rules: [
