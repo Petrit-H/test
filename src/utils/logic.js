@@ -244,26 +244,26 @@ const allowAllCookies = function () {
   getCookiesData().then((data) => {
     console.log("🔸🔸🔸", data);
     console.log("🔴🔴🔴🔴🔴🔴🔴🔴", data.length);
-    // setTimeout(() => {
-    const allowAllCookiesButton = document.querySelector(".allowAll");
-    const radioButtons = document.querySelectorAll(".radioButtonCookie");
-    const cookieRadioButton = document.querySelectorAll(".cc-btn");
-    console.log("🇽🇰🇽🇰🇽🇰", allowAllCookiesButton);
-    allowAllCookiesButton.addEventListener("click", () => {
-      // FILTERED_COOKIES = getCookiesData();
-      // console.log("🔴🔴🔴🔴🔴🔴🔴🔴", getCookiesData());
-      for (let i = 0; i < radioButtons.length; i++) {
-        // const element = radioButtons[i];
-        // element.checked = true;
-        // console.log(element.checked);
-        // element.addEventListener("change", console.log("change"));
-        // const event = new Event("change");
-        // element.dispatchEvent(event);
-        // saveSpecificCookiesData(i + 1);
-      }
-    });
-    // saveAllCookies();
-    // }, 400);
+    setTimeout(() => {
+      const allowAllCookiesButton = document.querySelector(".allowAll");
+      const radioButtons = document.querySelectorAll(".radioButtonCookie");
+      const cookieRadioButton = document.querySelectorAll(".cc-btn");
+      console.log("🇽🇰🇽🇰🇽🇰", allowAllCookiesButton);
+      allowAllCookiesButton.addEventListener("click", () => {
+        // FILTERED_COOKIES = getCookiesData();
+        // console.log("🔴🔴🔴🔴🔴🔴🔴🔴", getCookiesData());
+        for (let i = 0; i < radioButtons.length; i++) {
+          const element = radioButtons[i];
+          element.checked = true;
+          console.log(element.checked);
+          element.addEventListener("change", console.log("change"));
+          const event = new Event("change");
+          element.dispatchEvent(event);
+          saveSpecificCookiesData(i + 1);
+        }
+      });
+      // saveAllCookies();
+    }, 300);
   });
   // document.removeEventListener("click", allowAllCookiesButton);
 };
@@ -274,22 +274,6 @@ const acceptNecessary = function () {
     gotItButton.addEventListener("click", () => {
       console.log("================acceptNecessary=================");
       saveNecessaryCookiesData();
-      // getCookiesData(5).then((data) => {
-      //   console.log("NECESSARY COOKIES ONLY", data);
-      //   for (const cookie of data) {
-      //     setCookie(
-      //       cookie.name, // name
-      //       // cookie.value, // value
-      //       "", // value
-      //       cookie.expiryDays, // expiration day
-      //       cookie.domain, // domain
-      //       "", // domain
-      //       cookie.path, // path
-      //       // "/",
-      //       cookie.is_secure // is secure
-      //     );
-      //   }
-      // });
     });
   }, 300);
 };

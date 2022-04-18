@@ -76,41 +76,33 @@ const draw = function (countryCode) {
       // console.log("🚀 ~ POPUP INIT", popup);
       // ccInstance.popup?.open();
     })
-    .on("popupOpened", (...args) => console.log("Popup Open", args))
+    .on("popupOpened", (...args) => {
+      console.log("Popup Open", args);
+      acceptNecessary();
+      initiateTypeChangeAndBannerShow();
+    })
     .on("popupClosed", (...args) => {
       console.log("Popup Closed", args);
+      acceptNecessary();
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
 };
-
-setTimeout(() => {
-  acceptNecessary();
-  // bannerAccordionToggle(1);
-
+function initiateTypeChangeAndBannerShow() {
+  // setTimeout(() => {
   const toggleType = document.querySelectorAll(".typeChange");
-  // console.log("🚀 ~ TOGGLE TYPE", toggleType);
-
   for (const key of toggleType) {
     console.log(key);
     key.addEventListener("click", (event) => {
       console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
       timeStamp();
-
-      console.log("🚀 ~ file: index.html ~ line 193 ~ type", testType);
+      console.log("🚀 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
-      console.log(
-        "🚀 ~ file: index.html ~ line 204 ~ categoriesType => ",
-        categoriesType
-      );
+      console.log("🚀 ~ categoriesType => ", categoriesType);
       console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
       if (testType === "info") {
         testType = "categories";
-        optionsObj(
-          // locationElement[locationElement.selectedIndex].value,
-          "XK",
-          "categories"
-        );
+        optionsObj("XK", "categories");
         ccInstance.destroy();
         // draw(locationElement[locationElement.selectedIndex].value);
         draw("XK");
@@ -120,14 +112,10 @@ setTimeout(() => {
           allowAllCookies();
           // document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
           // document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
-        }, 250);
+        }, 50);
       } else if (testType === "categories") {
         testType = "info ";
-        optionsObj(
-          // locationElement[locationElement.selectedIndex].value,
-          "XK",
-          "info"
-        );
+        optionsObj("XK", "info");
         ccInstance.destroy();
         // ccInstance.clearStatuses().destroy();
         // draw(locationElement[locationElement.selectedIndex].value);
@@ -141,5 +129,6 @@ setTimeout(() => {
   // CountryCode = fetchClientIp();
   console.log("🚀 ~ LOCATIONNNNNNN ", fetchClientIp());
   // console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
-}, 500);
+  // }, 400);
+}
 draw("XK");

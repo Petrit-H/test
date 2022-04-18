@@ -28,7 +28,7 @@ let cookiesPerCategory = [];
 let dataForBala = {};
 
 window.addEventListener("load", function (event) {
-  console.log(
+/*   console.log(
     "welcome to🔐 \n",
     `
       CCCCCCCCCCCCC MMMMMMMM              MMMMMMMMM PPPPPPPPPPPPPPP
@@ -48,7 +48,7 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
     CCC:::::::::::C M::::::M               M::::::M P::::::P
        CCCCCCCCCCCC MMMMMMMM               MMMMMMMM PPPPPPPP
     `
-  );
+  ); */
   const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
   const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
   const spinner = document.getElementById("spinner");

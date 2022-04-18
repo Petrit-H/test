@@ -218,7 +218,7 @@ export const fetchDomainsFromAPI = () => {
   axios(config)
     .then(function (response) {
       responseData = response.data;
-    /*   console.log("==========︾==========");
+      console.log("==========︾==========");
       console.log("🚀 ~ categories", categories);
       console.log("🚀 ~ responseData", responseData);
       // console.log("🚀 ~ dataForBala", dataForBala);
@@ -229,7 +229,7 @@ export const fetchDomainsFromAPI = () => {
       filterCookiesByCategory(response.data, 2, MARKETING, "MARKETING");
       filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
       console.log("==========︽==========");
-      console.log("DOMAINS LIST", responseData); */
+      // console.log("DOMAINS LIST", responseData);
       return responseData;
     })
     .catch(function (error) {
