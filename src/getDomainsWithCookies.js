@@ -48,7 +48,7 @@ export const getCookiesData = async () => {
   let filteredCookiesPerCategory = [];
   let config = {
     method: "GET",
-    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=135",
     // headers: { "Access-Control-Allow-Origin": "*" },
   };
   try {
@@ -80,7 +80,7 @@ export const getCookiesData = async () => {
 export const saveNecessaryCookiesData = () => {
   let config = {
     method: "GET",
-    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=135",
     // url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
   };
   axios(config)
@@ -115,7 +115,7 @@ export const saveNecessaryCookiesData = () => {
 export const saveSpecificCookiesData = (id) => {
   let config = {
     method: "GET",
-    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=135",
     // url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
   };
   axios(config)
@@ -149,7 +149,7 @@ export const saveSpecificCookiesData = (id) => {
 //   let filteredCookiesPerCategory = [];
 //   let config = {
 //     method: "GET",
-//     // url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=1",
+//     // url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=1"5
 //     url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
 //     // headers: { "Access-Control-Allow-Origin": "*" },
 //   };
@@ -210,7 +210,7 @@ export const saveSpecificCookiesData = (id) => {
 export const fetchDomainsFromAPI = () => {
   let config = {
     method: "GET",
-    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=132",
+    url: "https://cmp.gjirafa.dev/GetAllCookiesByDomainId?domainId=135",
     // url: "https://cmp.gjirafa.dev/DomainListViewTestHalabaku",
     // headers: { "Access-Control-Allow-Origin": "*" },
   };
@@ -241,7 +241,7 @@ export const fetchCategoriesFromAPI = () => {
   let config = {
     method: "get",
     // url: "https://cmp.gjirafa.dev/CategoryListView",
-    url: "https://cmp.gjirafa.dev/GetAllCategoriesByDomainId?domainId=132",
+    url: "https://cmp.gjirafa.dev/GetAllCategoriesByDomainId?domainId=135",
     headers: {},
   };
   axios(config)

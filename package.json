@@ -1,6 +1,6 @@
 {
   "name": "gjirafa-cmp",
-  "version": "4.5.12",
+  "version": "4.5.13",
   "description": "FORK OF Osano cookie consent tool.",
   "main": "./dist/index.min.js",
   "types": "types/index.d.ts",
