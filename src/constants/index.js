@@ -22,6 +22,7 @@ export let MARKETING = [];
 export let OTHER = [];
 
 export const CLIENT_GEOLOCATION_API_URL = "https://cmp.gjirafa.dev/GetPublicIp";
+
 export const USER_COOKIE_DATA = [];
 
 export const CLOSE_ICON = "https://tojnhu4mvp.gjirafa.net/CMP/closeIcon.svg";

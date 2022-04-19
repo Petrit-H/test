@@ -240,7 +240,8 @@ export const fetchDomainsFromAPI = () => {
 export const fetchCategoriesFromAPI = () => {
   let config = {
     method: "get",
-    url: "https://cmp.gjirafa.dev/CategoryListView",
+    // url: "https://cmp.gjirafa.dev/CategoryListView",
+    url: "https://cmp.gjirafa.dev/GetAllCategoriesByDomainId?domainId=132",
     headers: {},
   };
   axios(config)

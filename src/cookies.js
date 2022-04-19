@@ -26,7 +26,6 @@ let responseForCookies = []; //?{ cookie_name: "", cookie_status: "" }
 let cookiesPerCategory = [];
 // let dataForBala = [];
 let dataForBala = {};
-
 window.addEventListener("load", function (event) {
 /*   console.log(
     "welcome to🔐 \n",
