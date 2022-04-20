@@ -12,8 +12,8 @@ export const COOKIES_CATEGORIES = [
 ];
 
 export const DOMAINS = [];
-export let FILTERED_COOKIES = []
-export const COOKIES_PER_CATEGORY = []
+export let FILTERED_COOKIES = [];
+export const COOKIES_PER_CATEGORY = [];
 export let ALL_DATA = [];
 export let NECESSARY = [];
 export let PREFERENCES = [];
@@ -22,11 +22,14 @@ export let MARKETING = [];
 export let OTHER = [];
 
 export const CLIENT_GEOLOCATION_API_URL = "https://cmp.gjirafa.dev/GetPublicIp";
-
-export const USER_COOKIE_DATA = [];
+export const CMP_API_BASE_URL = "https://cmp.gjirafa.dev";
 
 export const CLOSE_ICON = "https://tojnhu4mvp.gjirafa.net/CMP/closeIcon.svg";
-export const CLOSE_ICON_WHITE = "https://tojnhu4mvp.gjirafa.net/CMP/closeIconWhite.svg";
-export const COOKIE_WIDGET_ICON_CIRCLE = "https://tojnhu4mvp.gjirafa.net/CMP/widgetCircle.svg";
-export const COOKIE_WIDGET_ICON_TRIANGLE = "https://tojnhu4mvp.gjirafa.net/CMP/widgetTriangle.svg";
-export const CARET_DOWN_ICON = "https://tojnhu4mvp.gjirafa.net/CMP/caretDown.svg";
+export const CLOSE_ICON_WHITE =
+  "https://tojnhu4mvp.gjirafa.net/CMP/closeIconWhite.svg";
+export const COOKIE_WIDGET_ICON_CIRCLE =
+  "https://tojnhu4mvp.gjirafa.net/CMP/widgetCircle.svg";
+export const COOKIE_WIDGET_ICON_TRIANGLE =
+  "https://tojnhu4mvp.gjirafa.net/CMP/widgetTriangle.svg";
+export const CARET_DOWN_ICON =
+  "https://tojnhu4mvp.gjirafa.net/CMP/caretDown.svg";

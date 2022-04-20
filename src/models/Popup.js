@@ -20,9 +20,9 @@ import {
   traverseDOMPath,
 } from "../utils";
 import {
-  getCookiesData,
-  saveNecessaryCookiesData,
-  saveSpecificCookiesData,
+  getCookies,
+  saveNecessaryCookies,
+  saveSpecificCookies,
 } from "../getDomainsWithCookies";
 import CMP_Section from "../cookies.js";
 const { toBinary } = require("../utils/encryptToBinary.js");
@@ -232,11 +232,8 @@ export default class Popup extends Base {
 
   revokeChoice(preventOpen) {
     this.options.enabled = true;
-    //!==========
     this.clearStatuses();
-
     this.emit("revokeChoice");
-
     if (!preventOpen) {
       this.autoOpen();
     }
@@ -300,32 +297,12 @@ export default class Popup extends Base {
           path,
           secure
         );
-        // console.log("ON LOAD STUFFFFFFFFFF");
         for (let index = 0; index < radioButtons.length; index++) {
           const element = radioButtons[index];
-          // setTimeout(() => {
-
           if (element.checked) {
             console.log("RADIO BUTTON CLICKED ", element.id);
-            //! SAVE THE CHECKED COOKIES
-            saveSpecificCookiesData(+element.id);
-            // getCookiesData(+element.id).then((data) => {
-            //   // ALL_DATA.push(data); // console.log("DATaAaaaaaaaaa",data)
-            //   console.log("DATaAaaaaaaaaa", data);
-            //   for (const cookie of data) {
-            //     setCookie(
-            //       cookie.name, // name
-            //       // cookie.value, // value
-            //       "", // value
-            //       cookie.expiryDays, // expiration day
-            //       cookie.domain, // domain
-            //       cookie.path, // path
-            //       cookie.is_secure // is secure
-            //     );
-            //   }
-            // });
+            saveSpecificCookies(+element.id);
           }
-          // }, 100);
         }
         this.emit("statusChanged", cookieName, status, chosenBefore);
       } else {
@@ -342,7 +319,6 @@ export default class Popup extends Base {
         updateCategoryStatus(category, arguments[0])
       );
     } else if (arguments.length > 1) {
-      // COOKIES_CATEGORIES.forEach((categoryStatus, index) => {
       arguments.forEach((categoryStatus, index) => {
         updateCategoryStatus(this.userCategories[index], categoryStatus);
       });
@@ -366,29 +342,10 @@ export default class Popup extends Base {
     const { name, domain, path } = this.options.cookie;
     COOKIES_CATEGORIES.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
-
-      //! SAVE THE NECESSARY COOKIES
-      saveNecessaryCookiesData();
-      // getCookiesData(5).then((data) => {
-      //   console.log("NECESSARY COOKIES ONLY", data);
-      //   for (const cookie of data) {
-      //     setCookie(
-      //       cookie.name, // name
-      //       // cookie.value, // value
-      //       "", // value
-      //       cookie.expiryDays, // expiration day
-      //       cookie.domain, // domain
-      //       "", // domain
-      //       cookie.path, // path
-      //       // "/",
-      //       cookie.is_secure // is secure
-      //     );
-      //   }
-      // });
+      saveNecessaryCookies();
       console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
   }
-
   canUseCookies() {
     if (
       !window.navigator.cookieEnabled ||
@@ -397,7 +354,6 @@ export default class Popup extends Base {
     ) {
       return true;
     }
-
     const statusesValues = this.getStatuses();
     const matches = statusesValues.map((status, index) => ({
       [COOKIES_CATEGORIES[index]]: isValidStatus(status),
@@ -512,7 +468,6 @@ export default class Popup extends Base {
     el.querySelectorAll('.cc-btn [type="checkbox"]').forEach(
       (checkbox, index) => {
         checkbox.addEventListener("change", () => {
-          // debugger;
           this.userCategories[checkbox.name] = checkbox.checked
             ? "ALLOW"
             : "DENY";
@@ -558,7 +513,6 @@ export default class Popup extends Base {
     if (btn.classList.contains("cc-btn") && btn.classList.contains("cc-save")) {
       this.setStatuses();
       setTimeout(() => {
-        //!==========
         this.close(true);
         console.log("TEST PETRIT", this.userCategories);
       }, 200);
@@ -582,7 +536,6 @@ export default class Popup extends Base {
       return;
     }
     if (btn.classList.contains("cc-close")) {
-      //!=========
       this.setStatuses(STATUS_DISMISS);
       this.close(true);
       return;
@@ -767,18 +720,5 @@ export default class Popup extends Base {
     if (this.revokeBtn) {
       this.revokeBtn.remove();
     }
-    // if (this.onWindowScroll) {
-    //   window.removeEventListener("scroll", this.onWindowScroll);
-    // }
-    // if (this.onWindowClick) {
-    //   window.removeEventListener("click", this.onWindowClick);
-    //   window.removeEventListener("touchend", this.onWindowClick);
-    // }
-    // if (this.onLinkClick) {
-    //   window.removeEventListener("click", this.onLinkClick);
-    // }
-    // if (this.onKeyPress) {
-    //   window.addEventListener("onkeypress", this.onKeyPress);
-    // }
   }
 }

@@ -10,8 +10,6 @@ import {
   CARET_DOWN_ICON,
 } from "../constants/index.js";
 
-import {testClick,acceptNecessary,allowAllCookies,goBackFunc} from '../utils/logic'
-
 export default {
   // if false, this prevents the popup from showing (useful for giving to control to another piece of code)
   enabled: true,
@@ -73,12 +71,12 @@ export default {
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
           <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-white typeChange">Cookie Settings</button>
+            <button class="text-white banner-type-change">Cookie Settings</button>
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
         <button class="gotItButton px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" >{{dismiss}}</button>
-        <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
+        <button class="banner-type-change px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
       </div>
     </div>
     `,
@@ -107,8 +105,8 @@ export default {
             </ul>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
-            <button
-              class="cc-btn cc-save cc-${STATUS_ALLOW}  allowAll border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" >{{allowAll}}</button>
+            <button type="button"
+              class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" >{{allowAll}}</button>
             <button class="cc-btn cc-save  cc-${STATUS_ALLOW} border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
               My Choices</button>
           </div>
@@ -122,10 +120,10 @@ export default {
           </div>
           <div class="contentWrapper overflow-y-scroll my-3">
             <div class="descSectoin px-4 py-3">
-              <p id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
+              <button id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
                 <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 transform mr-3">
                 <span class="text-black">Back</span>
-              </p>
+              </button>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel
                 quaerat
                 obcaecati commodi
@@ -140,8 +138,8 @@ export default {
             <div class="cookieSettingsInject p-4"></div>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
-            <button
-              class="cc-btn cc-save  allowAll border-2 rounded-md px-5 py-1.5 border-gray-200  mr-4">{{allowAll}}</button>
+            <button type="button"
+              class="cc-btn cc-save  allow-all border-2 rounded-md px-5 py-1.5 border-gray-200  mr-4">{{allowAll}}</button>
             <button class="cc-btn cc-save border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
               My
               Choices

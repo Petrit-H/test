@@ -90,10 +90,10 @@ const draw = function (countryCode) {
 };
 function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
-  const toggleType = document.querySelectorAll(".typeChange");
-  for (const key of toggleType) {
-    console.log(key);
-    key.addEventListener("click", (event) => {
+  const bannertypeChangeButtons = document.querySelectorAll(".banner-type-change");
+  for (const typeChangeElement of bannertypeChangeButtons) {
+    console.log(typeChangeElement);
+    typeChangeElement.addEventListener("click", (event) => {
       console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
       timeStamp();
       console.log("🚀 ~ type", testType);

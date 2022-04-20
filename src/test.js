@@ -1,8 +1,8 @@
-import { getCookiesData } from "./getDomainsWithCookies"
+import { getCookies } from "./getDomainsWithCookies"
 import "./styles/main.scss"
 
 
 
-// getCookiesData()
+// getCookies()
 
 console.log("TEST")

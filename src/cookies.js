@@ -1,13 +1,8 @@
 import {
-  settingsAccordionToggle,
-  filterCookiesByCategory,
-} from "./utils/logic";
-import { CARET_DOWN_ICON, COOKIES_CATEGORIES } from "./constants";
-import {
   // categories,
-  fetchCategoriesFromAPI,
-  fetchDomainsFromAPI,
-  getCookiesData,
+  getCategories,
+  getDomains,
+  getCookies,
   // responseData,
 } from "./getDomainsWithCookies";
 import { setCookie } from "./utils/cookie";
@@ -60,8 +55,8 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
   // bannerAccordionToggle()
 
   setTimeout(() => {
-    let categories = fetchCategoriesFromAPI();
-    let responseData = fetchDomainsFromAPI();
+    let categories = getCategories();
+    let responseData = getDomains();
     // toggleInjectedRadioButtons();
 
     // bannerAccordionToggle()
