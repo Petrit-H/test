@@ -70,7 +70,6 @@ function timeStamp() {
 const draw = function (countryCode) {
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = false;
-  console.log("🚀 ~ ccInstance.autoOpen ", ccInstance.autoOpen);
   ccInstance
     .on("initialized", function (popup) {
       // console.log("🚀 ~ POPUP INIT", popup);
@@ -92,7 +91,6 @@ function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
   const bannertypeChangeButtons = document.querySelectorAll(".banner-type-change");
   for (const typeChangeElement of bannertypeChangeButtons) {
-    console.log(typeChangeElement);
     typeChangeElement.addEventListener("click", (event) => {
       console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
       timeStamp();

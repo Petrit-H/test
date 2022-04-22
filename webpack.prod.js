@@ -13,36 +13,21 @@ module.exports = merge(commonConfig, {
   watch: true,
   module: {
     rules: [
-      // {
-      //   test: /\.css$/,
-      //   use: [MiniCssExtractPlugin.loader, "css-loader"],
-      // },
       {
         test: /\.s[ac]ss$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            // This is required for asset imports in CSS, such as url()
             options: { publicPath: "" },
           },
           "css-loader",
           "postcss-loader",
-          // according to the docs, sass-loader should be at the bottom, which
-          // loads it first to avoid prefixes in your sourcemaps and other issues.
           "sass-loader",
         ],
       },
     ],
   },
   plugins: [
-    // new ImageminPlugin({
-    //   externalImages: {
-    //     context: ".",
-    //     sources:glob.sync("./src/assets/images/**.{png,jpg,jpeg,gif,svg}"),
-    //     destination: "dist/images",
-    //     fileName: "[name].[ext]",
-    //   },
-    // }),
     new MiniCssExtractPlugin({
       filename: "main.css",
     }),
@@ -60,17 +45,10 @@ module.exports = merge(commonConfig, {
       new TerserPlugin(),
     ],
     splitChunks: {
-      // minSize: 10000,
-      // maxSize: 250000,
-      // minSize: 20000,
       minRemainingSize: 0,
       minChunks: 1,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
-      // enforceSizeThreshold: 50000,
     },
-    // runtimeChunk: {
-    //   name: "single",
-    // },
   }
 });

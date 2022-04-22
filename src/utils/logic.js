@@ -25,14 +25,12 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
       ".cookieSettingsInject"
     );
     cookieSettingsInject.innerHTML = COOKIES?.map((item) => {
-      settingsAccordionToggle();
       // const valid = new Date(item.expiration).getTime();
       // let expirationDate = !!valid
       //   ? formatDistance(new Date(fromUnixTime(valid)), new Date(), {
       //       addSuffix: true,
       //     })
       //   : "Unknown date";
-
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
         <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${categoryId}>
         <p class="category-title font-medium">${item.name}</p>
@@ -53,15 +51,21 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
         </li>
         <li class="flex justify-between my-4 p-2">
         <span class="flex-1 text-primary-light">Duration</span>
-        <span class="flex-1" id="cookieDuration">${item.expiration/3600}</span>
+        <span class="flex-1" id="cookieDuration">${
+          item.expiration / 3600
+        }</span>
         </li>
         <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Category</span>
-              <span class="flex-1" id="cookieCategory">${item.category}</span>
+              <span class="flex-1" id="cookieCategory">${
+                item.category.name
+              }</span>
               </li>
               <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Description</span>
-              <span class="flex-1" id="cookieDescription">${item.description}</span>
+              <span class="flex-1" id="cookieDescription">${
+                item.description
+              }</span>
               </li>
               </ul>
               </div>
@@ -69,16 +73,17 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
               </div>
               `;
     }).join("");
+    settingsAccordionToggle();
   }, 200);
 };
-const filterCookiesByCategory = function (arr, id, storeToVariable, category) {
-  arr.map((item) => {
-    // el.filter((item) => {
-    if (item.categoryId === id) {
-      storeToVariable.push(item);
-    }
-    // });
-  });
+const filterCookiesByCategory = function (obj, id, storeToVariable, category) {
+  // arr.map((item) => {
+  // el.filter((item) => {
+  if (obj.id === id) {
+    storeToVariable.push(item);
+  }
+  // });
+  // });
   console.log(`🚀 ~ ${category} id:`, id, `=> `, storeToVariable);
   return storeToVariable;
 };
@@ -137,31 +142,30 @@ const showModal = function (categoryId, domainId) {
   });
   fillCookiesSettingItem(categoryId, domainId);
 };
+
+/**
+ * @param {HTMLElement} el
+ * @param  {...any} cls
+ */
+const toggleCSSclasses = (el, ...cls) => {
+  cls.map((cl) => el.classList.toggle(cl));
+  console.log("CLICK");
+};
+
 const settingsAccordionToggle = function () {
   setTimeout(() => {
     const accordionHeader = document.querySelectorAll(
       ".settingAccordion .accordionHeader"
     );
+    console.log("🚀 ~  ~ accordionHeader", accordionHeader);
     const accordionContent = document.querySelectorAll(
       ".settingAccordion .accordionContent"
     );
     const carretToggle = document.querySelectorAll(".toggleAccordion");
     for (let i = 0; i < accordionHeader.length; i++) {
-      accordionHeader[i].addEventListener("click", () => {
-        ["h-0", "hidden"].map((cssClass) => {
-          accordionContent[i]?.classList?.toggle(cssClass);
-          console.log(
-            "🚀 ~ file: logic.js ~ line 153 ~ accordionHeader[i].addEventListener ~ cssClass",
-            cssClass
-          );
-        });
-        console.log(
-          " accordionContent[i]?.classList?",
-          accordionContent[i]?.classList
-        );
-        console.log("accordionContent[index]", accordionContent[i]);
-        console.log("accordionContent[index]", accordionHeader[i]);
-        carretToggle[i]?.classList?.toggle("rotate-180");
+      accordionHeader[i].addEventListener("click", function () {
+        toggleCSSclasses(accordionContent[i], "hidden", "h-0");
+        carretToggle[i].classList.toggle("rotate-180");
       });
     }
   }, 200);

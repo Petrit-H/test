@@ -4,7 +4,7 @@ body,
 html {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   height: 100%;
   // background: #3f4f79;
@@ -14,7 +14,7 @@ html {
 body.example3 {
   // background: #7f5f49;
   height: auto;
-  background: rgba(102, 124, 153, 0.4);
+  // background: rgba(102, 124, 153, 0.4);
   // background: #667c99;
   // opacity: 0.4;
   z-index: 0;
@@ -270,6 +270,7 @@ ul {
     margin: 20px 0;
   }
 }
+
 /* ========================= */
 //! Style the tab
 .tab {
@@ -306,9 +307,11 @@ ul {
   border: 1px solid #ccc;
   border-top: none;
 }
+
 .cc-type-info {
   background-color: #052d61;
 }
+
 //! small consent banner visible on page load
 .CMPWrapper {
   // background-color: #052d61;
@@ -323,13 +326,16 @@ ul {
     position: relative;
     // font-size: 14px;
     line-height: 18px;
+
     &__description {
       color: #a3b0c2;
+
       button,
       a {
         position: relative;
         color: #ffffff !important;
         margin-right: 1rem;
+
         // text-decoration: underline;
         &::after {
           content: "";
@@ -343,6 +349,7 @@ ul {
         }
       }
     }
+
     &__controls {
       button,
       a {
@@ -358,16 +365,38 @@ ul {
       }
     }
   }
+
   &.showModal {
     // transform: translateY(0);
   }
 }
 
 //!CATEGORIES BANNER STYLES
-.CMPCategories {
+.cmp-categories {
   margin: auto;
   height: 100vh;
+
   & > * {
     // margin: auto;
   }
+}
+
+.cmp-overlay {
+  display: flex;
+  visibility: visible;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: hsla(214, 20%, 50%, 40%);
+  // background-color: #667c99;
+  opacity: 1;
+  backface-visibility: hidden;
+  transition: opacity 0.1s cubic-bezier(0, 0.78, 0.03, 0.93) 0s, z-index 0s 0.1s,
+    visibility 0s 0.1s;
+  will-change: visibility, z-index, opacity;
 }

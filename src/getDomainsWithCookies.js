@@ -103,6 +103,30 @@ export const saveSpecificCookies = (id) => {
       console.log(err);
     });
 };
+//! Fetch data from the CATEGORIES endpoint
+export const getCategories = () => {
+  let config = {
+    method: "get",
+    url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=135`,
+    // ur`: "${CMP_API_BASE_URL}/CategoryListView`,
+  };
+  axios(config)
+    .then(function (response) {
+      categories = response.data;
+      console.log("CATEGORIES LIST: ", response.data);
+      categories.forEach((category) => {
+        //  console.log(category)
+        // filterCookiesByCategory(category, category.id, NECESSARY, category.name);
+        NECESSARY.push(category);
+        console.log(`🚀 ~ ${category.name} id:`, category.id, `=> `, NECESSARY);
+      });
+      return categories;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return categories;
+};
 
 //! fetch all the domains, their cookies and filter cookies for categories
 export const getDomains = () => {
@@ -115,37 +139,10 @@ export const getDomains = () => {
   axios(config)
     .then(function (response) {
       responseData = response.data;
-      console.log("==========︾==========");
-      console.log("🚀 ~ categories", categories);
       console.log("🚀 ~ responseData", responseData);
-      console.log("==========xxx==========");
-      filterCookiesByCategory(response.data, 5, NECESSARY, "NECESSARY");
-      filterCookiesByCategory(response.data, 4, PREFERENCES, "PREFERENCES");
-      filterCookiesByCategory(response.data, 3, ANALYTICAL, "ANALYTICAL");
-      filterCookiesByCategory(response.data, 2, MARKETING, "MARKETING");
-      filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
-      console.log("==========︽==========");
       return responseData;
     })
     .catch(function (error) {
       console.log(error.message);
     });
-};
-//! Fetch data from the CATEGORIES endpoint
-export const getCategories = () => {
-  let config = {
-    method: "get",
-    url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=135`,
-    // ur`: "${CMP_API_BASE_URL}/CategoryListView`,
-  };
-  axios(config)
-    .then(function (response) {
-      categories = response.data;
-      console.log("CATEGORIES LIST: ", response.data);
-      return categories;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  return categories;
 };

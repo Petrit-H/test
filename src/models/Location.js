@@ -79,13 +79,8 @@ export default class Location extends Base {
 
   // Potentially adds a callback to a url for jsonp.
   setupUrl(service) {
-    console.log(
-      "🚀 ~ file: Location.js ~ line 82 ~ Location ~ setupUrl ~ service",
-      service
-    );
     const serviceOpts = this.getCurrentServiceOpts();
     return service.url.replace(/\{(.*?)\}/g, function (_, param) {
-      console.log("🚀 ~ file: Location.js ~ line 84 ~ Location ~ param", param);
       if (param === "callback") {
         const tempName = "callback" + Date.now();
         window[tempName] = function (res) {
