@@ -38,8 +38,7 @@ export default {
     message:
       "By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.",
     // "This website uses cookies to ensure you get the best experience on our website.",
-    dismiss: "Aight",
-    // dismiss: "Got it!",
+    dismiss: "Got it!",
     allow: "Allow",
     allowAll: "Accept All",
     deny: "Decline",
