@@ -51,21 +51,15 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
         </li>
         <li class="flex justify-between my-4 p-2">
         <span class="flex-1 text-primary-light">Duration</span>
-        <span class="flex-1" id="cookieDuration">${
-          item.expiration / 3600
-        }</span>
+        <span class="flex-1" id="cookieDuration">${item.expiration}</span>
         </li>
         <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Category</span>
-              <span class="flex-1" id="cookieCategory">${
-                item.category.name
-              }</span>
+              <span class="flex-1" id="cookieCategory">${item.category.name}</span>
               </li>
               <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Description</span>
-              <span class="flex-1" id="cookieDescription">${
-                item.description
-              }</span>
+              <span class="flex-1" id="cookieDescription">${item.description}</span>
               </li>
               </ul>
               </div>
