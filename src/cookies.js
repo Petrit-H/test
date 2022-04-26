@@ -72,9 +72,9 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
       MARKETING: MARKETING,
       OTHER: OTHER,
     };
+    console.log("🚀 ~ responseData", responseData);
    /*  console.log("==================🧲🧲🧲🧲====================");
     console.log("🚀 ~ categories", categories);
-    console.log("🚀 ~ responseData", responseData);
     console.log("🚀 ~ DATA-4-BALA", dataForBala);
     console.log("==================🧲🧲🧲🧲=====================");
  */

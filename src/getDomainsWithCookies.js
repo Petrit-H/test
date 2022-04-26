@@ -51,26 +51,28 @@ export const getCookiesPerCategory = async (categoryId, domainId) => {
 export const saveNecessaryCookies = () => {
   let config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
+    // url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
+    url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=135&categoryId=5`,
   };
   axios(config)
     .then(function (response) {
-      const data = response.data;
-      data.filter((cookie) => {
-        if (cookie.categoryId === 5) {
-          setCookie(
-            cookie.name, // name
-            cookie.value, // value
-            // "", // value
-            cookie.expiryDays, // expiration day
-            cookie.domain, // domain
-            cookie.path, // path
-            cookie.is_secure // is secure
-          );
-        } else {
-          return;
-        }
-      });
+      const data = response.data.cookies;
+      console.log("🚀 ~ ~ NECESSARY COOKIES", data);
+      // data.filter((cookie) => {
+      for (const cookie of data) {
+        console.log("🔱~🔱", cookie);
+        setCookie(
+          cookie.name, // name
+          cookie.plaintext_value, // value
+          // "", // value
+          cookie.expiration, // expiration day
+          // cookie.expiration, // expiration day
+          cookie.domain, // domain
+          cookie.path, // path
+          cookie.is_secure // is secure
+        );
+      }
+      // });
       return filteredCookiesPerDomain;
     })
     .catch(function (err) {
@@ -87,10 +89,15 @@ export const saveSpecificCookies = (id) => {
       const data = response.data;
       data.filter((cookie) => {
         if (cookie.categoryId === +id) {
+          console.log(
+            "🚀 ~ cookie.categoryId === +id",
+            cookie.categoryId === +id
+          );
           setCookie(
             cookie.name, // name
-            cookie.value, // value
-            cookie.expiryDays, // expiration day
+            cookie.plaintext_value, // value
+            cookie.expiration, // expiration day
+            // cookie.expiration, // expiration day
             cookie.domain, // domain
             cookie.path, // path
             cookie.is_secure // is secure
@@ -114,12 +121,6 @@ export const getCategories = () => {
     .then(function (response) {
       categories = response.data;
       console.log("CATEGORIES LIST: ", response.data);
-      categories.forEach((category) => {
-        //  console.log(category)
-        // filterCookiesByCategory(category, category.id, NECESSARY, category.name);
-        NECESSARY.push(category);
-        console.log(`🚀 ~ ${category.name} id:`, category.id, `=> `, NECESSARY);
-      });
       return categories;
     })
     .catch(function (error) {
@@ -139,7 +140,13 @@ export const getDomains = () => {
   axios(config)
     .then(function (response) {
       responseData = response.data;
-      console.log("🚀 ~ responseData", responseData);
+      console.log("==========︾==========");
+      filterCookiesByCategory(response.data, 5, NECESSARY, "NECESSARY");
+      filterCookiesByCategory(response.data, 4, PREFERENCES, "PREFERENCES");
+      filterCookiesByCategory(response.data, 3, ANALYTICAL, "ANALYTICAL");
+      filterCookiesByCategory(response.data, 2, MARKETING, "MARKETING");
+      filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
+      console.log("==========︽==========");
       return responseData;
     })
     .catch(function (error) {

@@ -278,11 +278,10 @@ export default class Popup extends Base {
    * @return { undefined }
    */
   setStatuses() {
-    let ALL_DATA = [];
     const { name, expiryDays, domain, path, secure } = this.options.cookie;
     const radioButtons = document.querySelectorAll(".radioButtonCookie");
-    const cookieRadioButton = document.querySelectorAll(".cc-btn");
-
+    console.log("🚀 ~ 🧲🧲🧲🧲🧲🧲🧲", radioButtons)
+    // const cookieRadioButton = document.querySelectorAll(".cc-btn");
     const updateCategoryStatus = (categoryName, status) => {
       if (isValidStatus(status)) {
         // const hash = toBinary(status);
@@ -293,10 +292,12 @@ export default class Popup extends Base {
           cookieName,
           toBinary(status),
           expiryDays,
+          // expiryDays,
           domain,
           path,
           secure
         );
+        // saveNecessaryCookies()
         for (let index = 0; index < radioButtons.length; index++) {
           const element = radioButtons[index];
           if (element.checked) {
@@ -515,7 +516,7 @@ export default class Popup extends Base {
       setTimeout(() => {
         this.close(true);
         console.log("TEST PETRIT", this.userCategories);
-      }, 200);
+      }, 300);
       return;
     }
     if (btn.classList.contains("cc-btn")) {

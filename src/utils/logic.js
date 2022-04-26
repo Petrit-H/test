@@ -70,14 +70,14 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
     settingsAccordionToggle();
   }, 200);
 };
-const filterCookiesByCategory = function (obj, id, storeToVariable, category) {
-  // arr.map((item) => {
-  // el.filter((item) => {
-  if (obj.id === id) {
-    storeToVariable.push(item);
-  }
-  // });
-  // });
+const filterCookiesByCategory = function (arr, id, storeToVariable, category) {
+  arr.map((item) => {
+    // el.filter((item) => {
+    if (item.categoryId === id) {
+      storeToVariable.push(item);
+    }
+    // });
+  });
   console.log(`🚀 ~ ${category} id:`, id, `=> `, storeToVariable);
   return storeToVariable;
 };
@@ -227,24 +227,26 @@ const fillCookies = function () {
   }, 300);
 };
 const allowAllCookies = function () {
-  getCookies().then((data) => {
-    setTimeout(() => {
-      const allowAllCookiesButton = document.querySelector(".allow-all");
-      const radioButtons = document.querySelectorAll(".radioButtonCookie");
-      const cookieRadioButton = document.querySelectorAll(".cc-btn");
-      allowAllCookiesButton.addEventListener("click", () => {
-        for (let i = 0; i < radioButtons.length; i++) {
-          const element = radioButtons[i];
-          element.checked = true;
-          console.log(element.checked);
-          element.addEventListener("change", console.log("change"));
-          const event = new Event("change");
-          element.dispatchEvent(event);
-          saveSpecificCookies(i + 1);
-        }
-      });
-    }, 300);
-  });
+  // getCookies().then((data) => {
+  setTimeout(() => {
+    const allowAllCookiesButton = document.querySelector(".allow-all");
+    const radioButtons = document.querySelectorAll(".radioButtonCookie");
+    const cookieRadioButton = document.querySelectorAll(".cc-btn");
+    allowAllCookiesButton.addEventListener("click", () => {
+      for (let i = 0; i < radioButtons.length; i++) {
+        const element = radioButtons[i];
+        element.checked = true;
+        console.log(element.checked);
+        element.addEventListener("change", console.log("change"));
+        const event = new Event("change");
+        element.dispatchEvent(event);
+        console.log(i + 1,element.id);
+        //!get the id of the category being clicked not the index of the category
+        saveSpecificCookies(element.id);
+      }
+    });
+  }, 300);
+  // });
   // document.removeEventListener("click", allowAllCookiesButton);
 };
 const acceptNecessary = function () {
