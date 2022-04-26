@@ -108,8 +108,6 @@ function initiateTypeChangeAndBannerShow() {
           fillCookies();
           bannerAccordionToggle();
           allowAllCookies();
-          // document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
-          // document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
         }, 150);
       } else if (testType === "categories") {
         testType = "info ";

@@ -302,7 +302,7 @@ export default class Popup extends Base {
           const element = radioButtons[index];
           if (element.checked) {
             console.log("RADIO BUTTON CLICKED ", element.id);
-            saveSpecificCookies(+element.id);
+            saveSpecificCookies(element.id);
           }
         }
         this.emit("statusChanged", cookieName, status, chosenBefore);

@@ -16,9 +16,9 @@ export const setCookie = function ( name, value, expiryDays, domain, path, secur
   exdate.setHours(exdate.getHours() + ((typeof expiryDays !== "number"  ? 365 : expiryDays ) * 24))
   document.cookie = name + '=' +
                     value +
-                    // ';max-age=' + expiryDays +
+                    ';max-age=' + expiryDays +
                     // ';expires=' + expiryDays +
-                    ';expires=' + exdate.toUTCString() +
+                    // ';expires=' + exdate.toUTCString() +
                     ( domain ? ';domain=' + domain : '' ) +
                     ';path=' + (path || '/') +
                     ( secure ? ';secure' : '' )
