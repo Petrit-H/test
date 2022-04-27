@@ -57,10 +57,8 @@ export const saveNecessaryCookies = () => {
   axios(config)
     .then(function (response) {
       const data = response.data.cookies;
-      console.log("🚀 ~ ~ NECESSARY COOKIES", data);
       // data.filter((cookie) => {
       for (const cookie of data) {
-        console.log("🔱~🔱", cookie);
         setCookie(
           cookie.name, // name
           cookie.plaintext_value, // value
@@ -89,10 +87,6 @@ export const saveSpecificCookies = (id) => {
       const data = response.data;
       data.filter((cookie) => {
         if (cookie.categoryId === +id) {
-          console.log(
-            "🚀 ~ cookie.categoryId === +id",
-            cookie.categoryId === +id
-          );
           setCookie(
             cookie.name, // name
             cookie.plaintext_value, // value
@@ -107,7 +101,7 @@ export const saveSpecificCookies = (id) => {
       return filteredCookiesPerDomain;
     })
     .catch(function (err) {
-      console.log(err);
+      console.log(err.message);
     });
 };
 //! Fetch data from the CATEGORIES endpoint

@@ -260,7 +260,6 @@ export default class Popup extends Base {
   // opens the popup if no answer has been given
   autoOpen() {
     const hasAnswered = this.hasAnswered();
-    console.log("🚀 ~ HASS ANSWEREDDDDDDD", hasAnswered);
     if (!hasAnswered && this.options.enabled) {
       this.open();
     } else if (hasAnswered && this.options.revokable) {
@@ -280,7 +279,6 @@ export default class Popup extends Base {
   setStatuses() {
     const { name, expiryDays, domain, path, secure } = this.options.cookie;
     const radioButtons = document.querySelectorAll(".radioButtonCookie");
-    console.log("🚀 ~ 🧲🧲🧲🧲🧲🧲🧲", radioButtons);
     // const cookieRadioButton = document.querySelectorAll(".cc-btn");
     const updateCategoryStatus = (categoryName, status) => {
       if (isValidStatus(status)) {
@@ -302,7 +300,6 @@ export default class Popup extends Base {
         for (let index = 1; index < radioButtons.length; index++) {
           const element = radioButtons[index];
           if (element.checked) {
-            console.log("RADIO BUTTON CLICKED ", element.id);
             saveSpecificCookies(element.id);
           }
         }
@@ -345,7 +342,6 @@ export default class Popup extends Base {
     COOKIES_CATEGORIES.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
       saveNecessaryCookies();
-      console.log("🚀 ~ this.options.cookie", this.options.cookie);
     });
   }
   canUseCookies() {
@@ -516,7 +512,6 @@ export default class Popup extends Base {
       this.setStatuses();
       setTimeout(() => {
         this.close(true);
-        console.log("TEST PETRIT", this.userCategories);
       }, 300);
       return;
     }
@@ -681,7 +676,6 @@ export default class Popup extends Base {
       if (this.options.theme) {
         classes.push("cc-theme-" + this.options.theme);
       }
-      // console.log(this.options.content);
       const revokeBtn = this.options.revokeBtn
         .replace("{{classes}}", classes.join(" "))
         .replace("{{widgetImage}}", this.options.content.widgetImage);

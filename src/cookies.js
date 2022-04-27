@@ -59,26 +59,9 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
 
   setTimeout(() => {
     fetchClientIp().then((location) => {
-      console.log("PETRIT LOCATION", location);
       locationData = location;
       return location;
     });
-
-    // dataForBala = {
-    //   id: createUUID(),
-    //   domains: responseData,
-    //   NECESSARY: NECESSARY,
-    //   PREFERENCES: PREFERENCES,
-    //   ANALYTICAL: ANALYTICAL,
-    //   MARKETING: MARKETING,
-    //   OTHER: OTHER,
-    // };
-    console.log("🚀 ~ locationData", locationData);
-    /*  console.log("==================🧲🧲🧲🧲====================");
-    console.log("🚀 ~ categories", categories);
-    console.log("🚀 ~ DATA-4-BALA", dataForBala);
-    console.log("==================🧲🧲🧲🧲=====================");
- */
   }, 400);
 });
 

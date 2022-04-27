@@ -24,7 +24,6 @@ let CountryCode = "";
  */
 const optionsObj = (countryCode, type) => {
   // debugger;
-  console.log("CODE ", countryCode);
   const options = {
     cookieconsent: CookieConsent,
     // selector: document.querySelector(".example-selector"),
@@ -69,10 +68,6 @@ fetchClientIp().then((country) => {
   CountryCode = country;
   draw(country);
 });
-console.log(
-  "🚀 ~ file: initFile.js ~ line 70 ~ fetchClientIp ~ CountryCode",
-  CountryCode
-);
 
 const draw = function (countryCode) {
   getCategories();
@@ -80,16 +75,13 @@ const draw = function (countryCode) {
   ccInstance.autoOpen = false;
   ccInstance
     .on("initialized", function (popup) {
-      // console.log("🚀 ~ POPUP INIT", popup);
       // ccInstance.popup?.open();
     })
     .on("popupOpened", (...args) => {
-      console.log("Popup Open", args);
       acceptNecessary();
       initiateTypeChangeAndBannerShow();
     })
     .on("popupClosed", (...args) => {
-      console.log("Popup Closed", args);
       acceptNecessary();
       // ccInstance.popup?.close();
     })
@@ -103,12 +95,8 @@ function initiateTypeChangeAndBannerShow() {
   );
   for (const typeChangeElement of bannertypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
-      console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
       timeStamp();
-      console.log("🚀 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
-      console.log("🚀 ~ categoriesType => ", categoriesType);
-      console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
       if (testType === "info") {
         testType = "categories";
         optionsObj("XK", "categories");
@@ -125,17 +113,13 @@ function initiateTypeChangeAndBannerShow() {
         ccInstance.destroy();
         // ccInstance.clearStatuses().destroy();
         draw(CountryCode);
-        console.log("🚀 ~TYPE->  options.type", testType);
       } else {
         return this;
       }
     });
   }
-  // CountryCode = fetchClientIp();
-  // console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
   // }, 400);
 }
 
-console.log("CountryCode", CountryCode);
 
 // draw("XK");

@@ -19,7 +19,6 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
     // getCookies().then(( cookies ) => {
     COOKIES = cookies;
     const noData = document.getElementById("noData");
-    console.log("noData", noData);
     if (COOKIES.length === 0) {
       noData.classList.remove("hidden");
     } else {
@@ -110,17 +109,15 @@ const bannerAccordionToggle = function () {
           contentData?.classList?.toggle(cssClass);
         });
         const children = accordionContents[i].childNodes;
-        console.log("BANNER CLICK ACCORDION ", categoryID, " TOGGLE");
       });
       categoryDescription[i].addEventListener("click", () => {
-        console.log("dataset", categoryDescription[i].dataset);
         showModal(categoryID, domainID);
       });
     }
   }, 300);
 };
 const goBackFunc = function () {
-  console.log("GO BACK");
+  console.log("go back");
   document.getElementById("COOKIE_SETTINGS").classList.add("hidden");
   // COOKIE_SETTINGS.classList.remove("hidden");
   document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
@@ -144,7 +141,6 @@ const showModal = function (categoryId, domainId) {
  */
 const toggleCSSclasses = (el, ...cls) => {
   cls.map((cl) => el.classList.toggle(cl));
-  console.log("CLICK");
 };
 
 const settingsAccordionToggle = function () {
@@ -152,7 +148,6 @@ const settingsAccordionToggle = function () {
     const accordionHeader = document.querySelectorAll(
       ".settingAccordion .accordionHeader"
     );
-    console.log("🚀 ~  ~ accordionHeader", accordionHeader);
     const accordionContent = document.querySelectorAll(
       ".settingAccordion .accordionContent"
     );
@@ -174,12 +169,12 @@ const fillCookies = function () {
       ?.slice(0)
       ?.reverse()
       ?.map((item) => {
-        setTimeout(() => {
-          const target = document.getElementById(`test-${item.id}`);
-          target.addEventListener("click", () => {
-            console.log(item);
-          });
-        }, 200);
+        // setTimeout(() => {
+        //   const target = document.getElementById(`test-${item.id}`);
+        //   target.addEventListener("click", () => {
+        //     console.log(item);
+        //   });
+        // }, 200);
         return `<li id=test-${
           item.id
         } class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer"  >
@@ -237,11 +232,9 @@ const allowAllCookies = function () {
       for (let i = 0; i < radioButtons.length; i++) {
         const element = radioButtons[i];
         element.checked = true;
-        console.log(element.checked);
-        element.addEventListener("change", console.log("change"));
+        // element.addEventListener("change", console.log("change"));
         const event = new Event("change");
         element.dispatchEvent(event);
-        console.log(i + 1, element.id);
         //!get the id of the category being clicked not the index of the category
         saveSpecificCookies(element.id);
       }
@@ -255,7 +248,6 @@ const acceptNecessary = function () {
   setTimeout(() => {
     const gotItButton = document.querySelector(".gotItButton");
     gotItButton.addEventListener("click", () => {
-      console.log("================acceptNecessary=================");
       saveNecessaryCookies();
     });
   }, 300);
