@@ -280,7 +280,7 @@ export default class Popup extends Base {
   setStatuses() {
     const { name, expiryDays, domain, path, secure } = this.options.cookie;
     const radioButtons = document.querySelectorAll(".radioButtonCookie");
-    console.log("🚀 ~ 🧲🧲🧲🧲🧲🧲🧲", radioButtons)
+    console.log("🚀 ~ 🧲🧲🧲🧲🧲🧲🧲", radioButtons);
     // const cookieRadioButton = document.querySelectorAll(".cc-btn");
     const updateCategoryStatus = (categoryName, status) => {
       if (isValidStatus(status)) {
@@ -298,7 +298,8 @@ export default class Popup extends Base {
           secure
         );
         // saveNecessaryCookies()
-        for (let index = 1; index < 3; index++) {
+        // for (let index = 1; index < 3; index++) {
+        for (let index = 1; index < radioButtons.length; index++) {
           const element = radioButtons[index];
           if (element.checked) {
             console.log("RADIO BUTTON CLICKED ", element.id);

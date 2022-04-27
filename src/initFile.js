@@ -69,7 +69,10 @@ fetchClientIp().then((country) => {
   CountryCode = country;
   draw(country);
 });
-console.log("🚀 ~ file: initFile.js ~ line 70 ~ fetchClientIp ~ CountryCode", CountryCode)
+console.log(
+  "🚀 ~ file: initFile.js ~ line 70 ~ fetchClientIp ~ CountryCode",
+  CountryCode
+);
 
 const draw = function (countryCode) {
   getCategories();
@@ -110,8 +113,7 @@ function initiateTypeChangeAndBannerShow() {
         testType = "categories";
         optionsObj("XK", "categories");
         ccInstance.destroy();
-        // draw(locationElement[locationElement.selectedIndex].value);
-        draw("XK");
+        draw(CountryCode);
         setTimeout(() => {
           fillCookies();
           bannerAccordionToggle();
@@ -122,8 +124,7 @@ function initiateTypeChangeAndBannerShow() {
         optionsObj("XK", "info");
         ccInstance.destroy();
         // ccInstance.clearStatuses().destroy();
-        // draw(locationElement[locationElement.selectedIndex].value);
-        draw("XK");
+        draw(CountryCode);
         console.log("🚀 ~TYPE->  options.type", testType);
       } else {
         return this;
