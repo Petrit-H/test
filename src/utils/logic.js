@@ -24,13 +24,12 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
     const cookieSettingsInject = document.querySelector(
       ".cookieSettingsInject"
     );
+    // const noData = document.getElementById("noData");
+  //  console.log("noData",noData)
+    // if (COOKIES.length === 0) {
+    //   noData.classList.remove("hidden");
+    // }
     cookieSettingsInject.innerHTML = COOKIES?.map((item) => {
-      // const valid = new Date(item.expiration).getTime();
-      // let expirationDate = !!valid
-      //   ? formatDistance(new Date(fromUnixTime(valid)), new Date(), {
-      //       addSuffix: true,
-      //     })
-      //   : "Unknown date";
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
         <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${categoryId}>
         <p class="category-title font-medium">${item.name}</p>
@@ -240,7 +239,7 @@ const allowAllCookies = function () {
         element.addEventListener("change", console.log("change"));
         const event = new Event("change");
         element.dispatchEvent(event);
-        console.log(i + 1,element.id);
+        console.log(i + 1, element.id);
         //!get the id of the category being clicked not the index of the category
         saveSpecificCookies(element.id);
       }

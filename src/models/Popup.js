@@ -298,7 +298,7 @@ export default class Popup extends Base {
           secure
         );
         // saveNecessaryCookies()
-        for (let index = 0; index < radioButtons.length; index++) {
+        for (let index = 1; index < 3; index++) {
           const element = radioButtons[index];
           if (element.checked) {
             console.log("RADIO BUTTON CLICKED ", element.id);

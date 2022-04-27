@@ -1,6 +1,5 @@
 import CookieConsent from "../src/models/CookieConsent";
-// import CookieConsent from "./models/CookieConsent";
-// import CMP_Section from "./utils/logic";
+import { getCategories } from "./getDomainsWithCookies";
 import { fetchClientIp } from "./options/location";
 import "./styles/main.scss";
 import {
@@ -8,12 +7,21 @@ import {
   allowAllCookies,
   bannerAccordionToggle,
   fillCookies,
-  // showModal,
 } from "./utils/logic";
 
+const locationElement = document.getElementById("location");
+const categoriesType = document.querySelector(".cc-window");
+const infoType = document.querySelector(".cc-window.cc-type-info");
+let ccInstance;
 let testType = "info";
 let CountryCode = "";
-// debugger
+
+//!the config file for the consent manager/library to start
+/**
+ * @param {String} countryCode the country code
+ * @param {String} type    the banner type (info and/or categories)
+ * @returns {Object} the config object to start the Cookie Consent
+ */
 const optionsObj = (countryCode, type) => {
   // debugger;
   console.log("CODE ", countryCode);
@@ -46,15 +54,6 @@ const optionsObj = (countryCode, type) => {
   return options;
 };
 
-// console.log("🚀 ~ OPTIONS", optionsObj());
-
-// var type = optionsObj().type
-
-const locationElement = document.getElementById("location");
-const categoriesType = document.querySelector(".cc-window");
-const infoType = document.querySelector(".cc-window.cc-type-info");
-let ccInstance;
-
 function timeStamp() {
   const now = new Date();
   const time = [now.getHours(), now.getMinutes(), now.getSeconds()];
@@ -66,8 +65,14 @@ function timeStamp() {
   console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
+fetchClientIp().then((country) => {
+  CountryCode = country;
+  draw(country);
+});
+console.log("🚀 ~ file: initFile.js ~ line 70 ~ fetchClientIp ~ CountryCode", CountryCode)
 
 const draw = function (countryCode) {
+  getCategories();
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = false;
   ccInstance
@@ -87,9 +92,12 @@ const draw = function (countryCode) {
     })
     .on("error", console.error);
 };
+
 function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
-  const bannertypeChangeButtons = document.querySelectorAll(".banner-type-change");
+  const bannertypeChangeButtons = document.querySelectorAll(
+    ".banner-type-change"
+  );
   for (const typeChangeElement of bannertypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
@@ -123,8 +131,10 @@ function initiateTypeChangeAndBannerShow() {
     });
   }
   // CountryCode = fetchClientIp();
-  console.log("🚀 ~ LOCATIONNNNNNN ", fetchClientIp());
   // console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
   // }, 400);
 }
-draw("XK");
+
+console.log("CountryCode", CountryCode);
+
+// draw("XK");
