@@ -98,9 +98,7 @@ export default {
               <p class="2xl:pt-4 pb-2">{{title}}</p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
             </div>
-            <div id="noData" class=" absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 z-50 hidden">
-              <p class="my-auto">No Data Available</p>
-            </div>
+
             <ul class="cc-categories px-4 cookie-categories-inject">
 
             </ul>
@@ -120,10 +118,11 @@ export default {
             <span aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</span>
           </div>
           <div class="contentWrapper overflow-y-scroll my-3">
+
             <div class="descSectoin px-4 py-3">
               <button id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
-                <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 transform mr-3">
-                <span class="text-black">Back</span>
+                <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 z-50 transform mr-3">
+                <span class="text-black z-50">Back</span>
               </button>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel
                 quaerat
@@ -133,10 +132,10 @@ export default {
                 quod tempora!</p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
             </div>
-
-
-
-            <div class="cookieSettingsInject p-4"></div>
+            <div id="noData" class=" absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
+            <p class="my-auto">No Data Available</p>
+          </div>
+          <div class="cookieSettingsInject p-4"></div>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
             <button type="button"

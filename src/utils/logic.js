@@ -18,17 +18,19 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
   getCookiesPerCategory(categoryId, 135).then(({ cookies }) => {
     // getCookies().then(( cookies ) => {
     COOKIES = cookies;
-    console.log("🚀 ~ ~ ", COOKIES);
+    const noData = document.getElementById("noData");
+    console.log("noData", noData);
+    if (COOKIES.length === 0) {
+      noData.classList.remove("hidden");
+    } else {
+      noData.classList.add("hidden");
+    }
   });
   setTimeout(() => {
     const cookieSettingsInject = document.querySelector(
       ".cookieSettingsInject"
     );
-    // const noData = document.getElementById("noData");
-  //  console.log("noData",noData)
-    // if (COOKIES.length === 0) {
-    //   noData.classList.remove("hidden");
-    // }
+
     cookieSettingsInject.innerHTML = COOKIES?.map((item) => {
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
         <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${categoryId}>
