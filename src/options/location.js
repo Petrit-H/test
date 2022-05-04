@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CLIENT_GEOLOCATION_API_URL } from "../constants";
+import { changeBannerTypeOnLocation } from "../initFile";
 let countryCode = "";
 
 const toError = (obj) => {
@@ -12,35 +13,52 @@ const toError = (obj) => {
   }, 200);
 };
 
-export const fetchClientIp = () => {
+export const fetchClientIp = async () => {
   let url = "";
   let config = {
     method: "get",
     url: CLIENT_GEOLOCATION_API_URL,
     headers: {},
   };
-
-  axios(config)
-    .then(function (response) {
-      url = response.data;
-      countryCode = response.data.CountryCode;
-
-      /* console.log("🚀 ~ ", countryCode);
-      console.log("==========︾==========");
-      console.log("🚀 ~ ", url);
-      console.log("🚀 ~ ", url.Country);
-      console.log("🚀 ~ ", url.CountryCode);
-      console.log("🚀 ~ ", url.Timezone);
-      console.log("🚀 ~ ", url.CountryID);
-      console.log("==========︽=========="); */
-      // toError({ code: url.CountryCode, error: "Invalid response" });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  return countryCode;
+  try {
+    const response = await axios(config);
+    url = response.data;
+    countryCode = response.data.CountryCode;
+    // console.log("fetchClientIp =>", countryCode);
+    return countryCode;
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 
+// export const fetchClientIp = () => {
+//   let url = "";
+//   let config = {
+//     method: "get",
+//     url: CLIENT_GEOLOCATION_API_URL,
+//     headers: {},
+//   };
+
+//   axios(config)
+//     .then(function (response) {
+//       url = response.data;
+//       countryCode = response.data.CountryCode;
+
+//       /* console.log("🚀 ~ ", countryCode);
+//       console.log("==========︾==========");
+//       console.log("🚀 ~ ", url);
+//       console.log("🚀 ~ ", url.Country);
+//       console.log("🚀 ~ ", url.CountryCode);
+//       console.log("🚀 ~ ", url.Timezone);
+//       console.log("🚀 ~ ", url.CountryID);
+//       console.log("==========︽=========="); */
+//       // toError({ code: url.CountryCode, error: "Invalid response" });
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   return countryCode;
+// };
 
 export default {
   // The default timeout is 5 seconds. This is mainly needed to catch JSONP requests that error.
@@ -52,7 +70,8 @@ export default {
   // the order that services will be attempted in
   serviceDefinitions: {
     ipinfo: function (options) {
-      fetchClientIp();
+      fetchClientIp().then((location) => location);
+      // fetchClientIp()
       return {
         url: CLIENT_GEOLOCATION_API_URL,
         callback: function (done, response) {

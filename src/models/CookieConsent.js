@@ -14,12 +14,8 @@ export default class CookieConsent extends Base {
     super(options);
 
     const answers = COOKIES_CATEGORIES.map((category) => {
-      const cookieName =
-        this.options.cookie && this.options.cookie.name
-          ? this.options.cookie.name
-          : "gjirafa_";
+      const cookieName = this.options?.cookie?.name || "gjirafa_";
       const answer = getCookie(cookieName + category);
-      console.log("IS VALID AND STUFF",isValidStatus(answer) ? { [category]: answer } : undefined)
       return isValidStatus(answer) ? { [category]: answer } : undefined;
     }).filter((obj) => (obj ? obj[Object.keys(obj)[0]] : false));
 
@@ -46,9 +42,6 @@ export default class CookieConsent extends Base {
       );
     }
     this.popup = new Popup(this.options);
-
-    // console.log("🚀 ~ THIS.POPUP", this.popup )
-
     setTimeout(() => this.emit("initialized", this.popup), 0);
   }
   initializationError(error) {
@@ -95,6 +88,6 @@ COOKIES_STATUSES.reduce(
       configurable: false,
     }),
     obj
-  ),
-  CookieConsent
-);
+    ),
+    CookieConsent
+    );

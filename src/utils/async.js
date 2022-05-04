@@ -21,11 +21,7 @@ export const getScript = ( url, callback, timeout ) => {
       scriptTag.onreadystatechange = scriptTag.onload = null
     }
   }
-
   document.body.appendChild(scriptTag)
-
-  // You can't catch JSONP Errors, because it's handled by the script tag
-  // one way is to use a timeout
   timeoutIdx = setTimeout(function() {
     callback.done = true
     callback()
@@ -35,9 +31,6 @@ export const getScript = ( url, callback, timeout ) => {
 
 
 export const makeAsyncRequest = ( url, onComplete, timeout, postData, requestHeaders ) => {
-  // debugger;
-console.log("UNE",postData)
-
   const xhr = new (window.XMLHttpRequest || window.ActiveXObject)(
     'MSXML2.XMLHTTP.3.0'
   )

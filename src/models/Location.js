@@ -1,5 +1,3 @@
-;
-
 import Base from "./Base";
 import defaultOptions from "../options/location";
 import { isPlainObject, getScript, makeAsyncRequest } from "../utils";
@@ -79,21 +77,12 @@ export default class Location extends Base {
 
   // Potentially adds a callback to a url for jsonp.
   setupUrl(service) {
-    console.log(
-      "🚀 ~ file: Location.js ~ line 82 ~ Location ~ setupUrl ~ service",
-      service
-    );
     const serviceOpts = this.getCurrentServiceOpts();
     return service.url.replace(/\{(.*?)\}/g, function (_, param) {
-      console.log("🚀 ~ file: Location.js ~ line 84 ~ Location ~ param", param);
       if (param === "callback") {
         const tempName = "callback" + Date.now();
         window[tempName] = function (res) {
           service.__JSONP_DATA = JSON.stringify(res);
-          console.log(
-            "🚀 ~ file: Location.js ~ line 88 ~ Location ~ returnservice.url.replace ~ service.__JSONP_DATA",
-            service.__JSONP_DATA
-          );
         };
         return tempName;
       }
@@ -166,8 +155,6 @@ export default class Location extends Base {
   // This is called with the `result` from `service.callback` regardless of how it provided that result (sync or async).
   // `result` will be whatever is returned from `service.callback`. A service callback should provide an object with data
   onServiceResult(complete, result) {
-    console.log("Piti", result);
-
     // convert result to nodejs style async callback
     if (result instanceof Error || (result && result.error)) {
       complete.call(this, result, null);
