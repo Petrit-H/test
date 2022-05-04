@@ -1,4 +1,3 @@
-import { format, formatDistance, fromUnixTime } from "date-fns";
 import { CARET_DOWN_ICON } from "../constants";
 import {
   categories,
@@ -165,6 +164,7 @@ const fillCookies = function () {
     const cookieCategoriesInject = document.querySelector(
       ".cookie-categories-inject"
     );
+    console.log("🚀 ~ ~ ~ cookieCategoriesInject", cookieCategoriesInject)
     cookieCategoriesInject.innerHTML = categories
       ?.slice(0)
       ?.reverse()

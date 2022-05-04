@@ -14,7 +14,7 @@ module.exports = {
   // watch: true,
   output: {
     filename: "[name].min.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "./dist"),
     publicPath: "./",
     libraryExport: "default",
     libraryTarget: "umd",
@@ -25,7 +25,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       inject: "body",
-      template: path.resolve(__dirname, "src", "index.html"),
+      template: path.resolve(__dirname, "./src", "index.html"),
     }),
   ],
+
 };

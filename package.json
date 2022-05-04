@@ -1,6 +1,6 @@
 {
   "name": "gjirafa-cmp",
-  "version": "4.5.24",
+  "version": "4.5.25",
   "description": "FORK OF Osano cookie consent tool.",
   "main": "./dist/index.min.js",
   "types": "types/index.d.ts",
@@ -12,7 +12,7 @@
   },
   "homepage": "https://github.com/Petrit-H/test.git",
   "scripts": {
-    "start": "npx tailwindcss -o tailwind.css && webpack --config webpack.dev.js",
+    "start": "npx tailwindcss -o tailwind.css && webpack --config  webpack.dev.js",
     "build": "npx tailwindcss -o ./src/styles/tailwind.css && webpack --config webpack.prod.js",
     "test": "jest ./src --verbose --coverage && rm -rf coverage/"
   },
@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "webpack-dev-server": "^4.8.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
@@ -55,7 +56,6 @@
     "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^9.2.0",
     "css-loader": "^6.6.0",
-    "date-fns": "^2.28.0",
     "file-loader": "^6.2.0",
     "glob": "^7.2.0",
     "html-loader": "^3.1.0",
@@ -86,7 +86,6 @@
     "webpack": "^5.69.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0"
   },
   "bugs": {

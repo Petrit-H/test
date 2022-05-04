@@ -1,13 +1,11 @@
 // const GjTailwindConfig = require("@gjirafatech/gjirafa-tailwind");
 
 module.exports = {
-  purge: [
-    "./src/**/*.html",
-    "./src/**/*.js",
-    "./src/**/*.vue",
-    "./src/**/*.jsx",
+  content: [
+    // Example content paths...
+    "./public/**/*.html",
+    "./src/**/*.{js,jsx,ts,tsx,vue}",
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       boxShadow: {

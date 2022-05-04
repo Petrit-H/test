@@ -143,7 +143,6 @@ export default class Popup extends Base {
       }
       this.emit("popupClosed");
     }
-
     return this;
   }
 

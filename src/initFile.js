@@ -1,5 +1,6 @@
 import CookieConsent from "../src/models/CookieConsent";
 import { getCategories } from "./getDomainsWithCookies";
+import Legal from "./models/Legal";
 import { fetchClientIp } from "./options/location";
 import "./styles/main.scss";
 import {
@@ -8,6 +9,7 @@ import {
   bannerAccordionToggle,
   fillCookies,
 } from "./utils/logic";
+// import {getCountryLaws} from './models/CookieConsent'
 
 const locationElement = document.getElementById("location");
 const categoriesType = document.querySelector(".cc-window");
@@ -36,11 +38,11 @@ const optionsObj = (countryCode, type) => {
     // legal: {
     //   countryCode: countryCode,
     // },
-    law: {
-      regionalLaw: true,
-    },
+    // law: {
+    //   regionalLaw: true,
+    // },
     location: true,
-    // position: 'top-right',
+    // position: 'right',
     revokable: true,
     palette: {
       categories: {
@@ -66,13 +68,16 @@ function timeStamp() {
 }
 fetchClientIp().then((country) => {
   CountryCode = country;
+  ccInstance = new CookieConsent(optionsObj(country, testType));
   draw(country);
 });
 
 const draw = function (countryCode) {
   getCategories();
-  ccInstance = new CookieConsent(optionsObj(countryCode, testType));
-  ccInstance.autoOpen = false;
+  // ccInstance = new CookieConsent(optionsObj(countryCode, "opt-in"));
+  // ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+
+  ccInstance.autoOpen = true;
   ccInstance
     .on("initialized", function (popup) {
       // ccInstance.popup?.open();
@@ -90,10 +95,10 @@ const draw = function (countryCode) {
 
 function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
-  const bannertypeChangeButtons = document.querySelectorAll(
+  const bannerTypeChangeButtons = document.querySelectorAll(
     ".banner-type-change"
   );
-  for (const typeChangeElement of bannertypeChangeButtons) {
+  for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       timeStamp();
       // toggleType.addEventListener("click", (e) => {
@@ -106,7 +111,7 @@ function initiateTypeChangeAndBannerShow() {
           fillCookies();
           bannerAccordionToggle();
           allowAllCookies();
-        }, 150);
+        }, 200);
       } else if (testType === "categories") {
         testType = "info ";
         optionsObj("XK", "info");
@@ -121,5 +126,8 @@ function initiateTypeChangeAndBannerShow() {
   // }, 400);
 }
 
-
 // draw("XK");
+// setTimeout(() => {
+//   const testData = ccInstance.getCountryLaws(CountryCode);
+//   console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
+// },200);

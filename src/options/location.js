@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CLIENT_GEOLOCATION_API_URL } from "../constants";
+import { changeBannerTypeOnLocation } from "../initFile";
 let countryCode = "";
 
 const toError = (obj) => {
@@ -23,7 +24,7 @@ export const fetchClientIp = async () => {
     const response = await axios(config);
     url = response.data;
     countryCode = response.data.CountryCode;
-
+    // console.log("fetchClientIp =>", countryCode);
     return countryCode;
   } catch (error) {
     console.error(error.message);

@@ -80,7 +80,21 @@ export default {
       </div>
     </div>
     `,
-    allow: `<a aria-label="allow cookies" role=button tabindex="0"  class="cc-btn cc-${STATUS_ALLOW}">{{allow}}</a>`,
+    allow: `
+    <div class="controlSection z-50 fixed top-0 right-0 pt-2 pr-2 flex justify-between items-center ">
+      <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhite}}</span>
+    </div>
+    <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
+      <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
+          <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
+            <button class="text-white banner-type-change">Cookie Settings</button>
+          </p>
+      </div>
+      <div class="bannerWrapper__controls flex justify-end text-sm">
+        <button class="gotItButton px-10 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" >{{dismiss}}</button>
+      </div>
+    </div>
+    `,
     deny: `<a aria-label="deny cookies" role=button tabindex="0" class="cc-btn cc-${STATUS_DENY}">{{deny}}</a>`,
     link: `<a aria-label="learn more about cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a>`,
     close: `<span aria-label="dismiss cookie message" role=button tabindex="0" class="cc-close">{{close}}</span>`,
@@ -169,8 +183,7 @@ export default {
   // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
   compliance: {
     info: '<div class="cc-compliance w-full">{{dismiss}}</div>',
-    "opt-in":
-      '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}{{customize}}</div>',
+    "opt-in": '<div class="cc-compliance cc-highlight">{{allow}}</div>',
     "opt-out":
       '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
     categories:
@@ -280,3 +293,15 @@ export default {
   // handlers. You can use other pre-existing classes too. See `src/styles` folder.
   overrideHTML: null,
 };
+
+/*
+  compliance: {
+    info: '<div class="cc-compliance w-full">{{dismiss}}</div>',
+    "opt-in":
+      '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}{{customize}}</div>',
+    "opt-out":
+      '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
+    categories:
+      '<div class="cmp-categories flex items-center">{{categories}}</div>',
+  },
+*/
