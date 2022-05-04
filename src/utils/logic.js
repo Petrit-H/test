@@ -25,11 +25,11 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
     }
   });
   setTimeout(() => {
-    const cookieSettingsInject = document.querySelector(
-      ".cookieSettingsInject"
+    const customCategoriesBanner = document.querySelector(
+      ".custom-categories-banner"
     );
 
-    cookieSettingsInject.innerHTML = COOKIES?.map((item) => {
+    customCategoriesBanner.innerHTML = COOKIES?.map((item) => {
       return `<div class="settingAccordion border border-gray-200 my-0.5 xl:my-2 rounded-md">
         <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${categoryId}>
         <p class="category-title font-medium">${item.name}</p>
@@ -161,11 +161,11 @@ const settingsAccordionToggle = function () {
 };
 const fillCookies = function () {
   setTimeout(() => {
-    const cookieCategoriesInject = document.querySelector(
-      ".cookie-categories-inject"
+    const basicCategoriesBanner = document.querySelector(
+      ".basic-categories-banner"
     );
-    console.log("🚀 ~ ~ ~ cookieCategoriesInject", cookieCategoriesInject)
-    cookieCategoriesInject.innerHTML = categories
+    console.log("🚀 ~ ~ ~ basicCategoriesBanner", basicCategoriesBanner);
+    basicCategoriesBanner.innerHTML = categories
       ?.slice(0)
       ?.reverse()
       ?.map((item) => {
@@ -220,7 +220,7 @@ const fillCookies = function () {
                   </li>`;
       })
       .join("");
-  }, 300);
+  }, 150);
 };
 const allowAllCookies = function () {
   // getCookies().then((data) => {

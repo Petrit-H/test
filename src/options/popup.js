@@ -113,7 +113,7 @@ export default {
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
             </div>
 
-            <ul class="cc-categories px-4 cookie-categories-inject">
+            <ul class="cc-categories px-4 basic-categories-banner">
 
             </ul>
           </div>
@@ -149,7 +149,7 @@ export default {
             <div id="noData" class=" absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
             <p class="my-auto">No Data Available</p>
           </div>
-          <div class="cookieSettingsInject p-4"></div>
+          <div class="custom-categories-banner custom-categories-banner p-4"></div>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
             <button type="button"
