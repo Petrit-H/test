@@ -25,7 +25,6 @@ let CountryCode = "";
  * @returns {Object} the config object to start the Cookie Consent
  */
 const optionsObj = (countryCode, type) => {
-  // debugger;
   const options = {
     cookieconsent: CookieConsent,
     // selector: document.querySelector(".example-selector"),

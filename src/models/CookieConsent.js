@@ -23,7 +23,6 @@ export default class CookieConsent extends Base {
     if (answers.length > 0) {
       setTimeout(() => this.emit("initialized", answers));
     } else if (this.options.legal && this.options.legal.countryCode) {
-      // debugger
       this.initializationComplete({ code: this.options.legal.countryCode });
     } else if (this.options.location) {
       new Location(this.options.location).locate(

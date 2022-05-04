@@ -25,27 +25,17 @@ let dataForBala = {};
 let locationData = "";
 
 window.addEventListener("load", function (event) {
-/*   console.log(
+  console.log(
     "welcome to🔐 \n",
     `
-      CCCCCCCCCCCCC MMMMMMMM              MMMMMMMMM PPPPPPPPPPPPPPP
-    CCC:::::::::::C M:::::::M             M:::::::M P:::::::::::::::P
-  CC::::::::::::::C M::::::::M           M::::::::M P:::::PPPPPP:::::P
- C:::::CCCCCCCC:::C M:::::::::M         M:::::::::M P:::::P     P:::::P
-C:::::C       CCCCC M::::::::::M       M::::::::::M P:::::P     P:::::P
-C:::::C              M::::::::::M     M::::::::::M   P::::P     P:::::P
-C:::::C              M::::::M::::M   M::::M::::::M   P::::PPPPPP:::::P
-C:::::C              M:::::M M::::M M::::M M:::::M   P:::::::::::::PP
-C:::::C              M:::::M  M::::M::::M  M:::::M   P::::PPPPPPPPP
-C:::::C              M:::::M   M:::::::M   M:::::M   P::::P
-C:::::C              M:::::M    M:::::M    M:::::M   P::::P
-C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
- C:::::CCCCCCCC:::C M::::::M               M::::::M P::::::P
-  CC::::::::::::::C M::::::M               M::::::M P::::::P
-    CCC:::::::::::C M::::::M               M::::::M P::::::P
-       CCCCCCCCCCCC MMMMMMMM               MMMMMMMM PPPPPPPP
+.------..------..------.
+|C.--. ||M.--. ||P.--. |
+| :/\\: || (\\/) || :/\\: |
+| :\\/: || :\\/: || (__) |
+| '--'C|| '--'M|| '--'P|
+\`------'\`------'\`------'
     `
-  ); */
+  );
   const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
   const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
   const spinner = document.getElementById("spinner");
