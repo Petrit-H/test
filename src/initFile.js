@@ -1,6 +1,6 @@
 import CookieConsent from "../src/models/CookieConsent";
-import { getCategories } from "./getDomainsWithCookies";
-import Legal from "./models/Legal";
+// import CookieConsent from "./models/CookieConsent";
+// import CMP_Section from "./utils/logic";
 import { fetchClientIp } from "./options/location";
 import "./styles/main.scss";
 import {
@@ -8,24 +8,15 @@ import {
   allowAllCookies,
   bannerAccordionToggle,
   fillCookies,
+  // showModal,
 } from "./utils/logic";
-// import {getCountryLaws} from './models/CookieConsent'
 
-const locationElement = document.getElementById("location");
-const categoriesType = document.querySelector(".cc-window");
-const infoType = document.querySelector(".cc-window.cc-type-info");
-let ccInstance;
 let testType = "info";
 let CountryCode = "";
-
-//!the config file for the consent manager/library to start
-/**
- * @param {String} countryCode the country code
- * @param {String} type    the banner type (info and/or categories)
- * @returns {Object} the config object to start the Cookie Consent
- */
+// debugger
 const optionsObj = (countryCode, type) => {
   // debugger;
+  console.log("CODE ", countryCode);
   const options = {
     cookieconsent: CookieConsent,
     // selector: document.querySelector(".example-selector"),
@@ -38,11 +29,11 @@ const optionsObj = (countryCode, type) => {
     // legal: {
     //   countryCode: countryCode,
     // },
-    // law: {
-    //   regionalLaw: true,
-    // },
+    law: {
+      regionalLaw: true,
+    },
     location: true,
-    // position: 'right',
+    // position: 'top-right',
     revokable: true,
     palette: {
       categories: {
@@ -55,6 +46,15 @@ const optionsObj = (countryCode, type) => {
   return options;
 };
 
+// console.log("🚀 ~ OPTIONS", optionsObj());
+
+// var type = optionsObj().type
+
+const locationElement = document.getElementById("location");
+const categoriesType = document.querySelector(".cc-window");
+const infoType = document.querySelector(".cc-window.cc-type-info");
+let ccInstance;
+
 function timeStamp() {
   const now = new Date();
   const time = [now.getHours(), now.getMinutes(), now.getSeconds()];
@@ -66,68 +66,69 @@ function timeStamp() {
   console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
-fetchClientIp().then((country) => {
-  CountryCode = country;
-  ccInstance = new CookieConsent(optionsObj(country, testType));
-  draw(country);
-});
 
 const draw = function (countryCode) {
-  getCategories();
-  // ccInstance = new CookieConsent(optionsObj(countryCode, "opt-in"));
-  // ccInstance = new CookieConsent(optionsObj(countryCode, testType));
-
-  ccInstance.autoOpen = true;
+  ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+  ccInstance.autoOpen = false;
+  console.log("🚀 ~ ccInstance.autoOpen ", ccInstance.autoOpen);
   ccInstance
     .on("initialized", function (popup) {
+      // console.log("🚀 ~ POPUP INIT", popup);
       // ccInstance.popup?.open();
     })
     .on("popupOpened", (...args) => {
+      console.log("Popup Open", args);
       acceptNecessary();
       initiateTypeChangeAndBannerShow();
     })
     .on("popupClosed", (...args) => {
+      console.log("Popup Closed", args);
       acceptNecessary();
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
 };
-
 function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
-  const bannerTypeChangeButtons = document.querySelectorAll(
-    ".banner-type-change"
-  );
-  for (const typeChangeElement of bannerTypeChangeButtons) {
-    typeChangeElement.addEventListener("click", (event) => {
+  const toggleType = document.querySelectorAll(".typeChange");
+  for (const key of toggleType) {
+    console.log(key);
+    key.addEventListener("click", (event) => {
+      console.log("🚀 ~ CLICKED TYPE CHEANGE", event.target);
       timeStamp();
+      console.log("🚀 ~ type", testType);
       // toggleType.addEventListener("click", (e) => {
+      console.log("🚀 ~ categoriesType => ", categoriesType);
+      console.log("🚀 ~ file: index.html ~ line 205 ~ infoType => ", infoType);
       if (testType === "info") {
         testType = "categories";
         optionsObj("XK", "categories");
         ccInstance.destroy();
-        draw(CountryCode);
+        // draw(locationElement[locationElement.selectedIndex].value);
+        draw("XK");
         setTimeout(() => {
           fillCookies();
           bannerAccordionToggle();
           allowAllCookies();
-        }, 200);
+          // document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
+          // document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
+        }, 150);
       } else if (testType === "categories") {
         testType = "info ";
         optionsObj("XK", "info");
         ccInstance.destroy();
         // ccInstance.clearStatuses().destroy();
-        draw(CountryCode);
+        // draw(locationElement[locationElement.selectedIndex].value);
+        draw("XK");
+        console.log("🚀 ~TYPE->  options.type", testType);
       } else {
         return this;
       }
     });
   }
+  // CountryCode = fetchClientIp();
+  console.log("🚀 ~ LOCATIONNNNNNN ", fetchClientIp());
+  // console.log("🚀 ~ LOCATIONNNNNNN ", CountryCode);
   // }, 400);
 }
-
-// draw("XK");
-// setTimeout(() => {
-//   const testData = ccInstance.getCountryLaws(CountryCode);
-//   console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
-// },200);
+draw("XK");

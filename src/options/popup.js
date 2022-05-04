@@ -10,6 +10,8 @@ import {
   CARET_DOWN_ICON,
 } from "../constants/index.js";
 
+import {testClick,acceptNecessary,allowAllCookies,goBackFunc} from '../utils/logic'
+
 export default {
   // if false, this prevents the popup from showing (useful for giving to control to another piece of code)
   enabled: true,
@@ -71,36 +73,21 @@ export default {
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
           <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-white banner-type-change">Cookie Settings</button>
+            <button class="text-white typeChange">Cookie Settings</button>
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
         <button class="gotItButton px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" >{{dismiss}}</button>
-        <button class="banner-type-change px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
+        <button class="typeChange px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
       </div>
     </div>
     `,
-    allow: `
-    <div class="controlSection z-50 fixed top-0 right-0 pt-2 pr-2 flex justify-between items-center ">
-      <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhite}}</span>
-    </div>
-    <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
-      <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
-          <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-white banner-type-change">Cookie Settings</button>
-          </p>
-      </div>
-      <div class="bannerWrapper__controls flex justify-end text-sm">
-        <button class="gotItButton px-10 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" >{{dismiss}}</button>
-      </div>
-    </div>
-    `,
+    allow: `<a aria-label="allow cookies" role=button tabindex="0"  class="cc-btn cc-${STATUS_ALLOW}">{{allow}}</a>`,
     deny: `<a aria-label="deny cookies" role=button tabindex="0" class="cc-btn cc-${STATUS_DENY}">{{deny}}</a>`,
     link: `<a aria-label="learn more about cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a>`,
     close: `<span aria-label="dismiss cookie message" role=button tabindex="0" class="cc-close">{{close}}</span>`,
     categories: `
-    <div class="max-w-lg xl:max-w-xl min-w-sm  w-full mx-auto z-10 flex flex-col justify-center items-center ">
-    <div class="cmp-overlay"></div>
+      <div class="max-w-lg xl:max-w-xl min-w-sm  w-full mx-auto z-10 flex flex-col justify-center items-center ">
         <i class="hidden">COOKIE_DISPLAY</i>
         <div id="COOKIE_DISPLAY" class="cookieModal  relative overflow-hidden rounded-lg bg-white w-full">
           <div class="controlSection z-50 sticky top-0 p-4 flex justify-between items-center border-b-2 border-gray-200">
@@ -112,14 +99,16 @@ export default {
               <p class="2xl:pt-4 pb-2">{{title}}</p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
             </div>
-
+            <div id="noData" class=" absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 z-50 hidden">
+              <p class="my-auto">No Data Available</p>
+            </div>
             <ul class="cc-categories px-4 cookie-categories-inject">
 
             </ul>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
-            <button type="button"
-              class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" >{{allowAll}}</button>
+            <button
+              class="cc-btn cc-save cc-${STATUS_ALLOW}  allowAll border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" >{{allowAll}}</button>
             <button class="cc-btn cc-save  cc-${STATUS_ALLOW} border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
               My Choices</button>
           </div>
@@ -132,12 +121,11 @@ export default {
             <span aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</span>
           </div>
           <div class="contentWrapper overflow-y-scroll my-3">
-
             <div class="descSectoin px-4 py-3">
-              <button id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
-                <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 z-50 transform mr-3">
-                <span class="text-black z-50">Back</span>
-              </button>
+              <p id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
+                <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 transform mr-3">
+                <span class="text-black">Back</span>
+              </p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel
                 quaerat
                 obcaecati commodi
@@ -146,14 +134,14 @@ export default {
                 quod tempora!</p>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
             </div>
-            <div id="noData" class=" absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
-            <p class="my-auto">No Data Available</p>
-          </div>
-          <div class="cookieSettingsInject p-4"></div>
+
+
+
+            <div class="cookieSettingsInject p-4"></div>
           </div>
           <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
-            <button type="button"
-              class="cc-btn cc-save  allow-all border-2 rounded-md px-5 py-1.5 border-gray-200  mr-4">{{allowAll}}</button>
+            <button
+              class="cc-btn cc-save  allowAll border-2 rounded-md px-5 py-1.5 border-gray-200  mr-4">{{allowAll}}</button>
             <button class="cc-btn cc-save border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
               My
               Choices
@@ -161,7 +149,6 @@ export default {
           </div>
         </div>
   </div>
-
       `,
     save: `<button class="cc-btn cc-save">Save your data</button>`,
     // compliance: compliance is also an element,  but it is generated by the application, depending on `type` below
@@ -183,11 +170,12 @@ export default {
   // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
   compliance: {
     info: '<div class="cc-compliance w-full">{{dismiss}}</div>',
-    "opt-in": '<div class="cc-compliance cc-highlight">{{allow}}</div>',
+    "opt-in":
+      '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}{{customize}}</div>',
     "opt-out":
       '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
     categories:
-      '<div class="cmp-categories flex items-center">{{categories}}</div>',
+      '<div class="CMPCategories flex items-center">{{categories}}</div>',
   },
 
   // select your type of popup here
@@ -293,15 +281,3 @@ export default {
   // handlers. You can use other pre-existing classes too. See `src/styles` folder.
   overrideHTML: null,
 };
-
-/*
-  compliance: {
-    info: '<div class="cc-compliance w-full">{{dismiss}}</div>',
-    "opt-in":
-      '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}{{customize}}</div>',
-    "opt-out":
-      '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
-    categories:
-      '<div class="cmp-categories flex items-center">{{categories}}</div>',
-  },
-*/

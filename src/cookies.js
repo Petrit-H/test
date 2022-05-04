@@ -1,13 +1,17 @@
 import {
+  settingsAccordionToggle,
+  filterCookiesByCategory,
+} from "./utils/logic";
+import { CARET_DOWN_ICON, COOKIES_CATEGORIES } from "./constants";
+import {
   // categories,
-  getCategories,
-  getDomains,
-  getCookies,
+  fetchCategoriesFromAPI,
+  fetchDomainsFromAPI,
+  getCookiesData,
   // responseData,
 } from "./getDomainsWithCookies";
 import { setCookie } from "./utils/cookie";
 import axios from "axios";
-import { fetchClientIp } from "./options/location";
 
 console.log(createUUID());
 const OTHER = [];
@@ -22,8 +26,6 @@ let responseForCookies = []; //?{ cookie_name: "", cookie_status: "" }
 let cookiesPerCategory = [];
 // let dataForBala = [];
 let dataForBala = {};
-let locationData = "";
-
 window.addEventListener("load", function (event) {
 /*   console.log(
     "welcome to🔐 \n",
@@ -49,7 +51,7 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
   const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
   const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
   const spinner = document.getElementById("spinner");
-
+  const noData = document.getElementById("noData");
   const goBack = document.getElementById("goBack");
 
   // const cookieSectionInject = document.querySelector(".cookieSectionInject");
@@ -58,10 +60,31 @@ C:::::C       CCCCC M::::::M     MMMMM     M::::::M P::::::P
   // bannerAccordionToggle()
 
   setTimeout(() => {
-    fetchClientIp().then((location) => {
-      locationData = location;
-      return location;
-    });
+    let categories = fetchCategoriesFromAPI();
+    let responseData = fetchDomainsFromAPI();
+    // toggleInjectedRadioButtons();
+
+    // bannerAccordionToggle()
+    // showModal();
+
+    dataForBala = {
+      id: createUUID(),
+      domains: responseData,
+      NECESSARY: NECESSARY,
+      PREFERENCES: PREFERENCES,
+      ANALYTICAL: ANALYTICAL,
+      MARKETING: MARKETING,
+      OTHER: OTHER,
+    };
+   /*  console.log("==================🧲🧲🧲🧲====================");
+    console.log("🚀 ~ categories", categories);
+    console.log("🚀 ~ responseData", responseData);
+    console.log("🚀 ~ DATA-4-BALA", dataForBala);
+    console.log("==================🧲🧲🧲🧲=====================");
+ */
+    // if (responseData.length === 0) {
+    //   noData.classList.remove("hidden");
+    // }
   }, 400);
 });
 
