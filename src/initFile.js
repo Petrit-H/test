@@ -19,11 +19,6 @@ let testType = "info";
 let CountryCode = "";
 
 //!the config file for the consent manager/library to start
-/**
- * @param {String} countryCode the country code
- * @param {String} type    the banner type (info and/or categories)
- * @returns {Object} the config object to start the Cookie Consent
- */
 const optionsObj = (countryCode, type) => {
   const options = {
     cookieconsent: CookieConsent,
@@ -67,8 +62,23 @@ function timeStamp() {
 }
 fetchClientIp().then((country) => {
   CountryCode = country;
-  // ccInstance = new CookieConsent(optionsObj(country, testType));
-  draw(country);
+  // draw(country);
+  getCategories();
+  ccInstance = new CookieConsent(optionsObj(country, testType));
+  ccInstance.autoOpen = true;
+  ccInstance
+    .on("initialized", function (popup) {
+      // ccInstance.popup?.open();
+    })
+    .on("popupOpened", (...args) => {
+      acceptNecessary();
+      initiateTypeChangeAndBannerShow();
+    })
+    .on("popupClosed", (...args) => {
+      acceptNecessary();
+      // ccInstance.popup?.close();
+    })
+    .on("error", console.error);
 });
 
 const draw = function (countryCode) {
@@ -102,17 +112,17 @@ function initiateTypeChangeAndBannerShow() {
       // toggleType.addEventListener("click", (e) => {
       if (testType === "info") {
         testType = "categories";
-        optionsObj("XK", "categories");
+        optionsObj(CountryCode, "categories");
         ccInstance.destroy();
         draw(CountryCode);
         setTimeout(() => {
           fillCookies();
           bannerAccordionToggle();
           allowAllCookies();
-        }, 200);
+        }, 300);
       } else if (testType === "categories") {
         testType = "info ";
-        optionsObj("XK", "info");
+        optionsObj(CountryCode, "info");
         ccInstance.destroy();
         // ccInstance.clearStatuses().destroy();
         draw(CountryCode);
@@ -125,7 +135,7 @@ function initiateTypeChangeAndBannerShow() {
 }
 
 // draw("XK");
-// setTimeout(() => {
-//   const testData = ccInstance.getCountryLaws(CountryCode);
-//   console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
-// },200);
+setTimeout(() => {
+  const testData = ccInstance.getCountryLaws(CountryCode);
+  console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
+}, 200);
