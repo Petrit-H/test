@@ -99,8 +99,6 @@ const bannerAccordionToggle = function () {
         event.stopPropagation();
       });
       accordionHeaders[i].addEventListener("click", () => {
-        // saveNecessaryCookies(4);
-        // acceptSpecificCookies(categoryID);
         const contentData = document.getElementById(
           `CATEGORY_CONTENT_${categoryID}`
         );
@@ -187,9 +185,9 @@ const fillCookies = function () {
           item.id
         }>
       <button class="cc-btn w-auto group relative consentButton " >
-      <input type="checkbox" id="${item.id}" class="radioButtonCookie" name="${
-          item.name
-        }"
+      <input type="checkbox" id="${item.id}" ${
+          item.checked && "checked"
+        } class="radioButtonCookie" name="${item.name}"
       value="${item.name.toLowerCase()}" ${
           item.name.toLowerCase() === "necessary" && "disabled checked"
         } />
@@ -233,8 +231,6 @@ const allowAllCookies = function () {
         const element = radioButtons[i];
         element.checked = true;
         // element.addEventListener("change", console.log("change"));
-        const event = new Event("change");
-        element.dispatchEvent(event);
         //!get the id of the category being clicked not the index of the category
         saveSpecificCookies(element.id);
       }
