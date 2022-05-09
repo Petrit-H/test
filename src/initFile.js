@@ -1,5 +1,5 @@
 import CookieConsent from "../src/models/CookieConsent";
-import { getCategories } from "./getDomainsWithCookies";
+// import { getCategories } from "./getDomainsWithCookies";
 import Legal from "./models/Legal";
 import { fetchClientIp } from "./options/location";
 import "./styles/main.scss";
@@ -7,7 +7,7 @@ import {
   acceptNecessary,
   allowAllCookies,
   bannerAccordionToggle,
-  fillCookies,
+  fillCategories,
 } from "./utils/logic";
 // import {getCountryLaws} from './models/CookieConsent'
 
@@ -63,7 +63,7 @@ function timeStamp() {
 fetchClientIp().then((country) => {
   CountryCode = country;
   // draw(country);
-  getCategories();
+  // getCategories();
   ccInstance = new CookieConsent(optionsObj(country, testType));
   ccInstance.autoOpen = true;
   ccInstance
@@ -82,7 +82,7 @@ fetchClientIp().then((country) => {
 });
 
 const draw = function (countryCode) {
-  getCategories();
+  // getCategories();
   // ccInstance = new CookieConsent(optionsObj(countryCode, "opt-in"));
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = true;
@@ -116,7 +116,7 @@ function initiateTypeChangeAndBannerShow() {
         ccInstance.destroy();
         draw(CountryCode);
         setTimeout(() => {
-          fillCookies();
+          fillCategories();
           bannerAccordionToggle();
           allowAllCookies();
         }, 300);

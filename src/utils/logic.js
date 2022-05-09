@@ -1,29 +1,85 @@
-import { CARET_DOWN_ICON } from "../constants";
+import {
+  ANALYTICAL,
+  CARET_DOWN_ICON,
+  MARKETING,
+  NECESSARY,
+  OTHER,
+  PREFERENCES,
+} from "../constants";
 import {
   categories,
+  fetchDataFromJSONFile,
   getCookies,
   getCookiesPerCategory,
   saveNecessaryCookies,
   saveSpecificCookies,
+  User,
+  DomainId,
+  DomainName,
+  DomainWebsiteUrl,
+  Language,
+  LanguagesList,
+  DomainCategoriesWithCookies,
+  DomainCategories,
+  CookiesPerDomain,
 } from "../getDomainsWithCookies";
 
-const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
-const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
+// const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
+// const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
 let data = [];
 let COOKIES = [];
+let cookiesPerCateroryArr = [];
+
+let response = [];
+const filterCookiesByCategory = (arr, id, storeToVariable, category) => {
+  //  arr.map((item) => {
+  response = arr.filter((item) => item.categoryId === +id);
+  // });
+  console.log(`🚀 ~ ${category} id:`, +id, `=> `, response);
+  return response;
+  // return storeToVariable;
+};
 
 // //!  FILL THE COOKIE SETTINGS SECTION
 const fillCookiesSettingItem = (categoryId, domainId) => {
-  getCookiesPerCategory(categoryId, 135).then(({ cookies }) => {
-    // getCookies().then(( cookies ) => {
-    COOKIES = cookies;
-    const noData = document.getElementById("noData");
-    if (COOKIES.length === 0) {
-      noData.classList.remove("hidden");
-    } else {
-      noData.classList.add("hidden");
-    }
-  });
+  // fetchDataFromJSONFile().then((json) => console.log("kkkk", json));
+
+  // getCookiesPerCategory(categoryId, 135).then(({ cookies }) => {
+  //   // getCookies().then(( cookies ) => {
+  //     COOKIES = cookies;
+  //     const noData = document.getElementById("noData");
+  //     if (COOKIES.length === 0) {
+  //       noData.classList.remove("hidden");
+  //     } else {
+  //       noData.classList.add("hidden");
+  //     }
+  //   });
+  COOKIES = filterCookiesByCategory(
+    CookiesPerDomain,
+    categoryId,
+    cookiesPerCateroryArr,
+    "COOKIES"
+  );
+  console.log(
+    "🚀 ~ file: logic.js ~ line 48 ~ //getCookiesPerCategory ~ COOKIES",
+    COOKIES
+  );
+  console.log("==========︾==========");
+  filterCookiesByCategory(CookiesPerDomain, 5, NECESSARY, "NECESSARY");
+  filterCookiesByCategory(CookiesPerDomain, 4, PREFERENCES, "PREFERENCES");
+  filterCookiesByCategory(CookiesPerDomain, 3, ANALYTICAL, "ANALYTICAL");
+  filterCookiesByCategory(CookiesPerDomain, 2, MARKETING, "MARKETING");
+  filterCookiesByCategory(CookiesPerDomain, 1, OTHER, "OTHER");
+  console.log("==========︽==========");
+  // COOKIES = cookies;
+  // COOKIES = CookiesPerDomain;
+  const noData = document.getElementById("noData");
+  if (COOKIES.length === 0) {
+    noData.classList.remove("hidden");
+  } else {
+    noData.classList.add("hidden");
+  }
+
   setTimeout(() => {
     const customCategoriesBanner = document.querySelector(
       ".custom-categories-banner"
@@ -54,7 +110,7 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
         </li>
         <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Category</span>
-              <span class="flex-1" id="cookieCategory">${item.category.name}</span>
+              <span class="flex-1" id="cookieCategory">${item.category}</span>
               </li>
               <li class="flex justify-between my-4 p-2">
               <span class="flex-1 text-primary-light">Description</span>
@@ -69,17 +125,8 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
     settingsAccordionToggle();
   }, 200);
 };
-const filterCookiesByCategory = function (arr, id, storeToVariable, category) {
-  arr.map((item) => {
-    // el.filter((item) => {
-    if (item.categoryId === id) {
-      storeToVariable.push(item);
-    }
-    // });
-  });
-  console.log(`🚀 ~ ${category} id:`, id, `=> `, storeToVariable);
-  return storeToVariable;
-};
+
+//? Toggle the category accordion
 const bannerAccordionToggle = function () {
   setTimeout(() => {
     const accordionHeaders = document.querySelectorAll(
@@ -113,15 +160,16 @@ const bannerAccordionToggle = function () {
     }
   }, 300);
 };
+
+//? Send the user one step back
 const goBackFunc = function () {
   console.log("go back");
   document.getElementById("COOKIE_SETTINGS").classList.add("hidden");
-  // COOKIE_SETTINGS.classList.remove("hidden");
   document.getElementById("COOKIE_DISPLAY").classList.remove("hidden");
-  // COOKIE_DISPLAY.classList.add("hidden");
   data = [];
-  // });
+  COOKIES = [];
 };
+//? Show the "Cookies Settings" modal
 const showModal = function (categoryId, domainId) {
   document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
   document.getElementById("COOKIE_DISPLAY").classList.add("hidden");
@@ -157,13 +205,27 @@ const settingsAccordionToggle = function () {
     }
   }, 200);
 };
-const fillCookies = function () {
+
+const fillCategories = function () {
+  fetchDataFromJSONFile().then((json) => console.log("kkkk", json));
   setTimeout(() => {
+    console.log("LOGIC", {
+      User,
+      DomainId,
+      DomainName,
+      DomainWebsiteUrl,
+      Language,
+      LanguagesList,
+      DomainCategoriesWithCookies,
+      DomainCategories,
+    });
     const basicCategoriesBanner = document.querySelector(
       ".basic-categories-banner"
     );
     console.log("🚀 ~ ~ ~ basicCategoriesBanner", basicCategoriesBanner);
-    basicCategoriesBanner.innerHTML = categories
+    console.log(DomainCategories);
+    basicCategoriesBanner.innerHTML = DomainCategories
+      // basicCategoriesBanner.innerHTML = categories
       ?.slice(0)
       ?.reverse()
       ?.map((item) => {
@@ -178,7 +240,7 @@ const fillCookies = function () {
         } class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer"  >
       <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" data-category-id=${
         item.id
-      } data-did=${item.domainId}
+      } data-did=${DomainId}
       >
       <p class=" category-title font-medium">${item.name}</p>
       <label for=${item.name.toLowerCase()} class="switch-toggle relative dot-wrapper inline-flex cursor-pointer" tabindex=${
@@ -207,7 +269,7 @@ const fillCookies = function () {
                  }">
                   <div class="mx-4 py-4 px-2">
                   <p class="category-description mb-4 transition duration-300 ease-in-out transform">
-                  ${item.name}
+                  ${item.description}
                   </p>
                   <p value=${item.id} data-settings-details-id=${item.id}
                   class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
@@ -258,7 +320,7 @@ export {
   goBackFunc,
   filterCookiesByCategory,
   settingsAccordionToggle,
-  fillCookies,
+  fillCategories,
   fillCookiesSettingItem,
   allowAllCookies,
   acceptNecessary,

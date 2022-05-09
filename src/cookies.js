@@ -1,6 +1,6 @@
 import {
   // categories,
-  getCategories,
+  // getCategories,
   getDomains,
   getCookies,
   // responseData,
@@ -67,6 +67,3 @@ function createUUID() {
   );
   return uuid;
 }
-
-//   }
-// }

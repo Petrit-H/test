@@ -1,7 +1,6 @@
 // import CMP_Section from "./cookies";
 // import CMP_Section from "./utils/logic.js";
-
-import axios from "axios";
+import jsonData from "./data.json";
 import {
   ANALYTICAL,
   CMP_API_BASE_URL,
@@ -12,17 +11,96 @@ import {
 } from "./constants";
 import { setCookie } from "./utils/cookie";
 import { filterCookiesByCategory } from "./utils/logic";
+import axios from "axios";
 
 export let categories = [];
 export let responseData = [];
 export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
 
+//!!!!!!!!!!!
+export let User = {};
+export let DomainId = "";
+export let DomainName = "";
+export let DomainWebsiteUrl = "";
+export let Language = {};
+export let LanguagesList = [];
+export let LomainCategoriesWithCookies = [];
+export let DomainCategories = [];
+export let CookiesPerDomain = [];
+export let DomainCategoriesWithCookies = [];
+const {
+  user,
+  domainId,
+  domainName,
+  domainWebsiteUrl,
+  language,
+  languagesList,
+  domainCategoriesWithCookies,
+  domainCategories,
+  cookiesPerDomain,
+} = jsonData;
+
+//!!!!!!!!!!!
+export const fetchDataFromJSONFile = async () => {
+  const URL = "data.json";
+  const config = {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    // let response = await fetch("data.json");
+    // let cmpData = await response.json();
+    // console.log(`Domain #${cmpData.domainId} => `, cmpData);
+    DomainId = domainId;
+    User = user;
+    DomainName = domainName;
+    DomainWebsiteUrl = domainWebsiteUrl;
+    Language = language;
+    LanguagesList = languagesList;
+    DomainCategoriesWithCookies = domainCategoriesWithCookies;
+    DomainCategories = domainCategories;
+    CookiesPerDomain = cookiesPerDomain;
+    return {
+      User,
+      DomainId,
+      DomainName,
+      DomainWebsiteUrl,
+      Language,
+      LanguagesList,
+      DomainCategoriesWithCookies,
+      DomainCategories,
+      CookiesPerDomain
+    };
+    // return json
+  } catch (error) {
+    console.log(error);
+  }
+  return {
+    User,
+    DomainId,
+    DomainName,
+    DomainWebsiteUrl,
+    Language,
+    LanguagesList,
+    DomainCategoriesWithCookies,
+    DomainCategories,
+    CookiesPerDomain,
+  };
+};
+// console.log("first", jsonData);
+//!!!!!!!!!!!
+
 export const getCookies = async () => {
   let filteredCookiesPerCategory = [];
   let config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
+    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
+    // url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
   };
   try {
     const response = await axios(config);
@@ -105,10 +183,11 @@ export const saveSpecificCookies = (id) => {
     });
 };
 //! Fetch data from the CATEGORIES endpoint
-export const getCategories = () => {
+/* export const getCategories = () => {
   let config = {
     method: "get",
-    url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=135`,
+    url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=${domainId}`,
+    // url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=135`,
     // ur`: "${CMP_API_BASE_URL}/CategoryListView`,
   };
   axios(config)
@@ -121,7 +200,7 @@ export const getCategories = () => {
       console.log(error);
     });
   return categories;
-};
+}; */
 
 //! fetch all the domains, their cookies and filter cookies for categories
 export const getDomains = () => {
