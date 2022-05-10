@@ -267,7 +267,7 @@ const allowAllCookies = function () {
  */
 const acceptNecessary = function () {
   setTimeout(() => {
-    const gotItButton = document.querySelector(".gotItButton");
+    const gotItButton = document.querySelector(".got-it-button");
     gotItButton.addEventListener("click", () => {
       saveNecessaryCookies();
     });

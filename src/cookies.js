@@ -16,13 +16,7 @@ window.addEventListener("load", function (event) {
 \`------'\`------'\`------'
     `
   );
-  const COOKIE_SETTINGS = document.getElementById("COOKIE_SETTINGS");
-  const COOKIE_DISPLAY = document.getElementById("COOKIE_DISPLAY");
-  const spinner = document.getElementById("spinner");
 
-  const goBack = document.getElementById("goBack");
-
-  const cookieSectionInject = document.getElementById("cookieSectionInject");
   setTimeout(() => {
     fetchClientIp().then((location) => {
       locationData = location;

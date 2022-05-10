@@ -2,14 +2,7 @@ import axios from "axios";
 import jsonData from "./data.json";
 import { setCookie } from "./utils/cookie";
 import { filterCookiesByCategory } from "./utils/logic";
-import {
-  ANALYTICAL,
-  CMP_API_BASE_URL,
-  MARKETING,
-  NECESSARY,
-  OTHER,
-  PREFERENCES,
-} from "./constants";
+import { CMP_API_BASE_URL } from "./constants";
 
 export let categories = [];
 export let responseData = [];
@@ -25,6 +18,7 @@ export let LomainCategoriesWithCookies = [];
 export let DomainCategories = [];
 export let CookiesPerDomain = [];
 export let DomainCategoriesWithCookies = [];
+
 const {
   user,
   domainId,

@@ -75,8 +75,8 @@ export default {
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
-        <button class="gotItButton px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" >{{dismiss}}</button>
-        <button class="banner-type-change px-10 w-3/4 cc-btn py-2.5 rounded-md " id="acceptCookies">{{settings}}</button>
+        <button class="got-it-button px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{dismiss}}</button>
+        <button class="banner-type-change px-10 w-3/4 cc-btn py-2.5 rounded-md " id="accept-cookies">{{settings}}</button>
       </div>
     </div>
     `,
@@ -91,7 +91,7 @@ export default {
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
-        <button class="gotItButton px-10 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="declineCookies" >{{dismiss}}</button>
+        <button class="got-it-button px-10 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{dismiss}}</button>
       </div>
     </div>
     `,
