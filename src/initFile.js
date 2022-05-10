@@ -1,15 +1,13 @@
 import CookieConsent from "../src/models/CookieConsent";
-// import { getCategories } from "./getDomainsWithCookies";
 import Legal from "./models/Legal";
 import { fetchClientIp } from "./options/location";
-import "./styles/main.scss";
 import {
   acceptNecessary,
   allowAllCookies,
   bannerAccordionToggle,
   fillCategories,
 } from "./utils/logic";
-// import {getCountryLaws} from './models/CookieConsent'
+import "./styles/main.scss";
 
 const locationElement = document.getElementById("location");
 const categoriesType = document.querySelector(".cc-window");
@@ -22,21 +20,11 @@ let CountryCode = "";
 const optionsObj = (countryCode, type) => {
   const options = {
     cookieconsent: CookieConsent,
-    // selector: document.querySelector(".example-selector"),
     container: document.getElementById("CMP_Selector"),
-    // container: document.getElementById("CMP"),
     type: type,
-    // type: "opt-in",
     regionalLaw: true,
     legal: countryCode,
-    // legal: {
-    //   countryCode: countryCode,
-    // },
-    // law: {
-    //   regionalLaw: true,
-    // },
     location: true,
-    // position: 'right',
     revokable: true,
     palette: {
       categories: {
@@ -57,13 +45,11 @@ function timeStamp() {
       time[i] = "0" + time[i];
     }
   }
-  console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
+  // console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
 fetchClientIp().then((country) => {
   CountryCode = country;
-  // draw(country);
-  // getCategories();
   ccInstance = new CookieConsent(optionsObj(country, testType));
   ccInstance.autoOpen = true;
   ccInstance
@@ -83,7 +69,6 @@ fetchClientIp().then((country) => {
 
 const draw = function (countryCode) {
   // getCategories();
-  // ccInstance = new CookieConsent(optionsObj(countryCode, "opt-in"));
   ccInstance = new CookieConsent(optionsObj(countryCode, testType));
   ccInstance.autoOpen = true;
   ccInstance
@@ -137,5 +122,5 @@ function initiateTypeChangeAndBannerShow() {
 // draw("XK");
 setTimeout(() => {
   const testData = ccInstance.getCountryLaws(CountryCode);
-  console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
-}, 200);
+  // console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
+}, 250);

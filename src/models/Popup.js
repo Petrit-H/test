@@ -5,7 +5,6 @@ import {
   COOKIES_STATUSES,
   STATUS_ALLOW,
   STATUS_DISMISS,
-  // ALL_DATA
 } from "../constants";
 import {
   addCustomStylesheet,
@@ -289,7 +288,6 @@ export default class Popup extends Base {
           cookieName,
           toBinary(status),
           expiryDays,
-          // expiryDays,
           domain,
           path,
           secure

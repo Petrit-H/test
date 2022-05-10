@@ -1,27 +1,7 @@
-import {
-  // categories,
-  // getCategories,
-  getDomains,
-  getCookies,
-  // responseData,
-} from "./getDomainsWithCookies";
 import { setCookie } from "./utils/cookie";
-import axios from "axios";
 import { fetchClientIp } from "./options/location";
 
-console.log(createUUID());
-const OTHER = [];
-const MARKETING = [];
-const ANALYTICAL = [];
-const PREFERENCES = [];
-const NECESSARY = [];
-// let responseData = [];
-// let categories = [];
-// let filteredCookies = [];
-let responseForCookies = []; //?{ cookie_name: "", cookie_status: "" }
-let cookiesPerCategory = [];
-// let dataForBala = [];
-let dataForBala = {};
+// console.log(createUUID());
 let locationData = "";
 
 window.addEventListener("load", function (event) {
@@ -42,11 +22,7 @@ window.addEventListener("load", function (event) {
 
   const goBack = document.getElementById("goBack");
 
-  // const cookieSectionInject = document.querySelector(".cookieSectionInject");
   const cookieSectionInject = document.getElementById("cookieSectionInject");
-
-  // bannerAccordionToggle()
-
   setTimeout(() => {
     fetchClientIp().then((location) => {
       locationData = location;

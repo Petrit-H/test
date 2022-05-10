@@ -1,6 +1,7 @@
-// import CMP_Section from "./cookies";
-// import CMP_Section from "./utils/logic.js";
+import axios from "axios";
 import jsonData from "./data.json";
+import { setCookie } from "./utils/cookie";
+import { filterCookiesByCategory } from "./utils/logic";
 import {
   ANALYTICAL,
   CMP_API_BASE_URL,
@@ -9,16 +10,11 @@ import {
   OTHER,
   PREFERENCES,
 } from "./constants";
-import { setCookie } from "./utils/cookie";
-import { filterCookiesByCategory } from "./utils/logic";
-import axios from "axios";
 
 export let categories = [];
 export let responseData = [];
 export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
-
-//!!!!!!!!!!!
 export let User = {};
 export let DomainId = "";
 export let DomainName = "";
@@ -41,21 +37,12 @@ const {
   cookiesPerDomain,
 } = jsonData;
 
-//!!!!!!!!!!!
+/**
+ * fetch all the data from the local file and export them
+ * @returns the data from the local JSON
+ */
 export const fetchDataFromJSONFile = async () => {
-  const URL = "data.json";
-  const config = {
-    method: "GET",
-    mode: "cors",
-    cache: "no-cache",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
   try {
-    // let response = await fetch("data.json");
-    // let cmpData = await response.json();
-    // console.log(`Domain #${cmpData.domainId} => `, cmpData);
     DomainId = domainId;
     User = user;
     DomainName = domainName;
@@ -74,9 +61,8 @@ export const fetchDataFromJSONFile = async () => {
       LanguagesList,
       DomainCategoriesWithCookies,
       DomainCategories,
-      CookiesPerDomain
+      CookiesPerDomain,
     };
-    // return json
   } catch (error) {
     console.log(error);
   }
@@ -92,11 +78,12 @@ export const fetchDataFromJSONFile = async () => {
     CookiesPerDomain,
   };
 };
-// console.log("first", jsonData);
-//!!!!!!!!!!!
 
+/**
+ *  fetch all the cookies based on the domain you are in
+ * @returns all the cookies for the domain at hand
+ */
 export const getCookies = async () => {
-  let filteredCookiesPerCategory = [];
   let config = {
     method: "GET",
     url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
@@ -111,69 +98,66 @@ export const getCookies = async () => {
   }
   return cookiesPerCategory;
 };
+
+/**
+ * fetch all the cookies for a specific category
+ * @param {Integer} categoryId the category you filter the domain
+ * @param {Integer} domainId the domain you fetch data from
+ * @returns the array of the cookies
+ */
 export const getCookiesPerCategory = async (categoryId, domainId) => {
-  // let domainId = "135";
-  // let categoryId = "1";
   const config = {
     method: "GET",
     url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=${domainId}&categoryId=${categoryId}`,
   };
   try {
     const cookies = await axios(config);
-    console.log("COOKIES", cookies.data);
     return cookies.data;
   } catch (error) {
     console.error(error.message);
   }
 };
+
+/**
+ * save the cookies that are necessary
+ */
 export const saveNecessaryCookies = () => {
   let config = {
     method: "GET",
-    // url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
-    url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=135&categoryId=5`,
+    url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=${domainId}&categoryId=5`,
   };
   axios(config)
     .then(function (response) {
       const data = response.data.cookies;
-      // data.filter((cookie) => {
       for (const cookie of data) {
-        setCookie(
-          cookie.name, // name
-          cookie.plaintext_value, // value
-          // "", // value
-          cookie.expiration, // expiration day
-          // cookie.expiration, // expiration day
-          cookie.domain, // domain
-          cookie.path, // path
-          cookie.is_secure // is secure
-        );
+        const { name, plaintext_value, expiration, domain, path, is_secure } =
+          cookie;
+        setCookie(name, plaintext_value, expiration, domain, path, is_secure);
       }
-      // });
       return filteredCookiesPerDomain;
     })
     .catch(function (err) {
       console.log(err.message);
     });
 };
+
+/**
+ * save the cookies of the specified id/category
+ * @param {Integer} id the id of cookie
+ */
 export const saveSpecificCookies = (id) => {
   let config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
+    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
   };
   axios(config)
     .then(function (response) {
       const data = response.data;
       data.filter((cookie) => {
+        const { name, plaintext_value, expiration, domain, path, is_secure } =
+          cookie;
         if (cookie.categoryId === +id) {
-          setCookie(
-            cookie.name, // name
-            cookie.plaintext_value, // value
-            cookie.expiration, // expiration day
-            // cookie.expiration, // expiration day
-            cookie.domain, // domain
-            cookie.path, // path
-            cookie.is_secure // is secure
-          );
+          setCookie(name, plaintext_value, expiration, domain, path, is_secure);
         }
       });
       return filteredCookiesPerDomain;
@@ -182,43 +166,46 @@ export const saveSpecificCookies = (id) => {
       console.log(err.message);
     });
 };
-//! Fetch data from the CATEGORIES endpoint
-/* export const getCategories = () => {
+
+/**
+ * fetch data from the CATEGORIES endpoint
+ * @returns the array of the categories
+ */
+export const getCategories = () => {
   let config = {
     method: "get",
     url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=${domainId}`,
     // url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=135`,
-    // ur`: "${CMP_API_BASE_URL}/CategoryListView`,
   };
   axios(config)
     .then(function (response) {
       categories = response.data;
-      console.log("CATEGORIES LIST: ", response.data);
+      // console.log("CATEGORIES LIST: ", response.data);
       return categories;
     })
     .catch(function (error) {
       console.log(error);
     });
   return categories;
-}; */
+};
 
-//! fetch all the domains, their cookies and filter cookies for categories
+/**
+ * fetch all the domains, their cookies and filter cookies for categories
+ */
 export const getDomains = () => {
   let config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
-    // ur`: "${CMP_API_BASE_URL}/DomainListViewTestHalabaku`,
+    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
   };
-
   axios(config)
     .then(function (response) {
       responseData = response.data;
       console.log("==========︾==========");
-      filterCookiesByCategory(response.data, 5, NECESSARY, "NECESSARY");
-      filterCookiesByCategory(response.data, 4, PREFERENCES, "PREFERENCES");
-      filterCookiesByCategory(response.data, 3, ANALYTICAL, "ANALYTICAL");
-      filterCookiesByCategory(response.data, 2, MARKETING, "MARKETING");
-      filterCookiesByCategory(response.data, 1, OTHER, "OTHER");
+      filterCookiesByCategory(response.data, 5, "NECESSARY");
+      filterCookiesByCategory(response.data, 4, "PREFERENCES");
+      filterCookiesByCategory(response.data, 3, "ANALYTICAL");
+      filterCookiesByCategory(response.data, 2, "MARKETING");
+      filterCookiesByCategory(response.data, 1, "OTHER");
       console.log("==========︽==========");
       return responseData;
     })
