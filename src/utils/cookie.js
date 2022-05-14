@@ -11,7 +11,7 @@ export const getCookie = name => {
         .shift()
 }
 
-export const setCookie = function ( name, value, expiryDays, domain, path, secure ) {
+export const setCookie = function ( name, value, expiryDays, domain, path, secure,sameSite) {
   const exdate = new Date()
   exdate.setHours(exdate.getHours() + ((typeof expiryDays !== "number"  ? 365 : expiryDays ) * 24))
   document.cookie = name + '=' +
@@ -20,8 +20,9 @@ export const setCookie = function ( name, value, expiryDays, domain, path, secur
                     // ';expires=' + expiryDays +
                     // ';expires=' + exdate.toUTCString() +
                     ( domain ? ';domain=' + domain : '' ) +
-                    ';path=' + (path || '/') +
-                    ( secure ? ';secure' : '' )
+                    ( secure ? ';Secure' : '' ) +
+                    ';path=' + (path || '/')+
+                    (sameSite?';SameSite=Strict':';SameSite=Lax')
 
 
 }

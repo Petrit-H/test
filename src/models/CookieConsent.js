@@ -5,6 +5,7 @@ import Popup from "./Popup";
 
 import { COOKIES_CATEGORIES, COOKIES_STATUSES } from "../constants";
 import { getCookie, isValidStatus } from "../utils";
+import { DomainCategories } from "../cookies";
 
 // This function initializes the app by combining the use of the Popup, Locator and Law modules
 // You can string together these three modules yourself however you want, by writing a new function.
@@ -13,10 +14,11 @@ export default class CookieConsent extends Base {
   constructor(options = {}) {
     super(options);
 
-    const answers = COOKIES_CATEGORIES.map((category) => {
+    // const answers = DomainCategories.map((category) => {
+    const answers = COOKIES_CATEGORIES.map(({name}) => {
       const cookieName = this.options?.cookie?.name || "gjirafa_";
-      const answer = getCookie(cookieName + category);
-      return isValidStatus(answer) ? { [category]: answer } : undefined;
+      const answer = getCookie(cookieName + name);
+      return isValidStatus(answer) ? { [name]: answer } : undefined;
     }).filter((obj) => (obj ? obj[Object.keys(obj)[0]] : false));
 
     // if they have already answered
@@ -87,6 +89,6 @@ COOKIES_STATUSES.reduce(
       configurable: false,
     }),
     obj
-    ),
-    CookieConsent
-    );
+  ),
+  CookieConsent
+);

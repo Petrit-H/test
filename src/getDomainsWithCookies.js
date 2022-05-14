@@ -3,75 +3,80 @@ import jsonData from "./data.json";
 import { setCookie } from "./utils/cookie";
 import { filterCookiesByCategory } from "./utils/logic";
 import { CMP_API_BASE_URL } from "./constants";
+import {
+  DomainCategoriesWithCookies,
+  DomainId,
+  CookiesPerDomain,
+} from "./cookies";
 
 export let categories = [];
 export let responseData = [];
 export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
-export let User = {};
-export let DomainId = "";
-export let DomainName = "";
-export let DomainWebsiteUrl = "";
-export let Language = {};
-export let LanguagesList = [];
-export let LomainCategoriesWithCookies = [];
-export let DomainCategories = [];
-export let CookiesPerDomain = [];
-export let DomainCategoriesWithCookies = [];
+// export let User = {};
+// export let DomainId = "";
+// export let DomainName = "";
+// export let DomainWebsiteUrl = "";
+// export let Language = {};
+// export let LanguagesList = [];
+// export let LomainCategoriesWithCookies = [];
+// export let DomainCategories = [];
+// export let CookiesPerDomain = [];
+// export let DomainCategoriesWithCookies = [];
 
-const {
-  user,
-  domainId,
-  domainName,
-  domainWebsiteUrl,
-  language,
-  languagesList,
-  domainCategoriesWithCookies,
-  domainCategories,
-  cookiesPerDomain,
-} = jsonData;
+// const {
+//   user,
+//   domainId,
+//   domainName,
+//   domainWebsiteUrl,
+//   language,
+//   languagesList,
+//   domainCategoriesWithCookies,
+//   domainCategories,
+//   cookiesPerDomain,
+// } = jsonData;
 
-/**
- * fetch all the data from the local file and export them
- * @returns the data from the local JSON
- */
-export const fetchDataFromJSONFile = async () => {
-  try {
-    DomainId = domainId;
-    User = user;
-    DomainName = domainName;
-    DomainWebsiteUrl = domainWebsiteUrl;
-    Language = language;
-    LanguagesList = languagesList;
-    DomainCategoriesWithCookies = domainCategoriesWithCookies;
-    DomainCategories = domainCategories;
-    CookiesPerDomain = cookiesPerDomain;
-    return {
-      User,
-      DomainId,
-      DomainName,
-      DomainWebsiteUrl,
-      Language,
-      LanguagesList,
-      DomainCategoriesWithCookies,
-      DomainCategories,
-      CookiesPerDomain,
-    };
-  } catch (error) {
-    console.log(error);
-  }
-  return {
-    User,
-    DomainId,
-    DomainName,
-    DomainWebsiteUrl,
-    Language,
-    LanguagesList,
-    DomainCategoriesWithCookies,
-    DomainCategories,
-    CookiesPerDomain,
-  };
-};
+// /**
+//  * fetch all the data from the local file and export them
+//  * @returns the data from the local JSON
+//  */
+// export const fetchDataFromJSONFile = async () => {
+//   try {
+//     DomainId = domainId;
+//     User = user;
+//     DomainName = domainName;
+//     DomainWebsiteUrl = domainWebsiteUrl;
+//     Language = language;
+//     LanguagesList = languagesList;
+//     DomainCategoriesWithCookies = domainCategoriesWithCookies;
+//     DomainCategories = domainCategories;
+//     CookiesPerDomain = cookiesPerDomain;
+//     return {
+//       User,
+//       DomainId,
+//       DomainName,
+//       DomainWebsiteUrl,
+//       Language,
+//       LanguagesList,
+//       DomainCategoriesWithCookies,
+//       DomainCategories,
+//       CookiesPerDomain,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   return {
+//     User,
+//     DomainId,
+//     DomainName,
+//     DomainWebsiteUrl,
+//     Language,
+//     LanguagesList,
+//     DomainCategoriesWithCookies,
+//     DomainCategories,
+//     CookiesPerDomain,
+//   };
+// };
 
 /**
  *  fetch all the cookies based on the domain you are in
@@ -80,7 +85,7 @@ export const fetchDataFromJSONFile = async () => {
 export const getCookies = async () => {
   let config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
+    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${DomainId}`,
     // url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
   };
   try {
@@ -102,7 +107,7 @@ export const getCookies = async () => {
 export const getCookiesPerCategory = async (categoryId, domainId) => {
   const config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=${domainId}&categoryId=${categoryId}`,
+    url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=${DomainId}&categoryId=${categoryId}`,
   };
   try {
     const cookies = await axios(config);
@@ -116,23 +121,25 @@ export const getCookiesPerCategory = async (categoryId, domainId) => {
  * save the cookies that are necessary
  */
 export const saveNecessaryCookies = () => {
-  let config = {
-    method: "GET",
-    url: `${CMP_API_BASE_URL}/GetCookiesByCategoryHalabaku?domainId=${domainId}&categoryId=5`,
-  };
-  axios(config)
-    .then(function (response) {
-      const data = response.data.cookies;
-      for (const cookie of data) {
-        const { name, plaintext_value, expiration, domain, path, is_secure } =
-          cookie;
-        setCookie(name, plaintext_value, expiration, domain, path, is_secure);
+  try {
+    console.log(DomainCategoriesWithCookies.length);
+    for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
+      const category = DomainCategoriesWithCookies[index];
+      let {
+        categoryId,
+        cookies: { data },
+      } = category;
+      if (categoryId === 5) {
+        for (const cookie of data) {
+          let { name, plaintext_value, expiration, cookieDomain, path, is_secure } =
+            cookie;
+          setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
+        }
       }
-      return filteredCookiesPerDomain;
-    })
-    .catch(function (err) {
-      console.log(err.message);
-    });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 /**
@@ -140,25 +147,46 @@ export const saveNecessaryCookies = () => {
  * @param {Integer} id the id of cookie
  */
 export const saveSpecificCookies = (id) => {
-  let config = {
-    method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
-  };
-  axios(config)
-    .then(function (response) {
-      const data = response.data;
-      data.filter((cookie) => {
-        const { name, plaintext_value, expiration, domain, path, is_secure } =
-          cookie;
-        if (cookie.categoryId === +id) {
-          setCookie(name, plaintext_value, expiration, domain, path, is_secure);
+  try {
+
+    for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
+      const category = DomainCategoriesWithCookies[index];
+      let {
+        categoryName,
+        categoryId,
+        cookies: { data },
+      } = category;
+      if (categoryId === +id) {
+        for (const cookie of data) {
+          let { name, plaintext_value, expiration, cookieDomain, path, is_secure } =
+            cookie;
+          setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
         }
-      });
-      return filteredCookiesPerDomain;
-    })
-    .catch(function (err) {
-      console.log(err.message);
-    });
+      }
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const saveAllCookies = () => {
+  try {
+    for (let index = 0; index < CookiesPerDomain.length; index++) {
+      const cookie = CookiesPerDomain[index];
+      let { name, plaintext_value, expiration, cookieDomain, path, is_secure } =
+        cookie;
+      setCookie(
+        name,
+        plaintext_value,
+        expiration,
+        cookieDomain,
+        path,
+        is_secure
+      );
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 /**
@@ -168,7 +196,7 @@ export const saveSpecificCookies = (id) => {
 export const getCategories = () => {
   let config = {
     method: "get",
-    url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=${domainId}`,
+    url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=${DomainId}`,
     // url: `${CMP_API_BASE_URL}/GetAllCategoriesByDomainId?domainId=135`,
   };
   axios(config)
@@ -189,7 +217,7 @@ export const getCategories = () => {
 export const getDomains = () => {
   let config = {
     method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${domainId}`,
+    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${DomainId}`,
   };
   axios(config)
     .then(function (response) {

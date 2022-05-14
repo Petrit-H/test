@@ -23,7 +23,7 @@ import {
   saveNecessaryCookies,
   saveSpecificCookies,
 } from "../getDomainsWithCookies";
-import CMP_Section from "../cookies.js";
+import { DomainCategories } from "../cookies.js";
 const { toBinary } = require("../utils/encryptToBinary.js");
 
 export default class Popup extends Base {
@@ -228,9 +228,21 @@ export default class Popup extends Base {
     if (this.revokeBtn) this.revokeBtn.style.display = show ? "" : "none";
   }
 
+  /**
+   * Clear all the cookies
+   */
+   clearCookies() {
+    document.cookie.split(";").forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+  }
+
   revokeChoice(preventOpen) {
     this.options.enabled = true;
     this.clearStatuses();
+    this.clearCookies();
     this.emit("revokeChoice");
     if (!preventOpen) {
       this.autoOpen();
@@ -293,8 +305,7 @@ export default class Popup extends Base {
           secure
         );
         // saveNecessaryCookies()
-        // for (let index = 1; index < 3; index++) {
-        for (let index = 1; index < radioButtons.length; index++) {
+        for (let index = 0; index < radioButtons.length; index++) {
           const element = radioButtons[index];
           if (element.checked) {
             saveSpecificCookies(element.id);
@@ -307,12 +318,14 @@ export default class Popup extends Base {
     };
 
     if (arguments.length === 0) {
-      COOKIES_CATEGORIES.forEach((category) =>
-        updateCategoryStatus(category, this.userCategories[category])
+      COOKIES_CATEGORIES.forEach(( name ) =>
+        // DomainCategories.forEach((category) =>
+        updateCategoryStatus(name, this.userCategories[name])
       );
     } else if (arguments.length === 1) {
-      COOKIES_CATEGORIES.forEach((category) =>
-        updateCategoryStatus(category, arguments[0])
+      COOKIES_CATEGORIES.forEach(( name ) =>
+        // DomainCategories.forEach((category) =>
+        updateCategoryStatus(name, arguments[0])
       );
     } else if (arguments.length > 1) {
       arguments.forEach((categoryStatus, index) => {
@@ -326,8 +339,9 @@ export default class Popup extends Base {
    * @return { array<string> } - cookie COOKIES_CATEGORIES status in order of COOKIES_CATEGORIES
    */
   getStatuses() {
-    return COOKIES_CATEGORIES.map((categoryName) =>
-      getCookie(this.options.cookie.name + "_" + categoryName)
+    return COOKIES_CATEGORIES.map(( name ) =>
+      // return DomainCategories.map((categoryName) =>
+      getCookie(this.options.cookie.name + "_" + name)
     );
   }
 
@@ -336,7 +350,8 @@ export default class Popup extends Base {
    */
   clearStatuses() {
     const { name, domain, path } = this.options.cookie;
-    COOKIES_CATEGORIES.forEach((categoryName) => {
+    COOKIES_CATEGORIES.forEach(( categoryName ) => {
+      // DomainCategories.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
       saveNecessaryCookies();
     });
@@ -352,13 +367,17 @@ export default class Popup extends Base {
     const statusesValues = this.getStatuses();
     const matches = statusesValues.map((status, index) => ({
       [COOKIES_CATEGORIES[index]]: isValidStatus(status),
+      // [DomainCategories[index]]: isValidStatus(status),
     }));
     const hasMatches =
       matches.filter((match) => match[Object.keys(match)[0]]).length > 0;
-    statusesValues.forEach((status, index) =>
-      this.userCategories[COOKIES_CATEGORIES[index]] === status
-        ? status
-        : this.userCategories[COOKIES_CATEGORIES[index]]
+    statusesValues.forEach(
+      (status, index) =>
+        this.userCategories[COOKIES_CATEGORIES[index]] === status
+          ? // this.userCategories[DomainCategories[index]] === status
+            status
+          : this.userCategories[COOKIES_CATEGORIES[index]]
+      // : this.userCategories[DomainCategories[index]]
     );
 
     return hasMatches;
@@ -705,6 +724,7 @@ export default class Popup extends Base {
       }
     }
   }
+
   destroy() {
     console.warn("Destroying...");
     if (this.element) {

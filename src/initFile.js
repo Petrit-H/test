@@ -1,5 +1,4 @@
 import CookieConsent from "../src/models/CookieConsent";
-import Legal from "./models/Legal";
 import { fetchClientIp } from "./options/location";
 import {
   acceptNecessary,
@@ -7,14 +6,34 @@ import {
   bannerAccordionToggle,
   fillCategories,
 } from "./utils/logic";
+// import { DomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
+import { DomainCategories, fetchDataFromJSONFile } from "./cookies";
+import { saveAllCookies } from "./getDomainsWithCookies";
 
-const locationElement = document.getElementById("location");
-const categoriesType = document.querySelector(".cc-window");
-const infoType = document.querySelector(".cc-window.cc-type-info");
+export let responseJSON = {
+  userId: createUUID(),
+  categories: DomainCategories,
+};
+
 let ccInstance;
 let testType = "info";
 let CountryCode = "";
+
+function createUUID() {
+  var dt = new Date().getTime();
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      var r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
+  fetchDataFromJSONFile().then((json) => json);
+  return uuid;
+}
+
 
 //!the config file for the consent manager/library to start
 const optionsObj = (countryCode, type) => {
@@ -48,6 +67,7 @@ function timeStamp() {
   // console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
+
 fetchClientIp().then((country) => {
   CountryCode = country;
   ccInstance = new CookieConsent(optionsObj(country, testType));
@@ -119,8 +139,9 @@ function initiateTypeChangeAndBannerShow() {
   // }, 400);
 }
 
-// draw("XK");
 setTimeout(() => {
   const testData = ccInstance.getCountryLaws(CountryCode);
-  // console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
-}, 250);
+  console.log("🚀 ~ ~ ~ responseJSON", responseJSON);
+  console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
+  // saveAllCookies()
+}, 300);

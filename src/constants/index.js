@@ -1,3 +1,6 @@
+import { DomainCategories, fetchDataFromJSONFile } from "../cookies";
+fetchDataFromJSONFile().then((json) => json);
+
 export const CMP_API_BASE_URL = "https://cmp.gjirafa.dev";
 export const CMP_IMAGE_BASE_URL = "https://tojnhu4mvp.gjirafa.net/CMP";
 
@@ -12,6 +15,8 @@ export const COOKIES_STATUSES = ["DENY", "ALLOW", "DISMISS"];
 export const STATUS_DENY = "DENY";
 export const STATUS_ALLOW = "ALLOW";
 export const STATUS_DISMISS = "DISMISS";
+console.log(DomainCategories);
+// export const COOKIES_CATEGORIES = DomainCategories
 export const COOKIES_CATEGORIES = [
   "NECESSARY",
   "PREFERENCES",

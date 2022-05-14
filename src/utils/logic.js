@@ -7,9 +7,12 @@ import {
   PREFERENCES,
 } from "../constants";
 import {
-  fetchDataFromJSONFile,
+  saveAllCookies,
   saveNecessaryCookies,
   saveSpecificCookies,
+} from "../getDomainsWithCookies";
+import {
+  fetchDataFromJSONFile,
   User,
   DomainId,
   DomainName,
@@ -19,7 +22,8 @@ import {
   DomainCategoriesWithCookies,
   DomainCategories,
   CookiesPerDomain,
-} from "../getDomainsWithCookies";
+  // } from "../getDomainsWithCookies";
+} from "../cookies";
 
 let data = [];
 let COOKIES = [];
@@ -91,7 +95,7 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
          </li>
          <li class="flex justify-between my-4 p-2">
             <span class="flex-1 text-primary-light">Category</span>
-            <span class="flex-1" id="cookieCategory">${item.category}</span>
+            <span class="flex-1" id="cookieCategory">${item.category.name}</span>
          </li>
          <li class="flex justify-between my-4 p-2">
             <span class="flex-1 text-primary-light">Description</span>
@@ -213,27 +217,45 @@ const fillCategories = function () {
       ?.reverse()
       ?.map((item) => {
         return `
-        <li id=test-${ item.id } class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer">
-          <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" data-category-id=${ item.id }
+        <li id=test-${
+          item.id
+        } class="cc-category flex-col border border-gray-200 my-0.5 xl:my-2 rounded-md  cursor-pointer">
+          <div class="accordionHeader w-full cursor-pointer flex justify-between p-4" data-category-id=${
+            item.id
+          }
               data-did=${DomainId}>
               <p class=" category-title font-medium">${item.name}</p>
               <label for=${item.name.toLowerCase()} class="switch-toggle relative dot-wrapper inline-flex cursor-pointer"
-                tabindex=${ item.id }>
+                tabindex=${item.id}>
                 <button class="cc-btn w-auto group relative consentButton ">
-                    <input type="checkbox" id="${item.id}" ${ item.checked && "checked" } class="radioButtonCookie"
-                      name="${item.name}" value="${item.name.toLowerCase()}" ${ item.name.toLowerCase()==="necessary"
-                      && "disabled checked" } />
+                    <input type="checkbox" id=${item.id} ${
+          item.checked && "checked"
+        } data-radio-parent-category-name="${
+          item.name
+        }" class="radioButtonCookie"
+                      name="${item.name}" value="${item.name.toLowerCase()}" ${
+          item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
+        } />
                     <div class="switch-holder block border border-primary-stroke  w-9 h-6 rounded-full transition"></div>
-                    <div class="${item.name.toLowerCase() === "necessary" && "translate-x-3 transform cursor-not-allowed" } dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition ${ item.name.toLowerCase()==="necessary" ? "bg-red-700": "bg-gray-400" }"></div>
+                    <div class="${
+                      item.name.toLowerCase() === "necessary" &&
+                      "translate-x-3 transform cursor-not-allowed"
+                    } dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition ${
+          item.name.toLowerCase() === "necessary" ? "bg-red-700" : "bg-gray-400"
+        }"></div>
                 </button>
               </label>
           </div>
-          <div class="accordionContent border-t h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${item.id}">
+          <div class="accordionContent border-t h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${
+            item.id
+          }">
               <div class="mx-4 py-4 px-2">
                 <p class="category-description mb-4 transition duration-300 ease-in-out transform">
                     ${item.description}
                 </p>
-                <p value=${item.id} data-settings-details-id=${item.id} class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
+                <p value=${item.id} data-settings-details-id=${
+          item.id
+        } class="cookieDetails text-blue-500  transition duration-300 ease-in-out transform cursor-pointer max-w-max">
                     Cookies Details</p>
               </div>
           </div>
@@ -254,9 +276,11 @@ const allowAllCookies = function () {
     const cookieRadioButton = document.querySelectorAll(".cc-btn");
     allowAllCookiesButton.addEventListener("click", () => {
       for (let i = 0; i < radioButtons.length; i++) {
+        console.log(+radioButtons[i].id);
         const element = radioButtons[i];
         element.checked = true;
-        saveSpecificCookies(element.id);
+        // saveSpecificCookies(element.id);
+        saveAllCookies()
       }
     });
   }, 300);
