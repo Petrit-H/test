@@ -28,14 +28,11 @@ export let responseJSON = {
 export const fillJSONWithCheckedCategory = () => {
   const radioButtons = document.querySelectorAll(".radioButtonCookie");
   if (radioButtons.length !== 0 && radioButtons !== null) {
-    console.log(
-      "🚀 ~ file: initFile.js ~ line 30 ~ fillJSONWithCheckedCategory ~ radioButtons",
-      radioButtons.length
-    );
+    // console.log("🚀 ~ ~ radioButtons", radioButtons.length);
     for (let index = 0; index < radioButtons.length; index++) {
       const element = radioButtons[index];
       if (element.checked) {
-        console.log(element.id, element.name);
+        // console.log(element.id, element.name);
         acceptedCategories.push(element.name);
       }
     }
@@ -49,7 +46,7 @@ export const fillJSONWithCheckedCategory = () => {
   }
 
   console.log(responseJSON);
-  acceptedCategories=[]
+  acceptedCategories = [];
 };
 
 function createUUID() {
@@ -172,7 +169,6 @@ function initiateTypeChangeAndBannerShow() {
 
 setTimeout(() => {
   const testData = ccInstance.getCountryLaws(CountryCode);
-  console.log("🚀 ~ ~ ~ responseJSON", responseJSON);
-  console.log("🚀 ~ ~ ~ testData", CountryCode, testData);
+  console.log(CountryCode, testData);
   // saveAllCookies()
 }, 300);

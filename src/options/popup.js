@@ -3,11 +3,22 @@ import {
   STATUS_ALLOW,
   STATUS_DISMISS,
   // COOKIES_CATEGORIES,
-  CLOSE_ICON,
-  CLOSE_ICON_WHITE,
-  COOKIE_WIDGET_ICON_CIRCLE,
-  COOKIE_WIDGET_ICON_TRIANGLE,
-  CARET_DOWN_ICON,
+  CONSENT_CLOSE_ICON,
+  CONSENT_CLOSE_ICON_WHITE,
+  CONSENT_WIDGET_ICON_CIRCLE,
+  CONSENT_WIDGET_ICON_TRIANGLE,
+  CONSENT_CARET_DOWN_ICON,
+  CONSENT_HEADER_MESSAGE,
+  CONSENT_BANNER_TITLE,
+  CONSENT_MESSAGE,
+  CONSENT_DISMISS_BUTTON_CONSTENT,
+  CONSENT_ALLOW_BUTTON_CONTENT,
+  CONSENT_ALLOW_ALL_BUTTON_CONTENT,
+  CONSENT_DENY_BUTTON_CONTENT,
+  CONSENT_LEARN_MORE_CONTENT,
+  CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
+  CONSENT_COOKIE_PRIVACY_LINK_TARGET,
+  CONSENT_COOKIE_SETTINGS,
 } from "../constants/index.js";
 
 export default {
@@ -32,24 +43,21 @@ export default {
 
   // each item defines the inner text for the element that it references
   content: {
-    header: "Cookies used on the website!",
-    title:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate est explicabo enim atque molestiae doloremque voluptates, consectetur vitae rem amet?",
-    message:
-      "By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.",
-    // "This website uses cookies to ensure you get the best experience on our website.",
-    dismiss: "Got it!",
-    allow: "Allow",
-    allowAll: "Accept All",
-    deny: "Decline",
-    link: "Learn more",
-    href: "https://www.cookiesandyou.com",
-    close: `<img src=${CLOSE_ICON} class="cc-close" alt="close button"/>`,
-    closeWhite: `<img src=${CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
-    target: "_blank",
-    widgetImage: `<img src=${COOKIE_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
+    header: CONSENT_HEADER_MESSAGE,
+    title: CONSENT_BANNER_TITLE,
+    message: CONSENT_MESSAGE,
+    dismiss: CONSENT_DISMISS_BUTTON_CONSTENT,
+    allow: CONSENT_ALLOW_BUTTON_CONTENT,
+    allowAll: CONSENT_ALLOW_ALL_BUTTON_CONTENT,
+    deny: CONSENT_DENY_BUTTON_CONTENT,
+    link: CONSENT_LEARN_MORE_CONTENT,
+    href: CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
+    close: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
+    closeWhite: `<img src=${CONSENT_CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
+    target: CONSENT_COOKIE_PRIVACY_LINK_TARGET,
+    widgetImage: `<img src=${CONSENT_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
     policy: "Cookie Policy",
-    settings: "Cookie Preferences",
+    settings: CONSENT_COOKIE_SETTINGS,
   },
 
   // This is the HTML for the elements above. The string {{header}} will be replaced with the equivalent text below.
@@ -135,7 +143,7 @@ export default {
 
             <div class="descSectoin px-4 py-3">
               <button id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
-                <img src=${CARET_DOWN_ICON} alt="goback " class="rotate-90 z-50 transform mr-3">
+                <img src=${CONSENT_CARET_DOWN_ICON} alt="goback " class="rotate-90 z-50 transform mr-3">
                 <span class="text-black z-50">Back</span>
               </button>
               <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel

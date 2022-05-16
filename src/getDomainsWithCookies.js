@@ -59,7 +59,6 @@ export const getCookiesPerCategory = async (categoryId, domainId) => {
  */
 export const saveNecessaryCookies = () => {
   try {
-    console.log(DomainCategoriesWithCookies.length);
     for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
       const category = DomainCategoriesWithCookies[index];
       let {

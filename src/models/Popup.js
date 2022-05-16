@@ -24,6 +24,7 @@ import {
   saveSpecificCookies,
 } from "../getDomainsWithCookies";
 import { DomainCategories } from "../cookies.js";
+import { fillJSONWithCheckedCategory } from "../initFile";
 const { toBinary } = require("../utils/encryptToBinary.js");
 
 export default class Popup extends Base {
@@ -526,6 +527,7 @@ export default class Popup extends Base {
 
     if (btn.classList.contains("cc-btn") && btn.classList.contains("cc-save")) {
       this.setStatuses();
+      fillJSONWithCheckedCategory()
       setTimeout(() => {
         this.close(true);
       }, 300);
@@ -726,7 +728,7 @@ export default class Popup extends Base {
   }
 
   destroy() {
-    console.warn("Destroying...");
+    // console.warn("Destroying...");
     if (this.element) {
       this.element.remove();
     }

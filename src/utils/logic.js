@@ -1,6 +1,6 @@
 import {
   ANALYTICAL,
-  CARET_DOWN_ICON,
+  CONSENT_CARET_DOWN_ICON,
   MARKETING,
   NECESSARY,
   OTHER,
@@ -13,7 +13,6 @@ import {
 } from "../getDomainsWithCookies";
 import {
   fetchDataFromJSONFile,
-  User,
   DomainId,
   DomainName,
   DomainWebsiteUrl,
@@ -75,7 +74,7 @@ const fillCookiesSettingItem = (categoryId, domainId) => {
       <p class="category-title font-medium">${item.name}</p>
       <div class="controlButtons flex">
          <button id="closeIcon" class="carret closeIcon cursor-pointer my-auto">
-            <img src="${CARET_DOWN_ICON}" class="toggleAccordion transition transform duration-500 ease-in-out "
+            <img src="${CONSENT_CARET_DOWN_ICON}" class="toggleAccordion transition transform duration-500 ease-in-out "
                alt="caret up/down" />
          </button>
       </div>
