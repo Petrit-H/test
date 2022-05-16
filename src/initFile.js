@@ -8,17 +8,49 @@ import {
 } from "./utils/logic";
 // import { DomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
-import { DomainCategories, fetchDataFromJSONFile } from "./cookies";
+import {
+  DomainCategories,
+  CookiesPerDomain,
+  fetchDataFromJSONFile,
+} from "./cookies";
 import { saveAllCookies } from "./getDomainsWithCookies";
-
-export let responseJSON = {
-  userId: createUUID(),
-  categories: DomainCategories,
-};
 
 let ccInstance;
 let testType = "info";
 let CountryCode = "";
+let acceptedCategories = [];
+
+export let responseJSON = {
+  userId: createUUID(),
+  categories: acceptedCategories,
+};
+
+export const fillJSONWithCheckedCategory = () => {
+  const radioButtons = document.querySelectorAll(".radioButtonCookie");
+  if (radioButtons.length !== 0 && radioButtons !== null) {
+    console.log(
+      "🚀 ~ file: initFile.js ~ line 30 ~ fillJSONWithCheckedCategory ~ radioButtons",
+      radioButtons.length
+    );
+    for (let index = 0; index < radioButtons.length; index++) {
+      const element = radioButtons[index];
+      if (element.checked) {
+        console.log(element.id, element.name);
+        acceptedCategories.push(element.name);
+      }
+    }
+  } else {
+    for (let index = 0; index < DomainCategories.length; index++) {
+      const element = DomainCategories[index];
+      if (element.checked) {
+        acceptedCategories.push(element.name);
+      }
+    }
+  }
+
+  console.log(responseJSON);
+  acceptedCategories=[]
+};
 
 function createUUID() {
   var dt = new Date().getTime();
@@ -33,7 +65,6 @@ function createUUID() {
   fetchDataFromJSONFile().then((json) => json);
   return uuid;
 }
-
 
 //!the config file for the consent manager/library to start
 const optionsObj = (countryCode, type) => {

@@ -24,6 +24,7 @@ import {
   CookiesPerDomain,
   // } from "../getDomainsWithCookies";
 } from "../cookies";
+import { fillJSONWithCheckedCategory, responseJSON } from "../initFile";
 
 let data = [];
 let COOKIES = [];
@@ -212,6 +213,7 @@ const fillCategories = function () {
     const basicCategoriesBanner = document.querySelector(
       ".basic-categories-banner"
     );
+
     // console.log("🚀 ~ ~ ~ basicCategoriesBanner", basicCategoriesBanner);
     basicCategoriesBanner.innerHTML = DomainCategories?.slice(0)
       ?.reverse()
@@ -225,7 +227,7 @@ const fillCategories = function () {
           }
               data-did=${DomainId}>
               <p class=" category-title font-medium">${item.name}</p>
-              <label for=${item.name.toLowerCase()} class="switch-toggle relative dot-wrapper inline-flex cursor-pointer"
+              <label for="${item.name.toLowerCase()}" class="switch-toggle relative dot-wrapper inline-flex cursor-pointer"
                 tabindex=${item.id}>
                 <button class="cc-btn w-auto group relative consentButton ">
                     <input type="checkbox" id=${item.id} ${
@@ -263,7 +265,11 @@ const fillCategories = function () {
         `;
       })
       .join("");
+
+      // console.log(responseJSON)
   }, 150);
+
+
 };
 
 /**
@@ -276,12 +282,12 @@ const allowAllCookies = function () {
     const cookieRadioButton = document.querySelectorAll(".cc-btn");
     allowAllCookiesButton.addEventListener("click", () => {
       for (let i = 0; i < radioButtons.length; i++) {
-        console.log(+radioButtons[i].id);
         const element = radioButtons[i];
         element.checked = true;
         // saveSpecificCookies(element.id);
-        saveAllCookies()
+        saveAllCookies();
       }
+      fillJSONWithCheckedCategory();
     });
   }, 300);
 };
@@ -294,6 +300,7 @@ const acceptNecessary = function () {
     const gotItButton = document.querySelector(".got-it-button");
     gotItButton.addEventListener("click", () => {
       saveNecessaryCookies();
+      fillJSONWithCheckedCategory();
     });
   }, 300);
 };
