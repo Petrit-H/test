@@ -1,26 +1,55 @@
-// const GjTailwindConfig = require("@gjirafatech/gjirafa-tailwind");
-
 module.exports = {
   content: [
-    // Example content paths...
-    "./public/**/*.html",
-    "./src/**/*.{js,jsx,ts,tsx,vue}",
+    "./dist/*.html",
+    "./src/**/*.{js,jsx,tsx,ts,vue}",
+    "./src/*.{js,jsx,tsx,ts,vue}",
   ],
+  darkMode: "media", // or 'class'
   theme: {
     extend: {
-      boxShadow: {
-        primary: "0 0 0 1px rgb(29, 121, 242)",
-      },
       colors: {
-        primary: {
-          light: "#667C99",
-          DEFAULT: "#052D61",
-          // dark: "#009eeb",
+        petrit: "#00ff00",
+        blue: {
+          200: "#B0CDFB",
+          300: "#667C99",
+          DEFAULT: "#1D79F2",
+          400: "#3a81f6",
+          500: "#052D61",
         },
         black: {
           DEFAULT: "#000000",
-          faded: "#A3B0C2",
+          faded: "#2C2C2C",
         },
+        gray: {
+          faded: "#F6F7F9",
+          light: "#E0E5EB",
+          DEFAULT: "#DADFE7",
+          dark: "#CACACA",
+        },
+      },
+      fontSize: {
+        xsmall: "10px",
+        small: "12px",
+        base: "14px",
+      },
+      fontWeight: {
+        light: 300,
+        normal: 400,
+        medium: 500,
+        bold: 700,
+      },
+      lineHeight: {
+        DEFAULT: "18px",
+        12: "12px",
+      },
+      boxShadow: {
+        primary: "0 0 0 1px rgb(29, 121, 242)",
+      },
+      maxWidth: {
+        "1/2": "50%",
+        "3/4": "75%",
+        "4/5": "80%",
+        "9/10": "90%",
       },
       borders: {
         1: "1px",

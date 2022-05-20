@@ -19,6 +19,8 @@ import {
   CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
   CONSENT_COOKIE_PRIVACY_LINK_TARGET,
   CONSENT_COOKIE_SETTINGS,
+  CONSENT_BANNER_LOGO,
+  CONSENT_BANNER_LANGUAGES_ICON,
 } from "../constants/index.js";
 
 export default {
@@ -53,7 +55,7 @@ export default {
     link: CONSENT_LEARN_MORE_CONTENT,
     href: CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
     close: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
-    closeWhite: `<img src=${CONSENT_CLOSE_ICON_WHITE} class="cc-close" alt="close button"/>`,
+    closeWhite: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
     target: CONSENT_COOKIE_PRIVACY_LINK_TARGET,
     widgetImage: `<img src=${CONSENT_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
     policy: "Cookie Policy",
@@ -77,12 +79,12 @@ export default {
       <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhite}}</span>
     </div>
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
-      <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
-          <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-white banner-type-change">Cookie Settings</button>
+      <div class=" bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 ">
+          <p class="text-petrit font-bold text-base">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
+            <button class="text-blue banner-type-change">Cookie Settings</button>
           </p>
       </div>
-      <div class="bannerWrapper__controls flex justify-end text-sm">
+      <div class="bannerWrapper__controls flex justify-end text-sm bg-petrit">
         <button class="got-it-button px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{dismiss}}</button>
         <button class="banner-type-change px-10 w-3/4 cc-btn py-2.5 rounded-md " id="accept-cookies">{{settings}}</button>
       </div>
@@ -95,7 +97,7 @@ export default {
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
           <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-white banner-type-change">Cookie Settings</button>
+            <button class=" banner-type-change">Cookie Settings</button>
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
@@ -107,67 +109,54 @@ export default {
     link: `<a aria-label="learn more about cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a>`,
     close: `<span aria-label="dismiss cookie message" role=button tabindex="0" class="cc-close">{{close}}</span>`,
     categories: `
-    <div class="max-w-lg xl:max-w-xl min-w-sm  w-full mx-auto z-10 flex flex-col justify-center items-center ">
+    <div class="consent-banner-wrapper bg-white w-full mx-auto z-10 flex flex-col justify-center items-center ">
+
     <div class="cmp-overlay"></div>
-        <i class="hidden">COOKIE_DISPLAY</i>
-        <div id="COOKIE_DISPLAY" class="cookieModal  relative overflow-hidden rounded-lg bg-white w-full">
-          <div class="controlSection z-50 sticky top-0 p-4 flex justify-between items-center border-b-2 border-gray-200">
-            <div class="title">Cookie Settings</div>
-            <span aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</span>
-           </div>
-          <div class="contentWrapper overflow-y-auto my-3">
-            <div class="descSectoin px-4 py-3">
-              <p class="2xl:pt-4 pb-2">{{title}}</p>
-              <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
-            </div>
+    <div class="cookieModal  relative overflow-hidden rounded-lg bg-white w-full">
+      <div class="controlSection z-50 sticky top-0 mb-1 px-6 py-6 flex justify-between items-center ">
+        <div><img src=${CONSENT_BANNER_LOGO} alt="Consent Logo" /></div>
+        <div class="">
+          <button aria-label="dismiss cookie message" role=button tabindex="0" class="hover:bg-gray-faded active:bg-gray-faded rounded-sm"><img src=${CONSENT_BANNER_LANGUAGES_ICON}
+              alt="language picker" /></button>
+          <button aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</button>
+        </div>
+      </div>
+      <div class="tabs flex justify-start px-6  border-b border-blue-300">
+          <button class="tab pointer relative pb-4 mr-6 text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#COOKIE_DISPLAY">Categories</button>
+          <button class="tab pointer relative pb-4  text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " data-tab-target="#COOKIE_SETTINGS">Cookies</button>
+        </div>
+      <div class="contentWrapper px-6 overflow-y-auto my-3">
+        <div class="descSectoin py-3 ">
+          <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading">{{title}}</p>
+        </div>
 
-            <ul class="cc-categories px-4 basic-categories-banner">
-
-            </ul>
+        <div class="tab-content">
+          <div id="COOKIE_DISPLAY" class="tab-content active" data-tab-content>
+            <ul id="basic-categories-banner" class=" cc-categories "></ul>
           </div>
-          <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
-            <button type="button"
-              class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-0 rounded-md px-5 py-1.5 border-gray-200  mr-4" >{{allowAll}}</button>
-            <button class="cc-btn cc-save  cc-${STATUS_ALLOW} border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
-              My Choices</button>
+          <div id="noData"
+              class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
+              <p class="my-auto">No Data Available</p>
+            </div>
+          <div id="COOKIE_SETTINGS" class="tab-content " data-tab-content>
+            <div id="custom-categories-banner" class=" "></div>
           </div>
         </div>
 
-        <i class="hidden">COOKIE_SETTINGS</i>
-        <div id="COOKIE_SETTINGS" class=" cookieModal hidden relative overflow-hidden rounded-lg bg-white w-full">
-          <div class="controlSection z-50 sticky top-0 p-4 flex justify-between items-center border-b-2 border-gray-200">
-            <div class="title">Cookie Settings</div>
-            <span aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</span>
-          </div>
-          <div class="contentWrapper overflow-y-scroll my-3">
-
-            <div class="descSectoin px-4 py-3">
-              <button id="goBack" class="group flex items-center cursor-pointer max-w-max xl:mb-7 mb-5">
-                <img src=${CONSENT_CARET_DOWN_ICON} alt="goback " class="rotate-90 z-50 transform mr-3">
-                <span class="text-black z-50">Back</span>
-              </button>
-              <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto excepturi vel
-                quaerat
-                obcaecati commodi
-                eveniet placeat repudiandae natus nam deserunt tenetur voluptas facilis, voluptates explicabo quasi in,
-                eum
-                quod tempora!</p>
-              <p class="2xl:pt-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, maxime?</p>
-            </div>
-            <div id="noData" class=" absolute bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
-            <p class="my-auto">No Data Available</p>
-          </div>
-          <div class="custom-categories-banner custom-categories-banner p-4"></div>
-          </div>
-          <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-end left-0 p-3 w-full z-50">
-            <button type="button"
-              class="cc-btn cc-save  allow-all border-2 rounded-md px-5 py-1.5 border-gray-200  mr-4">{{allowAll}}</button>
-            <button class="cc-btn cc-save border-none border-gray-200 rounded-md px-5 py-1.5 bg-blue-500 text-white">Confirm
-              My
-              Choices
-            </button>
-          </div>
+      </div>
+      <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
+        <div>
+          <button
+          class="cc-btn cc-save  cc-${STATUS_ALLOW} border-2 border-blue-200 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
+          My Choices
+          </button>
+          <button type="button"
+            class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-2 border-blue-400 rounded-md text-white bg-blue-400 px-5 py-1.5  ml-2">
+            {{allowAll}}
+          </button>
         </div>
+      </div>
+    </div>
   </div>
 
       `,

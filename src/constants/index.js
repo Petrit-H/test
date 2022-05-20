@@ -18,6 +18,11 @@ import {
   CloseIcon,
   CaretDownIcon,
   CookieSettings,
+  ChevronDownFilled,
+  PortaCMPLogo,
+  LanguagesGlobe,
+  InfoIcon,
+  NecessaryTickIcon,
 } from "../cookies";
 fetchDataFromJSONFile().then((json) => json);
 
@@ -41,6 +46,11 @@ export const CONSENT_LEARN_MORE_CONTENT = LearnMore;
 export const CONSENT_COOKIE_PRIVACY_LINK_CONTENT = CookiePolicyLink;
 export const CONSENT_COOKIE_PRIVACY_LINK_TARGET = CookiePolicyLinkTarget;
 export const CONSENT_COOKIE_SETTINGS = CookieSettings;
+export const CONSENT_BANNER_LOGO = PortaCMPLogo;
+export const CONSENT_BANNER_CHEVRON_DOWN = ChevronDownFilled;
+export const CONSENT_BANNER_LANGUAGES_ICON = LanguagesGlobe;
+export const CONSENT_BANNER_INFO_ICON = InfoIcon;
+export const CONSENT_BANNER_RADIO_TICK = NecessaryTickIcon;
 
 export const COOKIES_STATUSES = ["DENY", "ALLOW", "DISMISS"];
 export const STATUS_DENY = "DENY";

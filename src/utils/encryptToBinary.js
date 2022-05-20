@@ -10,6 +10,6 @@ export const toBinary = (string) => {
   for (let i = 0; i < charCodes.byteLength; i++) {
     result += String.fromCharCode(charCodes[i]);
   }
-  console.log(window.btoa(result));
+  // console.log(window.btoa(result));
   return window.btoa(result);
 };

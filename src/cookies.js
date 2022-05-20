@@ -18,9 +18,10 @@ export let LanguagesList = [];
 export let LomainCategoriesWithCookies = [];
 export let DomainCategories = [];
 export let CookiesPerDomain = [];
+export let DomainCategoriesWithCookies = [];
+
 export let WidgetImageCircle = "";
 export let WidgetImageTriangle = "";
-export let DomainCategoriesWithCookies = [];
 export let ConsentHeaderMessage = "";
 export let ConsentBannerTitle = "";
 export let ConsentMessage = "";
@@ -35,6 +36,11 @@ export let CookiePolicyLinkTarget = "";
 export let CloseIconWhite = "";
 export let CloseIcon = "";
 export let CaretDownIcon = "";
+export let ChevronDownFilled = "";
+export let PortaCMPLogo = "";
+export let LanguagesGlobe = "";
+export let InfoIcon = "";
+export let NecessaryTickIcon = "";
 
 const {
   ipAddressURL,
@@ -58,13 +64,18 @@ const {
   allowButtonContent,
   allowAllButtonContent,
   denyButtonContent,
+  cookiePolicyLinkTarget,
+  cookieSettings,
   learnMore,
   cookiePolicyLink,
   closeIcon,
   caretDownIcon,
   closeIconWhite,
-  cookiePolicyLinkTarget,
-  cookieSettings,
+  chevronDownFilled,
+  portaCMPLogo,
+  languagesGlobe,
+  infoIcon,
+  necessaryTick,
 } = jsonData.consentData;
 
 /**
@@ -98,6 +109,11 @@ export const fetchDataFromJSONFile = async () => {
     CloseIconWhite = closeIconWhite;
     CloseIcon = closeIcon;
     CaretDownIcon = caretDownIcon;
+    ChevronDownFilled = chevronDownFilled;
+    PortaCMPLogo = portaCMPLogo;
+    LanguagesGlobe = languagesGlobe;
+    InfoIcon = infoIcon;
+    NecessaryTickIcon = necessaryTick;
 
     return {
       DomainId,
@@ -124,6 +140,11 @@ export const fetchDataFromJSONFile = async () => {
       CloseIcon,
       CaretDownIcon,
       CookieSettings,
+      ChevronDownFilled,
+      PortaCMPLogo,
+      LanguagesGlobe,
+      InfoIcon,
+      NecessaryTickIcon,
     };
   } catch (error) {
     console.log(error);
@@ -147,12 +168,16 @@ export const fetchDataFromJSONFile = async () => {
     DenyButtonContent,
     AllowAllButtonContent,
     LearnMore,
-    LearnMoreLink,
     CookiePolicyLinkTarget,
     CloseIconWhite,
     CloseIcon,
     CaretDownIcon,
     CookieSettings,
+    ChevronDownFilled,
+    PortaCMPLogo,
+    LanguagesGlobe,
+    InfoIcon,
+    NecessaryTickIcon,
   };
 };
 

@@ -5,6 +5,7 @@ import {
   allowAllCookies,
   bannerAccordionToggle,
   fillCategories,
+  fillCookiesSettingItem,
 } from "./utils/logic";
 // import { DomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
@@ -150,6 +151,7 @@ function initiateTypeChangeAndBannerShow() {
         draw(CountryCode);
         setTimeout(() => {
           fillCategories();
+          fillCookiesSettingItem();
           bannerAccordionToggle();
           allowAllCookies();
         }, 300);
