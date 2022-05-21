@@ -8,9 +8,6 @@ const glob = require("glob");
 
 module.exports = merge(commonConfig, {
   mode: "production",
-  // devtool: false,
-  devtool: "source-map",
-  // watch: true,
   module: {
     rules: [
       {
@@ -28,15 +25,15 @@ module.exports = merge(commonConfig, {
             options: { publicPath: "" },
           },
           "css-loader",
-          "postcss-loader",
           "sass-loader",
+          "postcss-loader",
         ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "main.css",
+      filename: "main.min.css",
     }),
   ],
   optimization: {
@@ -51,11 +48,5 @@ module.exports = merge(commonConfig, {
       }),
       new TerserPlugin(),
     ],
-    splitChunks: {
-      minRemainingSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 30,
-      maxInitialRequests: 30,
-    },
   }
 });

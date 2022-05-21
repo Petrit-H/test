@@ -3,6 +3,8 @@ const path = require("path");
 const commonConfig = require("./webpack.common");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = merge(commonConfig, {
   mode: "development",
@@ -33,14 +35,7 @@ module.exports = merge(commonConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "main.css",
+      filename: "main.min.css",
     }),
   ],
-  devServer: {
-    static: "./public",
-    compress: true,
-    hot: true,
-    // open: true,
-    port: 3000,
-  },
 });
