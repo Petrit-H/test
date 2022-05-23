@@ -18,7 +18,7 @@ pre {
   text-align: left;
   background: black;
   padding: 20px;
-  max-height: 300px;
+  // max-height: 300px;
   width: 60%;
   margin: 0 20% 30px 20%;
   overflow: auto;
@@ -168,7 +168,7 @@ ul {
 
 .example-selector > li {
   display: inline-block;
-  height: 6em;
+  // height: 6em;
   width: 6em;
   color: rgba(0, 0, 0, 0.7);
   background: rgba(255, 255, 255, 0.7);
@@ -299,11 +299,12 @@ ul {
 
 .cc-type-info,
 .cc-type-opt-in {
-  background-color: #052d61;
+  // background-color: #052d61;
 }
 
 //! small consent banner visible on page load
 .CMPWrapper {
+  margin-bottom: 1rem !important;
   // background-color: #052d61;
   // position: absolute;
   // top: 0;
@@ -318,13 +319,13 @@ ul {
     line-height: 18px;
 
     &__description {
-      color: #a3b0c2;
+      // color: #a3b0c2;
 
       button,
       a {
-        position: relative;
-        color: #ffffff !important;
-        margin-right: 1rem;
+        // position: relative;
+        // color: #ffffff !important;
+        // margin-right: 1rem;
 
         // text-decoration: underline;
         &::after {
@@ -343,14 +344,14 @@ ul {
     &__controls {
       button,
       a {
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        // border: 1px solid rgba(255, 255, 255, 0.2);
         box-sizing: border-box;
         // &:nth-child(1) {
         //   margin-right: 2rem;
         // }
         // &:nth-child(2) {
-        background-color: #1d79f2;
-        border-color: #1d79f2;
+        // background-color: #1d79f2;
+        // border-color: #1d79f2;
         // }
       }
     }

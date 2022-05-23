@@ -72,6 +72,7 @@ const optionsObj = (countryCode, type) => {
     container: document.getElementById("CMP_Selector"),
     type: type,
     regionalLaw: true,
+    // position:"left",
     legal: countryCode,
     location: true,
     revokable: true,

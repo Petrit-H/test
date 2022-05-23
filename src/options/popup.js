@@ -21,6 +21,7 @@ import {
   CONSENT_COOKIE_SETTINGS,
   CONSENT_BANNER_LOGO,
   CONSENT_BANNER_LANGUAGES_ICON,
+  CONSENT_COOKIE_PRIVACY,
 } from "../constants/index.js";
 
 export default {
@@ -58,7 +59,7 @@ export default {
     closeWhite: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
     target: CONSENT_COOKIE_PRIVACY_LINK_TARGET,
     widgetImage: `<img src=${CONSENT_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
-    cookiePolicy: "Cookie Policy",
+    cookiePolicy: CONSENT_COOKIE_PRIVACY,
     privacyPolicy: "Privacy Policy",
     settings: CONSENT_COOKIE_SETTINGS,
   },
@@ -75,19 +76,26 @@ export default {
     messagelink:
       '<span id="cookieconsent:desc" class="cc-message">{{policy}} <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a></span>',
     // dismiss: `<a aria-label="dismiss cookie message" role=button tabindex="0" class="cc-btn cc-${STATUS_DISMISS}">{{dismiss}}</a>`,
+    //? <button class="text-blue banner-type-change">Cookie Settings</button>
+
     dismiss: `
     <div class="controlSection z-50 fixed top-0 right-0 pt-2 pr-2 flex justify-between items-center ">
       <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhite}}</span>
     </div>
-    <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
-      <div class=" bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 ">
-          <p class="text-petrit font-bold text-base">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class="text-blue banner-type-change">Cookie Settings</button>
-          </p>
+    <div id="CMP" class="CMPWrapper  transform  bannerWrapper flex flex-col md:flex-row justify-between w-screen	max-w-7xl mx-auto">
+      <div class=" bannerWrapper__description mb-9 md:mb-0  leading-4 ">
+        <p class="text-base font-normal text-black-400 mb-3">We value your privacy</p>
+        <p class=" font-normal text-black-400 text-xsmall">
+        {{message}}
+          <span id="cookieconsent:desc">
+            <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+            <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+          </span>
+        </p>
       </div>
-      <div class="bannerWrapper__controls flex justify-end text-sm bg-petrit">
-        <button class="got-it-button px-10 w-3/4 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{dismiss}}</button>
-        <button class="banner-type-change px-10 w-3/4 cc-btn py-2.5 rounded-md " id="accept-cookies">{{settings}}</button>
+      <div class="bannerWrapper__controls w-full md:w-1/2 flex items-center flex-col md:flex-row justify-end text-sm ">
+        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white got-it-button px-10 mb-2 md:mb-0 w-full md:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{allowAll}}</button>
+        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 banner-type-change px-10 w-full md:w-auto py-2.5 rounded-4 " id="accept-cookies">{{settings}}</button>
       </div>
     </div>
     `,
@@ -97,7 +105,7 @@ export default {
     </div>
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
-          <p class="text-black-faded">{{message}}
+          <p class="text-black-400">{{message}}
           <span id="cookieconsent:desc">
             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a>
           </span>
@@ -187,7 +195,7 @@ export default {
   //  - {{classes}} is where additional classes get added
   //  - {{children}} is where the HTML children are placed
   window:
-    '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="CMPWrapper w-full transform opacity-0  z-50  TEST cc-window {{classes}}"><!--googleoff: all-->{{children}}<!--googleon: all--></div>',
+    '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="CMPWrapper w-full transform opacity-0  z-50 shadow-3 cc-window {{classes}}">{{children}}</div>',
 
   modal: "",
 

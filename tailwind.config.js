@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        petrit: "#00ff00",
+        petrit: "#1A1A1A",
         blue: {
           200: "#B0CDFB",
           300: "#667C99",
@@ -18,7 +18,8 @@ module.exports = {
         },
         black: {
           DEFAULT: "#000000",
-          faded: "#2C2C2C",
+          300: "#2C2C2C",
+          400: "#1A1A1A",
         },
         gray: {
           faded: "#F6F7F9",
@@ -45,9 +46,11 @@ module.exports = {
       boxShadow: {
         primary: "0 0 0 1px rgb(29, 121, 242)",
         2: "0px 2px 16px rgba(0, 0, 0, 0.08)",
+        3: "0px 4px 16px rgba(44, 44, 44, 0.16)",
       },
       maxWidth: {
         "1/2": "50%",
+        "7/10": "70%",
         "3/4": "75%",
         "4/5": "80%",
         "9/10": "90%",
@@ -55,6 +58,9 @@ module.exports = {
       },
       borderWidth: {
         1: "1px",
+      },
+      borderRadius: {
+        4: "4px",
       },
       width: {
         100: "100px",

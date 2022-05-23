@@ -4,7 +4,7 @@
   "consentData": {
     "consentHeaderMessage": "Cookies used on the website!",
     "consentBannerTitle": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions. More information about each cookie category can be found below. Cookies under the “Necessary” category are essential for the site to function and cannot be turned off. However you can choose to give or withdraw consent by enabling / disabling all other categories below. Please be aware that disabling some of these categories may affect your browsing experience.",
-    "consentMessage": "By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.",
+    "consentMessage": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions",
     "dismissButtonContent": "Got it!",
     "allowButtonContent": "Allow",
     "allowAllButtonContent": "Accept All",
@@ -14,6 +14,8 @@
     "closeIcon": "https://tojnhu4mvp.gjirafa.net/CMP/close-cancel.svg",
     "closeIconWhite": "https://tojnhu4mvp.gjirafa.net/CMP/closeIconWhite.svg",
     "cookiePolicyLinkTarget": "_blank",
+    "cookiePolicy": "Cookie Policy",
+    "cookieSettings": "Settings",
     "widgetImageCircle": "https://tojnhu4mvp.gjirafa.net/CMP/widgetCircle.svg",
     "widgetImageTriangle": "https://tojnhu4mvp.gjirafa.net/CMP/widgetTriangle.svg",
     "caretDownIcon": "https://tojnhu4mvp.gjirafa.net/CMP/caretDown.svg",
@@ -21,9 +23,7 @@
     "portaCMPLogo": "https://tojnhu4mvp.gjirafa.net/CMP/porta.svg",
     "languagesGlobe": "https://tojnhu4mvp.gjirafa.net/CMP/languageGlobe.svg",
     "infoIcon": "https://tojnhu4mvp.gjirafa.net/CMP/info-circle.svg",
-    "necessaryTick": "https://tojnhu4mvp.gjirafa.net/CMP/necessaryTick.svg",
-    "cookiePolicy": "Cookie Policy",
-    "cookieSettings": "Cookie Preferences"
+    "necessaryTick": "https://tojnhu4mvp.gjirafa.net/CMP/necessaryTick.svg"
   },
   "domainId": 135,
   "domainName": "Testing connection back front Domains",
