@@ -58,7 +58,8 @@ export default {
     closeWhite: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
     target: CONSENT_COOKIE_PRIVACY_LINK_TARGET,
     widgetImage: `<img src=${CONSENT_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
-    policy: "Cookie Policy",
+    cookiePolicy: "Cookie Policy",
+    privacyPolicy: "Privacy Policy",
     settings: CONSENT_COOKIE_SETTINGS,
   },
 
@@ -96,8 +97,11 @@ export default {
     </div>
     <div id="CMP" class="CMPWrapper transform  bannerWrapper flex flex-col xl:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class="bannerWrapper__description mb-9 xl:mb-0 w-full xl:w-2/3 leading-4 text-sm">
-          <p class="text-black-faded">{{message}} <span id="cookieconsent:desc"><a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a></span>
-            <button class=" banner-type-change">Cookie Settings</button>
+          <p class="text-black-faded">{{message}}
+          <span id="cookieconsent:desc">
+            <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{policy}}</a>
+          </span>
+          <button class=" banner-type-change">Cookie Settings</button>
           </p>
       </div>
       <div class="bannerWrapper__controls flex justify-end text-sm">
@@ -115,19 +119,34 @@ export default {
     <div class="cookieModal  relative overflow-hidden rounded-lg bg-white w-full">
       <div class="controlSection z-50 sticky top-0 mb-1 px-6 py-6 flex justify-between items-center ">
         <div><img src=${CONSENT_BANNER_LOGO} alt="Consent Logo" /></div>
-        <div class="">
-          <button aria-label="dismiss cookie message" role=button tabindex="0" class="hover:bg-gray-faded active:bg-gray-faded rounded-sm"><img src=${CONSENT_BANNER_LANGUAGES_ICON}
-              alt="language picker" /></button>
+        <div class="flex">
+        <div id="language-icon-button" class="relative">
+          <button aria-label="dismiss cookie message" role=button tabindex="0"  class="h-full hover:bg-gray-faded active:bg-gray-faded rounded-sm">
+            <img src=${CONSENT_BANNER_LANGUAGES_ICON}  alt="language picker" />
+          </button>
+          <div id="language-options" class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
+              <button class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal">English</button>
+              <button class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal">Czech</button>
+          </div>
+        </div>
           <button aria-label="dismiss cookie message" role=button tabindex="0">{{close}}</button>
         </div>
       </div>
       <div class="tabs flex justify-start px-6  border-b border-blue-300">
           <button class="tab pointer relative pb-4 mr-6 text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#COOKIE_DISPLAY">Categories</button>
-          <button class="tab pointer relative pb-4  text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " data-tab-target="#COOKIE_SETTINGS">Cookies</button>
-        </div>
+          <button class="tab pointer relative pb-4  text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#COOKIE_SETTINGS">Cookies</button>
+      </div>
       <div class="contentWrapper px-6 overflow-y-auto my-3">
         <div class="descSectoin py-3 ">
           <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading">{{title}}</p>
+          <div class="flex">
+            <span id="cookieconsent:desc" class="text-blue text-small font-medium border-b-1 border-blue">
+             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
+            </span>
+            <span id="cookieconsent:desc" class="text-blue text-small font-medium ml-2 border-b-1 border-blue">
+             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+            </span>
+          </div>
         </div>
 
         <div class="tab-content">
@@ -147,11 +166,11 @@ export default {
       <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
         <div>
           <button
-          class="cc-btn cc-save  cc-${STATUS_ALLOW} border-2 border-blue-200 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
+          class="cc-btn cc-save  cc-${STATUS_ALLOW} border-1 border-blue-200 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
           My Choices
           </button>
           <button type="button"
-            class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-2 border-blue-400 rounded-md text-white bg-blue-400 px-5 py-1.5  ml-2">
+            class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-1 border-blue-400 rounded-md text-white bg-blue-400 px-5 py-1.5  ml-2">
             {{allowAll}}
           </button>
         </div>

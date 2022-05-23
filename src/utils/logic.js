@@ -28,6 +28,7 @@ import { fillJSONWithCheckedCategory, responseJSON } from "../initFile";
 
 let data = [];
 let COOKIES = [];
+let filteredCookies = [];
 let cookiesPerCateroryArr = [];
 let response = [];
 
@@ -43,6 +44,23 @@ const filterCookiesByCategory = (arr, id, category) => {
   // console.log(`🚀 ~ ${category} id:`, +id, `=> `, response);
   return response;
 };
+const switchBannerTabs = () => {
+  const tabs = document.querySelectorAll("[data-tab-target]");
+  const tabContents = document.querySelectorAll("[data-tab-content]");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = document.querySelector(tab.dataset.tabTarget);
+      tabContents.forEach((tabContent) => {
+        tabContent.classList.remove("active");
+      });
+      tabs.forEach((tab) => {
+        tab.classList.remove("active");
+      });
+      tab.classList.add("active");
+      target.classList.add("active");
+    });
+  });
+};
 
 /**
  * FILL THE COOKIE SETTINGS SECTION
@@ -50,7 +68,6 @@ const filterCookiesByCategory = (arr, id, category) => {
  * @param {Integer} domainId
  */
 const fillCookiesSettingItem = () => {
-  console.log("fillCookiesSettingItem")
   // COOKIES = filterCookiesByCategory(
   //   CookiesPerDomain,
   //   categoryId,
@@ -76,7 +93,7 @@ const fillCookiesSettingItem = () => {
     customCategoriesBanner.innerHTML = COOKIES?.map((item) => {
       return `
  <div class="settingAccordion border-b border-l border-r first-of-type:border-t first-of-type:rounded-tr-md first-of-type:rounded-tl-md last-of-type:rounded-br-md last-of-type:rounded-bl-md border-gray-light my-0 rounded-none">
-   <div class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id="">
+   <div id="cookie-${item.id}" class="accordionHeader cursor-pointer flex justify-between p-4" data-cookie-settings-id=${item.id}>
       <p class="category-title text-base text-blue-500 font-normal">${item.name}</p>
       <div class="controlButtons flex">
          <button id="closeIcon" class="carret closeIcon cursor-pointer my-auto">
@@ -115,33 +132,147 @@ const fillCookiesSettingItem = () => {
 };
 
 /**
+ *
+ * @param {Array} item the cookie passed to be mapped through
+ * @returns
+ */
+const filteredCookiesPerCategory = (item) => {
+  return `
+  <div class="testClick settingAccordion border-b border-l border-r first-of-type:border-t first-of-type:rounded-tr-md first-of-type:rounded-tl-md last-of-type:rounded-br-md last-of-type:rounded-bl-md border-gray-light my-0 rounded-none">
+    <div class="accordionHeader  cursor-pointer flex justify-between p-4" data-cookie-settings-id=${item.id}>
+       <p class="category-title text-base text-blue-500 font-normal">${item.name}</p>
+       <div class="controlButtons flex">
+          <button id="closeIcon" class="carret closeIcon cursor-pointer my-auto">
+             <img src="${CONSENT_CARET_DOWN_ICON}" class="toggleAccordion transition transform duration-200 -rotate-90 ease-in-out "
+                alt="caret up/down" />
+          </button>
+       </div>
+    </div>
+       <ul class="mb-4 transform accordionContent mx-4 h-0 hidden transition-all duration-500 ease-in-out">
+         <li class="flex flex-col justify-between mb-4">
+           <span class="flex-1 text-blue-300 text-small font-medium ">Category</span>
+           <span class="flex-1 text-small text-blue-500 font-medium" id="cookieCategory">${item.category.name}</span>
+         </li>
+         <li class="flex flex-col justify-between my-4">
+            <span class="flex-1 text-blue-300 text-small font-medium ">Description</span>
+            <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDescription">${item.description}</span>
+         </li>
+          <li class="flex flex-col justify-between my-4">
+             <span class="flex-1 text-blue-300 text-small font-medium ">Name</span>
+             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieName">${item.name}</span>
+          </li>
+          <li class="flex flex-col justify-between my-4">
+             <span class="flex-1 text-blue-300 text-small font-medium ">Host</span>
+             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieHost">${item.cookieDomain}</span>
+          </li>
+          <li class="flex flex-col justify-between my-4">
+             <span class="flex-1 text-blue-300 text-small font-medium ">Duration</span>
+             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDuration">${item.expiration}</span>
+          </li>
+       </ul>
+ </div>
+               `;
+};
+
+const changeTabOnClick = () => {
+  const tabs = document.querySelectorAll(".testClick");
+  console.log("CLICK", tabs);
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      let cookieId = tab.children[0].dataset.cookieSettingsId;
+      const targetCookie = document.getElementById(`cookie-${cookieId}`);
+      document.getElementById("cookies-tab").click();
+      targetCookie.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      targetCookie.click();
+    });
+  });
+};
+
+/**
  * Toggle the category accordion
  */
 const bannerAccordionToggle = function () {
   setTimeout(() => {
-    const accordionHeaders = document.querySelectorAll(
-      ".cc-category .accordionHeader"
-    );
+    const accordionHeaders = document.querySelectorAll(" .cookieDetails");
+
     const accordionContents = document.querySelectorAll(
       ".cc-category .accordionContent"
     );
     const categoryDescription =
       document.getElementsByClassName("cookieDetails");
     const injectedLabel = document.querySelectorAll(".dot-wrapper");
+    const carretToggle = document.querySelectorAll(".toggleAccordion");
 
     for (let i = 0; i < accordionHeaders.length; i++) {
-      const categoryID = accordionHeaders[i].dataset.categoryId;
+      const categoryID = +accordionHeaders[i].dataset.settingsDetailsId;
+      // const categoryID = +accordionHeaders[i].dataset.categoryId;
       const domainID = accordionHeaders[i].dataset.did;
+      const contentData = document.getElementById(
+        `CATEGORY_CONTENT_${categoryID}`
+      );
+      const closeAllAccContent = () => {
+        for (let i = 0; i < accordionContents.length; i++) {
+          const element = accordionContents[i];
+          element.classList.add("h-0");
+          element.classList.add("hidden");
+          carretToggle[i].classList.remove("rotate-180");
+        }
+      };
       injectedLabel[i].addEventListener("click", (event) => {
         event.stopPropagation();
       });
       accordionHeaders[i].addEventListener("click", () => {
-        const contentData = document.getElementById(
-          `CATEGORY_CONTENT_${categoryID}`
-        );
-        ["h-0", "hidden"].map((cssClass) => {
-          contentData?.classList?.toggle(cssClass);
-        });
+        if (
+          contentData.classList.contains("hidden") ||
+          contentData.classList.contains("h-0")
+        ) {
+          console.log("closed");
+          filteredCookies = filterCookiesByCategory(
+            CookiesPerDomain,
+            categoryID,
+            cookiesPerCateroryArr,
+            "filteredCookies"
+          );
+          contentData.innerHTML = filteredCookies
+            ?.map((item) => filteredCookiesPerCategory(item))
+            .join("");
+          changeTabOnClick();
+          closeAllAccContent();
+          toggleCSSclasses(contentData, "hidden", "h-0");
+          carretToggle[i].classList.add("rotate-180");
+        } else {
+          console.log("opened");
+          filteredCookies = filterCookiesByCategory(
+            CookiesPerDomain,
+            categoryID,
+            cookiesPerCateroryArr,
+            "filteredCookies"
+          );
+          contentData.innerHTML = filteredCookies
+            ?.map((item) => filteredCookiesPerCategory(item))
+            .join("");
+          toggleCSSclasses(contentData, "hidden", "h-0");
+          carretToggle[i].classList.add("rotate-180");
+          changeTabOnClick();
+        }
+
+        // filteredCookies = filterCookiesByCategory(
+        //   CookiesPerDomain,
+        //   categoryID,
+        //   cookiesPerCateroryArr,
+        //   "filteredCookies"
+        // );
+
+        // contentData.innerHTML = filteredCookies
+        //   ?.map((item) => filteredCookiesPerCategory(item))
+        //   .join("");
+        // ["h-0", "hidden"].map((cssClass) => {
+        //   contentData?.classList?.toggle(cssClass);
+        // });
+
         const children = accordionContents[i].childNodes;
       });
       // categoryDescription[i].addEventListener("click", () => {
@@ -149,6 +280,23 @@ const bannerAccordionToggle = function () {
       // });
     }
   }, 300);
+};
+
+const languageButtonToggle = () => {
+  setTimeout(() => {
+    const languageButton = document.getElementById("language-icon-button");
+    const languageOptionsMenu = document.getElementById("language-options");
+
+    // languageButton.addEventListener("mouseenter",()=>{
+    //   languageOptionsMenu.classList.remove("hidden")
+    // })
+    // languageButton.addEventListener("mouseleave",()=>{
+    //   languageOptionsMenu.classList.add("hidden")
+    // })
+    languageButton.addEventListener("click", () => {
+      languageOptionsMenu.classList.toggle("hidden");
+    });
+  }, 200);
 };
 
 /**
@@ -184,10 +332,28 @@ const settingsAccordionToggle = function () {
       ".settingAccordion .accordionContent"
     );
     const carretToggle = document.querySelectorAll(".toggleAccordion");
+
+    const closeAllAccContent = () => {
+      for (let i = 0; i < accordionContent.length; i++) {
+        const element = accordionContent[i];
+        element.classList.add("h-0");
+        element.classList.add("hidden");
+        carretToggle[i].classList.remove("rotate-180");
+      }
+    };
     for (let i = 0; i < accordionHeader.length; i++) {
       accordionHeader[i].addEventListener("click", function () {
-        toggleCSSclasses(accordionContent[i], "hidden", "h-0");
-        carretToggle[i].classList.toggle("rotate-180");
+        if (
+          accordionHeader[i].nextElementSibling.classList.contains("hidden") ||
+          accordionHeader[i].nextElementSibling.classList.contains("h-0")
+        ) {
+          closeAllAccContent();
+          toggleCSSclasses(accordionContent[i], "hidden", "h-0");
+          carretToggle[i].classList.add("rotate-180");
+        } else {
+          toggleCSSclasses(accordionContent[i], "hidden", "h-0");
+          carretToggle[i].classList.add("rotate-180");
+        }
       });
     }
   }, 200);
@@ -205,58 +371,67 @@ const fillCategories = function () {
     const basicCategoriesBanner = document.getElementById(
       "basic-categories-banner"
     );
-    console.log(
-      "🚀 ~ file: logic.js ~ line 216 ~ setTimeout ~ basicCategoriesBanner",
-      basicCategoriesBanner
-    );
 
     // console.log("🚀 ~ ~ ~ basicCategoriesBanner", basicCategoriesBanner);
     basicCategoriesBanner.innerHTML = DomainCategories?.slice(0)
       ?.reverse()
       ?.map((item) => {
         return `
-        <li id=test-${item.id} class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
-        <div class="accordionHeader text-small leading w-full flex flex-col justify-between py-6" data-category-id=${item.id} data-did=${DomainId}>
+        <li id=test-${
+          item.id
+        } class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
+        <div class="accordionHeader text-small leading w-full flex flex-col justify-between py-6"  data-did=${DomainId}>
           <div class="flex justify-between">
-            <p class=" category-title font-bold text-black-faded">${item.name}</p>
-            <label for="${item.name.toLowerCase()}" class="switch-toggle relative dot-wrapper inline-flex cursor-pointer ${item.name.toLowerCase()==="necessary" ? " cursor-not-allowed" : "" }" tabindex=${item.id}>
-              <button class="cc-btn w-auto group relative consentButton ${item.name.toLowerCase()==="necessary" ? " cursor-not-allowed" : "" }">
-                <input type="checkbox" id=${item.id} ${item.checked && "checked" } data-radio-parent-category-name="${item.name}" class="radioButtonCookie ${item.name.toLowerCase()==="necessary" ? "cursor-not-allowed" : "" }" name="${item.name}" value="${item.name.toLowerCase()}" ${item.name.toLowerCase()==="necessary" ? "disabled checked" : "" } />
-                <div class="switch-holder block border border-gray-light  w-9 h-6 rounded-full transition "></div>
-                <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition "></div>
+            <p class=" category-title font-bold text-black-faded">${
+              item.name
+            }</p>
+            <label for="${item.name.toLowerCase()}" class="switch-toggle relative dot-wrapper inline-flex cursor-pointer ${
+          item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""
+        }" tabindex=${item.id}>
+              <button class="cc-btn w-auto group relative consentButton ${
+                item.name.toLowerCase() === "necessary"
+                  ? " cursor-not-allowed"
+                  : ""
+              }">
+                <input type="checkbox" id=${item.id} ${
+          item.checked && "checked"
+        } data-radio-parent-category-name="${
+          item.name
+        }" class="radioButtonCookie ${
+          item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""
+        }" name="${item.name}" value="${item.name.toLowerCase()}" ${
+          item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
+        } />
+                <div class="switch-holder block border-1 border-gray-light  w-9 h-6 rounded-full transition "></div>
+                <div class="${
+                  item.name.toLowerCase() === "necessary"
+                    ? "translate-x-3 transform cursor-not-allowed necessary-category "
+                    : "bg-gray-dark"
+                } bg-gray-dark dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition "></div>
               </button>
             </label>
           </div>
-          <p class="category-description py-2 max-w-9/10 text-black-faded transition duration-300 ease-in-out transform">${item.description ? item.description : item.name}</p>
-          <button value=${item.id} data-settings-details-id=${ item.id } class="cookieDetails max-w-max flex items-center text-blue font-medium ">
-            <span>Show Cookies</span> <img src=${CONSENT_BANNER_CHEVRON_DOWN} alt="show cookies chevron"/>
+          <p class="category-description py-2 max-w-9/10 text-black-faded transition duration-300 ease-in-out transform">${
+            item.description ? item.description : item.name
+          }</p>
+          <button value=${item.id} data-settings-details-id=${
+          item.id
+        } class="cookieDetails max-w-max flex items-center text-blue font-medium " data-category-id=${
+          item.id
+        }>
+            <span>Show Cookies</span> <img src=${CONSENT_BANNER_CHEVRON_DOWN} class="toggleAccordion" alt="show cookies chevron"/>
           </button>
         </div>
-        <div class="accordionContent border-t h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${item.id}">
+        <div class="accordionContent h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${
+          item.id
+        }">
         vdfvdfabergfrrecgwertwfethwrtrt
         </div>
       </li>
         `;
       })
       .join("");
-      const tabs = document.querySelectorAll("[data-tab-target]");
-      const tabContents = document.querySelectorAll("[data-tab-content]");
-      console.log("🚀 ~ file: logic.js ~ line 269 ~ setTimeout ~ tabs", tabContents)
-      tabs.forEach((tab) => {
-        console.log(tab);
-        tab.addEventListener("click", () => {
-          console.log("CLICKKKKKK");
-          const target = document.querySelector(tab.dataset.tabTarget);
-          tabContents.forEach((tabContent) => {
-            tabContent.classList.remove("active");
-          });
-          tabs.forEach((tab) => {
-            tab.classList.remove("active");
-          });
-          tab.classList.add("active");
-          target.classList.add("active");
-        });
-      });
+    switchBannerTabs();
     // console.log(responseJSON)
   }, 200);
 };
@@ -312,4 +487,5 @@ export {
   allowAllCookies,
   acceptNecessary,
   stopParentClick,
+  languageButtonToggle,
 };

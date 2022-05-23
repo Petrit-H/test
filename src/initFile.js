@@ -6,6 +6,7 @@ import {
   bannerAccordionToggle,
   fillCategories,
   fillCookiesSettingItem,
+  languageButtonToggle,
 } from "./utils/logic";
 // import { DomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
@@ -96,8 +97,8 @@ function timeStamp() {
   // console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
-
 fetchClientIp().then((country) => {
+
   CountryCode = country;
   ccInstance = new CookieConsent(optionsObj(country, testType));
   ccInstance.autoOpen = true;
@@ -108,6 +109,7 @@ fetchClientIp().then((country) => {
     .on("popupOpened", (...args) => {
       acceptNecessary();
       initiateTypeChangeAndBannerShow();
+      languageButtonToggle()
     })
     .on("popupClosed", (...args) => {
       acceptNecessary();

@@ -44,15 +44,20 @@ module.exports = {
       },
       boxShadow: {
         primary: "0 0 0 1px rgb(29, 121, 242)",
+        2: "0px 2px 16px rgba(0, 0, 0, 0.08)",
       },
       maxWidth: {
         "1/2": "50%",
         "3/4": "75%",
         "4/5": "80%",
         "9/10": "90%",
+        100: "100px",
       },
-      borders: {
+      borderWidth: {
         1: "1px",
+      },
+      width: {
+        100: "100px",
       },
     },
   },

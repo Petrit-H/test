@@ -12,9 +12,9 @@
   },
   "homepage": "https://github.com/Petrit-H/test.git",
   "scripts": {
-    "twb":"npx tailwindcss -o ./src/styles/tailwind.css --watch",
+    "twb": "npx tailwindcss -o ./src/styles/tailwind.css --watch",
     "start": "webpack --config  webpack.dev.js",
-    "build": "npx tailwindcss -o ./src/styles/tailwind.css && webpack --config webpack.prod.js",
+    "build": " webpack --config webpack.prod.js",
     "test": "jest ./src --verbose --coverage && rm -rf coverage/"
   },
   "repository": {
@@ -34,8 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
-    "babel-runtime": "^6.26.0",
-    "webpack-dev-server": "^4.8.1"
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
