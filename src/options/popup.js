@@ -16,12 +16,15 @@ import {
   CONSENT_ALLOW_ALL_BUTTON_CONTENT,
   CONSENT_DENY_BUTTON_CONTENT,
   CONSENT_LEARN_MORE_CONTENT,
+  CONSENT_COOKIE_PRIVACY,
   CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
+  CONSENT_PRIVACY_POLICY,
+  CONSENT_PRIVACY_POLICY_LINK_CONTENT,
   CONSENT_COOKIE_PRIVACY_LINK_TARGET,
   CONSENT_COOKIE_SETTINGS,
   CONSENT_BANNER_LOGO,
   CONSENT_BANNER_LANGUAGES_ICON,
-  CONSENT_COOKIE_PRIVACY,
+  // CONSENT_COOKIE_PRIVACY,
 } from "../constants/index.js";
 
 export default {
@@ -60,7 +63,8 @@ export default {
     target: CONSENT_COOKIE_PRIVACY_LINK_TARGET,
     widgetImage: `<img src=${CONSENT_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
     cookiePolicy: CONSENT_COOKIE_PRIVACY,
-    privacyPolicy: "Privacy Policy",
+    privacyPolicy: CONSENT_PRIVACY_POLICY,
+    privacyPolicyLink: CONSENT_PRIVACY_POLICY_LINK_CONTENT,
     settings: CONSENT_COOKIE_SETTINGS,
   },
 
@@ -88,13 +92,13 @@ export default {
         <p class=" font-normal text-black-400 text-xsmall">
         {{message}}
           <span id="cookieconsent:desc">
-            <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+            <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
             <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
           </span>
         </p>
       </div>
       <div class="bannerWrapper__controls w-full md:w-1/2 flex items-center flex-col md:flex-row justify-end text-sm ">
-        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white got-it-button px-10 mb-2 md:mb-0 w-full md:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{allowAll}}</button>
+        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white got-it-button px-10 mb-2 md:mb-0 w-full md:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
         <button class="border-1 border-blue-400 bg-white text-small text-blue-400 banner-type-change px-10 w-full md:w-auto py-2.5 rounded-4 " id="accept-cookies">{{settings}}</button>
       </div>
     </div>
@@ -149,7 +153,7 @@ export default {
           <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading">{{title}}</p>
           <div class="flex">
             <span id="cookieconsent:desc" class="text-blue text-small font-medium border-b-1 border-blue">
-             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
+             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyLink}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
             </span>
             <span id="cookieconsent:desc" class="text-blue text-small font-medium ml-2 border-b-1 border-blue">
              <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>

@@ -1,4 +1,5 @@
 {
+  "consentType":1,
   "timestamp": "Wed May 04 2022 17:26:09 GMT+0200 (Central European Summer Time)",
   "ipAddressURL": "https://cmp.gjirafa.dev/GetPublicIp",
   "consentData": {
@@ -10,11 +11,13 @@
     "allowAllButtonContent": "Accept All",
     "denyButtonContent": "Decline",
     "learnMore": "Learn More",
+    "cookiePolicy": "Cookie Policy",
     "cookiePolicyLink": "https://www.cookiesandyou.com",
+    "privacyPolicy": "Privacy Policy",
+    "privacyPolicyLink": "https://www.cookiesandyou.com",
     "closeIcon": "https://tojnhu4mvp.gjirafa.net/CMP/close-cancel.svg",
     "closeIconWhite": "https://tojnhu4mvp.gjirafa.net/CMP/closeIconWhite.svg",
     "cookiePolicyLinkTarget": "_blank",
-    "cookiePolicy": "Cookie Policy",
     "cookieSettings": "Settings",
     "widgetImageCircle": "https://tojnhu4mvp.gjirafa.net/CMP/widgetCircle.svg",
     "widgetImageTriangle": "https://tojnhu4mvp.gjirafa.net/CMP/widgetTriangle.svg",

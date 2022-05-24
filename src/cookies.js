@@ -32,6 +32,8 @@ export let DenyButtonContent = "";
 export let LearnMore = "";
 export let CookiePolicy = "";
 export let CookiePolicyLink = "";
+export let PrivacyPolicy = "";
+export let PrivacyPolicyLink = "";
 export let CookieSettings = "";
 export let CookiePolicyLinkTarget = "";
 export let CloseIconWhite = "";
@@ -70,6 +72,8 @@ const {
   learnMore,
   cookiePolicyLink,
   cookiePolicy,
+  privacyPolicyLink,
+  privacyPolicy,
   closeIcon,
   caretDownIcon,
   closeIconWhite,
@@ -105,10 +109,12 @@ export const fetchDataFromJSONFile = async () => {
     AllowAllButtonContent = allowAllButtonContent;
     DenyButtonContent = denyButtonContent;
     LearnMore = learnMore;
-    CookiePolicyLink = cookiePolicyLink;
     CookieSettings = cookieSettings;
-    CookiePolicyLinkTarget = cookiePolicyLinkTarget;
+    CookiePolicyLink = cookiePolicyLink;
     CookiePolicy = cookiePolicy;
+    PrivacyPolicyLink = privacyPolicyLink;
+    PrivacyPolicy = privacyPolicy;
+    CookiePolicyLinkTarget = cookiePolicyLinkTarget;
     CloseIconWhite = closeIconWhite;
     CloseIcon = closeIcon;
     CaretDownIcon = caretDownIcon;
@@ -139,6 +145,8 @@ export const fetchDataFromJSONFile = async () => {
       LearnMore,
       CookiePolicyLink,
       CookiePolicy,
+      PrivacyPolicyLink,
+      PrivacyPolicy,
       CookiePolicyLinkTarget,
       CloseIconWhite,
       CloseIcon,
@@ -173,7 +181,10 @@ export const fetchDataFromJSONFile = async () => {
     AllowAllButtonContent,
     LearnMore,
     CookiePolicyLinkTarget,
+    CookiePolicyLink,
     CookiePolicy,
+    PrivacyPolicyLink,
+    PrivacyPolicy,
     CloseIconWhite,
     CloseIcon,
     CaretDownIcon,

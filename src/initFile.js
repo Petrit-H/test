@@ -105,10 +105,11 @@ fetchClientIp().then((country) => {
   ccInstance.autoOpen = true;
   ccInstance
     .on("initialized", function (popup) {
-      // ccInstance.popup?.open();
+      // ccInstance.popup?.open()
+      initiateTypeChangeAndBannerShow();
     })
     .on("popupOpened", (...args) => {
-      acceptNecessary();
+      // acceptNecessary();
       initiateTypeChangeAndBannerShow();
       languageButtonToggle()
     })
@@ -143,6 +144,11 @@ function initiateTypeChangeAndBannerShow() {
   const bannerTypeChangeButtons = document.querySelectorAll(
     ".banner-type-change"
   );
+  const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once")
+  console.log("🚀 ~~ acceptAllCookiesAtOnce", acceptAllCookiesAtOnce)
+  acceptAllCookiesAtOnce.addEventListener("click",()=>{
+    console.log("click")
+  })
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       timeStamp();

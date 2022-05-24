@@ -24,6 +24,8 @@ import {
   InfoIcon,
   NecessaryTickIcon,
   CookiePolicy,
+  PrivacyPolicy,
+  PrivacyPolicyLink,
 } from "../cookies";
 fetchDataFromJSONFile().then((json) => json);
 
@@ -45,8 +47,10 @@ export const CONSENT_ALLOW_ALL_BUTTON_CONTENT = AllowAllButtonContent;
 export const CONSENT_DENY_BUTTON_CONTENT = DenyButtonContent;
 export const CONSENT_LEARN_MORE_CONTENT = LearnMore;
 export const CONSENT_COOKIE_PRIVACY_LINK_CONTENT = CookiePolicyLink;
-export const CONSENT_COOKIE_PRIVACY_LINK_TARGET = CookiePolicyLinkTarget;
 export const CONSENT_COOKIE_PRIVACY = CookiePolicy;
+export const CONSENT_PRIVACY_POLICY_LINK_CONTENT = PrivacyPolicyLink;
+export const CONSENT_PRIVACY_POLICY = PrivacyPolicy;
+export const CONSENT_COOKIE_PRIVACY_LINK_TARGET = CookiePolicyLinkTarget;
 export const CONSENT_COOKIE_SETTINGS = CookieSettings;
 export const CONSENT_BANNER_LOGO = PortaCMPLogo;
 export const CONSENT_BANNER_CHEVRON_DOWN = ChevronDownFilled;

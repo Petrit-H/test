@@ -456,6 +456,11 @@ const allowAllCookies = function () {
   }, 300);
 };
 
+const allowAllCookiesAtOnce = () => {
+  saveAllCookies();
+  fillJSONWithCheckedCategory();
+};
+
 /**
  * allow necessary cookies
  */
