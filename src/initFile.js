@@ -1,20 +1,9 @@
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
-import {
-  acceptNecessary,
-  allowAllCookies,
-  bannerAccordionToggle,
-  fillCategories,
-  fillCookiesSettingItem,
-  languageButtonToggle,
-} from "./utils/logic";
-// import { DomainCategories } from "./getDomainsWithCookies";
+import { acceptNecessary, acceptAllCookies, bannerAccordionToggle, fillCategories, fillCookiesSettingItem, languageButtonToggle, allowAllCookiesAtOnce } from "./utils/logic";
+// import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
-import {
-  DomainCategories,
-  CookiesPerDomain,
-  fetchDataFromJSONFile,
-} from "./cookies";
+import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
 import { saveAllCookies } from "./getDomainsWithCookies";
 
 let ccInstance;
@@ -39,8 +28,8 @@ export const fillJSONWithCheckedCategory = () => {
       }
     }
   } else {
-    for (let index = 0; index < DomainCategories.length; index++) {
-      const element = DomainCategories[index];
+    for (let index = 0; index < cmpDomainCategories.length; index++) {
+      const element = cmpDomainCategories[index];
       if (element.checked) {
         acceptedCategories.push(element.name);
       }
@@ -53,14 +42,11 @@ export const fillJSONWithCheckedCategory = () => {
 
 function createUUID() {
   var dt = new Date().getTime();
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      var r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (dt + Math.random() * 16) % 16 | 0;
+    dt = Math.floor(dt / 16);
+    return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+  });
   fetchDataFromJSONFile().then((json) => json);
   return uuid;
 }
@@ -99,7 +85,6 @@ function timeStamp() {
   return "[" + time.join(":") + "] ";
 }
 fetchClientIp().then((country) => {
-
   CountryCode = country;
   ccInstance = new CookieConsent(optionsObj(country, testType));
   ccInstance.autoOpen = true;
@@ -109,9 +94,8 @@ fetchClientIp().then((country) => {
       initiateTypeChangeAndBannerShow();
     })
     .on("popupOpened", (...args) => {
-      // acceptNecessary();
       initiateTypeChangeAndBannerShow();
-      languageButtonToggle()
+      languageButtonToggle();
     })
     .on("popupClosed", (...args) => {
       acceptNecessary();
@@ -141,14 +125,13 @@ const draw = function (countryCode) {
 
 function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
-  const bannerTypeChangeButtons = document.querySelectorAll(
-    ".banner-type-change"
-  );
-  const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once")
-  console.log("🚀 ~~ acceptAllCookiesAtOnce", acceptAllCookiesAtOnce)
-  acceptAllCookiesAtOnce.addEventListener("click",()=>{
-    console.log("click")
-  })
+  const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
+  const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
+  console.log("🚀 ~~ acceptAllCookiesAtOnce", acceptAllCookiesAtOnce);
+  acceptAllCookiesAtOnce.addEventListener("click", () => {
+    console.log("click");
+    allowAllCookiesAtOnce();
+  });
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       timeStamp();
@@ -162,7 +145,8 @@ function initiateTypeChangeAndBannerShow() {
           fillCategories();
           fillCookiesSettingItem();
           bannerAccordionToggle();
-          allowAllCookies();
+          acceptAllCookies();
+          acceptNecessary();
         }, 300);
       } else if (testType === "categories") {
         testType = "info ";

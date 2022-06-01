@@ -1,29 +1,9 @@
 import Base from "./Base";
 import defaultOptions from "../options/popup";
-import {
-  COOKIES_CATEGORIES,
-  COOKIES_STATUSES,
-  STATUS_ALLOW,
-  STATUS_DISMISS,
-} from "../constants";
-import {
-  addCustomStylesheet,
-  getCookie,
-  hash,
-  interpolateString,
-  isMobile,
-  isPlainObject,
-  isValidStatus,
-  setCookie,
-  throttle,
-  traverseDOMPath,
-} from "../utils";
-import {
-  getCookies,
-  saveNecessaryCookies,
-  saveSpecificCookies,
-} from "../getDomainsWithCookies";
-import { DomainCategories } from "../cookies.js";
+import { COOKIES_CATEGORIES, COOKIES_STATUSES, STATUS_ALLOW, STATUS_DISMISS } from "../constants";
+import { addCustomStylesheet, getCookie, hash, interpolateString, isMobile, isPlainObject, isValidStatus, setCookie, throttle, traverseDOMPath } from "../utils";
+import { getCookies, saveNecessaryCookies, saveSpecificCookies } from "../getDomainsWithCookies";
+import { cmpDomainCategories } from "../cookies.js";
 import { fillJSONWithCheckedCategory } from "../initFile";
 const { toBinary } = require("../utils/encryptToBinary.js");
 
@@ -50,10 +30,7 @@ export default class Popup extends Base {
       };
 
       for (let prefix in trans) {
-        if (
-          trans.hasOwnProperty(prefix) &&
-          typeof el.style[prefix + "ransition"] !== "undefined"
-        ) {
+        if (trans.hasOwnProperty(prefix) && typeof el.style[prefix + "ransition"] !== "undefined") {
           return trans[prefix];
         }
       }
@@ -74,9 +51,7 @@ export default class Popup extends Base {
     }
 
     // the full markup either contains the wrapper or it does not (for multiple instances)
-    let cookiePopup = this.options.window
-      .replace("{{classes}}", this.getPopupClasses().join(" "))
-      .replace("{{children}}", this.getPopupInnerMarkup());
+    let cookiePopup = this.options.window.replace("{{classes}}", this.getPopupClasses().join(" ")).replace("{{children}}", this.getPopupInnerMarkup());
 
     // if user passes html, use it instead
     const customHTML = this.options.overrideHTML;
@@ -89,9 +64,7 @@ export default class Popup extends Base {
 
     if (this.options.static) {
       // `grower` is a wrapper div with a hidden overflow whose height is animated
-      const wrapper = this.appendMarkup(
-        `<div class="cc-grower">${cookiePopup}</div>`
-      );
+      const wrapper = this.appendMarkup(`<div class="cc-grower">${cookiePopup}</div>`);
 
       wrapper.style.display = ""; // set it to visible (because appendMarkup hides it)
       this.element = wrapper.firstChild; // get the `element` reference from the wrapper
@@ -162,8 +135,7 @@ export default class Popup extends Base {
       el.style.display = "";
 
       if (this.options.static) {
-        this.element.parentNode.style.maxHeight =
-          this.element.clientHeight + "px";
+        this.element.parentNode.style.maxHeight = this.element.clientHeight + "px";
       }
 
       const fadeInTimeout = 20; // (ms) DO NOT MAKE THIS VALUE SMALLER. See below
@@ -173,10 +145,7 @@ export default class Popup extends Base {
       // If the class is remvoed before a redraw could happen, then the fadeIn effect WILL NOT work, and
       // the popup will appear from nothing. Therefore we MUST allow enough time for the browser to do
       // its thing. The actually difference between using 0 and 20 in a set timeout is neglegible anyway
-      this.openingTimeout = setTimeout(
-        () => this.afterFadeIn(el),
-        fadeInTimeout
-      );
+      this.openingTimeout = setTimeout(() => this.afterFadeIn(el), fadeInTimeout);
     }
   }
 
@@ -216,13 +185,7 @@ export default class Popup extends Base {
   }
 
   isOpen() {
-    return (
-      this.element &&
-      this.element.style.display === "" &&
-      (this.hasTransition
-        ? !this.element.classList.contains("cc-invisible")
-        : true)
-    );
+    return this.element && this.element.style.display === "" && (this.hasTransition ? !this.element.classList.contains("cc-invisible") : true);
   }
 
   toggleRevokeButton(show) {
@@ -232,11 +195,9 @@ export default class Popup extends Base {
   /**
    * Clear all the cookies
    */
-   clearCookies() {
+  clearCookies() {
     document.cookie.split(";").forEach(function (c) {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
     });
   }
 
@@ -263,9 +224,7 @@ export default class Popup extends Base {
    * @return { array<boolean> } - true if consent has been given
    */
   hasConsented() {
-    return this.getStatuses().map(
-      (status) => status === STATUS_ALLOW || status === STATUS_DISMISS
-    );
+    return this.getStatuses().map((status) => status === STATUS_ALLOW || status === STATUS_DISMISS);
   }
 
   // opens the popup if no answer has been given
@@ -295,16 +254,8 @@ export default class Popup extends Base {
       if (isValidStatus(status)) {
         // const hash = toBinary(status);
         const cookieName = name + "_" + categoryName;
-        const chosenBefore =
-          COOKIES_STATUSES.indexOf(getCookie(cookieName)) >= 0;
-        setCookie(
-          cookieName,
-          toBinary(status),
-          expiryDays,
-          domain,
-          path,
-          secure
-        );
+        const chosenBefore = COOKIES_STATUSES.indexOf(getCookie(cookieName)) >= 0;
+        setCookie(cookieName, toBinary(status), expiryDays, domain, path, secure);
         // saveNecessaryCookies()
         for (let index = 0; index < radioButtons.length; index++) {
           const element = radioButtons[index];
@@ -319,13 +270,13 @@ export default class Popup extends Base {
     };
 
     if (arguments.length === 0) {
-      COOKIES_CATEGORIES.forEach(( name ) =>
-        // DomainCategories.forEach((category) =>
+      COOKIES_CATEGORIES.forEach((name) =>
+        // cmpDomainCategories.forEach((category) =>
         updateCategoryStatus(name, this.userCategories[name])
       );
     } else if (arguments.length === 1) {
-      COOKIES_CATEGORIES.forEach(( name ) =>
-        // DomainCategories.forEach((category) =>
+      COOKIES_CATEGORIES.forEach((name) =>
+        // cmpDomainCategories.forEach((category) =>
         updateCategoryStatus(name, arguments[0])
       );
     } else if (arguments.length > 1) {
@@ -340,8 +291,8 @@ export default class Popup extends Base {
    * @return { array<string> } - cookie COOKIES_CATEGORIES status in order of COOKIES_CATEGORIES
    */
   getStatuses() {
-    return COOKIES_CATEGORIES.map(( name ) =>
-      // return DomainCategories.map((categoryName) =>
+    return COOKIES_CATEGORIES.map((name) =>
+      // return cmpDomainCategories.map((categoryName) =>
       getCookie(this.options.cookie.name + "_" + name)
     );
   }
@@ -351,34 +302,29 @@ export default class Popup extends Base {
    */
   clearStatuses() {
     const { name, domain, path } = this.options.cookie;
-    COOKIES_CATEGORIES.forEach(( categoryName ) => {
-      // DomainCategories.forEach((categoryName) => {
+    COOKIES_CATEGORIES.forEach((categoryName) => {
+      // cmpDomainCategories.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
       saveNecessaryCookies();
     });
   }
   canUseCookies() {
-    if (
-      !window.navigator.cookieEnabled ||
-      window.CookiesOK ||
-      window.navigator.CookiesOK
-    ) {
+    if (!window.navigator.cookieEnabled || window.CookiesOK || window.navigator.CookiesOK) {
       return true;
     }
     const statusesValues = this.getStatuses();
     const matches = statusesValues.map((status, index) => ({
       [COOKIES_CATEGORIES[index]]: isValidStatus(status),
-      // [DomainCategories[index]]: isValidStatus(status),
+      // [cmpDomainCategories[index]]: isValidStatus(status),
     }));
-    const hasMatches =
-      matches.filter((match) => match[Object.keys(match)[0]]).length > 0;
+    const hasMatches = matches.filter((match) => match[Object.keys(match)[0]]).length > 0;
     statusesValues.forEach(
       (status, index) =>
         this.userCategories[COOKIES_CATEGORIES[index]] === status
-          ? // this.userCategories[DomainCategories[index]] === status
+          ? // this.userCategories[cmpDomainCategories[index]] === status
             status
           : this.userCategories[COOKIES_CATEGORIES[index]]
-      // : this.userCategories[DomainCategories[index]]
+      // : this.userCategories[cmpDomainCategories[index]]
     );
 
     return hasMatches;
@@ -391,10 +337,7 @@ export default class Popup extends Base {
 
   getPopupClasses() {
     const opts = this.options;
-    let positionStyle =
-      opts.position == "top" || opts.position == "bottom"
-        ? "banner"
-        : "floating";
+    let positionStyle = opts.position == "top" || opts.position == "bottom" ? "banner" : "floating";
 
     if (isMobile() && opts.mobileForceFloat) {
       positionStyle = "floating";
@@ -447,10 +390,7 @@ export default class Popup extends Base {
     }
 
     // build the compliance types from the already interpolated `elements`
-    interpolated.compliance = interpolateString(
-      complianceType,
-      (name) => interpolated[name]
-    );
+    interpolated.compliance = interpolateString(complianceType, (name) => interpolated[name]);
 
     // checks if the layout is valid and defaults to basic if it's not
     let layout = opts.layouts[opts.layout];
@@ -464,10 +404,7 @@ export default class Popup extends Base {
   appendMarkup(markup) {
     const opts = this.options;
     const div = document.createElement("div");
-    const cont =
-      opts.container && opts.container.nodeType === 1
-        ? opts.container
-        : document.body;
+    const cont = opts.container && opts.container.nodeType === 1 ? opts.container : document.body;
 
     div.innerHTML = markup;
 
@@ -480,20 +417,14 @@ export default class Popup extends Base {
     }
 
     el.addEventListener("click", (event) => this.handleButtonClick(event));
-    el.querySelectorAll('.cc-btn [type="checkbox"]').forEach(
-      (checkbox, index) => {
-        checkbox.addEventListener("change", () => {
-          this.userCategories[checkbox.name] = checkbox.checked
-            ? "ALLOW"
-            : "DENY";
-          checkbox.checked
-            ? console.log(`BUTTON CLICKED AND ALLOWED STUFF ${index}`)
-            : "";
-        });
+    el.querySelectorAll('.cc-btn [type="checkbox"]').forEach((checkbox, index) => {
+      checkbox.addEventListener("change", () => {
+        this.userCategories[checkbox.name] = checkbox.checked ? "ALLOW" : "DENY";
+        checkbox.checked ? console.log(`BUTTON CLICKED AND ALLOWED STUFF ${index}`) : "";
+      });
 
-        checkbox.addEventListener("click", (event) => event.stopPropagation());
-      }
-    );
+      checkbox.addEventListener("click", (event) => event.stopPropagation());
+    });
 
     el.querySelectorAll(".cc-info").forEach((showInfo) => {
       showInfo.addEventListener("mousedown", function (event) {
@@ -512,9 +443,7 @@ export default class Popup extends Base {
           cont.insertBefore(el, cont.firstChild);
         }
       } catch (error) {
-        throw new Error(
-          "No container to attach too. Make sure the DOM has loaded. Is your script loaded just before the `</body>` tag?"
-        );
+        throw new Error("No container to attach too. Make sure the DOM has loaded. Is your script loaded just before the `</body>` tag?");
       }
     }
 
@@ -527,22 +456,14 @@ export default class Popup extends Base {
 
     if (btn.classList.contains("cc-btn") && btn.classList.contains("cc-save")) {
       this.setStatuses();
-      fillJSONWithCheckedCategory()
+      fillJSONWithCheckedCategory();
       setTimeout(() => {
         this.close(true);
       }, 300);
       return;
     }
     if (btn.classList.contains("cc-btn")) {
-      const matches = btn.className.match(
-        new RegExp(
-          "\\bcc-(" +
-            COOKIES_STATUSES.map((str) =>
-              str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
-            ).join("|") +
-            ")\\b"
-        )
-      );
+      const matches = btn.className.match(new RegExp("\\bcc-(" + COOKIES_STATUSES.map((str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")).join("|") + ")\\b"));
       const match = (matches && matches[1]) || false;
       if (match) {
         this.setStatuses(match);
@@ -585,23 +506,14 @@ export default class Popup extends Base {
           return arr;
         })([], event.target);
     if (!path) {
-      console.warn(
-        "'.path' & '.composedPath' failed to generate an event path."
-      );
+      console.warn("'.path' & '.composedPath' failed to generate an event path.");
       return;
     }
     return path;
   }
 
   applyAutoDismiss() {
-    const {
-      enabled,
-      dismissOnTimeout: delay,
-      dismissOnScroll: scrollRange,
-      dismissOnLinkClick,
-      dismissOnWindowClick,
-      dismissOnKeyPress,
-    } = this.options;
+    const { enabled, dismissOnTimeout: delay, dismissOnScroll: scrollRange, dismissOnLinkClick, dismissOnWindowClick, dismissOnKeyPress } = this.options;
 
     if (enabled) {
       if (typeof delay == "number" && delay >= 0) {
@@ -626,14 +538,7 @@ export default class Popup extends Base {
         });
       } else if (dismissOnWindowClick) {
         this.onWindowClick = (evt) => {
-          if (
-            !getEventPath(evt).some((element) =>
-              this.options.ignoreClicksFrom.some(
-                (ignoredClick) =>
-                  element.classList && element.classList.contains(ignoredClick)
-              )
-            )
-          ) {
+          if (!getEventPath(evt).some((element) => this.options.ignoreClicksFrom.some((ignoredClick) => element.classList && element.classList.contains(ignoredClick)))) {
             this.setStatuses(STATUS_DISMISS);
             this.close(true);
 
@@ -647,12 +552,7 @@ export default class Popup extends Base {
         window.addEventListener("touchend", this.onWindowClick);
       } else if (dismissOnLinkClick) {
         this.onLinkClick = (evt) => {
-          if (
-            getEventPath(evt).some(
-              (elem) =>
-                typeof elem.tagName !== "undefined" && elem.tagName === "A"
-            )
-          ) {
+          if (getEventPath(evt).some((elem) => typeof elem.tagName !== "undefined" && elem.tagName === "A")) {
             this.setStatuses(STATUS_DISMISS);
             this.close(true);
             window.removeEventListener("click", this.onLinkClick);
@@ -678,8 +578,7 @@ export default class Popup extends Base {
 
   applyRevokeButton() {
     // revokable is true if advanced compliance is selected
-    if (this.options.type != "info" && this.options.regionalLaw == true)
-      this.options.revokable = true;
+    if (this.options.type != "info" && this.options.regionalLaw == true) this.options.revokable = true;
     // animateRevokable false for mobile devices
     if (isMobile()) this.options.animateRevokable = false;
 
@@ -694,9 +593,7 @@ export default class Popup extends Base {
       if (this.options.theme) {
         classes.push("cc-theme-" + this.options.theme);
       }
-      const revokeBtn = this.options.revokeBtn
-        .replace("{{classes}}", classes.join(" "))
-        .replace("{{widgetImage}}", this.options.content.widgetImage);
+      const revokeBtn = this.options.revokeBtn.replace("{{classes}}", classes.join(" ")).replace("{{widgetImage}}", this.options.content.widgetImage);
 
       this.revokeBtn = this.appendMarkup(revokeBtn);
 
@@ -707,10 +604,7 @@ export default class Popup extends Base {
           const minY = 20;
           const maxY = window.innerHeight - 20;
 
-          if (
-            (btn.classList.contains("cc-top") && evt.clientY < minY) ||
-            (btn.classList.contains("cc-bottom") && evt.clientY > maxY)
-          ) {
+          if ((btn.classList.contains("cc-top") && evt.clientY < minY) || (btn.classList.contains("cc-bottom") && evt.clientY > maxY)) {
             active = true;
           }
 

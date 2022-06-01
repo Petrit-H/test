@@ -9,7 +9,7 @@
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
 
-.contentWrapper {
+.content-wrapper {
   // max-height: 100%;
   // max-height: calc(100% - 210px);
   // height: calc(100% - 120px);
@@ -19,7 +19,7 @@
     // max-height: calc(100% - 130px);
   }
 }
-.cookieModal {
+.cookie-modal {
   // max-height: 80vh;
   height: 100%;
   // max-height: calc(100vh - 330px);

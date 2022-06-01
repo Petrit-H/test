@@ -9,53 +9,43 @@ export let categories = [];
 export let responseData = [];
 export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
-export let IpAddressURL = {};
-export let DomainId = "";
-export let DomainName = "";
-export let DomainWebsiteUrl = "";
-export let Language = {};
-export let LanguagesList = [];
-export let LomainCategoriesWithCookies = [];
-export let DomainCategories = [];
-export let CookiesPerDomain = [];
-export let DomainCategoriesWithCookies = [];
+export let cmpIpAddressURL = {};
+export let cmpDomainId = "";
+export let cmpDomainName = "";
+export let cmpDomainWebsiteUrl = "";
+export let cmpLanguage = {};
+export let cmpLanguagesList = [];
+export let cmpLomainCategoriesWithCookies = [];
+export let cmpDomainCategories = [];
+export let cmpCookiesPerDomain = [];
+export let cmpDomainCategoriesWithCookies = [];
 
-export let WidgetImageCircle = "";
-export let WidgetImageTriangle = "";
-export let ConsentHeaderMessage = "";
-export let ConsentBannerTitle = "";
-export let ConsentMessage = "";
-export let DismissButtonContent = "";
-export let AllowButtonContent = "";
-export let AllowAllButtonContent = "";
-export let DenyButtonContent = "";
-export let LearnMore = "";
-export let CookiePolicy = "";
-export let CookiePolicyLink = "";
-export let PrivacyPolicy = "";
-export let PrivacyPolicyLink = "";
-export let CookieSettings = "";
-export let CookiePolicyLinkTarget = "";
-export let CloseIconWhite = "";
-export let CloseIcon = "";
-export let CaretDownIcon = "";
-export let ChevronDownFilled = "";
-export let PortaCMPLogo = "";
-export let LanguagesGlobe = "";
-export let InfoIcon = "";
-export let NecessaryTickIcon = "";
+export let cmpWidgetImageCircle = "";
+export let cmpWidgetImageTriangle = "";
+export let cmpHeaderMessage = "";
+export let cmpBannerTitle = "";
+export let cmpMessage = "";
+export let cmpDismissButtonContent = "";
+export let cmpAllowButtonContent = "";
+export let cmpAllowAllButtonContent = "";
+export let cmpDenyButtonContent = "";
+export let cmpLearnMore = "";
+export let cmpCookiePolicy = "";
+export let cmpCookiePolicyLink = "";
+export let cmpPrivacyPolicy = "";
+export let cmpPrivacyPolicyLink = "";
+export let cmpCookieSettings = "";
+export let cmpCookiePolicyLinkTarget = "";
+export let cmpCloseIconWhite = "";
+export let cmpCloseIcon = "";
+export let cmpCaretDownIcon = "";
+export let cmpChevronDownFilled = "";
+export let cmpPortaCMPLogo = "";
+export let cmpLanguagesGlobe = "";
+export let cmpInfoIcon = "";
+export let cmpNecessaryTickIcon = "";
 
-const {
-  ipAddressURL,
-  domainId,
-  domainName,
-  domainWebsiteUrl,
-  language,
-  languagesList,
-  domainCategoriesWithCookies,
-  domainCategories,
-  cookiesPerDomain,
-} = jsonData;
+const { ipAddressURL, domainId, domainName, domainWebsiteUrl, language, languagesList, domainCategoriesWithCookies, domainCategories, domainCookies } = jsonData;
 
 const {
   widgetImageCircle,
@@ -90,110 +80,110 @@ const {
  */
 export const fetchDataFromJSONFile = async () => {
   try {
-    DomainId = domainId;
-    IpAddressURL = ipAddressURL;
-    DomainName = domainName;
-    DomainWebsiteUrl = domainWebsiteUrl;
-    Language = language;
-    LanguagesList = languagesList;
-    DomainCategoriesWithCookies = domainCategoriesWithCookies;
-    DomainCategories = domainCategories;
-    CookiesPerDomain = cookiesPerDomain;
-    WidgetImageCircle = widgetImageCircle;
-    WidgetImageTriangle = widgetImageTriangle;
-    ConsentHeaderMessage = consentHeaderMessage;
-    ConsentBannerTitle = consentBannerTitle;
-    ConsentMessage = consentMessage;
-    DismissButtonContent = dismissButtonContent;
-    AllowButtonContent = allowButtonContent;
-    AllowAllButtonContent = allowAllButtonContent;
-    DenyButtonContent = denyButtonContent;
-    LearnMore = learnMore;
-    CookieSettings = cookieSettings;
-    CookiePolicyLink = cookiePolicyLink;
-    CookiePolicy = cookiePolicy;
-    PrivacyPolicyLink = privacyPolicyLink;
-    PrivacyPolicy = privacyPolicy;
-    CookiePolicyLinkTarget = cookiePolicyLinkTarget;
-    CloseIconWhite = closeIconWhite;
-    CloseIcon = closeIcon;
-    CaretDownIcon = caretDownIcon;
-    ChevronDownFilled = chevronDownFilled;
-    PortaCMPLogo = portaCMPLogo;
-    LanguagesGlobe = languagesGlobe;
-    InfoIcon = infoIcon;
-    NecessaryTickIcon = necessaryTick;
+    cmpDomainId = domainId;
+    cmpIpAddressURL = ipAddressURL;
+    cmpDomainName = domainName;
+    cmpDomainWebsiteUrl = domainWebsiteUrl;
+    cmpLanguage = language;
+    cmpLanguagesList = languagesList;
+    cmpDomainCategoriesWithCookies = domainCategoriesWithCookies;
+    cmpDomainCategories = domainCategories;
+    cmpCookiesPerDomain = domainCookies;
+    cmpWidgetImageCircle = widgetImageCircle;
+    cmpWidgetImageTriangle = widgetImageTriangle;
+    cmpHeaderMessage = consentHeaderMessage;
+    cmpBannerTitle = consentBannerTitle;
+    cmpMessage = consentMessage;
+    cmpDismissButtonContent = dismissButtonContent;
+    cmpAllowButtonContent = allowButtonContent;
+    cmpAllowAllButtonContent = allowAllButtonContent;
+    cmpDenyButtonContent = denyButtonContent;
+    cmpLearnMore = learnMore;
+    cmpCookieSettings = cookieSettings;
+    cmpCookiePolicyLink = cookiePolicyLink;
+    cmpCookiePolicy = cookiePolicy;
+    cmpPrivacyPolicyLink = privacyPolicyLink;
+    cmpPrivacyPolicy = privacyPolicy;
+    cmpCookiePolicyLinkTarget = cookiePolicyLinkTarget;
+    cmpCloseIconWhite = closeIconWhite;
+    cmpCloseIcon = closeIcon;
+    cmpCaretDownIcon = caretDownIcon;
+    cmpChevronDownFilled = chevronDownFilled;
+    cmpPortaCMPLogo = portaCMPLogo;
+    cmpLanguagesGlobe = languagesGlobe;
+    cmpInfoIcon = infoIcon;
+    cmpNecessaryTickIcon = necessaryTick;
 
     return {
-      DomainId,
-      DomainName,
-      DomainWebsiteUrl,
-      Language,
-      LanguagesList,
-      DomainCategoriesWithCookies,
-      DomainCategories,
-      CookiesPerDomain,
-      WidgetImageCircle,
-      WidgetImageTriangle,
-      ConsentHeaderMessage,
-      ConsentBannerTitle,
-      ConsentMessage,
-      DismissButtonContent,
-      AllowButtonContent,
-      DenyButtonContent,
-      AllowAllButtonContent,
-      LearnMore,
-      CookiePolicyLink,
-      CookiePolicy,
-      PrivacyPolicyLink,
-      PrivacyPolicy,
-      CookiePolicyLinkTarget,
-      CloseIconWhite,
-      CloseIcon,
-      CaretDownIcon,
-      CookieSettings,
-      ChevronDownFilled,
-      PortaCMPLogo,
-      LanguagesGlobe,
-      InfoIcon,
-      NecessaryTickIcon,
+      cmpDomainId,
+      cmpDomainName,
+      cmpDomainWebsiteUrl,
+      cmpLanguage,
+      cmpLanguagesList,
+      cmpDomainCategoriesWithCookies,
+      cmpDomainCategories,
+      cmpCookiesPerDomain,
+      cmpWidgetImageCircle,
+      cmpWidgetImageTriangle,
+      cmpHeaderMessage,
+      cmpBannerTitle,
+      cmpMessage,
+      cmpDismissButtonContent,
+      cmpAllowButtonContent,
+      cmpDenyButtonContent,
+      cmpAllowAllButtonContent,
+      cmpLearnMore,
+      cmpCookiePolicyLink,
+      cmpCookiePolicy,
+      cmpPrivacyPolicyLink,
+      cmpPrivacyPolicy,
+      cmpCookiePolicyLinkTarget,
+      cmpCloseIconWhite,
+      cmpCloseIcon,
+      cmpCaretDownIcon,
+      cmpCookieSettings,
+      cmpChevronDownFilled,
+      cmpPortaCMPLogo,
+      cmpLanguagesGlobe,
+      cmpInfoIcon,
+      cmpNecessaryTickIcon,
     };
   } catch (error) {
     console.log(error);
   }
   return {
-    DomainId,
-    DomainName,
-    DomainWebsiteUrl,
-    Language,
-    LanguagesList,
-    DomainCategoriesWithCookies,
-    DomainCategories,
-    CookiesPerDomain,
-    WidgetImageCircle,
-    WidgetImageTriangle,
-    ConsentHeaderMessage,
-    ConsentBannerTitle,
-    ConsentMessage,
-    DismissButtonContent,
-    AllowButtonContent,
-    DenyButtonContent,
-    AllowAllButtonContent,
-    LearnMore,
-    CookiePolicyLinkTarget,
-    CookiePolicyLink,
-    CookiePolicy,
-    PrivacyPolicyLink,
-    PrivacyPolicy,
-    CloseIconWhite,
-    CloseIcon,
-    CaretDownIcon,
-    CookieSettings,
-    ChevronDownFilled,
-    PortaCMPLogo,
-    LanguagesGlobe,
-    InfoIcon,
-    NecessaryTickIcon,
+    cmpDomainId,
+    cmpDomainName,
+    cmpDomainWebsiteUrl,
+    cmpLanguage,
+    cmpLanguagesList,
+    cmpDomainCategoriesWithCookies,
+    cmpDomainCategories,
+    cmpCookiesPerDomain,
+    cmpWidgetImageCircle,
+    cmpWidgetImageTriangle,
+    cmpHeaderMessage,
+    cmpBannerTitle,
+    cmpMessage,
+    cmpDismissButtonContent,
+    cmpAllowButtonContent,
+    cmpDenyButtonContent,
+    cmpAllowAllButtonContent,
+    cmpLearnMore,
+    cmpCookiePolicyLinkTarget,
+    cmpCookiePolicyLink,
+    cmpCookiePolicy,
+    cmpPrivacyPolicyLink,
+    cmpPrivacyPolicy,
+    cmpCloseIconWhite,
+    cmpCloseIcon,
+    cmpCaretDownIcon,
+    cmpCookieSettings,
+    cmpChevronDownFilled,
+    cmpPortaCMPLogo,
+    cmpLanguagesGlobe,
+    cmpInfoIcon,
+    cmpNecessaryTickIcon,
   };
 };
 

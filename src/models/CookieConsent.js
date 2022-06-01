@@ -5,7 +5,7 @@ import Popup from "./Popup";
 
 import { COOKIES_CATEGORIES, COOKIES_STATUSES } from "../constants";
 import { getCookie, isValidStatus } from "../utils";
-import { DomainCategories } from "../cookies";
+import { cmpDomainCategories } from "../cookies";
 
 // This function initializes the app by combining the use of the Popup, Locator and Law modules
 // You can string together these three modules yourself however you want, by writing a new function.
@@ -14,8 +14,8 @@ export default class CookieConsent extends Base {
   constructor(options = {}) {
     super(options);
 
-    // const answers = DomainCategories.map((category) => {
-    const answers = COOKIES_CATEGORIES.map(({name}) => {
+    // const answers = cmpDomainCategories.map((category) => {
+    const answers = COOKIES_CATEGORIES.map(({ name }) => {
       const cookieName = this.options?.cookie?.name || "gjirafa_";
       const answer = getCookie(cookieName + name);
       return isValidStatus(answer) ? { [name]: answer } : undefined;
@@ -27,20 +27,14 @@ export default class CookieConsent extends Base {
     } else if (this.options.legal && this.options.legal.countryCode) {
       this.initializationComplete({ code: this.options.legal.countryCode });
     } else if (this.options.location) {
-      new Location(this.options.location).locate(
-        this.initializationComplete.bind(this),
-        this.initializationError.bind(this)
-      );
+      new Location(this.options.location).locate(this.initializationComplete.bind(this), this.initializationError.bind(this));
     } else {
       this.initializationComplete({});
     }
   }
   initializationComplete(result) {
     if (result.code) {
-      this.options = new Legal(this.options.legal).applyLaw(
-        this.options,
-        result.code
-      );
+      this.options = new Legal(this.options.legal).applyLaw(this.options, result.code);
     }
     this.popup = new Popup(this.options);
     setTimeout(() => this.emit("initialized", this.popup), 0);

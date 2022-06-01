@@ -1171,12 +1171,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
-@media (min-width: 1024px) {
-  .lg\:w-1\/2 {
-    width: 50%;
-  }
-}
-
 @media (min-width: 1280px) {
   .xl\:my-2 {
     margin-top: 0.5rem;
