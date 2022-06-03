@@ -206,9 +206,9 @@ export default {
 
   // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
   compliance: {
-    info: '<div class="cc-compliance w-full">{{dismiss}}</div>',
-    "opt-in": '<div class="cc-compliance cc-highlight">{{allow}}</div>',
-    "opt-out": '<div class="cc-compliance cc-highlight">{{dismiss}}{{deny}}</div>',
+    info: '<div class="cc-compliance bg-white w-full">{{dismiss}}</div>',
+    "opt-in": '<div class="cc-compliance bg-white cc-highlight">{{allow}}</div>',
+    "opt-out": '<div class="cc-compliance bg-white cc-highlight">{{dismiss}}{{deny}}</div>',
     categories: '<div class="cmp-categories flex items-center">{{categories}}</div>',
   },
 
