@@ -16,21 +16,21 @@ let cookiesPerCateroryArr = [];
  *  fetch all the cookies based on the domain you are in
  * @returns all the cookies for the domain at hand
  */
-export const getCookies = async () => {
-  let config = {
-    method: "GET",
-    url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${cmpDomainId}`,
-    // url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
-  };
-  try {
-    const response = await axios(config);
-    cookiesPerCategory = response.data;
-    return cookiesPerCategory;
-  } catch (error) {
-    console.log(error.message);
-  }
-  return cookiesPerCategory;
-};
+// export const getCookies = async () => {
+//   let config = {
+//     method: "GET",
+//     url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=${cmpDomainId}`,
+//     // url: `${CMP_API_BASE_URL}/GetAllCookiesByDomainId?domainId=135`,
+//   };
+//   try {
+//     const response = await axios(config);
+//     cookiesPerCategory = response.data;
+//     return cookiesPerCategory;
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+//   return cookiesPerCategory;
+// };
 
 /**
  * fetch all the cookies for a specific category
@@ -81,18 +81,13 @@ export const saveNecessaryCookies = () => {
  */
 export const saveSpecificCookies = (id) => {
   try {
-    for (let index = 0; index < cmpDomainCategoriesWithCookies.length; index++) {
-      const category = cmpDomainCategoriesWithCookies[index];
-      let {
-        categoryName,
-        categoryId,
-        cookies: { data },
-      } = category;
+    cookiesPerCategory = filterCookiesByCategory(cmpCookiesPerDomain, id, cookiesPerCategory, `Category #${id}`);
+    console.log("cookiesPerCategory", cookiesPerCategory);
+    for (let index = 0; index < cookiesPerCategory.length; index++) {
+      const cookie = cookiesPerCategory[index];
+      let { categoryId, categoryName, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
       if (categoryId === +id) {
-        for (const cookie of data) {
-          let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-          setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
-        }
+        setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
       }
     }
   } catch (error) {
@@ -103,7 +98,7 @@ export const saveSpecificCookies = (id) => {
 export const saveAllCookies = () => {
   try {
     for (let index = 0; index < cmpCookiesPerDomain.length; index++) {
-      const cookie = CookiesPerDomain[index];
+      const cookie = cmpCookiesPerDomain[index];
       let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
       setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
     }

@@ -1,6 +1,6 @@
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
-import { acceptNecessary, acceptAllCookies, bannerAccordionToggle, fillCategories, fillCookiesSettingItem, languageButtonToggle, allowAllCookiesAtOnce } from "./utils/logic";
+import { acceptNecessaryCookies, acceptAllCookiesWithRadioToggle, bannerAccordionToggle, fillCategories, fillCookiesSettingItem, languageButtonToggle, allowAllCookiesAtOnce } from "./utils/logic";
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
@@ -17,7 +17,7 @@ export let responseJSON = {
 };
 
 export const fillJSONWithCheckedCategory = () => {
-  const radioButtons = document.querySelectorAll(".radioButtonCookie");
+  const radioButtons = document.querySelectorAll(".category-radio-button");
   if (radioButtons.length !== 0 && radioButtons !== null) {
     // console.log("🚀 ~ ~ radioButtons", radioButtons.length);
     for (let index = 0; index < radioButtons.length; index++) {
@@ -84,6 +84,7 @@ function timeStamp() {
   // console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
+
 fetchClientIp().then((country) => {
   CountryCode = country;
   ccInstance = new CookieConsent(optionsObj(country, testType));
@@ -98,7 +99,7 @@ fetchClientIp().then((country) => {
       languageButtonToggle();
     })
     .on("popupClosed", (...args) => {
-      acceptNecessary();
+      acceptNecessaryCookies();
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
@@ -113,11 +114,11 @@ const draw = function (countryCode) {
       // ccInstance.popup?.open();
     })
     .on("popupOpened", (...args) => {
-      acceptNecessary();
+      acceptNecessaryCookies();
       initiateTypeChangeAndBannerShow();
     })
     .on("popupClosed", (...args) => {
-      acceptNecessary();
+      acceptNecessaryCookies();
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
@@ -127,7 +128,6 @@ function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
   const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
   const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
-  console.log("🚀 ~~ acceptAllCookiesAtOnce", acceptAllCookiesAtOnce);
   acceptAllCookiesAtOnce.addEventListener("click", () => {
     console.log("click");
     allowAllCookiesAtOnce();
@@ -138,32 +138,30 @@ function initiateTypeChangeAndBannerShow() {
       // toggleType.addEventListener("click", (e) => {
       if (testType === "info") {
         testType = "categories";
-        optionsObj(CountryCode, "categories");
         ccInstance.destroy();
+        optionsObj(CountryCode, "categories");
         draw(CountryCode);
         setTimeout(() => {
           fillCategories();
           fillCookiesSettingItem();
           bannerAccordionToggle();
-          acceptAllCookies();
-          acceptNecessary();
+          acceptAllCookiesWithRadioToggle();
+          acceptNecessaryCookies();
         }, 300);
-      } else if (testType === "categories") {
-        testType = "info ";
-        optionsObj(CountryCode, "info");
-        ccInstance.destroy();
-        // ccInstance.clearStatuses().destroy();
-        draw(CountryCode);
-      } else {
-        return this;
       }
+      //  else if (testType === "categories") {
+      //   testType = "info ";
+      //   ccInstance.destroy();
+      //   optionsObj(CountryCode, "info");
+      //   draw(CountryCode);
+      // }
     });
   }
   // }, 400);
 }
 
-setTimeout(() => {
-  const testData = ccInstance.getCountryLaws(CountryCode);
-  console.log(CountryCode, testData);
-  // saveAllCookies()
-}, 300);
+// setTimeout(() => {
+//   const testData = ccInstance.getCountryLaws(CountryCode);
+//   console.log(CountryCode, testData);
+//   // saveAllCookies()
+// }, 300);

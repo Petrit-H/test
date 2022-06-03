@@ -12,8 +12,7 @@
 }
 
 /* dimensions for 'iPhone6 Plus' and lower */
-@media screen and (max-width: 414px) and (orientation: portrait),
-  screen and (max-width: 736px) and (orientation: landscape) {
+@media screen and (max-width: 414px) and (orientation: portrait), screen and (max-width: 736px) and (orientation: landscape) {
   .cc-window {
     &.cc-top {
       top: 0;
@@ -28,7 +27,7 @@
       left: 0;
       right: 0;
     }
-    
+
     &.cc-banner {
       flex-direction: column;
       align-items: unset;
@@ -49,19 +48,19 @@
     .cc-message {
       margin-bottom: 1em;
     }
-    .cc-categories{
+    .cc-categories {
       flex-direction: column;
       width: 100%;
       margin-right: 8px;
     }
     .cc-category {
       margin: 4px 0;
-      .cc-btn:not(.cc-info){
-        width: calc( 100% - 16px);
+      .cc-btn:not(.cc-info) {
+        width: calc(100% - 16px);
         min-width: 140px;
       }
     }
-  } 
+  }
 }
 @media screen and (max-width: 854px) {
   .cc-window.cc-type-categories .cc-btn.cc-save {
@@ -70,18 +69,18 @@
 }
 
 @media screen and (max-width: 790px) {
-  .cc-window.cc-type-categories .cc-categories{
+  .cc-window.cc-type-categories .cc-categories {
     display: flex;
     flex-direction: column;
   }
-  .cc-categories .cc-category{
+  .cc-categories .cc-category {
     margin: 4px 0;
   }
   .form {
-    width    : 100%;
+    width: 100%;
     max-width: 350px;
   }
-  .cc-btn:not(.cc-info):not(.cc-save){
-    width: calc( 100% - 16px);
+  .cc-btn:not(.cc-info):not(.cc-save) {
+    width: calc(100% - 16px);
   }
 }

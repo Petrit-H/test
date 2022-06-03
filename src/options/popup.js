@@ -96,7 +96,7 @@ export default {
         </p>
       </div>
       <div class="banner-wrapper-controls w-full md:w-1/2 flex items-center flex-col md:flex-row justify-end text-sm ">
-        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white got-it-button px-10 mb-2 md:mb-0 w-full md:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
+        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white  px-10 mb-2 md:mb-0 w-full md:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
         <button class="border-1 border-blue-400 bg-white text-small text-blue-400 banner-type-change px-10 w-full md:w-auto py-2.5 rounded-4 " id="accept-cookies">{{settings}}</button>
       </div>
     </div>
@@ -144,7 +144,7 @@ export default {
       </div>
       <div class="tabs flex justify-start px-6  border-b border-blue-300">
           <button type="button" class="tab pointer relative pb-4 mr-6 text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#cookie-display">Categories</button>
-          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#COOKIE_SETTINGS">Cookies</button>
+          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#cookie-settings">Cookies</button>
       </div>
       <div class="content-wrapper px-6 overflow-y-auto my-3">
         <div class="description-section py-3">
@@ -167,7 +167,7 @@ export default {
               class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
               <p class="my-auto">No Data Available</p>
             </div>
-          <div id="COOKIE_SETTINGS" class="tab-content " data-tab-content>
+          <div id="cookie-settings" class="tab-content py-6" data-tab-content>
             <div id="custom-categories-banner" class=" "></div>
           </div>
         </div>
@@ -180,7 +180,7 @@ export default {
           My Choices
           </button>
           <button type="button"
-            class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all border-1 border-blue-400 rounded-md text-white bg-blue-400 px-5 py-1.5  ml-2">
+            class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all-button border-1 border-blue-400 rounded-md text-white bg-blue-400 px-5 py-1.5  ml-2">
             {{allowAll}}
           </button>
         </div>

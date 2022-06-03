@@ -2,7 +2,7 @@ import Base from "./Base";
 import defaultOptions from "../options/popup";
 import { COOKIES_CATEGORIES, COOKIES_STATUSES, STATUS_ALLOW, STATUS_DISMISS } from "../constants";
 import { addCustomStylesheet, getCookie, hash, interpolateString, isMobile, isPlainObject, isValidStatus, setCookie, throttle, traverseDOMPath } from "../utils";
-import { getCookies, saveNecessaryCookies, saveSpecificCookies } from "../getDomainsWithCookies";
+import { saveNecessaryCookies, saveSpecificCookies } from "../getDomainsWithCookies";
 import { cmpDomainCategories } from "../cookies.js";
 import { fillJSONWithCheckedCategory } from "../initFile";
 const { toBinary } = require("../utils/encryptToBinary.js");
@@ -248,7 +248,7 @@ export default class Popup extends Base {
    */
   setStatuses() {
     const { name, expiryDays, domain, path, secure } = this.options.cookie;
-    const radioButtons = document.querySelectorAll(".radioButtonCookie");
+    const radioButtons = document.querySelectorAll(".category-radio-button");
     // const cookieRadioButton = document.querySelectorAll(".cc-btn");
     const updateCategoryStatus = (categoryName, status) => {
       if (isValidStatus(status)) {

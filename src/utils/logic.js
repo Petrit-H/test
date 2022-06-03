@@ -31,6 +31,7 @@ const filterCookiesByCategory = (arr, id, storeArray, category) => {
   console.log(`🚀 ~ ${category} id:`, +id, `=> `, response);
   return response;
 };
+
 const switchBannerTabs = () => {
   const tabs = document.querySelectorAll("[data-tab-target]");
   const tabContents = document.querySelectorAll("[data-tab-content]");
@@ -71,12 +72,6 @@ const languageButtonToggle = () => {
  * @param {Integer} domainId
  */
 const fillCookiesSettingItem = () => {
-  // cookies = filterCookiesByCategory(
-  //   cmpCookiesPerDomain,
-  //   categoryId,
-  //   cookiesPerCategoryArr,
-  //   "cookies"
-  // );
   cookies = cmpCookiesPerDomain;
   const noData = document.getElementById("noData");
   if (cookies.length === 0) {
@@ -131,7 +126,7 @@ const fillCookiesSettingItem = () => {
       })
       .join("");
     settingsAccordionToggle();
-  }, 200);
+  }, 50);
 };
 
 /**
@@ -239,28 +234,10 @@ const bannerAccordionToggle = function () {
           carretToggle[i].classList.add("rotate-180");
           changeTabOnClick();
         }
-
-        // filteredCookies = filterCookiesByCategory(
-        //   cmpCookiesPerDomain,
-        //   categoryID,
-        //   cookiesPerCategoryArr,
-        //   "filteredCookies"
-        // );
-
-        // contentData.innerHTML = filteredCookies
-        //   ?.map((item) => filteredCookiesPerCategory(item))
-        //   .join("");
-        // ["h-0", "hidden"].map((cssClass) => {
-        //   contentData?.classList?.toggle(cssClass);
-        // });
-
         const children = accordionContents[i].childNodes;
       });
-      // categoryDescription[i].addEventListener("click", () => {
-      //   showModal(categoryID, domainID);
-      // });
     }
-  }, 300);
+  }, 200);
 };
 
 /**
@@ -269,7 +246,7 @@ const bannerAccordionToggle = function () {
  * @param {Integer} domainId  the id of the domain
  */
 const showModal = function (categoryId, domainId) {
-  document.getElementById("COOKIE_SETTINGS").classList.remove("hidden");
+  document.getElementById("cookie-settings").classList.remove("hidden");
   document.getElementById("cookie-display").classList.add("hidden");
 
   // fillCookiesSettingItem();
@@ -334,7 +311,7 @@ const fillCategories = function () {
             <p class=" category-title font-bold text-black-faded">${item.name}</p>
             <label for="${item.name.toLowerCase()}" class="switch-toggle relative dot-wrapper inline-flex cursor-pointer ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}" tabindex=${item.id}>
               <button class="cc-btn w-auto group relative consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
-                <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="radioButtonCookie ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${item.name}" value="${item.name.toLowerCase()}" ${
+                <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${item.name}" value="${item.name.toLowerCase()}" ${
           item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
         } />
                 <div class="switch-holder block border-1 border-gray-light  w-9 h-6 rounded-full transition "></div>
@@ -362,10 +339,10 @@ const fillCategories = function () {
 /**
  * allow all the cookies
  */
-const acceptAllCookies = function () {
+const acceptAllCookiesWithRadioToggle = function () {
   setTimeout(() => {
-    const allowAllCookiesButton = document.querySelector(".allow-all");
-    const radioButtons = document.querySelectorAll(".radioButtonCookie");
+    const allowAllCookiesButton = document.querySelector(".allow-all-button");
+    const radioButtons = document.querySelectorAll(".category-radio-button");
     const cookieRadioButton = document.querySelectorAll(".cc-btn");
     allowAllCookiesButton.addEventListener("click", () => {
       for (let i = 0; i < radioButtons.length; i++) {
@@ -376,9 +353,12 @@ const acceptAllCookies = function () {
       }
       fillJSONWithCheckedCategory();
     });
-  }, 300);
+  }, 200);
 };
 
+/**
+ * save all the cookies WITHOUT checking all the radio buttons and repopulate the main JSON
+ */
 const allowAllCookiesAtOnce = () => {
   saveAllCookies();
   fillJSONWithCheckedCategory();
@@ -387,14 +367,16 @@ const allowAllCookiesAtOnce = () => {
 /**
  * allow necessary cookies
  */
-const acceptNecessary = function () {
+const acceptNecessaryCookies = function () {
   setTimeout(() => {
+    console.log("SAVE ALL COOKIES");
     const gotItButton = document.querySelector(".got-it-button");
     gotItButton.addEventListener("click", () => {
-      saveNecessaryCookies();
+      // saveNecessaryCookies();
+      saveAllCookies();
       fillJSONWithCheckedCategory();
     });
-  }, 300);
+  }, 200);
 };
 
 /**
@@ -405,4 +387,4 @@ const stopParentClick = function (event) {
   event.stopPropagation();
 };
 
-export { bannerAccordionToggle, showModal, filterCookiesByCategory, settingsAccordionToggle, fillCategories, fillCookiesSettingItem, acceptAllCookies, acceptNecessary, allowAllCookiesAtOnce, stopParentClick, languageButtonToggle };
+export { bannerAccordionToggle, showModal, filterCookiesByCategory, settingsAccordionToggle, fillCategories, fillCookiesSettingItem, acceptAllCookiesWithRadioToggle, acceptNecessaryCookies, allowAllCookiesAtOnce, stopParentClick, languageButtonToggle };
