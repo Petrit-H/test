@@ -472,6 +472,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
 }
 
+@media (min-width: 475px) {
+  .container {
+    max-width: 475px;
+  }
+}
+
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
@@ -564,6 +570,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -607,6 +618,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.75rem;
 }
 
+.mr-0 {
+  margin-right: 0px;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -629,6 +644,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
@@ -667,16 +686,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100vw;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .w-full {
   width: 100%;
 }
 
 .w-100 {
   width: 100px;
-}
-
-.w-auto {
-  width: auto;
 }
 
 .w-9 {
@@ -1149,7 +1168,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(5 45 97 / var(--tw-text-opacity));
 }
 
+@media (min-width: 640px) {
+  .sm\:w-auto {
+    width: auto;
+  }
+}
+
 @media (min-width: 768px) {
+  .md\:mx-1 {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+
   .md\:mb-0 {
     margin-bottom: 0px;
   }
@@ -1158,16 +1188,30 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-right: 0.5rem;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
 
-  .md\:w-auto {
-    width: auto;
-  }
-
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:w-1\/2 {
+    width: 50%;
+  }
+
+  .lg\:w-3\/4 {
+    width: 75%;
   }
 }
 
@@ -1193,5 +1237,19 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 1536px) {
   .\32xl\:pt-4 {
     padding-top: 1rem;
+  }
+}
+
+@media (min-width: 475px) {
+  .xs\:mr-2 {
+    margin-right: 0.5rem;
+  }
+
+  .xs\:mb-0 {
+    margin-bottom: 0px;
+  }
+
+  .xs\:flex-row {
+    flex-direction: row;
   }
 }

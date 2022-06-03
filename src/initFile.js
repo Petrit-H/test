@@ -124,7 +124,7 @@ const draw = function (countryCode) {
     .on("error", console.error);
 };
 
-function initiateTypeChangeAndBannerShow() {
+export function initiateTypeChangeAndBannerShow() {
   // setTimeout(() => {
   const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
   const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");

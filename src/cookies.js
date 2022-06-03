@@ -1,6 +1,7 @@
 import { setCookie } from "./utils/cookie";
 import { fetchClientIp } from "./options/location";
 import jsonData from "./data.json";
+import { initiateTypeChangeAndBannerShow } from "./initFile";
 
 // console.log(createUUID());
 let locationData = "";
@@ -199,7 +200,7 @@ window.addEventListener("load", function (event) {
 \`------'\`------'\`------'
     `
   );
-
+  initiateTypeChangeAndBannerShow();
   setTimeout(() => {
     fetchClientIp().then((location) => {
       locationData = location;

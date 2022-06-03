@@ -85,19 +85,19 @@ export default {
       <span aria-label="dismiss cookie message" class="z-50" role=button tabindex="0">{{closeWhiteIcon}}</span>
     </button>
     <div id="cmp" class="cmp-container  transform  banner-wrapper flex flex-col md:flex-row justify-between w-screen	max-w-7xl mx-auto">
-      <div class=" cmp-banner-description mb-9 md:mb-0  leading-4 ">
+      <div class=" cmp-banner-description w-auto md:w-3/4 lg:w-3/4 mb-9 md:mb-0 leading-4 ">
         <p class="text-base font-normal text-black-400 mb-3">We value your privacy</p>
-        <p class=" font-normal text-black-400 text-xsmall">
-        {{message}}
-          <span id="cookieconsent:desc">
-            <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
-            <a class="text-blue-400 border-b-1 border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
-          </span>
-        </p>
+        <div class=" font-normal text-black-400 text-xsmall">
+          <span>{{message}}</span>
+          <div class="inline-block" id="cookieconsent:desc">
+            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-0 md:mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
+            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+          </div>
+        </div>
       </div>
-      <div class="banner-wrapper-controls w-full md:w-1/2 flex items-center flex-col md:flex-row justify-end text-sm ">
-        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white  px-10 mb-2 md:mb-0 w-full md:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
-        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 banner-type-change px-10 w-full md:w-auto py-2.5 rounded-4 " id="accept-cookies">{{settings}}</button>
+      <div class="banner-wrapper-controls w-full md:w-1/2 lg:w-1/2 flex flex-col xs:flex-row  items-center justify-start md:justify-end text-sm ">
+        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white mr-0 xs:mr-2 px-10 mb-2 xs:mb-0 w-full sm:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
+        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 banner-type-change px-10 w-full sm:w-auto py-2.5 rounded-4 " id="accept-cookies">{{settings}}</button>
       </div>
     </div>
     `,
