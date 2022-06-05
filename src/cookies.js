@@ -32,9 +32,9 @@ export let cmpAllowAllButtonContent = "";
 export let cmpDenyButtonContent = "";
 export let cmpLearnMore = "";
 export let cmpCookiePolicy = "";
-export let cmpCookiePolicyLink = "";
+export let cmpCookiePolicyURL = "";
 export let cmpPrivacyPolicy = "";
-export let cmpPrivacyPolicyLink = "";
+export let cmpPrivacyPolicyURL = "";
 export let cmpCookieSettings = "";
 export let cmpCookiePolicyLinkTarget = "";
 export let cmpCloseIconWhite = "";
@@ -61,9 +61,9 @@ const {
   cookiePolicyLinkTarget,
   cookieSettings,
   learnMore,
-  cookiePolicyLink,
+  cookiePolicyUrl,
   cookiePolicy,
-  privacyPolicyLink,
+  privacyPolicyUrl,
   privacyPolicy,
   closeIcon,
   caretDownIcon,
@@ -101,9 +101,9 @@ export const fetchDataFromJSONFile = async () => {
     cmpDenyButtonContent = denyButtonContent;
     cmpLearnMore = learnMore;
     cmpCookieSettings = cookieSettings;
-    cmpCookiePolicyLink = cookiePolicyLink;
+    cmpCookiePolicyURL = cookiePolicyUrl;
     cmpCookiePolicy = cookiePolicy;
-    cmpPrivacyPolicyLink = privacyPolicyLink;
+    cmpPrivacyPolicyURL = privacyPolicyUrl;
     cmpPrivacyPolicy = privacyPolicy;
     cmpCookiePolicyLinkTarget = cookiePolicyLinkTarget;
     cmpCloseIconWhite = closeIconWhite;
@@ -134,9 +134,9 @@ export const fetchDataFromJSONFile = async () => {
       cmpDenyButtonContent,
       cmpAllowAllButtonContent,
       cmpLearnMore,
-      cmpCookiePolicyLink,
+      cmpCookiePolicyURL,
       cmpCookiePolicy,
-      cmpPrivacyPolicyLink,
+      cmpPrivacyPolicyURL,
       cmpPrivacyPolicy,
       cmpCookiePolicyLinkTarget,
       cmpCloseIconWhite,
@@ -172,9 +172,9 @@ export const fetchDataFromJSONFile = async () => {
     cmpAllowAllButtonContent,
     cmpLearnMore,
     cmpCookiePolicyLinkTarget,
-    cmpCookiePolicyLink,
+    cmpCookiePolicyURL,
     cmpCookiePolicy,
-    cmpPrivacyPolicyLink,
+    cmpPrivacyPolicyURL,
     cmpPrivacyPolicy,
     cmpCloseIconWhite,
     cmpCloseIcon,

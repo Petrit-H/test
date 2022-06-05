@@ -3,28 +3,28 @@ import {
   STATUS_ALLOW,
   STATUS_DISMISS,
   // COOKIES_CATEGORIES,
-  CONSENT_CLOSE_ICON,
-  CONSENT_CLOSE_ICON_WHITE,
-  CONSENT_WIDGET_ICON_CIRCLE,
-  CONSENT_WIDGET_ICON_TRIANGLE,
-  CONSENT_CARET_DOWN_ICON,
-  CONSENT_HEADER_MESSAGE,
-  CONSENT_BANNER_TITLE,
-  CONSENT_MESSAGE,
-  CONSENT_DISMISS_BUTTON_CONSTENT,
-  CONSENT_ALLOW_BUTTON_CONTENT,
-  CONSENT_ALLOW_ALL_BUTTON_CONTENT,
-  CONSENT_DENY_BUTTON_CONTENT,
-  CONSENT_LEARN_MORE_CONTENT,
-  CONSENT_COOKIE_PRIVACY,
-  CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
-  CONSENT_PRIVACY_POLICY,
-  CONSENT_PRIVACY_POLICY_LINK_CONTENT,
-  CONSENT_COOKIE_PRIVACY_LINK_TARGET,
-  CONSENT_COOKIE_SETTINGS,
-  CONSENT_BANNER_LOGO,
-  CONSENT_BANNER_LANGUAGES_ICON,
-  // CONSENT_COOKIE_PRIVACY,
+  CMP_CLOSE_ICON,
+  CMP_CLOSE_ICON_WHITE,
+  CMP_WIDGET_ICON_CIRCLE,
+  CMP_WIDGET_ICON_TRIANGLE,
+  CMP_CARET_DOWN_ICON,
+  CMP_HEADER_MESSAGE,
+  CMP_BANNER_TITLE,
+  CMP_MESSAGE,
+  CMP_DISMISS_BUTTON_CONSTENT,
+  CMP_ALLOW_BUTTON_CONTENT,
+  CMP_ALLOW_ALL_BUTTON_CONTENT,
+  CMP_DENY_BUTTON_CONTENT,
+  CMP_LEARN_MORE_CONTENT,
+  CMP_COOKIE_POLICY,
+  CMP_COOKIE_POLICY_URL,
+  CMP_PRIVACY_POLICY,
+  CMP_PRIVACY_POLICY_URL,
+  CMP_COOKIE_POLICY_LINK_TARGET,
+  CMP_COOKIE_SETTINGS,
+  CMP_BANNER_LOGO,
+  CMP_BANNER_LANGUAGES_ICON,
+  // CMP_COOKIE_POLICY,
 } from "../constants/index.js";
 
 export default {
@@ -49,23 +49,24 @@ export default {
 
   // each item defines the inner text for the element that it references
   content: {
-    header: CONSENT_HEADER_MESSAGE,
-    title: CONSENT_BANNER_TITLE,
-    message: CONSENT_MESSAGE,
-    dismiss: CONSENT_DISMISS_BUTTON_CONSTENT,
-    allow: CONSENT_ALLOW_BUTTON_CONTENT,
-    allowAll: CONSENT_ALLOW_ALL_BUTTON_CONTENT,
-    deny: CONSENT_DENY_BUTTON_CONTENT,
-    link: CONSENT_LEARN_MORE_CONTENT,
-    href: CONSENT_COOKIE_PRIVACY_LINK_CONTENT,
-    close: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
-    closeWhiteIcon: `<img src=${CONSENT_CLOSE_ICON} class="cc-close" alt="close button"/>`,
-    target: CONSENT_COOKIE_PRIVACY_LINK_TARGET,
-    widgetImage: `<img src=${CONSENT_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
-    cookiePolicy: CONSENT_COOKIE_PRIVACY,
-    privacyPolicy: CONSENT_PRIVACY_POLICY,
-    privacyPolicyLink: CONSENT_PRIVACY_POLICY_LINK_CONTENT,
-    settings: CONSENT_COOKIE_SETTINGS,
+    header: CMP_HEADER_MESSAGE,
+    title: CMP_BANNER_TITLE,
+    message: CMP_MESSAGE,
+    dismiss: CMP_DISMISS_BUTTON_CONSTENT,
+    allow: CMP_ALLOW_BUTTON_CONTENT,
+    allowAll: CMP_ALLOW_ALL_BUTTON_CONTENT,
+    deny: CMP_DENY_BUTTON_CONTENT,
+    link: CMP_LEARN_MORE_CONTENT,
+    href: CMP_COOKIE_POLICY_URL,
+    close: `<img src=${CMP_CLOSE_ICON} class="cc-close" alt="close button"/>`,
+    closeWhiteIcon: `<img src=${CMP_CLOSE_ICON} class="cc-close" alt="close button"/>`,
+    target: CMP_COOKIE_POLICY_LINK_TARGET,
+    widgetImage: `<img src=${CMP_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
+    cookiePolicy: CMP_COOKIE_POLICY,
+    cookiePolicyURL: CMP_COOKIE_POLICY_URL,
+    privacyPolicy: CMP_PRIVACY_POLICY,
+    privacyPolicyURL: CMP_PRIVACY_POLICY_URL,
+    settings: CMP_COOKIE_SETTINGS,
   },
 
   // This is the HTML for the elements above. The string {{header}} will be replaced with the equivalent text below.
@@ -90,8 +91,8 @@ export default {
         <div class=" font-normal text-black-400 text-xsmall">
           <span>{{message}}</span>
           <div class="inline-block" id="cookieconsent:desc">
-            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-0 md:mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
-            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-0 md:mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyURL}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
+            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{cookiePolicyURL}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
           </div>
         </div>
       </div>
@@ -128,11 +129,11 @@ export default {
     <div class="cmp-overlay"></div>
     <div class="cookie-modal  relative overflow-hidden rounded-lg bg-white w-full">
       <div class="control-section z-50 sticky top-0 mb-1 px-6 py-6 flex justify-between items-center ">
-        <div><img src=${CONSENT_BANNER_LOGO} alt="Consent Logo" /></div>
+        <div><img src=${CMP_BANNER_LOGO} alt="Consent Logo" /></div>
         <div class="flex">
         <div id="language-icon-button" class="relative">
           <button aria-label="dismiss cookie message" type="button" tabindex="0"  class="h-full hover:bg-gray-faded active:bg-gray-faded rounded-sm">
-            <img src=${CONSENT_BANNER_LANGUAGES_ICON}  alt="language picker" />
+            <img src=${CMP_BANNER_LANGUAGES_ICON}  alt="language picker" />
           </button>
           <div id="language-options" class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
               <button class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal">English</button>
@@ -151,7 +152,7 @@ export default {
           <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading">{{title}}</p>
           <div class="flex">
             <span id="cookieconsent:desc" class="text-blue text-small font-medium border-b-1 border-blue">
-             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyLink}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
+             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyURL}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
             </span>
             <span id="cookieconsent:desc" class="text-blue text-small font-medium ml-2 border-b-1 border-blue">
              <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>

@@ -1,4 +1,4 @@
-import { ANALYTICAL, CONSENT_BANNER_CHEVRON_DOWN, CONSENT_CARET_DOWN_ICON, MARKETING, NECESSARY, OTHER, PREFERENCES } from "../constants";
+import { ANALYTICAL, CMP_BANNER_CHEVRON_DOWN, CMP_CARET_DOWN_ICON, MARKETING, NECESSARY, OTHER, PREFERENCES } from "../constants";
 import { saveAllCookies, saveNecessaryCookies, saveSpecificCookies } from "../getDomainsWithCookies";
 import {
   fetchDataFromJSONFile,
@@ -94,7 +94,7 @@ const fillCookiesSettingItem = () => {
       <p class="category-title text-base text-blue-500 font-normal">${item.name}</p>
       <div class="control-buttons flex">
          <button id="closeIcon" class="carret closeIcon cursor-pointer my-auto">
-            <img src="${CONSENT_CARET_DOWN_ICON}" class="toggle-accordion transition transform duration-200 ease-in-out "
+            <img src="${CMP_CARET_DOWN_ICON}" class="toggle-accordion transition transform duration-200 ease-in-out "
                alt="caret up/down" />
          </button>
       </div>
@@ -141,7 +141,7 @@ const filteredCookiesPerCategory = (item) => {
        <p class="category-title text-base text-blue-500 font-normal">${item.name}</p>
        <div class="control-buttons flex">
           <button id="closeIcon" class="carret closeIcon cursor-pointer my-auto">
-             <img src="${CONSENT_CARET_DOWN_ICON}" class="toggle-accordion transition transform duration-200 -rotate-90 ease-in-out "
+             <img src="${CMP_CARET_DOWN_ICON}" class="toggle-accordion transition transform duration-200 -rotate-90 ease-in-out "
                 alt="caret up/down" />
           </button>
        </div>
@@ -309,19 +309,19 @@ const fillCategories = function () {
         <div class="accordion-header text-small leading w-full flex flex-col justify-between py-6"  data-did=${cmpDomainId}>
           <div class="flex justify-between">
             <p class=" category-title font-bold text-black-faded">${item.name}</p>
-            <label for="${item.name.toLowerCase()}" class="switch-toggle relative dot-wrapper inline-flex cursor-pointer ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}" tabindex=${item.id}>
-              <button class="cc-btn w-auto group relative consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
+
+              <button class="switch-toggle dot-wrapper inline-flex cursor-pointer   cc-btn w-auto group relative consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
                 <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${item.name}" value="${item.name.toLowerCase()}" ${
           item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
         } />
                 <div class="switch-holder block border-1 border-gray-light  w-9 h-6 rounded-full transition "></div>
                 <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition "></div>
               </button>
-            </label>
+
           </div>
           <p class="category-description py-2 max-w-9/10 text-black-faded transition duration-300 ease-in-out transform">${item.description ? item.description : item.name}</p>
           <button value=${item.id} data-settings-details-id=${item.id} class="cookie-details max-w-max flex items-center text-blue font-medium " data-category-id=${item.id}>
-            <span>Show Cookies</span> <img src=${CONSENT_BANNER_CHEVRON_DOWN} class="toggle-accordion" alt="show cookies chevron"/>
+            <span>Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN} class="toggle-accordion" alt="show cookies chevron"/>
           </button>
         </div>
         <div class="accordion-content h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${item.id}">
