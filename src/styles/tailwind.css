@@ -472,12 +472,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
 }
 
-@media (min-width: 475px) {
-  .container {
-    max-width: 475px;
-  }
-}
-
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
@@ -1236,19 +1230,5 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 1536px) {
   .\32xl\:pt-4 {
     padding-top: 1rem;
-  }
-}
-
-@media (min-width: 475px) {
-  .xs\:mr-2 {
-    margin-right: 0.5rem;
-  }
-
-  .xs\:mb-0 {
-    margin-bottom: 0px;
-  }
-
-  .xs\:flex-row {
-    flex-direction: row;
   }
 }
