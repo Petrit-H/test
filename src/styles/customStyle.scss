@@ -411,6 +411,7 @@ ul {
   // padding: 10px 0;
   &.active {
     color: #052d61;
+    font-weight: 700;
   }
   &.active::after {
     content: "";

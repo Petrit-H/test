@@ -306,20 +306,20 @@ const fillCategories = function () {
       ?.map((item) => {
         return `
         <li id=test-${item.id} class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
-        <div class="accordion-header text-small leading w-full flex flex-col justify-between py-6"  data-did=${cmpDomainId}>
-          <div class="flex justify-between">
+        <div class="accordion-header text-small leading w-full flex flex-col justify-between py-3"  data-did=${cmpDomainId}>
+          <div class="flex items-end justify-between">
             <p class=" category-title font-bold text-black-faded">${item.name}</p>
 
               <button class="switch-toggle dot-wrapper inline-flex cursor-pointer   cc-btn w-auto group relative consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
                 <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${item.name}" value="${item.name.toLowerCase()}" ${
           item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
         } />
-                <div class="switch-holder block border-1 border-gray-light  w-9 h-6 rounded-full transition "></div>
-                <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-4 h-4 rounded-full transition "></div>
+                <div class="switch-holder block border-1 border-gray-light  w-10 h-7 rounded-full transition "></div>
+                <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition "></div>
               </button>
 
           </div>
-          <p class="category-description py-2 max-w-9/10 text-black-faded transition duration-300 ease-in-out transform">${item.description ? item.description : item.name}</p>
+          <p class="category-description max-w-4/5 text-black-faded transition duration-300 ease-in-out transform">${item.description ? item.description : item.name}</p>
           <button value=${item.id} data-settings-details-id=${item.id} class="cookie-details max-w-max flex items-center text-blue font-medium " data-category-id=${item.id}>
             <span>Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN} class="toggle-accordion" alt="show cookies chevron"/>
           </button>

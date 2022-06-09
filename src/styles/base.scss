@@ -3,7 +3,6 @@
 .cc-revoke {
   position: fixed;
   // bottom: 1em;
-
   overflow: hidden;
   box-sizing: border-box; /* exclude padding when dealing with width */
   font-family: "Inter", sans-serif;
@@ -39,7 +38,7 @@
 }
 
 .cc-revoke {
-  padding: 0.5em;
+  // padding: 0.5em;
 }
 .cc-revoke:hover {
   text-decoration: underline;

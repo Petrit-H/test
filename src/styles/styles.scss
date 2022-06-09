@@ -32,13 +32,16 @@
 }
 
 input[type="checkbox"]:checked ~ .dot {
-  transform: translateX(12px);
+  transform: translateX(11px);
   background-color: #1d79f2;
+  box-shadow: 0 2px 4px 0 rgba(29, 121, 242, 0.4);
 }
 .necessary-category {
   background-image: url("https://tojnhu4mvp.gjirafa.net/CMP/necessaryTick.svg");
   background-repeat: no-repeat;
   background-color: transparent !important;
+  background-size: contain;
+  background-position: center;
   z-index: 999;
 }
 .switch-toggle input {

@@ -125,12 +125,13 @@ const draw = function (countryCode) {
 };
 
 export function initiateTypeChangeAndBannerShow() {
-  // setTimeout(() => {
   const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
   const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
   acceptAllCookiesAtOnce.addEventListener("click", () => {
     console.log("click");
-    allowAllCookiesAtOnce();
+    setTimeout(() => {
+      allowAllCookiesAtOnce();
+    }, 200);
   });
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
