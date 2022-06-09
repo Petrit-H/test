@@ -1,9 +1,5 @@
 module.exports = {
-  content: [
-    "./dist/*.html",
-    "./src/**/*.{js,jsx,tsx,ts,vue}",
-    "./src/*.{js,jsx,tsx,ts,vue}",
-  ],
+  content: ["./dist/*.html", "./src/**/*.{js,jsx,tsx,ts,vue}", "./src/*.{js,jsx,tsx,ts,vue}"],
   darkMode: "media", // or 'class'
   theme: {
     extend: {
@@ -50,6 +46,8 @@ module.exports = {
       },
       maxWidth: {
         "1/2": "50%",
+        "1/3": "30%",
+        "6/10": "60%",
         "7/10": "70%",
         "3/4": "75%",
         "4/5": "80%",
@@ -64,6 +62,9 @@ module.exports = {
       },
       width: {
         100: "100px",
+      },
+      screens: {
+        xs: "475px",
       },
     },
   },
@@ -84,13 +85,7 @@ module.exports = {
     "at-rule-no-unknown": [
       true,
       {
-        ignoreAtRules: [
-          "tailwind",
-          "apply",
-          "variants",
-          "responsive",
-          "screen",
-        ],
+        ignoreAtRules: ["tailwind", "apply", "variants", "responsive", "screen"],
       },
     ],
     "declaration-block-trailing-semicolon": null,
