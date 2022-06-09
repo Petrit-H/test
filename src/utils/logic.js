@@ -28,7 +28,7 @@ let response = [];
  */
 const filterCookiesByCategory = (arr, id, storeArray, category) => {
   response = arr.filter((item) => item.categoryId === +id);
-  console.log(`🚀 ~ ${category} id:`, +id, `=> `, response);
+  // console.log(`🚀 ~ ${category} id:`, +id, `=> `, response);
   return response;
 };
 
@@ -174,7 +174,7 @@ const filteredCookiesPerCategory = (item) => {
 
 const changeTabOnClick = () => {
   const tabs = document.querySelectorAll(".tab-item");
-  console.log("CLICK", tabs);
+  // console.log("CLICK", tabs);
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       let cookieId = tab.children[0].dataset.cookieSettingsId;
@@ -219,7 +219,7 @@ const bannerAccordionToggle = function () {
       });
       accordionHeaders[i].addEventListener("click", () => {
         if (contentData.classList.contains("hidden") || contentData.classList.contains("h-0")) {
-          console.log("closed");
+          // console.log("closed");
           filteredCookies = filterCookiesByCategory(cmpCookiesPerDomain, categoryID, cookiesPerCategoryArr, "filteredCookies");
           contentData.innerHTML = filteredCookies?.map((item) => filteredCookiesPerCategory(item)).join("");
           changeTabOnClick();
@@ -227,7 +227,7 @@ const bannerAccordionToggle = function () {
           toggleCSSclasses(contentData, "hidden", "h-0");
           carretToggle[i].classList.add("rotate-180");
         } else {
-          console.log("opened");
+          // console.log("opened");
           filteredCookies = filterCookiesByCategory(cmpCookiesPerDomain, categoryID, cookiesPerCategoryArr, "filteredCookies");
           contentData.innerHTML = filteredCookies?.map((item) => filteredCookiesPerCategory(item)).join("");
           toggleCSSclasses(contentData, "hidden", "h-0");
@@ -369,7 +369,7 @@ const allowAllCookiesAtOnce = () => {
  */
 const acceptNecessaryCookies = function () {
   setTimeout(() => {
-    console.log("SAVE ALL COOKIES");
+    // console.log("SAVE ALL COOKIES");
     const gotItButton = document.querySelector(".got-it-button");
     gotItButton.addEventListener("click", () => {
       // saveNecessaryCookies();

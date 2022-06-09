@@ -4,11 +4,9 @@ import { changeBannerTypeOnLocation } from "../initFile";
 let countryCode = "";
 
 const toError = (obj) => {
-  console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
+  // console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
   setTimeout(() => {
-    let errorMessage = new Error(
-      "Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error
-    );
+    let errorMessage = new Error("Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error);
     return errorMessage;
   }, 200);
 };

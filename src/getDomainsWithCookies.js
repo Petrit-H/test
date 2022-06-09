@@ -82,7 +82,7 @@ export const saveNecessaryCookies = () => {
 export const saveSpecificCookies = (id) => {
   try {
     cookiesPerCategory = filterCookiesByCategory(cmpCookiesPerDomain, id, cookiesPerCategory, `Category #${id}`);
-    console.log("cookiesPerCategory", cookiesPerCategory);
+    // console.log("cookiesPerCategory", cookiesPerCategory);
     for (let index = 0; index < cookiesPerCategory.length; index++) {
       const cookie = cookiesPerCategory[index];
       let { categoryId, categoryName, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
@@ -140,13 +140,13 @@ export const getDomains = () => {
   axios(config)
     .then(function (response) {
       responseData = response.data;
-      console.log("==========︾==========");
-      filterCookiesByCategory(response.data, 5, "NECESSARY");
-      filterCookiesByCategory(response.data, 4, "PREFERENCES");
-      filterCookiesByCategory(response.data, 3, "ANALYTICAL");
-      filterCookiesByCategory(response.data, 2, "MARKETING");
-      filterCookiesByCategory(response.data, 1, "OTHER");
-      console.log("==========︽==========");
+      // console.log("==========︾==========");
+      // filterCookiesByCategory(response.data, 5, "NECESSARY");
+      // filterCookiesByCategory(response.data, 4, "PREFERENCES");
+      // filterCookiesByCategory(response.data, 3, "ANALYTICAL");
+      // filterCookiesByCategory(response.data, 2, "MARKETING");
+      // filterCookiesByCategory(response.data, 1, "OTHER");
+      // console.log("==========︽==========");
       return responseData;
     })
     .catch(function (error) {
