@@ -12,15 +12,18 @@ const toError = (obj) => {
 
 export const fetchClientIp = async () => {
   let url = "";
+  let data = "";
   let config = {
     method: "get",
-    url: CLIENT_GEOLOCATION_API_URL,
+    // url: CLIENT_GEOLOCATION_API_URL,
     headers: {},
   };
   try {
-    const response = await axios(config);
-    url = response.data;
-    countryCode = response.data.CountryCode;
+    // const response = await axios(config);
+    const response = await fetch(CLIENT_GEOLOCATION_API_URL, config);
+    // url = response.data;
+    data = await response.json();
+    countryCode = url.CountryCode;
     return countryCode;
   } catch (error) {
     console.error(error.message);
