@@ -3,7 +3,6 @@ import { fetchClientIp } from "./options/location";
 import jsonData from "./data.json";
 import { initiateTypeChangeAndBannerShow } from "./initFile";
 
-// console.log(createUUID());
 let locationData = "";
 
 export let categories = [];

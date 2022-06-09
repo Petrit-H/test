@@ -1,5 +1,3 @@
-;
-
 import Base from "./Base";
 import defaultOptions from "../options/legal";
 
@@ -16,7 +14,6 @@ export default class Legal extends Base {
   }
   applyLaw(options, countryCode) {
     const country = this.get(countryCode);
-    // console.log("🚀 ~ file: Legal.js ~ line 19 ~ Legal ~ applyLaw ~ country", country)
 
     if (!country.hasLaw) {
       // The country has no cookie law

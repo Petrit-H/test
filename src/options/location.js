@@ -4,7 +4,6 @@ import { changeBannerTypeOnLocation } from "../initFile";
 let countryCode = "";
 
 const toError = (obj) => {
-  // console.log("🚀 ~ file: location.js ~ line 4 ~ toError ~ obj", obj);
   setTimeout(() => {
     let errorMessage = new Error("Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error);
     return errorMessage;
@@ -22,41 +21,11 @@ export const fetchClientIp = async () => {
     const response = await axios(config);
     url = response.data;
     countryCode = response.data.CountryCode;
-    // console.log("fetchClientIp =>", countryCode);
     return countryCode;
   } catch (error) {
     console.error(error.message);
   }
 };
-
-// export const fetchClientIp = () => {
-//   let url = "";
-//   let config = {
-//     method: "get",
-//     url: CLIENT_GEOLOCATION_API_URL,
-//     headers: {},
-//   };
-
-//   axios(config)
-//     .then(function (response) {
-//       url = response.data;
-//       countryCode = response.data.CountryCode;
-
-//       /* console.log("🚀 ~ ", countryCode);
-//       console.log("==========︾==========");
-//       console.log("🚀 ~ ", url);
-//       console.log("🚀 ~ ", url.Country);
-//       console.log("🚀 ~ ", url.CountryCode);
-//       console.log("🚀 ~ ", url.Timezone);
-//       console.log("🚀 ~ ", url.CountryID);
-//       console.log("==========︽=========="); */
-//       // toError({ code: url.CountryCode, error: "Invalid response" });
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-//   return countryCode;
-// };
 
 export default {
   // The default timeout is 5 seconds. This is mainly needed to catch JSONP requests that error.
@@ -75,7 +44,6 @@ export default {
         callback: function (done, response) {
           try {
             var json = JSON.parse(response);
-            // console.log("🚀 ~ JSON ", json);
             if (json.CountryCode) {
               return { code: json.CountryCode };
             }

@@ -19,11 +19,9 @@ export let responseJSON = {
 export const fillJSONWithCheckedCategory = () => {
   const radioButtons = document.querySelectorAll(".category-radio-button");
   if (radioButtons.length !== 0 && radioButtons !== null) {
-    // console.log("🚀 ~ ~ radioButtons", radioButtons.length);
     for (let index = 0; index < radioButtons.length; index++) {
       const element = radioButtons[index];
       if (element.checked) {
-        // console.log(element.id, element.name);
         acceptedCategories.push(element.name);
       }
     }
@@ -36,7 +34,6 @@ export const fillJSONWithCheckedCategory = () => {
     }
   }
 
-  console.log(responseJSON);
   acceptedCategories = [];
 };
 
@@ -81,7 +78,6 @@ function timeStamp() {
       time[i] = "0" + time[i];
     }
   }
-  // console.log("🚀 ~  timeStamp", "[" + time.join(":") + "] ");
   return "[" + time.join(":") + "] ";
 }
 
@@ -128,7 +124,6 @@ export function initiateTypeChangeAndBannerShow() {
   const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
   const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
   acceptAllCookiesAtOnce.addEventListener("click", () => {
-    console.log("click");
     setTimeout(() => {
       allowAllCookiesAtOnce();
     }, 200);
@@ -160,9 +155,3 @@ export function initiateTypeChangeAndBannerShow() {
   }
   // }, 400);
 }
-
-// setTimeout(() => {
-//   const testData = ccInstance.getCountryLaws(CountryCode);
-//   console.log(CountryCode, testData);
-//   // saveAllCookies()
-// }, 300);
