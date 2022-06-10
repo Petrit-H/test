@@ -35,7 +35,7 @@ export default {
   // Otherwise there is no easy way to catch JSONP errors. That means that if a JSONP fails, the
   // app will take `timeout` milliseconds to react to a JSONP network error.
 
-  timeout: 1000,
+  timeout: 0,
 
   // the order that services will be attempted in
   serviceDefinitions: {

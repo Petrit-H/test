@@ -193,7 +193,6 @@ const changeTabOnClick = () => {
 const bannerAccordionToggle = function () {
   setTimeout(() => {
     const accordionHeaders = document.querySelectorAll(".cookie-details");
-
     const accordionContents = document.querySelectorAll(".cc-category .accordion-content");
     // const categoryDescription = document.getElementsByClassName("cookie-details");
     const injectedLabel = document.querySelectorAll(".dot-wrapper");
@@ -304,19 +303,19 @@ const fillCategories = function () {
         <li id=test-${item.id} class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
         <div class="accordion-header text-small leading w-full flex flex-col justify-between py-3"  data-did=${cmpDomainId}>
           <div class="flex items-end justify-between">
-            <p class=" category-title font-bold text-black-faded">${item.name}</p>
+            <p class=" category-title font-bold text-black-faded">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
 
               <button class="switch-toggle dot-wrapper inline-flex cursor-pointer   cc-btn w-auto group relative consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
-                <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${item.name}" value="${item.name.toLowerCase()}" ${
-          item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
-        } />
+                <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${
+          item.name
+        }" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""} />
                 <div class="switch-holder block border-1 border-gray-light  w-10 h-7 rounded-full transition "></div>
                 <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition "></div>
               </button>
 
           </div>
           <p class="category-description max-w-4/5 text-black-faded transition duration-300 ease-in-out transform">${item.description ? item.description : item.name}</p>
-          <button value=${item.id} data-settings-details-id=${item.id} class="cookie-details max-w-max flex items-center text-blue font-medium " data-category-id=${item.id}>
+          <button value=${item.id} data-settings-details-id=${item.id} class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${item.id}>
             <span>Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN} class="toggle-accordion" alt="show cookies chevron"/>
           </button>
         </div>
@@ -382,4 +381,16 @@ const stopParentClick = function (event) {
   event.stopPropagation();
 };
 
-export { bannerAccordionToggle, showModal, filterCookiesByCategory, settingsAccordionToggle, fillCategories, fillCookiesSettingItem, acceptAllCookiesWithRadioToggle, acceptNecessaryCookies, allowAllCookiesAtOnce, stopParentClick, languageButtonToggle };
+export {
+  bannerAccordionToggle,
+  showModal,
+  filterCookiesByCategory,
+  settingsAccordionToggle,
+  fillCategories,
+  fillCookiesSettingItem,
+  acceptAllCookiesWithRadioToggle,
+  acceptNecessaryCookies,
+  allowAllCookiesAtOnce,
+  stopParentClick,
+  languageButtonToggle,
+};

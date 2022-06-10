@@ -835,8 +835,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-width: 1px;
 }
 
-.border-t-2 {
-  border-top-width: 2px;
+.border-t-1 {
+  border-top-width: 1px;
 }
 
 .border-l {
@@ -1005,12 +1005,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-weight: 400;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .font-medium {
   font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .leading-4 {

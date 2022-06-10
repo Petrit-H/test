@@ -205,5 +205,5 @@ window.addEventListener("load", function (event) {
       locationData = location;
       return location;
     });
-  }, 50);
+  }, 100);
 });

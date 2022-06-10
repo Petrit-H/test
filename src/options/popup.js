@@ -143,8 +143,8 @@ export default {
         </div>
       </div>
       <div class="tabs flex justify-start px-6  border-b border-gray-light">
-          <button type="button" class="tab pointer relative pb-4 mr-6 text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#cookie-display">Categories</button>
-          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-bold text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#cookie-settings">Cookies</button>
+          <button type="button" class="tab pointer relative pb-4 mr-6 text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#cookie-display">Categories</button>
+          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#cookie-settings">Cookies</button>
       </div>
       <div class="content-wrapper px-6 overflow-y-auto my-3">
         <div class="description-section py-3">
@@ -173,7 +173,7 @@ export default {
         </div>
 
       </div>
-      <div class=" bottom-0 border-gray-200 border-t-2  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
+      <div class=" bottom-0 border-gray-200 border-t-1  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
         <div>
           <button
           class="cc-btn cc-save  cc-${STATUS_ALLOW} border-1 border-blue-200 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
