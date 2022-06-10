@@ -63,7 +63,12 @@
   right: 0;
   top: 0;
 }
-.cc-banner.cc-bottom {
+.cc-banner.cc-type-categories.cc-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.cc-banner.cc-type-info.cc-bottom {
   left: 0;
   right: 0;
   bottom: 8px;
@@ -168,5 +173,10 @@
     p {
       margin: 0;
     }
+  }
+}
+.widget-button {
+  img {
+    position: static;
   }
 }

@@ -61,7 +61,7 @@ export default {
     close: `<img src=${CMP_CLOSE_ICON} class="cc-close" alt="close button"/>`,
     closeWhiteIcon: `<img src=${CMP_CLOSE_ICON} class="cc-close" alt="close button"/>`,
     target: CMP_COOKIE_POLICY_LINK_TARGET,
-    widgetImage: `<img src=${CMP_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0" style="position:static;padding:0" alt="cookie icon bottom"/>`,
+    widgetImage: `<img src=${CMP_WIDGET_ICON_CIRCLE} class="cc-revoke static p-0 max-w-6/10 m-4" alt="cookie icon bottom"/>`,
     cookiePolicy: CMP_COOKIE_POLICY,
     privacyPolicy: CMP_PRIVACY_POLICY,
     privacyPolicyLink: CMP_PRIVACY_POLICY_URL,
@@ -201,7 +201,7 @@ export default {
 
   // This is the html for the revoke button. This only shows up after the user has selected their level of consent
   // It can be enabled of disabled using the `revokable` option
-  revokeBtn: '<button type="button" class="cc-revoke bottom-0">{{widgetImage}}</button>',
+  revokeBtn: '<button type="button" class="cc-revoke bottom-0 widget-button">{{widgetImage}}</button>',
 
   // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
   compliance: {

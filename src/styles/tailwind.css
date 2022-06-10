@@ -565,6 +565,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 10;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -722,6 +726,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
+}
+
+.max-w-6\/10 {
+  max-width: 60%;
 }
 
 .flex-1 {
