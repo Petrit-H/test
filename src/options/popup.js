@@ -100,7 +100,7 @@ export default {
               <input type="checkbox" id="dnsmd"  class="category-radio-button" name="do-not-sell-my-data" value="" />
               <div class="switch-holder block border-1 border-gray-light  w-10 h-7 rounded-full transition "></div>
               <div class="bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition"></div>
-              <p class=" category-title font-small font-medium text-blue-500 ml-2">Do not sell my personal information</p>
+              <p class=" category-title text-small font-medium text-blue-500 ml-2">Do not sell my personal information</p>
             </button>
        </div>
       </div>
