@@ -195,7 +195,7 @@ const bannerAccordionToggle = function () {
     const accordionHeaders = document.querySelectorAll(".cookie-details");
     const accordionContents = document.querySelectorAll(".cc-category .accordion-content");
     // const categoryDescription = document.getElementsByClassName("cookie-details");
-    const injectedLabel = document.querySelectorAll(".dot-wrapper");
+    const radioButtonWrapper = document.querySelectorAll(".dot-wrapper");
     const carretToggle = document.querySelectorAll(".toggle-accordion");
 
     for (let i = 0; i < accordionHeaders.length; i++) {
@@ -211,8 +211,9 @@ const bannerAccordionToggle = function () {
           carretToggle[i].classList.remove("rotate-180");
         }
       };
-      injectedLabel[i].addEventListener("click", (event) => {
+      radioButtonWrapper[i].addEventListener("click", (event) => {
         event.stopPropagation();
+        console.log("toggle", event.target.checked);
       });
       accordionHeaders[i].addEventListener("click", () => {
         if (contentData.classList.contains("hidden") || contentData.classList.contains("h-0")) {
@@ -229,7 +230,6 @@ const bannerAccordionToggle = function () {
           carretToggle[i].classList.add("rotate-180");
           changeTabOnClick();
         }
-        const children = accordionContents[i].childNodes;
       });
     }
   }, 200);
@@ -305,12 +305,14 @@ const fillCategories = function () {
           <div class="flex items-end justify-between">
             <p class=" category-title font-bold text-black-faded">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
 
-              <button class="switch-toggle dot-wrapper inline-flex cursor-pointer   cc-btn w-auto group relative consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
-                <input type="checkbox" id=${item.id} ${item.checked && "checked"} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${
+              <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
+                <input type="checkbox" id=${item.id} ${item.checked ? "checked" : ""} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${
           item.name
         }" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""} />
-                <div class="switch-holder block border-1 border-gray-light  w-10 h-7 rounded-full transition "></div>
+                <div class="switch-holder relative block border-1 border-gray-light  w-10 h-8 rounded-full transition ">
                 <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition "></div>
+                </div>
+
               </button>
 
           </div>

@@ -96,10 +96,11 @@ export default {
           </div>
         </div>
         <div class="DNSMD  mt-5 ${CMP_COMPLIANCE_TYPE === 2 ? "hidden" : ""}">
-            <button class="switch-toggle w-auto group relative flex justify-start items-center dot-wrapper cursor-pointer consentButton ">
+            <button class="w-auto group relative flex justify-start items-center dot-wrapper cursor-pointer consentButton ">
               <input type="checkbox" id="dnsmd"  class="category-radio-button" name="do-not-sell-my-data" value="" />
-              <div class="switch-holder block border-1 border-gray-light  w-10 h-7 rounded-full transition "></div>
-              <div class="bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition"></div>
+              <div class="switch-holder relative block border-1 border-gray-light  w-10 h-8 rounded-full transition ">
+              <div class="bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition "></div>
+              </div>
               <p class=" category-title text-small font-medium text-blue-500 ml-2">Do not sell my personal information</p>
             </button>
        </div>
@@ -139,7 +140,7 @@ export default {
       <div class="control-section z-50 sticky top-0 mb-1 px-6 py-6 flex justify-between items-center ">
         <div><img src=${CMP_BANNER_LOGO} alt="Consent Logo" /></div>
         <div class="flex">
-        <div id="language-icon-button" class="relative">
+        <div id="language-icon-button" class="relative mr-6">
           <button aria-label="dismiss cookie message" type="button" tabindex="0"  class="h-full hover:bg-gray-faded active:bg-gray-faded rounded-sm">
             <img src=${CMP_BANNER_LANGUAGES_ICON}  alt="language picker" />
           </button>
