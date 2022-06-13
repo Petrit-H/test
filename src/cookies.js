@@ -44,8 +44,9 @@ export let cmpPortaCMPLogo = "";
 export let cmpLanguagesGlobe = "";
 export let cmpInfoIcon = "";
 export let cmpNecessaryTickIcon = "";
+export let cmpComplianceType = "";
 
-const { ipAddressURL, domainId, domainName, domainWebsiteUrl, language, languagesList, domainCategoriesWithCookies, domainCategories, domainCookies } = jsonData;
+const { ipAddressURL, domainId, domainName, domainWebsiteUrl, language, languagesList, domainCategoriesWithCookies, domainCategories, domainCookies, complianceType } = jsonData;
 
 const {
   widgetImageCircle,
@@ -113,6 +114,7 @@ export const fetchDataFromJSONFile = async () => {
     cmpLanguagesGlobe = languagesGlobe;
     cmpInfoIcon = infoIcon;
     cmpNecessaryTickIcon = necessaryTick;
+    cmpComplianceType = complianceType;
 
     return {
       cmpDomainId,
@@ -147,6 +149,7 @@ export const fetchDataFromJSONFile = async () => {
       cmpLanguagesGlobe,
       cmpInfoIcon,
       cmpNecessaryTickIcon,
+      cmpComplianceType,
     };
   } catch (error) {
     console.log(error);
@@ -184,6 +187,7 @@ export const fetchDataFromJSONFile = async () => {
     cmpLanguagesGlobe,
     cmpInfoIcon,
     cmpNecessaryTickIcon,
+    cmpComplianceType,
   };
 };
 

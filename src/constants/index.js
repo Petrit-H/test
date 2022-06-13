@@ -98,6 +98,7 @@ import {
   cmpCookiePolicy,
   cmpPrivacyPolicy,
   cmpPrivacyPolicyURL,
+  cmpComplianceType,
 } from "../cookies";
 fetchDataFromJSONFile().then((json) => json);
 
@@ -105,6 +106,7 @@ export const CMP_API_BASE_URL = "https://cmp.gjirafa.dev";
 // export const CONSENT_IMAGE_BASE_URL = "https://tojnhu4mvp.gjirafa.net/CMP";
 
 export const CLIENT_GEOLOCATION_API_URL = cmpIpAddressURL;
+export const CMP_COMPLIANCE_TYPE = cmpComplianceType;
 export const CMP_CLOSE_ICON = cmpCloseIcon;
 export const CMP_CLOSE_ICON_WHITE = cmpCloseIconWhite;
 export const CMP_WIDGET_ICON_CIRCLE = cmpWidgetImageCircle;

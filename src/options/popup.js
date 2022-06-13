@@ -24,6 +24,7 @@ import {
   CMP_COOKIE_SETTINGS,
   CMP_BANNER_LOGO,
   CMP_BANNER_LANGUAGES_ICON,
+  CMP_COMPLIANCE_TYPE,
   // CMP_COOKIE_POLICY,
 } from "../constants/index.js";
 
@@ -94,10 +95,18 @@ export default {
             <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
           </div>
         </div>
+        <div class="DNSMD  mt-5 ${CMP_COMPLIANCE_TYPE === 2 ? "hidden" : ""}">
+            <button class="switch-toggle w-auto group relative flex justify-start items-center dot-wrapper cursor-pointer consentButton ">
+              <input type="checkbox" id="dnsmd"  class="category-radio-button" name="do-not-sell-my-data" value="" />
+              <div class="switch-holder block border-1 border-gray-light  w-10 h-7 rounded-full transition "></div>
+              <div class="bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition"></div>
+              <p class=" category-title font-small font-medium text-blue-500 ml-2">Do not sell my personal information</p>
+            </button>
+       </div>
       </div>
-      <div class="banner-wrapper-controls w-full md:w-1/2 lg:w-1/2 flex flex-col xs:flex-row  items-center justify-start md:justify-end text-sm ">
-        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white mr-0 xs:mr-2 px-10 mb-2 xs:mb-0 w-full sm:w-auto cc-btn cc-save py-2.5 rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
-        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 banner-type-change px-10 w-full sm:w-auto py-2.5 rounded-4 " id="accept-cookies">{{settings}}</button>
+      <div class="banner-wrapper-controls w-full md:w-1/2 lg:w-1/2 flex flex-col xs:flex-row  ${CMP_COMPLIANCE_TYPE === 2 ? "items-center" : "items-end"}  justify-start md:justify-end text-sm ">
+        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white leading mr-0 xs:mr-2 px-3 py-2 mb-2 xs:mb-0 w-full sm:w-auto cc-btn cc-save  rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
+        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 leading banner-type-change px-3 py-2 w-full sm:w-auto  rounded-4 " id="accept-cookies">{{settings}}</button>
       </div>
     </div>
     `,
