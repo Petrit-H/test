@@ -22,13 +22,15 @@
   "bannerCategories": {
     "bctTitle": "",
     "bctDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí. Více informací o každé kategorii souborů cookie naleznete níže. Soubory cookie v kategorii „Nezbytné“ jsou nezbytné pro fungování webu a nelze je vypnout. Můžete se však rozhodnout udělit nebo odvolat souhlas povolením / zakázáním všech ostatních kategorií níže. Uvědomte si prosím, že deaktivace některých z těchto kategorií může ovlivnit váš zážitek z prohlížení.",
+    "bctCategoriesTab": "Kategorie",
+    "bctCookiesTab": "Soubory cookie",
     "categories": [
       {
-        "bctCategoryName": "PERTIT CATEGORY",
-        "bctCategoryDescription": "this is a test"
+        "bctCategoryName": "PERTIT KATEGORIE",
+        "bctCategoryDescription": "tohle je zkouška"
       },
       {
-        "bctCategoryName": "Test ideal",
+        "bctCategoryName": " ideal",
         "bctCategoryDescription": "test ideal"
       },
       {
@@ -44,7 +46,7 @@
         "bctCategoryDescription": "Analytické soubory cookie nám pomáhají porozumět a zlepšovat výkon webu sledováním chování uživatele za účelem podávání zpráv o používání webu. Některé informace o metrikách poskytovaných těmito soubory cookie jsou počet návštěvníků a nejoblíbenější a nejméně oblíbené stránky."
       },
       {
-        "bctCategoryName": "",
+        "bctCategoryName": "Marketing",
         "bctCategoryDescription": "Soubory cookie pro cílení používáme my a třetí strany, které zastupují naše reklamní partnery. Tyto soubory cookie poskytují návštěvníkům našich stránek vlastní reklamu na základě jejich zájmů, jako jsou stránky, které navštívili. Pokud to není povoleno, nebude se návštěvníkovi webu zobrazovat reklama přizpůsobená jeho zájmům."
       },
       {

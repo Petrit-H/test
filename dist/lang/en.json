@@ -1,6 +1,6 @@
 {
   "test": {
-    "app-title": "With i18nextt",
+    "app-title": "With i18next",
     "home": "Home",
     "about": "About",
     "lead": "Welcome to my little spot on the interwebs, {{username}}!",
@@ -22,6 +22,8 @@
   "bannerCategories": {
     "bctTitle": "",
     "bctDescription": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions. More information about each cookie category can be found below. Cookies under the “Necessary” category are essential for the site to function and cannot be turned off. However you can choose to give or withdraw consent by enabling / disabling all other categories below. Please be aware that disabling some of these categories may affect your browsing experience.",
+    "bctCategoriesTab": "Categories",
+    "bctCookiesTab": "Cookies",
     "categories": [
       {
         "bctCategoryName": "PERTIT CATEGORY",
