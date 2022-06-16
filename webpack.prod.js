@@ -11,10 +11,6 @@ module.exports = merge(commonConfig, {
   mode: "production",
   module: {
     rules: [
-      // {
-      //   test: /\.json$/,
-      //   loader: "json-loader",
-      // },
       {
         type: "javascript/auto",
         test: /\.json$/,
@@ -29,15 +25,6 @@ module.exports = merge(commonConfig, {
         include: [path.resolve(__dirname, "src/lang")],
         // include: /\/src\/lang\/.*\.json$/,
         // include: /\/src\/.*\.json$/,
-
-        // test: /\.json$/,
-        // include: [path.resolve(__dirname, "src/lang")],
-        // use: [
-        //   {
-        //     loader: "file-loader",
-        //     options: { name: "[name].[ext]" },
-        //   },
-        // ],
       },
       {
         test: /\.(js|jsx)$/,
