@@ -24,11 +24,11 @@
     "bctDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí. Více informací o každé kategorii souborů cookie naleznete níže. Soubory cookie v kategorii „Nezbytné“ jsou nezbytné pro fungování webu a nelze je vypnout. Můžete se však rozhodnout udělit nebo odvolat souhlas povolením / zakázáním všech ostatních kategorií níže. Uvědomte si prosím, že deaktivace některých z těchto kategorií může ovlivnit váš zážitek z prohlížení.",
     "categories": [
       {
-        "bctCategoryName": "PERTIT KATEGORIE",
-        "bctCategoryDescription": "tohle je zkouška"
+        "bctCategoryName": "PERTIT CATEGORY",
+        "bctCategoryDescription": "this is a test"
       },
       {
-        "bctCategoryName": " ideal",
+        "bctCategoryName": "Test ideal",
         "bctCategoryDescription": "test ideal"
       },
       {

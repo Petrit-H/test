@@ -5,15 +5,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   // entry: "./src/index.js",
   entry: {
-    index: [
-      "./src/initFile.js",
-      "./src/getDomainsWithCookies.js",
-      "./src/cookies.js",
-    ],
+    "index.min.js": ["./src/initFile.js", "./src/getDomainsWithCookies.js", "./src/cookies.js"],
   },
   // watch: true,
   output: {
-    filename: "[name].min.js",
+    filename: "[name]",
     path: path.resolve(__dirname, "./dist"),
     publicPath: "./",
     libraryExport: "default",
@@ -28,5 +24,4 @@ module.exports = {
       template: path.resolve(__dirname, "./src", "index.html"),
     }),
   ],
-
 };

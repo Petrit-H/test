@@ -1,0 +1,1 @@
+import "./lang/en.json";

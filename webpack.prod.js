@@ -10,6 +10,10 @@ module.exports = merge(commonConfig, {
   mode: "production",
   module: {
     rules: [
+      // {
+      //   test: /\.json$/,
+      //   loader: "json-loader",
+      // },
       {
         test: /\.(js|jsx)$/,
         exclude: /[\\/]node_modules[\\/]/,
@@ -48,5 +52,5 @@ module.exports = merge(commonConfig, {
       }),
       new TerserPlugin(),
     ],
-  }
+  },
 });

@@ -15,6 +15,8 @@ import {
   // bindLocaleSwitcher,
   // initI18next,
 } from "./utils/logic";
+import "./lang/en.json";
+import "./lang/cs.json";
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
@@ -29,7 +31,7 @@ export let responseJSON = {
   userId: createUUID(),
   categories: acceptedCategories,
 };
-
+// console.log(en);
 export const fillJSONWithCheckedCategory = () => {
   const radioButtons = document.querySelectorAll(".category-radio-button");
   if (radioButtons.length !== 0 && radioButtons !== null) {
