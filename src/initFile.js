@@ -1,6 +1,20 @@
+import i18next from "i18next";
+import HttpApi from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
-import { acceptNecessaryCookies, acceptAllCookiesWithRadioToggle, bannerAccordionToggle, fillCategories, fillCookiesSettingItem, languageButtonToggle, allowAllCookiesAtOnce } from "./utils/logic";
+import {
+  acceptNecessaryCookies,
+  acceptAllCookiesWithRadioToggle,
+  bannerAccordionToggle,
+  fillCategories,
+  fillCookiesSettingItem,
+  languageButtonToggle,
+  allowAllCookiesAtOnce,
+  // translatePageElements,
+  // bindLocaleSwitcher,
+  // initI18next,
+} from "./utils/logic";
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
@@ -81,6 +95,60 @@ function timeStamp() {
   return "[" + time.join(":") + "] ";
 }
 
+export async function initI18next() {
+  await i18next
+    .use(HttpApi)
+    .use(LanguageDetector)
+    .init({
+      debug: true,
+      supportedLngs: ["en", "cs"],
+      fallbackLng: "en",
+      nonExplicitSupportedLngs: true,
+      backend: {
+        loadPath: "../src/lang/{{lng}}.json",
+      },
+    });
+}
+
+/**
+ * Translate the content page/elements
+ */
+export function translatePageElements() {
+  const translatableElements = document.querySelectorAll("[data-i18n-key]");
+  translatableElements.forEach((el) => {
+    const key = el.getAttribute("data-i18n-key");
+    const interpolations = el.getAttribute("data-i18n-opt");
+    const parsedInterpolations = interpolations ? JSON.parse(interpolations) : {};
+
+    el.innerHTML = i18next.t(key, parsedInterpolations);
+  });
+}
+
+/**
+ * Bind the switcher options to the languages available
+ * @param {string} initialValue the value for the given element
+ */
+export function bindLocaleSwitcher(initialValue) {
+  const switcher = document.querySelector("[data-i18n-switcher]");
+  console.log("🚀 ~~ switcher", switcher.children.length);
+  for (let index = 0; index < switcher.children.length; index++) {
+    const element = switcher.children[index];
+    // element.value = initialValue;
+    console.log("🧲element.value", element.value, `index= ${index}`, `initialValue= ${initialValue}`);
+    element.addEventListener("click", (e) => {
+      console.log("e.target.value", e.target.value);
+      i18next.changeLanguage(e.target.value).then(translatePageElements);
+    });
+  }
+  // ((element) => {
+  // element.value = initialValue;
+  // console.log("element.value", element.value);
+  // element.onchange = (e) => {
+  //   i18next.changeLanguage(e.target.value).then(translatePageElements);
+  // };
+  // });
+}
+
 fetchClientIp().then((country) => {
   CountryCode = country;
   ccInstance = new CookieConsent(optionsObj(country, testType));
@@ -93,6 +161,17 @@ fetchClientIp().then((country) => {
     .on("popupOpened", (...args) => {
       initiateTypeChangeAndBannerShow();
       languageButtonToggle();
+      // Init
+      (async function () {
+        i18next.on("languageChanged", (newLanguage) => {
+          document.documentElement.lang = newLanguage;
+          document.documentElement.dir = i18next.dir(newLanguage);
+        });
+
+        await initI18next();
+        translatePageElements();
+        bindLocaleSwitcher(i18next.resolvedLanguage);
+      })();
     })
     .on("popupClosed", (...args) => {
       acceptNecessaryCookies();
@@ -112,6 +191,17 @@ const draw = function (countryCode) {
     .on("popupOpened", (...args) => {
       acceptNecessaryCookies();
       initiateTypeChangeAndBannerShow();
+      // Init
+      (async function () {
+        i18next.on("languageChanged", (newLanguage) => {
+          document.documentElement.lang = newLanguage;
+          document.documentElement.dir = i18next.dir(newLanguage);
+        });
+
+        await initI18next();
+        translatePageElements();
+        bindLocaleSwitcher(i18next.resolvedLanguage);
+      })();
     })
     .on("popupClosed", (...args) => {
       acceptNecessaryCookies();

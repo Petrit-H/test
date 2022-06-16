@@ -1,0 +1,56 @@
+{
+  "test": {
+    "app-title": "With i18next",
+    "home": "Home",
+    "about": "About",
+    "lead": "Welcome to my little spot on the interwebs, {{username}}!",
+    "new-messages_one": "You have {{count}} new message",
+    "new-messages_other": "You have {{count}} new messages"
+  },
+  "bannerGlobals": {
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "acceptAllBtn": "Accept all",
+    "cookieSettings": "Settings",
+    "showCookiesBtn": "Show cookies"
+  },
+  "bannerInfo": {
+    "biTitle": "We value your privacy",
+    "biDescription": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions",
+    "biComplianceTypeBtn": "Do not sell my personal information"
+  },
+  "bannerCategories": {
+    "bctTitle": "",
+    "bctDescription": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions. More information about each cookie category can be found below. Cookies under the “Necessary” category are essential for the site to function and cannot be turned off. However you can choose to give or withdraw consent by enabling / disabling all other categories below. Please be aware that disabling some of these categories may affect your browsing experience.",
+    "categories": [
+      {
+        "bctCategoryName": "PERTIT CATEGORY",
+        "bctCategoryDescription": "this is a test"
+      },
+      {
+        "bctCategoryName": "Test ideal",
+        "bctCategoryDescription": "test ideal"
+      },
+      {
+        "bctCategoryName": "Necessary",
+        "bctCategoryDescription": "The necessary cookies are needed for the website to function properly and cannot be switched off. Some of the basic features that are enabled through these cookies are logging in, filling in forms, or changing your consent settings."
+      },
+      {
+        "bctCategoryName": "Preferences",
+        "bctCategoryDescription": "The preference cookies enhance the website’s personalisation based on the user’s preferences. They are set by us or our third-party service providers."
+      },
+      {
+        "bctCategoryName": "Analytical",
+        "bctCategoryDescription": "The analytics cookies help us understand and improve the performance of the site by tracking the user’s behavior to report on the website’s usage. Some information on metrics provided by these cookies is the number of visitors, and the most and least popular pages."
+      },
+      {
+        "bctCategoryName": "Marketing",
+        "bctCategoryDescription": "The targeting cookies are used by us and third parties that represent our advertising partners. These cookies provide our site visitors with custom advertising based on their interests such as the pages they have visited. If not allowed, the site visitor will not be shown advertising tailored to their interests."
+      },
+      {
+        "bctCategoryName": "Other",
+        "bctCategoryDescription": "The other cookies are cookies that have not been classified into a category yet."
+      }
+    ]
+  }
+}

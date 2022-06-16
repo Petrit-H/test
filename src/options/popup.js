@@ -87,12 +87,12 @@ export default {
     </button>
     <div id="cmp" class="cmp-container  transform  banner-wrapper flex flex-col md:flex-row justify-between w-screen	max-w-7xl mx-auto">
       <div class=" cmp-banner-description w-auto md:w-3/4 lg:w-3/4 mb-9 md:mb-0 leading-4 ">
-        <p class="text-base font-normal text-black-400 mb-3">We value your privacy</p>
+        <p class="text-base font-normal text-black-400 mb-3" data-i18n-key="bannerInfo.biTitle">We value your privacy</p>
         <div class=" font-normal text-black-400 text-xsmall">
-          <span>{{message}}</span>
+          <span data-i18n-key="bannerInfo.biDescription">{{message}}</span>
           <div class="inline-block" id="cookieconsent:desc">
-            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-0 md:mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
-            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-0 md:mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}" data-i18n-key="bannerGlobals.privacyPolicy">{{privacyPolicy}}</a>
+            <a class="text-blue-400 border-b-1 break-word border-b-blue-400 mx-1" aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}" data-i18n-key="bannerGlobals.cookiePolicy">{{cookiePolicy}}</a>
           </div>
         </div>
         <div class="DNSMD  mt-5 ${CMP_COMPLIANCE_TYPE === 2 ? "hidden" : ""}">
@@ -101,13 +101,13 @@ export default {
               <div class="switch-holder relative block border-1 border-gray-light  w-10 h-8 rounded-full transition ">
               <div class="bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition "></div>
               </div>
-              <p class=" category-title text-small font-medium text-blue-500 ml-2">Do not sell my personal information</p>
+              <p class=" category-title text-small font-medium text-blue-500 ml-2"  data-i18n-key="bannerInfo.biComplianceTypeBtn">Do not sell my personal information</p>
             </button>
        </div>
       </div>
       <div class="banner-wrapper-controls w-full md:w-1/2 lg:w-1/2 flex flex-col xs:flex-row  ${CMP_COMPLIANCE_TYPE === 2 ? "items-center" : "items-end"}  justify-start md:justify-end text-sm ">
-        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white leading mr-0 xs:mr-2 px-3 py-2 mb-2 xs:mb-0 w-full sm:w-auto cc-btn cc-save  rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" >{{allowAll}}</button>
-        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 leading banner-type-change px-3 py-2 w-full sm:w-auto  rounded-4 " id="accept-cookies">{{settings}}</button>
+        <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white leading mr-0 xs:mr-2 px-3 py-2 mb-2 xs:mb-0 w-full sm:w-auto cc-btn cc-save  rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" data-i18n-key="bannerGlobals.acceptAllBtn">{{allowAll}}</button>
+        <button class="border-1 border-blue-400 bg-white text-small text-blue-400 leading banner-type-change px-3 py-2 w-full sm:w-auto  rounded-4 " id="accept-cookies" data-i18n-key="bannerGlobals.cookieSettings">{{settings}}</button>
       </div>
     </div>
     `,
@@ -144,9 +144,9 @@ export default {
           <button aria-label="dismiss cookie message" type="button" tabindex="0"  class="h-full hover:bg-gray-faded active:bg-gray-faded rounded-sm">
             <img src=${CMP_BANNER_LANGUAGES_ICON}  alt="language picker" />
           </button>
-          <div id="language-options" class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
-              <button class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal">English</button>
-              <button class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal">Czech</button>
+          <div id="language-options" data-i18n-switcher class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
+              <button value="en" class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal" >English</button>
+              <button value="cs" class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal" >Czech</button>
           </div>
         </div>
           <button aria-label="dismiss cookie message" type="button" tabindex="0">{{close}}</button>
@@ -158,13 +158,13 @@ export default {
       </div>
       <div class="content-wrapper px-6 overflow-y-auto my-3">
         <div class="description-section py-3">
-          <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading">{{title}}</p>
+          <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading" data-i18n-key="bannerCategories.bctDescription">{{title}}</p>
           <div class="flex">
             <span id="cookieconsent:desc" class="text-blue text-small font-medium border-b-1 border-blue">
-             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyLink}}" rel="noopener noreferrer nofollow" target="{{target}}">{{privacyPolicy}}</a>
+             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyLink}}" rel="noopener noreferrer nofollow" target="{{target}}" data-i18n-key="bannerGlobals.privacyPolicy">{{privacyPolicy}}</a>
             </span>
             <span id="cookieconsent:desc" class="text-blue text-small font-medium ml-2 border-b-1 border-blue">
-             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{cookiePolicy}}</a>
+             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}" data-i18n-key="bannerGlobals.cookiePolicy">{{cookiePolicy}}</a>
             </span>
           </div>
         </div>

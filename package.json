@@ -1,6 +1,6 @@
 {
   "name": "gjirafa-cmp",
-  "version": "4.5.69",
+  "version": "4.5.70",
   "description": "FORK OF Osano cookie consent tool.",
   "main": "./dist/index.min.js",
   "types": "types/index.d.ts",
@@ -34,7 +34,10 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "i18next": "^21.8.9",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-http-backend": "^1.4.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
@@ -60,7 +63,6 @@
     "glob": "^7.2.0",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
-    "i": "^0.3.7",
     "image-webpack-loader": "^8.1.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "jest": "^27.5.1",
@@ -74,7 +76,6 @@
     "postcss-loader": "^6.2.1",
     "postcss-nesting": "^10.1.2",
     "postcss-preset-env": "^7.3.3",
-    "rimraf": "^3.0.2",
     "sass": "^1.49.7",
     "sass-loader": "^12.6.0",
     "string-replace-loader": "^3.1.0",

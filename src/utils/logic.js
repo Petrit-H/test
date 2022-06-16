@@ -11,7 +11,10 @@ import {
   cmpCookiesPerDomain,
   // } from "../getDomainsWithCookies";
 } from "../cookies";
-import { fillJSONWithCheckedCategory, responseJSON } from "../initFile";
+import { bindLocaleSwitcher, fillJSONWithCheckedCategory, initI18next, responseJSON, translatePageElements } from "../initFile";
+import i18next from "i18next";
+import HttpApi from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 let data = [];
 let cookies = [];
@@ -64,6 +67,60 @@ const languageButtonToggle = () => {
     });
   }, 0);
 };
+
+// export async function initI18next() {
+//   await i18next
+//     .use(HttpApi)
+//     .use(LanguageDetector)
+//     .init({
+//       debug: true,
+//       supportedLngs: ["en", "cs"],
+//       fallbackLng: "en",
+//       nonExplicitSupportedLngs: true,
+//       backend: {
+//         loadPath: "../../dist/lang/{{lng}}.json",
+//       },
+//     });
+// }
+
+// /**
+//  * Translate the content page/elements
+//  */
+// export function translatePageElements() {
+//   const translatableElements = document.querySelectorAll("[data-i18n-key]");
+//   translatableElements.forEach((el) => {
+//     const key = el.getAttribute("data-i18n-key");
+//     const interpolations = el.getAttribute("data-i18n-opt");
+//     const parsedInterpolations = interpolations ? JSON.parse(interpolations) : {};
+
+//     el.innerHTML = i18next.t(key, parsedInterpolations);
+//   });
+// }
+
+// /**
+//  * Bind the switcher options to the languages available
+//  * @param {string} initialValue the value for the given element
+//  */
+// export function bindLocaleSwitcher(initialValue) {
+//   const switcher = document.querySelector("[data-i18n-switcher]");
+//   console.log("🚀 ~~ switcher", switcher.children.length);
+//   for (let index = 0; index < switcher.children.length; index++) {
+//     const element = switcher.children[index];
+//     // element.value = initialValue;
+//     console.log("🧲element.value", element.value, `index= ${index}`, `initialValue= ${initialValue}`);
+//     element.addEventListener("click", (e) => {
+//       console.log("e.target.value", e.target.value);
+//       i18next.changeLanguage(e.target.value).then(translatePageElements);
+//     });
+//   }
+//   // ((element) => {
+//   // element.value = initialValue;
+//   // console.log("element.value", element.value);
+//   // element.onchange = (e) => {
+//   //   i18next.changeLanguage(e.target.value).then(translatePageElements);
+//   // };
+//   // });
+// }
 
 /**
  * FILL THE COOKIE SETTINGS SECTION
@@ -298,12 +355,12 @@ const fillCategories = function () {
     basicCategoriesBanner.innerHTML = cmpDomainCategories
       ?.slice(0)
       ?.reverse()
-      ?.map((item) => {
+      ?.map((item, index) => {
         return `
         <li id=test-${item.id} class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
         <div class="accordion-header text-small leading w-full flex flex-col justify-between py-3"  data-did=${cmpDomainId}>
           <div class="flex items-end justify-between">
-            <p class=" category-title font-bold text-black-faded">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
+            <p class=" category-title font-bold text-black-faded" data-i18n-key="bannerCategories.categories.${index}.bctCategoryName">${item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
 
               <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
                 <input type="checkbox" id=${item.id} ${item.checked ? "checked" : ""} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${
@@ -316,9 +373,9 @@ const fillCategories = function () {
               </button>
 
           </div>
-          <p class="category-description max-w-4/5 text-black-faded transition duration-300 ease-in-out transform">${item.description ? item.description : item.name}</p>
+          <p class="category-description max-w-4/5 text-black-faded transition duration-300 ease-in-out transform" data-i18n-key="bannerCategories.categories.${index}.bctCategoryDescription">${item.description ? item.description : item.name}</p>
           <button value=${item.id} data-settings-details-id=${item.id} class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${item.id}>
-            <span>Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN} class="toggle-accordion" alt="show cookies chevron"/>
+            <span data-i18n-key="bannerGlobals.showCookiesBtn">Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN} class="toggle-accordion" alt="show cookies chevron"/>
           </button>
         </div>
         <div class="accordion-content h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${item.id}">
@@ -330,6 +387,17 @@ const fillCategories = function () {
       .join("");
     switchBannerTabs();
     languageButtonToggle();
+    // Init
+    (async function () {
+      i18next.on("languageChanged", (newLanguage) => {
+        document.documentElement.lang = newLanguage;
+        document.documentElement.dir = i18next.dir(newLanguage);
+      });
+
+      await initI18next();
+      translatePageElements();
+      bindLocaleSwitcher(i18next.resolvedLanguage);
+    })();
   }, 200);
 };
 

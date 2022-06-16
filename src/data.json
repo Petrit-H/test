@@ -6,7 +6,7 @@
   "domainName": "Testing connection back front Domains",
   "domainWebsiteUrl": "https://portali.gjirafa.dev/",
   "consentData": {
-    "consentHeaderMessage": "Cookies used on the website!",
+    "consentModalMessage": "Cookies used on the website!",
     "consentBannerTitle": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions. More information about each cookie category can be found below. Cookies under the “Necessary” category are essential for the site to function and cannot be turned off. However you can choose to give or withdraw consent by enabling / disabling all other categories below. Please be aware that disabling some of these categories may affect your browsing experience.",
     "consentMessage": "We and our partners use cookies, tags and other tracking technologies to customise advertisements, analyse how the site is used, enhance the site’s personalisation and perform some other necessary functions",
     "dismissButtonContent": "Got it!",
@@ -41,38 +41,6 @@
     "isDefault": true,
     "domains": []
   },
-  "languagesList": [
-    {
-      "id": 1,
-      "encryptedId": "CfDJ8PqqNXts7VZCusYeXtwhEAs4usNkl9l0tVqrTVkqHpPkVZM1MjQ_PWBVNf4em7yro3C8EXfZ1soeeumH0CrydHtQ1g-xFYyZ0yKS1Fi0wkzNIo-iltqiChl-ZlaBSXfBXg",
-      "name": "English",
-      "nativeName": "English",
-      "code": "en",
-      "flag": "null",
-      "isDefault": true,
-      "domains": []
-    },
-    {
-      "id": 2,
-      "encryptedId": "CfDJ8PqqNXts7VZCusYeXtwhEAsT2aEilVuGgj7u4Hg2I0RHUKUvVfblEjSJZXI_aQLcDq1kdTGhBSmLKPswOPvrdpYOwjSWnptgJZyrF5S9iadL-CPDUvVFP90hVd1eaoSO3Q",
-      "name": "Abkhazian",
-      "nativeName": "аҧсуа бызшәа, аҧсшәа",
-      "code": "ab",
-      "flag": "null",
-      "isDefault": false,
-      "domains": []
-    },
-    {
-      "id": 8,
-      "encryptedId": "CfDJ8PqqNXts7VZCusYeXtwhEAuhZNxDlSKB0BE1Hq7fZjvfbm8YfMszLCHH51zs9ks0Ocg7No95dNqYctGAB7OzoeGg5t2Zx5W1k9yVqrJXDRnhROkwXTJbGoulfXfknCWzFQ",
-      "name": "NuKaLang",
-      "nativeName": "NoLang",
-      "code": "ww",
-      "flag": "null",
-      "isDefault": false,
-      "domains": []
-    }
-  ],
   "domainCategories": [
     {
       "id": 1,

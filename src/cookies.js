@@ -51,7 +51,7 @@ const { ipAddressURL, domainId, domainName, domainWebsiteUrl, language, language
 const {
   widgetImageCircle,
   widgetImageTriangle,
-  consentHeaderMessage,
+  consentModalMessage,
   consentBannerTitle,
   consentMessage,
   dismissButtonContent,
@@ -92,7 +92,7 @@ export const fetchDataFromJSONFile = async () => {
     cmpCookiesPerDomain = domainCookies;
     cmpWidgetImageCircle = widgetImageCircle;
     cmpWidgetImageTriangle = widgetImageTriangle;
-    cmpHeaderMessage = consentHeaderMessage;
+    cmpHeaderMessage = consentModalMessage;
     cmpBannerTitle = consentBannerTitle;
     cmpMessage = consentMessage;
     cmpDismissButtonContent = dismissButtonContent;
