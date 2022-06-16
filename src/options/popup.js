@@ -145,8 +145,8 @@ export default {
             <img src=${CMP_BANNER_LANGUAGES_ICON}  alt="language picker" />
           </button>
           <div id="language-options" data-i18n-switcher class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
-              <button value="en" class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal" >English</button>
-              <button value="cs" class="language px-3 py-3 w-full text-left text-blue-300 active:text-blue-500 focus:text-blue-500 hover:text-blue-500 text-base font-normal" >Czech</button>
+              <button value="en" class="language  px-3 py-3 w-full text-left active:text-blue-500 focus:text-blue-500 hover:text-blue-500 hover:bg-gray-faded  text-base font-normal" >English</button>
+              <button value="cs" class="language  px-3 py-3 w-full text-left active:text-blue-500 focus:text-blue-500 hover:text-blue-500 hover:bg-gray-faded text-base font-normal" >Czech</button>
           </div>
         </div>
           <button aria-label="dismiss cookie message" type="button" tabindex="0">{{close}}</button>

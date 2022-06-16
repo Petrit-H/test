@@ -56,9 +56,18 @@ const languageButtonToggle = () => {
   setTimeout(() => {
     const languageButton = document.getElementById("language-icon-button");
     const languageOptionsMenu = document.getElementById("language-options");
-    // languageButton.addEventListener("mouseenter",()=>{
-    //   languageOptionsMenu.classList.remove("hidden")
-    // })
+    const languageItems = document.querySelectorAll(".language");
+    for (let i = 0; i < languageItems.length; i++) {
+      const element = languageItems[i];
+      const prevElement = languageItems[i - 1];
+      element.addEventListener("click", () => {
+        languageItems.forEach((item) => {
+          item.classList.remove("text-blue");
+        });
+        element.classList.add("text-blue");
+      });
+    }
+
     // languageButton.addEventListener("mouseleave",()=>{
     //   languageOptionsMenu.classList.add("hidden")
     // })
@@ -67,60 +76,6 @@ const languageButtonToggle = () => {
     });
   }, 0);
 };
-
-// export async function initI18next() {
-//   await i18next
-//     .use(HttpApi)
-//     .use(LanguageDetector)
-//     .init({
-//       debug: true,
-//       supportedLngs: ["en", "cs"],
-//       fallbackLng: "en",
-//       nonExplicitSupportedLngs: true,
-//       backend: {
-//         loadPath: "../../dist/lang/{{lng}}.json",
-//       },
-//     });
-// }
-
-// /**
-//  * Translate the content page/elements
-//  */
-// export function translatePageElements() {
-//   const translatableElements = document.querySelectorAll("[data-i18n-key]");
-//   translatableElements.forEach((el) => {
-//     const key = el.getAttribute("data-i18n-key");
-//     const interpolations = el.getAttribute("data-i18n-opt");
-//     const parsedInterpolations = interpolations ? JSON.parse(interpolations) : {};
-
-//     el.innerHTML = i18next.t(key, parsedInterpolations);
-//   });
-// }
-
-// /**
-//  * Bind the switcher options to the languages available
-//  * @param {string} initialValue the value for the given element
-//  */
-// export function bindLocaleSwitcher(initialValue) {
-//   const switcher = document.querySelector("[data-i18n-switcher]");
-//   console.log("🚀 ~~ switcher", switcher.children.length);
-//   for (let index = 0; index < switcher.children.length; index++) {
-//     const element = switcher.children[index];
-//     // element.value = initialValue;
-//     console.log("🧲element.value", element.value, `index= ${index}`, `initialValue= ${initialValue}`);
-//     element.addEventListener("click", (e) => {
-//       console.log("e.target.value", e.target.value);
-//       i18next.changeLanguage(e.target.value).then(translatePageElements);
-//     });
-//   }
-//   // ((element) => {
-//   // element.value = initialValue;
-//   // console.log("element.value", element.value);
-//   // element.onchange = (e) => {
-//   //   i18next.changeLanguage(e.target.value).then(translatePageElements);
-//   // };
-//   // });
-// }
 
 /**
  * FILL THE COOKIE SETTINGS SECTION
@@ -157,23 +112,23 @@ const fillCookiesSettingItem = () => {
    </div>
       <ul class="mb-4 transform accordion-content mx-4 h-0 hidden transition-all duration-500 ease-in-out">
         <li class="flex flex-col justify-between mb-4">
-          <span class="flex-1 text-blue-300 text-small font-medium ">Category</span>
-          <span class="flex-1 text-small text-blue-500 font-medium" id="cookieCategory">${item.categoryName}</span>
+          <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcCategory">Category</span>
+          <span class="flex-1 text-small text-blue-500 font-medium" id="cookieCategory" >${item.categoryName}</span>
         </li>
         <li class="flex flex-col justify-between my-4">
-           <span class="flex-1 text-blue-300 text-small font-medium ">Description</span>
-           <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDescription">${item.description}</span>
+           <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcDescription">Description</span>
+           <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDescription" >${item.description}</span>
         </li>
          <li class="flex flex-col justify-between my-4">
-            <span class="flex-1 text-blue-300 text-small font-medium ">Name</span>
-            <span class="flex-1 text-small text-blue-500 font-medium" id="cookieName">${item.name}</span>
+            <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcName">Name</span>
+            <span class="flex-1 text-small text-blue-500 font-medium" id="cookieName" >${item.name}</span>
          </li>
          <li class="flex flex-col justify-between my-4">
-            <span class="flex-1 text-blue-300 text-small font-medium ">Host</span>
+            <span class="flex-1 text-blue-300 text-small font-medium" data-i18n-key="bannerCookies.bcHost">Host</span>
             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieHost">${item.cookieDomain}</span>
          </li>
          <li class="flex flex-col justify-between my-4">
-            <span class="flex-1 text-blue-300 text-small font-medium ">Duration</span>
+            <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcDuration">Duration</span>
             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDuration">${item.expiration}</span>
          </li>
       </ul>
