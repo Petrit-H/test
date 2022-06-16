@@ -54,5 +54,12 @@
         "bctCategoryDescription": "The other cookies are cookies that have not been classified into a category yet."
       }
     ]
+  },
+  "bannerCookies": {
+    "bcCategory": "Category",
+    "bcDescription": "Description",
+    "bcName": "Name",
+    "bcDuration": "Duration",
+    "bcHost": "Host"
   }
 }

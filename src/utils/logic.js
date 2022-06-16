@@ -57,6 +57,8 @@ const languageButtonToggle = () => {
     const languageButton = document.getElementById("language-icon-button");
     const languageOptionsMenu = document.getElementById("language-options");
     const languageItems = document.querySelectorAll(".language");
+    const rootModal = document.querySelector(".cookie-modal");
+
     for (let i = 0; i < languageItems.length; i++) {
       const element = languageItems[i];
       const prevElement = languageItems[i - 1];
@@ -71,8 +73,14 @@ const languageButtonToggle = () => {
     // languageButton.addEventListener("mouseleave",()=>{
     //   languageOptionsMenu.classList.add("hidden")
     // })
-    languageButton.addEventListener("click", () => {
+    languageButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
       languageOptionsMenu.classList.toggle("hidden");
+    });
+    rootModal.addEventListener("click", () => {
+      !languageOptionsMenu.classList.contains("hidden") && languageOptionsMenu.classList.toggle("hidden");
     });
   }, 0);
 };

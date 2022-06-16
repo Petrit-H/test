@@ -54,5 +54,12 @@
         "bctCategoryDescription": "Ostatní soubory cookie jsou soubory cookie, které dosud nebyly zařazeny do žádné kategorie."
       }
     ]
+  },
+  "bannerCookies": {
+    "bcCategory": "Kategorie",
+    "bcDescription": "Popis",
+    "bcName": "Název",
+    "bcDuration": "Doba trvání",
+    "bcHost": "Hostitel"
   }
 }
