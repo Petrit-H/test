@@ -57,7 +57,7 @@ const languageButtonToggle = () => {
     const languageButton = document.getElementById("language-icon-button");
     const languageOptionsMenu = document.getElementById("language-options");
     const languageItems = document.querySelectorAll(".language");
-    const rootModal = document.querySelector(".cookie-modal");
+    const rootModal = document.querySelector(".cmp-categories");
 
     for (let i = 0; i < languageItems.length; i++) {
       const element = languageItems[i];
