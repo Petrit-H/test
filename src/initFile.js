@@ -105,7 +105,7 @@ export async function initI18next() {
       fallbackLng: "en",
       nonExplicitSupportedLngs: true,
       backend: {
-        loadPath: "../src/lang/{{lng}}.json",
+        loadPath: "./lang/{{lng}}.json",
       },
     });
 }

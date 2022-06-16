@@ -1,0 +1,56 @@
+{
+  "test": {
+    "app-title": "při i18next",
+    "home": "Domov",
+    "about": "Kolem",
+    "lead": "Vítejte na mém malém místě na interwebech, {{username}}!",
+    "new-messages_one": "Ty máš {{count}} nová zpráva",
+    "new-messages_other": "Ty máš {{count}} nová zprávas"
+  },
+  "bannerGlobals": {
+    "privacyPolicy": "Zásady ochrany soukromí",
+    "cookiePolicy": "Zásady cookies",
+    "acceptAllBtn": "Přijmout vše",
+    "cookieSettings": "Nastavení",
+    "showCookiesBtn": "Zobrazit cookies"
+  },
+  "bannerInfo": {
+    "biTitle": "Vážíme si vašeho soukromí",
+    "biDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí.",
+    "biComplianceTypeBtn": "Neprodávejte mé osobní údaje"
+  },
+  "bannerCategories": {
+    "bctTitle": "",
+    "bctDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí. Více informací o každé kategorii souborů cookie naleznete níže. Soubory cookie v kategorii „Nezbytné“ jsou nezbytné pro fungování webu a nelze je vypnout. Můžete se však rozhodnout udělit nebo odvolat souhlas povolením / zakázáním všech ostatních kategorií níže. Uvědomte si prosím, že deaktivace některých z těchto kategorií může ovlivnit váš zážitek z prohlížení.",
+    "categories": [
+      {
+        "bctCategoryName": "PERTIT KATEGORIE",
+        "bctCategoryDescription": "tohle je zkouška"
+      },
+      {
+        "bctCategoryName": " ideal",
+        "bctCategoryDescription": "test ideal"
+      },
+      {
+        "bctCategoryName": "Nutné",
+        "bctCategoryDescription": "Potřebné soubory cookie jsou potřebné pro správné fungování webu a nelze je vypnout. Některé ze základních funkcí, které jsou povoleny prostřednictvím těchto souborů cookie, jsou přihlašování, vyplňování formulářů nebo změna nastavení vašeho souhlasu."
+      },
+      {
+        "bctCategoryName": "Předvolby",
+        "bctCategoryDescription": "Preferenční soubory cookie zvyšují personalizaci webu na základě preferencí uživatele. Nastavujeme je my nebo naši poskytovatelé služeb třetích stran."
+      },
+      {
+        "bctCategoryName": "Analytický",
+        "bctCategoryDescription": "Analytické soubory cookie nám pomáhají porozumět a zlepšovat výkon webu sledováním chování uživatele za účelem podávání zpráv o používání webu. Některé informace o metrikách poskytovaných těmito soubory cookie jsou počet návštěvníků a nejoblíbenější a nejméně oblíbené stránky."
+      },
+      {
+        "bctCategoryName": "",
+        "bctCategoryDescription": "Soubory cookie pro cílení používáme my a třetí strany, které zastupují naše reklamní partnery. Tyto soubory cookie poskytují návštěvníkům našich stránek vlastní reklamu na základě jejich zájmů, jako jsou stránky, které navštívili. Pokud to není povoleno, nebude se návštěvníkovi webu zobrazovat reklama přizpůsobená jeho zájmům."
+      },
+      {
+        "bctCategoryName": "jiný",
+        "bctCategoryDescription": "Ostatní soubory cookie jsou soubory cookie, které dosud nebyly zařazeny do žádné kategorie."
+      }
+    ]
+  }
+}
