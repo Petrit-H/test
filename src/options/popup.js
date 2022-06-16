@@ -153,8 +153,8 @@ export default {
         </div>
       </div>
       <div class="tabs flex justify-start px-6  border-b border-gray-light">
-          <button type="button" class="tab pointer relative pb-4 mr-6 text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#cookie-display">Categories</button>
-          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#cookie-settings">Cookies</button>
+          <button type="button" class="tab pointer relative pb-4 mr-6 text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#cookie-display" data-i18n-key="bannerCategories.bctCategoriesTab">Categories</button>
+          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#cookie-settings" data-i18n-key="bannerCategories.bctCookiesTab">Cookies</button>
       </div>
       <div class="content-wrapper px-6 overflow-y-auto my-3">
         <div class="description-section py-3">
