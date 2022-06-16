@@ -3,18 +3,7 @@ import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
-import {
-  acceptNecessaryCookies,
-  acceptAllCookiesWithRadioToggle,
-  bannerAccordionToggle,
-  fillCategories,
-  fillCookiesSettingItem,
-  languageButtonToggle,
-  allowAllCookiesAtOnce,
-  // translatePageElements,
-  // bindLocaleSwitcher,
-  // initI18next,
-} from "./utils/logic";
+import { acceptNecessaryCookies, acceptAllCookiesWithRadioToggle, bannerAccordionToggle, fillCategories, fillCookiesSettingItem, languageButtonToggle, allowAllCookiesAtOnce } from "./utils/logic";
 import "./lang/en.json";
 import "./lang/cs.json";
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
@@ -107,7 +96,7 @@ export async function initI18next() {
       fallbackLng: "en",
       nonExplicitSupportedLngs: true,
       backend: {
-        loadPath: "./lang/{{lng}}.json",
+        loadPath: "../dist/lang/{{lng}}.json",
       },
     });
 }
