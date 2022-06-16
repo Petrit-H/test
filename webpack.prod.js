@@ -1,4 +1,5 @@
 const { merge } = require("webpack-merge");
+const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -14,6 +15,30 @@ module.exports = merge(commonConfig, {
       //   test: /\.json$/,
       //   loader: "json-loader",
       // },
+      {
+        type: "javascript/auto",
+        test: /\.json$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "lang/[name].[ext]",
+            },
+          },
+        ],
+        include: [path.resolve(__dirname, "src/lang")],
+        // include: /\/src\/lang\/.*\.json$/,
+        // include: /\/src\/.*\.json$/,
+
+        // test: /\.json$/,
+        // include: [path.resolve(__dirname, "src/lang")],
+        // use: [
+        //   {
+        //     loader: "file-loader",
+        //     options: { name: "[name].[ext]" },
+        //   },
+        // ],
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /[\\/]node_modules[\\/]/,
