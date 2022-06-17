@@ -121,23 +121,12 @@ export function translatePageElements() {
  */
 export function bindLocaleSwitcher(initialValue) {
   const switcher = document.querySelector("[data-i18n-switcher]");
-  console.log("🚀 ~~ switcher", switcher.children.length);
   for (let index = 0; index < switcher.children.length; index++) {
     const element = switcher.children[index];
-    // element.value = initialValue;
-    console.log("🧲element.value", element.value, `index= ${index}`, `initialValue= ${initialValue}`);
     element.addEventListener("click", (e) => {
-      console.log("e.target.value", e.target.value);
       i18next.changeLanguage(e.target.value).then(translatePageElements);
     });
   }
-  // ((element) => {
-  // element.value = initialValue;
-  // console.log("element.value", element.value);
-  // element.onchange = (e) => {
-  //   i18next.changeLanguage(e.target.value).then(translatePageElements);
-  // };
-  // });
 }
 
 fetchClientIp().then((country) => {
@@ -212,7 +201,6 @@ export function initiateTypeChangeAndBannerShow() {
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       timeStamp();
-      // toggleType.addEventListener("click", (e) => {
       if (testType === "info") {
         testType = "categories";
         ccInstance.destroy();
@@ -226,13 +214,6 @@ export function initiateTypeChangeAndBannerShow() {
           acceptNecessaryCookies();
         }, 300);
       }
-      //  else if (testType === "categories") {
-      //   testType = "info ";
-      //   ccInstance.destroy();
-      //   optionsObj(CountryCode, "info");
-      //   draw(CountryCode);
-      // }
     });
   }
-  // }, 400);
 }

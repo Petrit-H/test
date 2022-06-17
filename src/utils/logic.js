@@ -113,7 +113,7 @@ const fillCookiesSettingItem = () => {
       <p class="category-title text-base text-blue-500 font-normal">${item.name}</p>
       <div class="control-buttons flex">
          <button id="closeIcon" class="carret closeIcon cursor-pointer my-auto">
-            <img src="${CMP_CARET_DOWN_ICON}" class="toggle-accordion transition transform duration-200 ease-in-out "
+            <img src="${CMP_CARET_DOWN_ICON}" class="cookie-toggle-accordion transition transform duration-200 ease-in-out "
                alt="caret up/down" />
          </button>
       </div>
@@ -283,7 +283,7 @@ const settingsAccordionToggle = function () {
   setTimeout(() => {
     const accordionHeader = document.querySelectorAll(".setting-accordion .accordion-header");
     const accordionContent = document.querySelectorAll(".setting-accordion .accordion-content");
-    const carretToggle = document.querySelectorAll(".toggle-accordion");
+    const carretToggle = document.querySelectorAll(".cookie-toggle-accordion");
 
     const closeAllAccContent = () => {
       for (let i = 0; i < accordionContent.length; i++) {
@@ -295,13 +295,13 @@ const settingsAccordionToggle = function () {
     };
     for (let i = 0; i < accordionHeader.length; i++) {
       accordionHeader[i].addEventListener("click", function () {
-        if (accordionHeader[i].nextElementSibling.classList.contains("hidden") || accordionHeader[i].nextElementSibling.classList.contains("h-0")) {
+        if (accordionContent[i].classList.contains("hidden") || accordionHeader[i].nextElementSibling.classList.contains("h-0")) {
           closeAllAccContent();
           toggleCSSclasses(accordionContent[i], "hidden", "h-0");
           carretToggle[i].classList.add("rotate-180");
         } else {
           toggleCSSclasses(accordionContent[i], "hidden", "h-0");
-          carretToggle[i].classList.add("rotate-180");
+          carretToggle[i].classList.remove("rotate-180");
         }
       });
     }
