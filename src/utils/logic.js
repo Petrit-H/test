@@ -329,8 +329,10 @@ const fillCategories = function () {
                 <input type="checkbox" id=${item.id} ${item.checked ? "checked" : ""} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${
           item.name
         }" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""} />
-                <div class="switch-holder relative block border-1 border-gray-light  w-10 h-8 rounded-full transition ">
-                <div class="${item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"} bg-gray-dark dot absolute left-1 top-1 my-0 w-5 h-5 rounded-full transition "></div>
+                <div class="switch-holder relative block border-1 border-gray-light w-9 h-6 rounded-full transition ">
+                <div class="${
+                  item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"
+                } bg-gray-dark dot absolute left-1 top-1/2 -translate-y-1/2 my-0 w-4 h-4 rounded-full transition "></div>
                 </div>
 
               </button>

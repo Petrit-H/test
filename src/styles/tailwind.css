@@ -545,8 +545,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 0.25rem;
 }
 
-.top-1 {
-  top: 0.25rem;
+.top-1\/2 {
+  top: 50%;
+}
+
+.top-\[25px\] {
+  top: 25px;
 }
 
 .left-0 {
@@ -674,12 +678,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-8 {
-  height: 2rem;
+.h-6 {
+  height: 1.5rem;
 }
 
-.h-5 {
-  height: 1.25rem;
+.h-4 {
+  height: 1rem;
 }
 
 .h-full {
@@ -698,12 +702,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: auto;
 }
 
-.w-10 {
-  width: 2.5rem;
+.w-9 {
+  width: 2.25rem;
 }
 
-.w-5 {
-  width: 1.25rem;
+.w-4 {
+  width: 1rem;
 }
 
 .w-full {
@@ -742,6 +746,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grow {
   flex-grow: 1;
+}
+
+.-translate-y-1\/2 {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .translate-x-3 {
@@ -821,10 +830,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .rounded-lg {
   border-radius: 0.5rem;
-}
-
-.rounded-sm {
-  border-radius: 0.125rem;
 }
 
 .rounded-none {
