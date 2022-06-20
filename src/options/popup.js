@@ -141,7 +141,7 @@ export default {
         <div><img src=${CMP_BANNER_LOGO} alt="Consent Logo" /></div>
         <div class="flex">
         <div id="language-icon-button" class="language-icon-button relative mr-6 flex items-center">
-          <button aria-label="dismiss cookie message" type="button" tabindex="0"  class="language-toggle-btn rounded-full h-full hover:bg-gray-faded active:bg-gray-faded">
+          <button aria-label="dismiss cookie message" type="button" tabindex="0"  class="language-toggle-btn flex items-center justify-center rounded-full h-full hover:bg-gray-faded active:bg-gray-faded">
             <img src=${CMP_BANNER_LANGUAGES_ICON}  alt="language picker" />
           </button>
           <div id="language-options" data-i18n-switcher class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  top-[25px] flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
