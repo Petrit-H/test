@@ -1,8 +1,8 @@
 import axios from "axios";
-import jsonData from "./data.json";
-import { setCookie } from "./utils/cookie";
+// import jsonData from "./data.json";
+import { getCookie, setCookie } from "./utils/cookie";
 import { filterCookiesByCategory } from "./utils/logic";
-import { CMP_API_BASE_URL } from "./constants";
+import { CMP_API_BASE_URL, CMP_IS_LOCALHOST } from "./constants";
 import { cmpDomainCategoriesWithCookies, cmpDomainId, cmpCookiesPerDomain } from "./cookies";
 // import { fillJSONWithCheckedCategory } from "./initFile";
 
@@ -43,11 +43,16 @@ export const saveNecessaryCookies = () => {
 export const saveSpecificCookies = (id) => {
   try {
     cookiesPerCategory = filterCookiesByCategory(cmpCookiesPerDomain, id, cookiesPerCategory, `Category #${id}`);
+    console.log("✅", cookiesPerCategory);
     for (let index = 0; index < cookiesPerCategory.length; index++) {
+      console.log("1️⃣");
       const cookie = cookiesPerCategory[index];
-      let { categoryId, categoryName, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
+      let { categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
+      console.log(categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure);
       if (categoryId === +id) {
-        setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
+        setCookie(name, plaintext_value, expiration, !CMP_IS_LOCALHOST ? cookieDomain : null, path, is_secure);
+        console.log("2️⃣", getCookie(name));
+        console.log("------");
       }
     }
   } catch (error) {
@@ -60,7 +65,8 @@ export const saveAllCookies = () => {
     for (let index = 0; index < cmpCookiesPerDomain.length; index++) {
       const cookie = cmpCookiesPerDomain[index];
       let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-      setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
+      setCookie(name, plaintext_value, expiration, !CMP_IS_LOCALHOST ? cookieDomain : null, path, is_secure);
+      // console.log("🟥VALUE ALL:", cookie);
     }
   } catch (error) {
     console.log(error.message);

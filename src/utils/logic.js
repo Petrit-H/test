@@ -1,12 +1,8 @@
-import { ANALYTICAL, CMP_BANNER_CHEVRON_DOWN, CMP_CARET_DOWN_ICON, MARKETING, NECESSARY, OTHER, PREFERENCES } from "../constants";
-import { saveAllCookies, saveNecessaryCookies, saveSpecificCookies } from "../getDomainsWithCookies";
+import { CMP_BANNER_CHEVRON_DOWN, CMP_CARET_DOWN_ICON } from "../constants";
+import { saveAllCookies } from "../getDomainsWithCookies";
 import {
   fetchDataFromJSONFile,
   cmpDomainId,
-  cmpDomainName,
-  cmpDomainWebsiteUrl,
-  cmpLanguage,
-  cmpLanguagesList,
   cmpDomainCategories,
   cmpCookiesPerDomain,
   // } from "../getDomainsWithCookies";
@@ -15,6 +11,7 @@ import { bindLocaleSwitcher, fillJSONWithCheckedCategory, initI18next, responseJ
 import i18next from "i18next";
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+import { setCookie } from "./cookie";
 
 let data = [];
 let cookies = [];
@@ -378,7 +375,6 @@ const acceptAllCookiesWithRadioToggle = function () {
       for (let i = 0; i < radioButtons.length; i++) {
         const element = radioButtons[i];
         element.checked = true;
-        // saveSpecificCookies(element.id);
         saveAllCookies();
       }
       fillJSONWithCheckedCategory();

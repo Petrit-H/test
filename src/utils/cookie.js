@@ -10,16 +10,16 @@ export const setCookie = function (name, value, expiryDays, domain, path, secure
   document.cookie =
     name +
     "=" +
-    value +
-    // ";max-age=" +
-    // expiryDays +
+    (value ? value : "") +
+    ";max-age=" +
+    expiryDays +
     // ";expires=" +
     // expiryDays +
-    ";expires=" +
-    exdate.toUTCString() +
+    // ";expires=" +
+    // exdate.toUTCString() +
     (domain ? ";domain=" + domain : "") +
     (secure ? ";Secure" : "") +
     ";path=" +
-    (path || "/") +
-    (sameSite ? ";SameSite=Strict" : ";SameSite=Lax");
+    (path || "/");
+  sameSite ? ";SameSite=Strict" : ";SameSite=Lax";
 };

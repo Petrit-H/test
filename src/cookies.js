@@ -1,7 +1,8 @@
 import { setCookie } from "./utils/cookie";
 import { fetchClientIp } from "./options/location";
-import jsonData from "./data.json";
+import jsonData from "./data3.json";
 import { initiateTypeChangeAndBannerShow } from "./initFile";
+import { saveAllCookies, saveSpecificCookies } from "./getDomainsWithCookies";
 
 let locationData = "";
 
@@ -203,6 +204,7 @@ window.addEventListener("load", function (event) {
 \`------'\`------'\`------'
     `
   );
+  console.log("jsonData", jsonData);
   initiateTypeChangeAndBannerShow();
   setTimeout(() => {
     fetchClientIp().then((location) => {

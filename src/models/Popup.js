@@ -305,7 +305,7 @@ export default class Popup extends Base {
     COOKIES_CATEGORIES.forEach((categoryName) => {
       // cmpDomainCategories.forEach((categoryName) => {
       setCookie(name + "_" + categoryName, "", -1, domain, path);
-      saveNecessaryCookies();
+      // saveNecessaryCookies();
     });
   }
   canUseCookies() {

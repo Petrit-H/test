@@ -25,6 +25,7 @@ import {
   CMP_BANNER_LOGO,
   CMP_BANNER_LANGUAGES_ICON,
   CMP_COMPLIANCE_TYPE,
+  CMP_DOMAIN_URL,
   // CMP_COOKIE_POLICY,
 } from "../constants/index.js";
 
