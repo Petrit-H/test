@@ -3,6 +3,7 @@ import { fetchClientIp } from "./options/location";
 import jsonData from "./data3.json";
 import { initiateTypeChangeAndBannerShow } from "./initFile";
 import { saveAllCookies, saveSpecificCookies } from "./getDomainsWithCookies";
+import { CMP_IS_LOCALHOST } from "./constants";
 
 let locationData = "";
 
@@ -205,6 +206,8 @@ window.addEventListener("load", function (event) {
     `
   );
   console.log("jsonData", jsonData);
+  console.log("🚀 ~ file: index.js ~ line 37 ~ CMP_IS_LOCALHOST", CMP_IS_LOCALHOST);
+
   initiateTypeChangeAndBannerShow();
   setTimeout(() => {
     fetchClientIp().then((location) => {
