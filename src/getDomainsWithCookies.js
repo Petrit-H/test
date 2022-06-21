@@ -1,7 +1,7 @@
 import axios from "axios";
 // import jsonData from "./data.json";
 import { getCookie, setCookie } from "./utils/cookie";
-import { filterCookiesByCategory } from "./utils/logic";
+import { filterCookiesByCategory, getEnvLocal } from "./utils/logic";
 import { CMP_API_BASE_URL, CMP_IS_LOCALHOST } from "./constants";
 import { cmpDomainCategoriesWithCookies, cmpDomainId, cmpCookiesPerDomain } from "./cookies";
 // import { fillJSONWithCheckedCategory } from "./initFile";
@@ -11,6 +11,7 @@ export let responseData = [];
 export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
 let cookiesPerCateroryArr = [];
+let isLocalEnv = getEnvLocal();
 
 /**
  * save the cookies that are necessary
@@ -42,10 +43,6 @@ export const saveNecessaryCookies = () => {
  */
 export const saveSpecificCookies = (id) => {
   try {
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-      CMP_IS_LOCALHOST = true;
-      console.log("CMP_IS_LOCALHOST", CMP_IS_LOCALHOST);
-    }
     cookiesPerCategory = filterCookiesByCategory(cmpCookiesPerDomain, id, cookiesPerCategory, `Category #${id}`);
     console.log("✅", cookiesPerCategory);
     for (let index = 0; index < cookiesPerCategory.length; index++) {
@@ -54,7 +51,7 @@ export const saveSpecificCookies = (id) => {
       let { categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
       console.log(categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure);
       if (categoryId === +id) {
-        setCookie(name, plaintext_value, expiration, !CMP_IS_LOCALHOST ? cookieDomain : null, path, is_secure);
+        setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
         console.log("2️⃣", getCookie(name));
         console.log("------");
       }
@@ -66,14 +63,10 @@ export const saveSpecificCookies = (id) => {
 
 export const saveAllCookies = () => {
   try {
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-      CMP_IS_LOCALHOST = true;
-      console.log("CMP_IS_LOCALHOST", CMP_IS_LOCALHOST);
-    }
     for (let index = 0; index < cmpCookiesPerDomain.length; index++) {
       const cookie = cmpCookiesPerDomain[index];
       let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-      setCookie(name, plaintext_value, expiration, !CMP_IS_LOCALHOST ? cookieDomain : null, path, is_secure);
+      setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
       // console.log("🟥VALUE ALL:", cookie);
     }
   } catch (error) {

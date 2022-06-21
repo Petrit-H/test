@@ -10,6 +10,7 @@ import "./lang/cs.json";
 import "./styles/main.scss";
 import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
 import { saveAllCookies } from "./getDomainsWithCookies";
+import { CMP_IS_LOCALHOST } from "./constants";
 
 let ccInstance;
 let testType = "info";

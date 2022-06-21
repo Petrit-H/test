@@ -1,4 +1,4 @@
-import { CMP_BANNER_CHEVRON_DOWN, CMP_CARET_DOWN_ICON } from "../constants";
+import { CMP_BANNER_CHEVRON_DOWN, CMP_CARET_DOWN_ICON, CMP_IS_LOCALHOST } from "../constants";
 import { saveAllCookies } from "../getDomainsWithCookies";
 import {
   fetchDataFromJSONFile,
@@ -412,6 +412,17 @@ const stopParentClick = function (event) {
   event.stopPropagation();
 };
 
+const getEnvLocal = () => {
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    return true;
+  } else {
+    return false;
+  }
+};
+const setEnvLocal = (data) => {
+  return (CMP_IS_LOCALHOST = data);
+};
+
 export {
   bannerAccordionToggle,
   showModal,
@@ -424,4 +435,5 @@ export {
   allowAllCookiesAtOnce,
   stopParentClick,
   languageButtonToggle,
+  getEnvLocal,
 };

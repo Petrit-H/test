@@ -35,10 +35,6 @@ export const CMP_API_BASE_URL = "https://cmp.gjirafa.dev";
 // export const CONSENT_IMAGE_BASE_URL = "https://tojnhu4mvp.gjirafa.net/CMP";
 
 export let CMP_IS_LOCALHOST = false;
-if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-  CMP_IS_LOCALHOST = true;
-  console.log("CMP_IS_LOCALHOST", CMP_IS_LOCALHOST);
-}
 
 export const CLIENT_GEOLOCATION_API_URL = cmpIpAddressURL;
 export const CMP_COMPLIANCE_TYPE = cmpComplianceType;
