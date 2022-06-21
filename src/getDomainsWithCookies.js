@@ -51,7 +51,7 @@ export const saveSpecificCookies = (id) => {
       let { categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
       console.log(categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure);
       if (categoryId === +id) {
-        setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
+        setCookie(name, plaintext_value, expiration, null, path, is_secure);
         console.log("2️⃣", getCookie(name));
         console.log("------");
       }
@@ -66,7 +66,7 @@ export const saveAllCookies = () => {
     for (let index = 0; index < cmpCookiesPerDomain.length; index++) {
       const cookie = cmpCookiesPerDomain[index];
       let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-      setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
+      setCookie(name, plaintext_value, expiration, null, path, is_secure);
       // console.log("🟥VALUE ALL:", cookie);
     }
   } catch (error) {
