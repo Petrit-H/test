@@ -310,13 +310,13 @@ const settingsAccordionToggle = function () {
  */
 const fillCategories = function () {
   fetchDataFromJSONFile().then((json) => json);
-  setTimeout(() => {
-    const basicCategoriesBanner = document.getElementById("basic-categories-banner");
-    basicCategoriesBanner.innerHTML = cmpDomainCategories
-      ?.slice(0)
-      ?.reverse()
-      ?.map((item, index) => {
-        return `
+  // setTimeout(() => {
+  const basicCategoriesBanner = document.getElementById("basic-categories-banner");
+  basicCategoriesBanner.innerHTML = cmpDomainCategories
+    ?.slice(0)
+    ?.reverse()
+    ?.map((item, index) => {
+      return `
         <li id=test-${item.id} class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
         <div class="accordion-header text-small leading w-full flex flex-col justify-between py-3"  data-did=${cmpDomainId}>
           <div class="flex items-end justify-between">
@@ -324,8 +324,8 @@ const fillCategories = function () {
 
               <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${item.name.toLowerCase() === "necessary" ? " cursor-not-allowed" : ""}">
                 <input type="checkbox" id=${item.id} ${item.checked ? "checked" : ""} data-radio-parent-category-name="${item.name}" class="category-radio-button ${item.name.toLowerCase() === "necessary" ? "cursor-not-allowed" : ""}" name="${
-          item.name
-        }" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""} />
+        item.name
+      }" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""} />
                 <div class="switch-holder relative block border-1 border-gray-light w-9 h-6 rounded-full transition ">
                 <div class="${
                   item.name.toLowerCase() === "necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"
@@ -345,22 +345,22 @@ const fillCategories = function () {
         </div>
       </li>
         `;
-      })
-      .join("");
-    switchBannerTabs();
-    languageButtonToggle();
-    // Init
-    (async function () {
-      i18next.on("languageChanged", (newLanguage) => {
-        document.documentElement.lang = newLanguage;
-        document.documentElement.dir = i18next.dir(newLanguage);
-      });
+    })
+    .join("");
+  switchBannerTabs();
+  languageButtonToggle();
+  // Init
+  (async function () {
+    i18next.on("languageChanged", (newLanguage) => {
+      document.documentElement.lang = newLanguage;
+      document.documentElement.dir = i18next.dir(newLanguage);
+    });
 
-      await initI18next();
-      translatePageElements();
-      bindLocaleSwitcher(i18next.resolvedLanguage);
-    })();
-  }, 200);
+    await initI18next();
+    translatePageElements();
+    bindLocaleSwitcher(i18next.resolvedLanguage);
+  })();
+  // }, 50);
 };
 
 /**

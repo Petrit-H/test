@@ -26,14 +26,6 @@
     "bctCookiesTab": "Soubory cookie",
     "categories": [
       {
-        "bctCategoryName": "ASDSest",
-        "bctCategoryDescription": "strdsdsdsdsdsdsding"
-      },
-      {
-        "bctCategoryName": "cattest",
-        "bctCategoryDescription": "string"
-      },
-      {
         "bctCategoryName": "Nutné",
         "bctCategoryDescription": "Potřebné soubory cookie jsou potřebné pro správné fungování webu a nelze je vypnout. Některé ze základních funkcí, které jsou povoleny prostřednictvím těchto souborů cookie, jsou přihlašování, vyplňování formulářů nebo změna nastavení vašeho souhlasu."
       },
