@@ -21,5 +21,5 @@ export const setCookie = function (name, value, expiryDays, domain, path, secure
     (secure ? ";Secure" : "") +
     ";path=" +
     (path || "/");
-  sameSite ? ";SameSite=Strict" : ";SameSite=Lax";
+  // sameSite ? ";SameSite=Strict" : ";SameSite=Lax";
 };
