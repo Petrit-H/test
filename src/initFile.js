@@ -3,24 +3,52 @@ import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
-import { acceptNecessaryCookies, acceptAllCookiesWithRadioToggle, bannerAccordionToggle, fillCategories, fillCookiesSettingItem, languageButtonToggle, allowAllCookiesAtOnce } from "./utils/logic";
+import {
+  // acceptNecessaryCookies,
+  acceptAllCookiesWithRadioToggle,
+  bannerAccordionToggle,
+  fillCategories,
+  fillCookiesSettingItem,
+  languageButtonToggle,
+  allowAllCookiesAtOnce,
+  filterCookiesByCategory,
+} from "./utils/logic";
 import "./lang/en.json";
 import "./lang/cs.json";
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
-import { saveAllCookies } from "./getDomainsWithCookies";
+import { saveAllCookies, sendAcceptedDataToDb } from "./getDomainsWithCookies";
 import { CMP_IS_LOCALHOST } from "./constants";
 
 let ccInstance;
 let testType = "info";
 let CountryCode = "";
 let acceptedCategories = [];
+let acceptedCookies = [];
+
+function timeStamp() {
+  const now = new Date();
+  const time = [now.getHours(), now.getMinutes(), now.getSeconds()];
+  const date = [now.getFullYear(), now.getUTCMonth() + 1, now.getDate()];
+  for (let i = 1; i < 3; i++) {
+    if (time[i] < 10) {
+      time[i] = "0" + time[i];
+    }
+  }
+  return "[" + time.join(":") + "]";
+  // return "" + date.join("-");
+  // return date.join("-") + "/" + time.join(":");
+}
 
 export let responseJSON = {
   userId: createUUID(),
-  categories: acceptedCategories,
+  // date: new Date.,
+  date: timeStamp(),
+  // date: new Date().toISOString() + "",
+  payload: { categories: acceptedCategories, cookies: acceptedCookies },
 };
+
 // console.log(en);
 export const fillJSONWithCheckedCategory = () => {
   const radioButtons = document.querySelectorAll(".category-radio-button");
@@ -31,16 +59,36 @@ export const fillJSONWithCheckedCategory = () => {
         acceptedCategories.push(element.name);
       }
     }
+    for (let index = 0; index < radioButtons.length; index++) {
+      const element = radioButtons[index];
+      const cookiesOfACategory = filterCookiesByCategory(cmpCookiesPerDomain, element.id);
+      cookiesOfACategory.length !== 0 && acceptedCookies.push(cookiesOfACategory);
+    }
   } else {
     for (let index = 0; index < cmpDomainCategories.length; index++) {
       const element = cmpDomainCategories[index];
       if (element.checked) {
         acceptedCategories.push(element.name);
+        acceptedCookies.push(element);
       }
     }
   }
-
   acceptedCategories = [];
+  acceptedCookies = [];
+  sendAcceptedDataToDb(responseJSON.userId, responseJSON.date, JSON.stringify(responseJSON.payload));
+};
+
+export const fillJSONWithAllCategories = () => {
+  for (const element of cmpDomainCategories) {
+    acceptedCategories.push(element.name);
+  }
+  for (const cookie of cmpCookiesPerDomain) {
+    acceptedCookies.push(cookie);
+  }
+  acceptedCategories = [];
+  acceptedCookies = [];
+  // sendAcceptedDataToDb(responseJSON.userId, responseJSON.date, responseJSON.payload);
+  sendAcceptedDataToDb(responseJSON.userId, responseJSON.date, JSON.stringify(responseJSON.payload));
 };
 
 function createUUID() {
@@ -75,17 +123,6 @@ const optionsObj = (countryCode, type) => {
   };
   return options;
 };
-
-function timeStamp() {
-  const now = new Date();
-  const time = [now.getHours(), now.getMinutes(), now.getSeconds()];
-  for (let i = 1; i < 3; i++) {
-    if (time[i] < 10) {
-      time[i] = "0" + time[i];
-    }
-  }
-  return "[" + time.join(":") + "] ";
-}
 
 export async function initI18next() {
   await i18next
@@ -140,7 +177,7 @@ fetchClientIp().then((country) => {
       initiateTypeChangeAndBannerShow();
     })
     .on("popupOpened", (...args) => {
-      initiateTypeChangeAndBannerShow();
+      // initiateTypeChangeAndBannerShow();
       languageButtonToggle();
       // Init
       (async function () {
@@ -155,7 +192,7 @@ fetchClientIp().then((country) => {
       })();
     })
     .on("popupClosed", (...args) => {
-      acceptNecessaryCookies();
+      // acceptNecessaryCookies();
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
@@ -170,7 +207,7 @@ const draw = function (countryCode) {
       // ccInstance.popup?.open();
     })
     .on("popupOpened", (...args) => {
-      acceptNecessaryCookies();
+      // acceptNecessaryCookies();
       initiateTypeChangeAndBannerShow();
       // Init
       (async function () {
@@ -185,7 +222,7 @@ const draw = function (countryCode) {
       })();
     })
     .on("popupClosed", (...args) => {
-      acceptNecessaryCookies();
+      // acceptNecessaryCookies();
       // ccInstance.popup?.close();
     })
     .on("error", console.error);
@@ -195,9 +232,9 @@ export function initiateTypeChangeAndBannerShow() {
   const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
   const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
   acceptAllCookiesAtOnce.addEventListener("click", () => {
-    setTimeout(() => {
-      allowAllCookiesAtOnce();
-    }, 200);
+    // setTimeout(() => {
+    allowAllCookiesAtOnce();
+    // }, 200);
   });
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
@@ -212,7 +249,7 @@ export function initiateTypeChangeAndBannerShow() {
           fillCookiesSettingItem();
           bannerAccordionToggle();
           acceptAllCookiesWithRadioToggle();
-          acceptNecessaryCookies();
+          // acceptNecessaryCookies();
         }, 300);
       }
     });

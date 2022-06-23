@@ -11,12 +11,12 @@ export const setCookie = function (name, value, expiryDays, domain, path, secure
     name +
     "=" +
     (value ? value : "") +
-    ";max-age=" +
-    expiryDays +
-    // ";expires=" +
+    // ";max-age=" +
     // expiryDays +
     // ";expires=" +
-    // exdate.toUTCString() +
+    // expiryDays +
+    ";expires=" +
+    exdate.toUTCString() +
     (domain ? ";domain=" + domain : "") +
     (secure ? ";Secure" : "") +
     ";path=" +

@@ -1,6 +1,6 @@
 import { setCookie } from "./utils/cookie";
 import { fetchClientIp } from "./options/location";
-import jsonData from "./data4.json";
+import jsonData from "./data5.json";
 import { initiateTypeChangeAndBannerShow } from "./initFile";
 import { saveAllCookies, saveSpecificCookies } from "./getDomainsWithCookies";
 import { CMP_IS_LOCALHOST } from "./constants";

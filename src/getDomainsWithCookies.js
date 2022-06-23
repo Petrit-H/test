@@ -4,7 +4,6 @@ import { getCookie, setCookie } from "./utils/cookie";
 import { filterCookiesByCategory, getEnvLocal } from "./utils/logic";
 import { CMP_API_BASE_URL, CMP_IS_LOCALHOST } from "./constants";
 import { cmpDomainCategoriesWithCookies, cmpDomainId, cmpCookiesPerDomain } from "./cookies";
-// import { fillJSONWithCheckedCategory } from "./initFile";
 
 export let categories = [];
 export let responseData = [];
@@ -16,44 +15,39 @@ let isLocalEnv = getEnvLocal();
 /**
  * save the cookies that are necessary
  */
-export const saveNecessaryCookies = () => {
-  try {
-    filterCookiesByCategory(cmpCookiesPerDomain, 5, cookiesPerCateroryArr, "filteredCookies");
-    /* for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
-      const category = DomainCategoriesWithCookies[index];
-      let {
-        categoryId,
-        cookies: { data },
-      } = category;
-      if (categoryId === 5) {
-        for (const cookie of data) {
-          let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-          setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
-        }
-      }
-    } */
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+// export const saveNecessaryCookies = () => {
+//   try {
+//     filterCookiesByCategory(cmpCookiesPerDomain, 5, cookiesPerCateroryArr, "filteredCookies");
+//     for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
+//       const category = DomainCategoriesWithCookies[index];
+//       let {
+//         categoryId,
+//         cookies: { data },
+//       } = category;
+//       if (categoryId === 5) {
+//         for (const cookie of data) {
+//           let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
+//           setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
+//         }
+//       }
+//     }
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
-/**
+/**§
  * save the cookies of the specified id/category
  * @param {Integer} id the id of cookie
  */
 export const saveSpecificCookies = (id) => {
   try {
     cookiesPerCategory = filterCookiesByCategory(cmpCookiesPerDomain, id, cookiesPerCategory, `Category #${id}`);
-    console.log("✅", cookiesPerCategory);
     for (let index = 0; index < cookiesPerCategory.length; index++) {
-      console.log("1️⃣");
       const cookie = cookiesPerCategory[index];
       let { categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-      console.log(categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure);
       if (categoryId === +id) {
         setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
-        console.log("2️⃣", getCookie(name));
-        console.log("------");
       }
     }
   } catch (error) {
@@ -93,6 +87,24 @@ export const getCategories = () => {
       console.log(error);
     });
   return categories;
+};
+
+export const sendAcceptedDataToDb = async (id, date, payload) => {
+  try {
+    let config = {
+      method: "post",
+      url: `${CMP_API_BASE_URL}/AddCookieConsent`,
+      data: {
+        userId: id,
+        date: date,
+        payload: payload,
+      },
+    };
+    const result = await axios(config);
+    console.log("SEND🟥", result);
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 /**

@@ -126,7 +126,7 @@ export default {
           </p>
       </div>
       <div class="banner-wrapper-controls flex justify-end text-sm">
-        <button class="got-it-button px-10 cc-btn cc-save py-2.5 rounded-md cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{dismiss}}</button>
+        <button class="got-it-button px-10 cc-btn py-2.5 rounded-md cc-${STATUS_ALLOW}" id="accept-necessary-cookies" >{{dismiss}}</button>
       </div>
     </div>
     `,
@@ -187,7 +187,7 @@ export default {
       <div class=" bottom-0 border-gray-200 border-t-1  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
         <div>
           <button
-          class="cc-btn cc-save  cc-${STATUS_ALLOW} border-1 border-blue-200 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
+          class="cc-btn cc-save  cc-${STATUS_ALLOW} border-1 border-blue-100 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
           My Choices
           </button>
           <button type="button"
