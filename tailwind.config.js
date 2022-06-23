@@ -6,7 +6,8 @@ module.exports = {
       colors: {
         petrit: "#1A1A1A",
         blue: {
-          200: "#B0CDFB",
+          100: "#B0CDFB",
+          200: "#A3B0C2",
           300: "#667C99",
           DEFAULT: "#1D79F2",
           400: "#3a81f6",

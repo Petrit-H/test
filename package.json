@@ -1,6 +1,6 @@
 {
   "name": "gjirafa-cmp",
-  "version": "4.5.82",
+  "version": "4.5.83",
   "description": "FORK OF Osano cookie consent tool.",
   "main": "./dist/index.min.js",
   "types": "types/index.d.ts",
@@ -66,7 +66,6 @@
     "image-webpack-loader": "^8.1.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "jest": "^27.5.1",
-    "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^2.5.3",
     "node-sass": "^7.0.1",
     "npm": "^8.5.1",
