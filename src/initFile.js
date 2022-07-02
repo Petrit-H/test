@@ -158,13 +158,18 @@ export function translatePageElements() {
  * @param {string} initialValue the value for the given element
  */
 export function bindLocaleSwitcher(initialValue) {
+  // const checkType = document.querySelector(".cc-type-info");
+
+  // if (checkType === null) {
   const switcher = document.querySelector("[data-i18n-switcher]");
-  for (let index = 0; index < switcher.children.length; index++) {
+  const length = switcher.children.length;
+  for (let index = 0; index < length; index++) {
     const element = switcher.children[index];
     element.addEventListener("click", (e) => {
       i18next.changeLanguage(e.target.value).then(translatePageElements);
     });
   }
+  // }
 }
 
 fetchClientIp().then((country) => {
@@ -229,13 +234,15 @@ const draw = function (countryCode) {
 };
 
 export function initiateTypeChangeAndBannerShow() {
+  const checkType = document.querySelector(".cc-type-info");
+
   const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
   const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
-  acceptAllCookiesAtOnce.addEventListener("click", () => {
-    // setTimeout(() => {
-    allowAllCookiesAtOnce();
-    // }, 200);
-  });
+  if (checkType !== null) {
+    acceptAllCookiesAtOnce.addEventListener("click", () => {
+      allowAllCookiesAtOnce();
+    });
+  }
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       timeStamp();

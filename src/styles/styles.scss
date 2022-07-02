@@ -1,10 +1,3 @@
-// @import "./main.scss";
-
-/* EXAMPLE 3  */
-/* Checkbox style */
-// @tailwind base;
-// @tailwind utilities;
-// @tailwind components;
 @use "tailwindcss/base";
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
@@ -13,8 +6,8 @@
   // max-height: 100%;
   // max-height: calc(100% - 210px);
   // height: calc(100% - 120px);
-
-  height: 500px;
+  // max-height: 500px;
+  // height: 500px;
   @media only screen and (min-width: 1536px) {
     // max-height: calc(100% - 130px);
   }

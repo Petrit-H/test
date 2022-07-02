@@ -206,8 +206,6 @@ window.addEventListener("load", function (event) {
 \`------'\`------'\`------'
     `
   );
-  console.log("jsonData", jsonData);
-  console.log("🚀 ~ file: index.js ~ line 37 ~ CMP_IS_LOCALHOST", getEnvLocal());
 
   initiateTypeChangeAndBannerShow();
   setTimeout(() => {

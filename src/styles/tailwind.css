@@ -593,14 +593,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0px;
 }
 
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .mx-4 {
@@ -692,6 +692,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-0 {
   height: 0px;
+}
+
+.max-h-\[300px\] {
+  max-height: 300px;
+}
+
+.max-h-95 {
+  max-height: 95%;
 }
 
 .w-screen {
@@ -965,6 +973,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.75rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -1203,8 +1216,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 640px) {
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sm\:max-h-\[400px\] {
+    max-height: 400px;
+  }
+
   .sm\:w-auto {
     width: auto;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
@@ -1212,6 +1239,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   .md\:mx-1 {
     margin-left: 0.25rem;
     margin-right: 0.25rem;
+  }
+
+  .md\:mx-4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .md\:mb-0 {
@@ -1222,12 +1254,26 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-right: 0.5rem;
   }
 
+  .md\:max-h-max {
+    max-height: -webkit-max-content;
+    max-height: -moz-max-content;
+    max-height: max-content;
+  }
+
+  .md\:max-h-\[500px\] {
+    max-height: 500px;
+  }
+
   .md\:w-3\/4 {
     width: 75%;
   }
 
   .md\:w-1\/2 {
     width: 50%;
+  }
+
+  .md\:w-full {
+    width: 100%;
   }
 
   .md\:flex-row {

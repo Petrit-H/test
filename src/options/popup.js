@@ -134,70 +134,77 @@ export default {
     link: `<a aria-label="learn more about cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a>`,
     close: `<span aria-label="dismiss cookie message" role=button tabindex="0" class="cc-close">{{close}}</span>`,
     categories: `
-    <div class="consent-banner-wrapper bg-white w-full mx-auto z-10 flex flex-col justify-center items-center ">
-
     <div class="cmp-overlay"></div>
-    <div class="cookie-modal  relative overflow-hidden rounded-lg bg-white w-full">
-      <div class="control-section z-50 sticky top-0 mb-1 px-6 py-6 flex justify-between items-center ">
-        <div><img src=${CMP_BANNER_LOGO} alt="Consent Logo" /></div>
-        <div class="flex">
-        <div id="language-icon-button" class="language-icon-button relative mr-6 flex items-center">
-          <button aria-label="dismiss cookie message" type="button" tabindex="0"  class="language-toggle-btn flex items-center justify-center rounded-full h-full hover:bg-gray-faded active:bg-gray-faded">
-            <img src=${CMP_BANNER_LANGUAGES_ICON}  alt="language picker" />
-          </button>
-          <div id="language-options" data-i18n-switcher class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  top-[25px] flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
-              <button value="en" class="language  px-3 py-3 w-full text-left active:text-blue-500 focus:text-blue-500 hover:text-blue-500 hover:bg-gray-faded  text-base font-normal" >English</button>
-              <button value="cs" class="language  px-3 py-3 w-full text-left active:text-blue-500 focus:text-blue-500 hover:text-blue-500 hover:bg-gray-faded text-base font-normal" >Czech</button>
-          </div>
-        </div>
-          <button aria-label="dismiss cookie message" type="button" tabindex="0">{{close}}</button>
-        </div>
+<div
+   class="  relative overflow-hidden rounded-lg bg-white w-full consent-banner-wrapper max-h-95 my-auto md:w-full md:mx-4 sm:mx-auto z-10 flex flex-col justify-center">
+   <div class="control-section z-50 sticky top-0 mb-1 px-6 py-6 flex justify-between items-center ">
+      <div><img src=${CMP_BANNER_LOGO} alt="Consent Logo" /></div>
+      <div class="flex">
+         <div id="language-icon-button" class="language-icon-button relative mr-6 flex items-center">
+            <button aria-label="dismiss cookie message" type="button" tabindex="0"
+               class="language-toggle-btn flex items-center justify-center rounded-full h-full hover:bg-gray-faded active:bg-gray-faded">
+               <img src=${CMP_BANNER_LANGUAGES_ICON} alt="language picker" />
+            </button>
+            <div id="language-options" data-i18n-switcher
+               class="hidden shadow-2 max-w-100 transition-all duration-500 ease-in-out absolute right-0  top-[25px] flex-col justify-start bg-white z-50 w-100 max-w- text-left border-1 border-gray-light rounded-md">
+               <button value="en"
+                  class="language  px-3 py-3 w-full text-left active:text-blue-500 focus:text-blue-500 hover:text-blue-500 hover:bg-gray-faded  text-base font-normal">English</button>
+               <button value="cs"
+                  class="language  px-3 py-3 w-full text-left active:text-blue-500 focus:text-blue-500 hover:text-blue-500 hover:bg-gray-faded text-base font-normal">Czech</button>
+            </div>
+         </div>
+         <button aria-label="dismiss cookie message" type="button" tabindex="0">{{close}}</button>
       </div>
-      <div class="tabs flex justify-start px-6  border-b border-gray-light">
-          <button type="button" class="tab pointer relative pb-4 mr-6 text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active" data-tab-target="#cookie-display" data-i18n-key="bannerCategories.bctCategoriesTab">Categories</button>
-          <button type="button" class="tab pointer relative pb-4  text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded " id="cookies-tab" data-tab-target="#cookie-settings" data-i18n-key="bannerCategories.bctCookiesTab">Cookies</button>
-      </div>
-      <div class="content-wrapper px-6 overflow-y-auto my-3">
-        <div class="description-section py-3">
-          <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading" data-i18n-key="bannerCategories.bctDescription">{{title}}</p>
-          <div class="flex">
+   </div>
+   <div class="tabs flex justify-start px-6  border-b border-gray-light">
+      <button type="button"
+         class="tab pointer relative pb-4 mr-6 text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded active"
+         data-tab-target="#cookie-display" data-i18n-key="bannerCategories.bctCategoriesTab">Categories</button>
+      <button type="button"
+         class="tab pointer relative pb-4  text-blue-300 font-medium text-base active:text-blue-500 focus:text-blue-500 hover:text-blue-500  after:bg-blue after:rounded "
+         id="cookies-tab" data-tab-target="#cookie-settings" data-i18n-key="bannerCategories.bctCookiesTab">Cookies</button>
+   </div>
+   <div class="content-wrapper sm:max-h-[400px] md:max-h-[500px] px-1 sm:px-6 overflow-y-auto my-3">
+      <div class="description-section py-3">
+         <p class="2xl:pt-4 pb-2 text-blue-300 text-small font-medium  leading" data-i18n-key="bannerCategories.bctDescription">{{title}}</p>
+         <div class="flex">
             <span id="cookieconsent:desc" class="text-blue text-small font-medium border-b-1 border-blue">
-             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyLink}}" rel="noopener noreferrer nofollow" target="{{target}}" data-i18n-key="bannerGlobals.privacyPolicy">{{privacyPolicy}}</a>
+               <a aria-label="learn more about cookies" role=button tabindex="0" href="{{privacyPolicyLink}}" rel="noopener noreferrer nofollow"
+                  target="{{target}}" data-i18n-key="bannerGlobals.privacyPolicy">{{privacyPolicy}}</a>
             </span>
             <span id="cookieconsent:desc" class="text-blue text-small font-medium ml-2 border-b-1 border-blue">
-             <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}" data-i18n-key="bannerGlobals.cookiePolicy">{{cookiePolicy}}</a>
+               <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow"
+                  target="{{target}}" data-i18n-key="bannerGlobals.cookiePolicy">{{cookiePolicy}}</a>
             </span>
-          </div>
-        </div>
-
-        <div class="tab-content">
-          <div id="cookie-display" class="tab-content active" data-tab-content>
-            <ul id="basic-categories-banner" class=" cc-categories "></ul>
-          </div>
-          <div id="noData"
-              class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
-              <p class="my-auto">No Data Available</p>
-            </div>
-          <div id="cookie-settings" class="tab-content py-6" data-tab-content>
-            <div id="custom-categories-banner" class=" "></div>
-          </div>
-        </div>
-
+         </div>
       </div>
-      <div class=" bottom-0 border-gray-200 border-t-1  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
-        <div>
-          <button
-          class="cc-btn cc-save  cc-${STATUS_ALLOW} border-1 border-blue-100 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
-          My Choices
-          </button>
-          <button type="button"
+
+      <div class="tab-content">
+         <div id="cookie-display" class="tab-content active" data-tab-content>
+            <ul id="basic-categories-banner" class=" cc-categories "></ul>
+         </div>
+         <div id="noData"
+            class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
+            <p class="my-auto">No Data Available</p>
+         </div>
+         <div id="cookie-settings" class="tab-content py-6" data-tab-content>
+            <div id="custom-categories-banner" class=" "></div>
+         </div>
+      </div>
+
+   </div>
+   <div class=" bottom-0 border-gray-200 border-t-1  buttons flex justify-start left-0 px-6 py-6 w-full z-50">
+      <div>
+         <button class="cc-btn cc-save  cc-${STATUS_ALLOW} border-1 border-blue-100 rounded-md px-5 py-1.5 bg-white text-blue-400">Confirm
+            My Choices
+         </button>
+         <button type="button"
             class="cc-btn cc-save cc-${STATUS_ALLOW}  allow-all-button border-1 border-blue-400 rounded-md text-white bg-blue-400 px-5 py-1.5  ml-2">
             {{allowAll}}
-          </button>
-        </div>
+         </button>
       </div>
-    </div>
-  </div>
+   </div>
+</div>
       `,
     save: `<button class="cc-btn cc-save">Save your data</button>`,
     // compliance: compliance is also an element,  but it is generated by the application, depending on `type` below
@@ -219,7 +226,7 @@ export default {
     info: '<div class="cc-compliance bg-white w-full">{{dismiss}}</div>',
     "opt-in": '<div class="cc-compliance bg-white cc-highlight">{{allow}}</div>',
     "opt-out": '<div class="cc-compliance bg-white cc-highlight">{{dismiss}}{{deny}}</div>',
-    categories: '<div class="cmp-categories flex items-center">{{categories}}</div>',
+    categories: '<div class="cmp-categories flex items-center my-auto bg-white w-screen md:w-full md:mx-4 sm:mx-auto z-10  flex-col justify-center">{{categories}}</div>',
   },
 
   // select your type of popup here
