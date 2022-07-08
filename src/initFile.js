@@ -17,15 +17,20 @@ import "./lang/en.json";
 import "./lang/cs.json";
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
-import { cmpDomainCategories, cmpCookiesPerDomain, fetchDataFromJSONFile } from "./cookies";
-import { saveAllCookies, sendAcceptedDataToDb } from "./getDomainsWithCookies";
-import { CMP_IS_LOCALHOST } from "./constants";
+import {
+  cmpDomainCategories,
+  cmpCookiesPerDomain,
+  fetchDataFromJSONFile,
+} from "./cookies";
+import { sendAcceptedDataToDb } from "./getDomainsWithCookies";
+// import { CMP_IS_LOCALHOST } from "./constants";
 
 let ccInstance;
 let testType = "info";
 let CountryCode = "";
 let acceptedCategories = [];
 let acceptedCookies = [];
+let hasAcceptedAll = false;
 
 function timeStamp() {
   const now = new Date();
@@ -43,9 +48,8 @@ function timeStamp() {
 
 export let responseJSON = {
   userId: createUUID(),
-  // date: new Date.,
   date: timeStamp(),
-  // date: new Date().toISOString() + "",
+  acceptedAll: hasAcceptedAll,
   payload: { categories: acceptedCategories, cookies: acceptedCookies },
 };
 
@@ -61,8 +65,12 @@ export const fillJSONWithCheckedCategory = () => {
     }
     for (let index = 0; index < radioButtons.length; index++) {
       const element = radioButtons[index];
-      const cookiesOfACategory = filterCookiesByCategory(cmpCookiesPerDomain, element.id);
-      cookiesOfACategory.length !== 0 && acceptedCookies.push(cookiesOfACategory);
+      const cookiesOfACategory = filterCookiesByCategory(
+        cmpCookiesPerDomain,
+        element.id
+      );
+      cookiesOfACategory.length !== 0 &&
+        acceptedCookies.push(cookiesOfACategory);
     }
   } else {
     for (let index = 0; index < cmpDomainCategories.length; index++) {
@@ -75,29 +83,52 @@ export const fillJSONWithCheckedCategory = () => {
   }
   acceptedCategories = [];
   acceptedCookies = [];
-  sendAcceptedDataToDb(responseJSON.userId, responseJSON.date, JSON.stringify(responseJSON.payload));
+  // sendAcceptedDataToDb(
+  //   responseJSON.userId,
+  //   responseJSON.date,
+  //   responseJSON.acceptAll,
+  //   JSON.stringify(responseJSON.payload)
+  // );
 };
 
+// function fn() {
+//   hasAcceptedAll = true;
+//   console.log(hasAcceptedAll);
+//   // return test;
+// }
+
 export const fillJSONWithAllCategories = () => {
+  hasAcceptedAll = true;
+  responseJSON = { ...responseJSON, acceptedAll: hasAcceptedAll };
+  // fn()
+  console.log(responseJSON.acceptedAll, hasAcceptedAll);
   for (const element of cmpDomainCategories) {
     acceptedCategories.push(element.name);
   }
   for (const cookie of cmpCookiesPerDomain) {
     acceptedCookies.push(cookie);
   }
+  sendAcceptedDataToDb(
+    responseJSON.userId,
+    responseJSON.date,
+    responseJSON.acceptedAll,
+    JSON.stringify(responseJSON.payload)
+  );
+
   acceptedCategories = [];
   acceptedCookies = [];
-  // sendAcceptedDataToDb(responseJSON.userId, responseJSON.date, responseJSON.payload);
-  sendAcceptedDataToDb(responseJSON.userId, responseJSON.date, JSON.stringify(responseJSON.payload));
 };
 
 function createUUID() {
   var dt = new Date().getTime();
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (dt + Math.random() * 16) % 16 | 0;
-    dt = Math.floor(dt / 16);
-    return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-  });
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      var r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
   fetchDataFromJSONFile().then((json) => json);
   return uuid;
 }
@@ -147,7 +178,9 @@ export function translatePageElements() {
   translatableElements.forEach((el) => {
     const key = el.getAttribute("data-i18n-key");
     const interpolations = el.getAttribute("data-i18n-opt");
-    const parsedInterpolations = interpolations ? JSON.parse(interpolations) : {};
+    const parsedInterpolations = interpolations
+      ? JSON.parse(interpolations)
+      : {};
 
     el.innerHTML = i18next.t(key, parsedInterpolations);
   });
@@ -236,8 +269,12 @@ const draw = function (countryCode) {
 export function initiateTypeChangeAndBannerShow() {
   const checkType = document.querySelector(".cc-type-info");
 
-  const bannerTypeChangeButtons = document.querySelectorAll(".banner-type-change");
-  const acceptAllCookiesAtOnce = document.getElementById("accept-all-cookies-at-once");
+  const bannerTypeChangeButtons = document.querySelectorAll(
+    ".banner-type-change"
+  );
+  const acceptAllCookiesAtOnce = document.getElementById(
+    "accept-all-cookies-at-once"
+  );
   if (checkType !== null) {
     acceptAllCookiesAtOnce.addEventListener("click", () => {
       allowAllCookiesAtOnce();

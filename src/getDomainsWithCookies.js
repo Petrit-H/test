@@ -3,7 +3,11 @@ import axios from "axios";
 import { getCookie, setCookie } from "./utils/cookie";
 import { filterCookiesByCategory, getEnvLocal } from "./utils/logic";
 import { CMP_API_BASE_URL, CMP_IS_LOCALHOST } from "./constants";
-import { cmpDomainCategoriesWithCookies, cmpDomainId, cmpCookiesPerDomain } from "./cookies";
+import {
+  cmpDomainCategoriesWithCookies,
+  cmpDomainId,
+  cmpCookiesPerDomain,
+} from "./cookies";
 
 export let categories = [];
 export let responseData = [];
@@ -42,12 +46,32 @@ let isLocalEnv = getEnvLocal();
  */
 export const saveSpecificCookies = (id) => {
   try {
-    cookiesPerCategory = filterCookiesByCategory(cmpCookiesPerDomain, id, cookiesPerCategory, `Category #${id}`);
+    cookiesPerCategory = filterCookiesByCategory(
+      cmpCookiesPerDomain,
+      id,
+      cookiesPerCategory,
+      `Category #${id}`
+    );
     for (let index = 0; index < cookiesPerCategory.length; index++) {
       const cookie = cookiesPerCategory[index];
-      let { categoryId, name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
+      let {
+        categoryId,
+        name,
+        plaintext_value,
+        expiration,
+        cookieDomain,
+        path,
+        is_secure,
+      } = cookie;
       if (categoryId === +id) {
-        setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
+        setCookie(
+          name,
+          plaintext_value,
+          expiration,
+          isLocalEnv ? null : cookieDomain,
+          path,
+          is_secure
+        );
       }
     }
   } catch (error) {
@@ -59,8 +83,16 @@ export const saveAllCookies = () => {
   try {
     for (let index = 0; index < cmpCookiesPerDomain.length; index++) {
       const cookie = cmpCookiesPerDomain[index];
-      let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-      setCookie(name, plaintext_value, expiration, isLocalEnv ? null : cookieDomain, path, is_secure);
+      let { name, plaintext_value, expiration, cookieDomain, path, is_secure } =
+        cookie;
+      setCookie(
+        name,
+        plaintext_value,
+        expiration,
+        isLocalEnv ? null : cookieDomain,
+        path,
+        is_secure
+      );
       // console.log("🟥VALUE ALL:", cookie);
     }
   } catch (error) {
@@ -89,7 +121,7 @@ export const getCategories = () => {
   return categories;
 };
 
-export const sendAcceptedDataToDb = async (id, date, payload) => {
+export const sendAcceptedDataToDb = async (id, date, hasAcceptedAll, payload) => {
   try {
     let config = {
       method: "post",
@@ -97,6 +129,7 @@ export const sendAcceptedDataToDb = async (id, date, payload) => {
       data: {
         userId: id,
         date: date,
+        acceptedAll: hasAcceptedAll,
         payload: payload,
       },
     };

@@ -694,10 +694,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0px;
 }
 
-.max-h-\[300px\] {
-  max-height: 300px;
-}
-
 .max-h-95 {
   max-height: 95%;
 }
@@ -1252,12 +1248,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:mr-2 {
     margin-right: 0.5rem;
-  }
-
-  .md\:max-h-max {
-    max-height: -webkit-max-content;
-    max-height: -moz-max-content;
-    max-height: max-content;
   }
 
   .md\:max-h-\[500px\] {

@@ -25,4 +25,10 @@ module.exports = {
       favicon: path.resolve(__dirname, "./src/assets", "favicon.ico"),
     }),
   ],
+  devServer: {
+    port: 8080,
+    contentBase: ["./src", "./dir"], // both src and output dirs
+    inline: true,
+    hot: true,
+  },
 };
