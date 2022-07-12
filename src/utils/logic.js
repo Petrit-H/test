@@ -145,7 +145,7 @@ const fillCookiesSettingItem = () => {
       })
       .join("");
     settingsAccordionToggle();
-  }, 50);
+  }, 150);
 };
 
 /**
@@ -367,7 +367,7 @@ const fillCategories = function () {
       translatePageElements();
       bindLocaleSwitcher(i18next.resolvedLanguage);
     })();
-  }, 50);
+  }, 150);
 };
 
 /**
