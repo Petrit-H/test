@@ -1,4 +1,8 @@
-import { CMP_BANNER_CHEVRON_DOWN, CMP_CARET_DOWN_ICON, CMP_IS_LOCALHOST } from "../constants";
+import {
+  CMP_BANNER_CHEVRON_DOWN,
+  CMP_CARET_DOWN_ICON,
+  CMP_IS_LOCALHOST,
+} from "../constants";
 import { saveAllCookies } from "../getDomainsWithCookies";
 import {
   fetchDataFromJSONFile,
@@ -7,7 +11,14 @@ import {
   cmpCookiesPerDomain,
   // } from "../getDomainsWithCookies";
 } from "../cookies";
-import { bindLocaleSwitcher, fillJSONWithAllCategories, fillJSONWithCheckedCategory, initI18next, responseJSON, translatePageElements } from "../initFile";
+import {
+  bindLocaleSwitcher,
+  fillJSONWithAllCategories,
+  fillJSONWithCheckedCategory,
+  initI18next,
+  responseJSON,
+  translatePageElements,
+} from "../initFile";
 import i18next from "i18next";
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -79,7 +90,8 @@ const languageButtonToggle = () => {
         languageOptionsMenu.classList.toggle("hidden");
       });
       rootModal.addEventListener("click", () => {
-        !languageOptionsMenu.classList.contains("hidden") && languageOptionsMenu.classList.toggle("hidden");
+        !languageOptionsMenu.classList.contains("hidden") &&
+          languageOptionsMenu.classList.toggle("hidden");
       });
     }
   }, 0);
@@ -92,18 +104,17 @@ const languageButtonToggle = () => {
  */
 const fillCookiesSettingItem = () => {
   cookies = cmpCookiesPerDomain;
-  const noData = document.getElementById("noData");
-  if (cookies.length === 0) {
-    noData.classList.remove("hidden");
-  } else {
-    noData.classList.add("hidden");
-  }
+  // const noData = document.getElementById("noData");
+  // if (cookies.length === 0) {
+  //   noData.classList.remove("hidden");
+  // } else {
+  //   noData.classList.add("hidden");
+  // }
 
   setTimeout(() => {
-    // const customCategoriesBanner = document.querySelector(
-    //   ".custom-categories-banner"
-    // );
-    const customCategoriesBanner = document.getElementById("custom-categories-banner");
+    const customCategoriesBanner = document.getElementById(
+      "custom-categories-banner"
+    );
 
     customCategoriesBanner.innerHTML = cookies
       ?.map((item) => {
@@ -145,7 +156,7 @@ const fillCookiesSettingItem = () => {
       })
       .join("");
     settingsAccordionToggle();
-  }, 150);
+  }, 50);
 };
 
 /**
@@ -198,9 +209,10 @@ const changeTabOnClick = () => {
       let cookieId = tab.children[0].dataset.cookieSettingsId;
       const targetCookie = document.getElementById(`cookie-${cookieId}`);
       document.getElementById("cookies-tab").click();
-      targetCookie.scrollIntoView({
+      targetCookie.scrollIntoView( true,{
         behavior: "smooth",
         block: "start",
+        inline: "center",
       });
       targetCookie.click();
     });
@@ -213,7 +225,9 @@ const changeTabOnClick = () => {
 const bannerAccordionToggle = function () {
   setTimeout(() => {
     const accordionHeaders = document.querySelectorAll(".cookie-details");
-    const accordionContents = document.querySelectorAll(".cc-category .accordion-content");
+    const accordionContents = document.querySelectorAll(
+      ".cc-category .accordion-content"
+    );
     // const categoryDescription = document.getElementsByClassName("cookie-details");
     const radioButtonWrapper = document.querySelectorAll(".dot-wrapper");
     const carretToggle = document.querySelectorAll(".toggle-accordion");
@@ -222,7 +236,9 @@ const bannerAccordionToggle = function () {
       const categoryID = +accordionHeaders[i].dataset.settingsDetailsId;
       // const categoryID = +accordionHeaders[i].dataset.categoryId;
       const domainID = accordionHeaders[i].dataset.did;
-      const contentData = document.getElementById(`CATEGORY_CONTENT_${categoryID}`);
+      const contentData = document.getElementById(
+        `CATEGORY_CONTENT_${categoryID}`
+      );
       const closeAllAccContent = () => {
         for (let i = 0; i < accordionContents.length; i++) {
           const element = accordionContents[i];
@@ -236,23 +252,49 @@ const bannerAccordionToggle = function () {
         console.log("toggle", event.target.checked);
       });
       accordionHeaders[i].addEventListener("click", () => {
-        if (contentData.classList.contains("hidden") || contentData.classList.contains("h-0")) {
-          filteredCookies = filterCookiesByCategory(cmpCookiesPerDomain, categoryID, cookiesPerCategoryArr, "filteredCookies");
-          contentData.innerHTML = filteredCookies?.map((item) => filteredCookiesPerCategory(item)).join("");
+        if (
+          contentData.classList.contains("hidden") ||
+          contentData.classList.contains("h-0")
+        ) {
+          filteredCookies = filterCookiesByCategory(
+            cmpCookiesPerDomain,
+            categoryID,
+            cookiesPerCategoryArr,
+            "filteredCookies"
+          );
+          contentData.innerHTML = filteredCookies
+            ?.map((item) => filteredCookiesPerCategory(item))
+            .join("");
           changeTabOnClick();
           closeAllAccContent();
           toggleCSSclasses(contentData, "hidden", "h-0");
           carretToggle[i].classList.add("rotate-180");
         } else {
-          filteredCookies = filterCookiesByCategory(cmpCookiesPerDomain, categoryID, cookiesPerCategoryArr, "filteredCookies");
-          contentData.innerHTML = filteredCookies?.map((item) => filteredCookiesPerCategory(item)).join("");
+          filteredCookies = filterCookiesByCategory(
+            cmpCookiesPerDomain,
+            categoryID,
+            cookiesPerCategoryArr,
+            "filteredCookies"
+          );
+          contentData.innerHTML = filteredCookies
+            ?.map((item) => filteredCookiesPerCategory(item))
+            .join("");
           toggleCSSclasses(contentData, "hidden", "h-0");
           carretToggle[i].classList.remove("rotate-180");
           changeTabOnClick();
         }
         if (filteredCookies.length === 0) {
           contentData.innerHTML = "No cookies to show";
-          contentData.classList.add("text-blue-200", "font-base", "border-1", "border-gray-light", "rounded-tl-4", "rounded-tr-4", "px-3", "py-4");
+          contentData.classList.add(
+            "text-blue-200",
+            "font-base",
+            "border-1",
+            "border-gray-light",
+            "rounded-tl-4",
+            "rounded-tr-4",
+            "px-3",
+            "py-4"
+          );
         }
       });
     }
@@ -285,8 +327,12 @@ const toggleCSSclasses = (el, ...cls) => {
  */
 const settingsAccordionToggle = function () {
   setTimeout(() => {
-    const accordionHeader = document.querySelectorAll(".setting-accordion .accordion-header");
-    const accordionContent = document.querySelectorAll(".setting-accordion .accordion-content");
+    const accordionHeader = document.querySelectorAll(
+      ".setting-accordion .accordion-header"
+    );
+    const accordionContent = document.querySelectorAll(
+      ".setting-accordion .accordion-content"
+    );
     const carretToggle = document.querySelectorAll(".cookie-toggle-accordion");
 
     const closeAllAccContent = () => {
@@ -299,7 +345,10 @@ const settingsAccordionToggle = function () {
     };
     for (let i = 0; i < accordionHeader.length; i++) {
       accordionHeader[i].addEventListener("click", function () {
-        if (accordionContent[i].classList.contains("hidden") || accordionHeader[i].nextElementSibling.classList.contains("h-0")) {
+        if (
+          accordionContent[i].classList.contains("hidden") ||
+          accordionHeader[i].nextElementSibling.classList.contains("h-0")
+        ) {
           closeAllAccContent();
           toggleCSSclasses(accordionContent[i], "hidden", "h-0");
           carretToggle[i].classList.add("rotate-180");
@@ -318,20 +367,44 @@ const settingsAccordionToggle = function () {
 const fillCategories = function () {
   fetchDataFromJSONFile().then((json) => json);
   setTimeout(() => {
-    const basicCategoriesBanner = document.getElementById("basic-categories-banner");
+    const basicCategoriesBanner = document.getElementById(
+      "basic-categories-banner"
+    );
     basicCategoriesBanner.innerHTML = cmpDomainCategories
       ?.slice(0)
       ?.reverse()
       ?.map((item, index) => {
-        return `<li id=test-${item.id} class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
+        return `<li id=test-${
+          item.id
+        } class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
         <div class="accordion-header text-small leading w-full flex flex-col justify-between py-3" data-did=${cmpDomainId}>
            <div class="flex items-end justify-between">
-              <p class=" category-title font-bold text-black-faded" data-i18n-key=${item.id > 5 ? item.name : `bannerCategories.categories.${index}.bctCategoryName`}></p>
-              <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${item.name.toLowerCase() === " necessary" ? " cursor-not-allowed" : ""}">
-                 <input type="checkbox" id=${item.id} ${item.checked ? "checked" : ""} data-radio-parent-category-name="${item.name}"
-                    class="category-radio-button ${item.name.toLowerCase() === " necessary" ? "cursor-not-allowed" : ""}" name="${item.name}" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""} />
+              <p class=" category-title font-bold text-black-faded" data-i18n-key=${
+                item.id > 5
+                  ? item.name
+                  : `bannerCategories.categories.${index}.bctCategoryName`
+              }></p>
+              <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${
+                item.name.toLowerCase() === " necessary"
+                  ? " cursor-not-allowed"
+                  : ""
+              }">
+                 <input type="checkbox" id=${item.id} ${
+          item.checked ? "checked" : ""
+        } data-radio-parent-category-name="${item.name}"
+                    class="category-radio-button ${
+                      item.name.toLowerCase() === " necessary"
+                        ? "cursor-not-allowed"
+                        : ""
+                    }" name="${item.name}" value="${item.name.toLowerCase()}" ${
+          item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
+        } />
                  <div class="switch-holder relative block border-1 border-gray-light w-9 h-6 rounded-full transition ">
-                    <div class="${item.name.toLowerCase() === " necessary" ? "translate-x-3 transform cursor-not-allowed necessary-category " : "bg-gray-dark"}
+                    <div class="${
+                      item.name.toLowerCase() === " necessary"
+                        ? "translate-x-3 transform cursor-not-allowed necessary-category "
+                        : "bg-gray-dark"
+                    }
                        bg-gray-dark dot absolute left-1 top-1/2 -translate-y-1/2 my-0 w-4 h-4 rounded-full transition "></div>
                 </div>
 
@@ -339,15 +412,25 @@ const fillCategories = function () {
 
           </div>
           <p class=" category-description max-w-4/5 text-black-faded transition duration-200 ease-in-out transform" data-i18n-key=${
-            item.id > 5 ? (item.description ? item.description : item.name) : `bannerCategories.categories.${index}.bctCategoryDescription`
+            item.id > 5
+              ? item.description
+                ? item.description
+                : item.name
+              : `bannerCategories.categories.${index}.bctCategoryDescription`
           }>${item.description ? item.description : item.name}</p>
-                       <button value=${item.id} data-settings-details-id=${item.id}
-                          class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${item.id}>
+                       <button value=${item.id} data-settings-details-id=${
+          item.id
+        }
+                          class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${
+                            item.id
+                          }>
                           <span data-i18n-key="bannerGlobals.showCookiesBtn">Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN}
                              class="toggle-accordion  transition duration-300 ease-in-out transform" alt="show cookies chevron" />
                        </button>
                     </div>
-                    <div class="accordion-content h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${item.id}">
+                    <div class="accordion-content h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${
+                      item.id
+                    }">
                        <p>No cookies to show</p>
                     </div>
      </li>`;
@@ -367,7 +450,7 @@ const fillCategories = function () {
       translatePageElements();
       bindLocaleSwitcher(i18next.resolvedLanguage);
     })();
-  }, 150);
+  }, 0);
 };
 
 /**
