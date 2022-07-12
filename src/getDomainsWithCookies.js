@@ -15,32 +15,46 @@ export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
 let cookiesPerCateroryArr = [];
 let isLocalEnv = getEnvLocal();
+let cs = "https://api.jsonbin.io/v3/b/62cb5cf4f023111c70713c0b";
+let en = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+let English;
+let Czech;
+
+export const getEnglish = () => {
+  let config = {
+    method: "get",
+    url: en,
+  };
+  axios(config)
+    .then(function ({ data }) {
+      English = data.record;
+      console.log(English);
+      return English;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return English;
+};
+
+export const getCzech = () => {
+  let config = {
+    method: "get",
+    url: cs,
+  };
+  axios(config)
+    .then(function ({ data }) {
+      Czech = data.record;
+      console.log(Czech)
+      return Czech;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return Czech;
+};
 
 /**
- * save the cookies that are necessary
- */
-// export const saveNecessaryCookies = () => {
-//   try {
-//     filterCookiesByCategory(cmpCookiesPerDomain, 5, cookiesPerCateroryArr, "filteredCookies");
-//     for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
-//       const category = DomainCategoriesWithCookies[index];
-//       let {
-//         categoryId,
-//         cookies: { data },
-//       } = category;
-//       if (categoryId === 5) {
-//         for (const cookie of data) {
-//           let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
-//           setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
-//         }
-//       }
-//     }
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-
-/**§
  * save the cookies of the specified id/category
  * @param {Integer} id the id of cookie
  */
@@ -121,7 +135,12 @@ export const getCategories = () => {
   return categories;
 };
 
-export const sendAcceptedDataToDb = async (id, date, hasAcceptedAll, payload) => {
+export const sendAcceptedDataToDb = async (
+  id,
+  date,
+  hasAcceptedAll,
+  payload
+) => {
   try {
     let config = {
       method: "post",

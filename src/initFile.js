@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+import axios from "axios";
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
 import {
@@ -22,7 +23,11 @@ import {
   cmpCookiesPerDomain,
   fetchDataFromJSONFile,
 } from "./cookies";
-import { sendAcceptedDataToDb } from "./getDomainsWithCookies";
+import {
+  getCzech,
+  getEnglish,
+  sendAcceptedDataToDb,
+} from "./getDomainsWithCookies";
 // import { CMP_IS_LOCALHOST } from "./constants";
 
 let ccInstance;
@@ -154,6 +159,66 @@ const optionsObj = (countryCode, type) => {
   };
   return options;
 };
+// getEnglish()
+// getCzech()
+
+// =====================
+
+function loadPath(lng) {
+  // console.log('loadPath', lng, namespace);
+
+  let path = "";
+  switch (lng) {
+    case "en":
+      path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+      break;
+    case "cs":
+      path = "https://api.jsonbin.io/v3/b/62cb5cf4f023111c70713c0b";
+      break;
+    default:
+      break;
+  }
+  // console.log('loadPath', path);
+
+  return path;
+}
+
+// =====================
+const loadResources = async (locale) => {
+  let path = loadPath(locale);
+  if (locale !== "dev")
+    return await axios
+      .get(path)
+      .then(({data}) => {
+        return data.record;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+};
+
+export const backendOptions = {
+  loadPath: "{{lng}}",
+  request: (options, url, payload, callback) => {
+    try {
+      loadResources(url).then((response) => {
+        callback(null, {
+          data: response,
+          status: 200,
+        });
+      });
+    } catch (e) {
+      console.error(e);
+      callback(null, {
+        status: 500,
+      });
+    }
+  },
+};
+
+// =====================
+
+// =====================
 
 export async function initI18next() {
   await i18next
@@ -164,9 +229,11 @@ export async function initI18next() {
       supportedLngs: ["en", "cs"],
       fallbackLng: "en",
       nonExplicitSupportedLngs: true,
-      backend: {
-        loadPath: "./lang/{{lng}}.json",
-      },
+      backend: backendOptions,
+      // backend: {
+      //   // loadPath: languages,
+      //   loadPath: "./lang/{{lng}}.json",
+      // },
     });
 }
 
