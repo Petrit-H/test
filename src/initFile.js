@@ -159,14 +159,8 @@ const optionsObj = (countryCode, type) => {
   };
   return options;
 };
-// getEnglish()
-// getCzech()
-
-// =====================
 
 function loadPath(lng) {
-  // console.log('loadPath', lng, namespace);
-
   let path = "";
   switch (lng) {
     case "en":
@@ -178,18 +172,15 @@ function loadPath(lng) {
     default:
       break;
   }
-  // console.log('loadPath', path);
-
   return path;
 }
 
-// =====================
 const loadResources = async (locale) => {
   let path = loadPath(locale);
   if (locale !== "dev")
     return await axios
       .get(path)
-      .then(({data}) => {
+      .then(({ data }) => {
         return data.record;
       })
       .catch((error) => {
@@ -216,25 +207,21 @@ export const backendOptions = {
   },
 };
 
-// =====================
-
-// =====================
-
+/**
+ * Init the i18n library
+ */
 export async function initI18next() {
   await i18next
     .use(HttpApi)
     .use(LanguageDetector)
     .init({
-      debug: true,
+      debug: false,
       supportedLngs: ["en", "cs"],
       fallbackLng: "en",
       nonExplicitSupportedLngs: true,
       backend: backendOptions,
-      // backend: {
-      //   // loadPath: languages,
-      //   loadPath: "./lang/{{lng}}.json",
-      // },
     });
+  // .loadLanguages(["en", "cs"])
 }
 
 /**
