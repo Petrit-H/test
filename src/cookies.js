@@ -14,6 +14,7 @@ export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
 export let cmpIpAddressURL = {};
 export let cmpDomainId = "";
+export let cmpEncryptedDomainId = "";
 export let cmpDomainName = "";
 export let cmpDomainWebsiteUrl = "";
 export let cmpLanguage = {};
@@ -49,7 +50,19 @@ export let cmpInfoIcon = "";
 export let cmpNecessaryTickIcon = "";
 export let cmpComplianceType = "";
 
-const { ipAddressURL, domainId, domainName, domainWebsiteUrl, language, languagesList, domainCategoriesWithCookies, domainCategories, domainCookies, complianceType } = jsonData;
+const {
+  ipAddressURL,
+  domainId,
+  encryptedId,
+  domainName,
+  domainWebsiteUrl,
+  language,
+  languagesList,
+  domainCategoriesWithCookies,
+  domainCategories,
+  domainCookies,
+  complianceType,
+} = jsonData;
 
 const {
   widgetImageCircle,
@@ -86,6 +99,7 @@ export const fetchDataFromJSONFile = async () => {
   try {
     cmpDomainId = domainId;
     cmpIpAddressURL = ipAddressURL;
+    cmpEncryptedDomainId = encryptedId;
     cmpDomainName = domainName;
     cmpDomainWebsiteUrl = domainWebsiteUrl;
     cmpLanguage = language;
@@ -122,6 +136,7 @@ export const fetchDataFromJSONFile = async () => {
     return {
       cmpDomainId,
       cmpDomainName,
+      cmpEncryptedDomainId,
       cmpDomainWebsiteUrl,
       cmpLanguage,
       cmpLanguagesList,
@@ -160,6 +175,7 @@ export const fetchDataFromJSONFile = async () => {
   return {
     cmpDomainId,
     cmpDomainName,
+    cmpEncryptedDomainId,
     cmpDomainWebsiteUrl,
     cmpLanguage,
     cmpLanguagesList,

@@ -77,8 +77,10 @@ export default {
   //    and to set the focus to the first interactive control (https://w3c.github.io/using-aria/)
   elements: {
     header: '<span class="cc-header">{{header}}</span>&nbsp',
-    message: '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
-    messagelink: '<span id="cookieconsent:desc" class="cc-message">{{policy}} <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a></span>',
+    message:
+      '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
+    messagelink:
+      '<span id="cookieconsent:desc" class="cc-message">{{policy}} <a aria-label="learn more about cookies" role=button tabindex="0" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a></span>',
     // dismiss: `<a aria-label="dismiss cookie message" role=button tabindex="0" class="cc-btn cc-${STATUS_DISMISS}">{{dismiss}}</a>`,
     //? <button class="text-blue banner-type-change">Cookie Settings</button>
 
@@ -106,7 +108,9 @@ export default {
             </button>
        </div>
       </div>
-      <div class="banner-wrapper-controls w-full md:w-1/2 lg:w-1/2 flex flex-col xs:flex-row  ${CMP_COMPLIANCE_TYPE === 2 ? "items-center" : "items-end"}  justify-start md:justify-end text-sm ">
+      <div class="banner-wrapper-controls w-full md:w-1/2 lg:w-1/2 flex flex-col xs:flex-row  ${
+        CMP_COMPLIANCE_TYPE === 2 ? "items-center" : "items-end"
+      }  justify-start md:justify-end text-sm ">
         <button class="md:mr-2 border-1 border-blue-400 bg-blue-400 text-small text-white leading mr-0 xs:mr-2 px-3 py-2 mb-2 xs:mb-0 w-full sm:w-auto cc-btn cc-save  rounded-4 cc-${STATUS_ALLOW}" id="accept-all-cookies-at-once" data-i18n-key="bannerGlobals.acceptAllBtn">{{allowAll}}</button>
         <button class="border-1 border-blue-400 bg-white text-small text-blue-400 leading banner-type-change px-3 py-2 w-full sm:w-auto  rounded-4 " id="accept-cookies" data-i18n-key="bannerGlobals.cookieSettings">{{settings}}</button>
       </div>
@@ -181,13 +185,16 @@ export default {
 
       <div class="tab-content">
          <div id="cookie-display" class="tab-content active" data-tab-content>
+           <div id="noCategoryData" class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
+              <p class="my-auto">No Categories Available</p>
+            </div>
             <ul id="basic-categories-banner" class=" cc-categories "></ul>
          </div>
-         <div id="noData"
-            class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
-            <p class="my-auto">No Data Available</p>
-         </div>
+
          <div id="cookie-settings" class="tab-content py-6" data-tab-content>
+            <div id="noCookieData" class=" absolute  bg-gray-100 flex  w-full items-center justify-center h-full top-0 left-0 text-2xl text-center text-gray-900 hidden">
+              <p class="my-auto">No Cookies Available</p>
+            </div>
             <div id="custom-categories-banner" class=" "></div>
          </div>
       </div>
@@ -213,20 +220,25 @@ export default {
   // The placeholders {{classes}} and {{children}} both get replaced during initialisation:
   //  - {{classes}} is where additional classes get added
   //  - {{children}} is where the HTML children are placed
-  window: '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cmp-container w-full transform opacity-0  z-50 shadow-3 cc-window {{classes}}">{{children}}</div>',
+  window:
+    '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cmp-container w-full transform opacity-0  z-50 shadow-3 cc-window {{classes}}">{{children}}</div>',
 
   modal: "",
 
   // This is the html for the revoke button. This only shows up after the user has selected their level of consent
   // It can be enabled of disabled using the `revokable` option
-  revokeBtn: '<button type="button" class="cc-revoke bottom-0 widget-button">{{widgetImage}}</button>',
+  revokeBtn:
+    '<button type="button" class="cc-revoke bottom-0 widget-button">{{widgetImage}}</button>',
 
   // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
   compliance: {
     info: '<div class="cc-compliance bg-white w-full">{{dismiss}}</div>',
-    "opt-in": '<div class="cc-compliance bg-white cc-highlight">{{allow}}</div>',
-    "opt-out": '<div class="cc-compliance bg-white cc-highlight">{{dismiss}}{{deny}}</div>',
-    categories: '<div class="cmp-categories flex items-center my-auto bg-white w-screen md:w-full md:mx-4 sm:mx-auto z-10  flex-col justify-center">{{categories}}</div>',
+    "opt-in":
+      '<div class="cc-compliance bg-white cc-highlight">{{allow}}</div>',
+    "opt-out":
+      '<div class="cc-compliance bg-white cc-highlight">{{dismiss}}{{deny}}</div>',
+    categories:
+      '<div class="cmp-categories flex items-center my-auto bg-white w-screen md:w-full md:mx-4 sm:mx-auto z-10  flex-col justify-center">{{categories}}</div>',
   },
 
   // select your type of popup here
@@ -239,7 +251,8 @@ export default {
     "basic-close": "{{messagelink}}{{compliance}}{{close}}",
     "basic-header": "{{header}}{{message}}{{link}}{{compliance}}",
     // add a custom layout here, then add some new css with the class '.cc-layout-my-cool-layout'
-    "my-cool-layout": '<div class="my-special-layout">{{message}}{{compliance}}</div>{{close}}',
+    "my-cool-layout":
+      '<div class="my-special-layout">{{message}}{{compliance}}</div>{{close}}',
   },
 
   // default layout (see above)

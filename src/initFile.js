@@ -22,6 +22,7 @@ import {
   cmpDomainCategories,
   cmpCookiesPerDomain,
   fetchDataFromJSONFile,
+  cmpEncryptedDomainId,
 } from "./cookies";
 import {
   getCzech,
@@ -53,6 +54,7 @@ function timeStamp() {
 
 export let responseJSON = {
   userId: createUUID(),
+  domainId:cmpEncryptedDomainId,
   date: timeStamp(),
   acceptedAll: hasAcceptedAll,
   payload: { categories: acceptedCategories, cookies: acceptedCookies },
@@ -115,6 +117,7 @@ export const fillJSONWithAllCategories = () => {
   }
   sendAcceptedDataToDb(
     responseJSON.userId,
+    responseJSON.domainId,
     responseJSON.date,
     responseJSON.acceptedAll,
     JSON.stringify(responseJSON.payload)
