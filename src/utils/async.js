@@ -1,4 +1,4 @@
-import { CLIENT_GEOLOCATION_API_URL } from "../constants"
+import { CLIENT_GEOLOCATION_API_URL, CMP_API_BASE_URL } from "../constants"
 
 
 export const getScript = ( url, callback, timeout ) => {
@@ -52,5 +52,5 @@ export const makeAsyncRequest = ( url, onComplete, timeout, postData, requestHea
       }
     }
   }
-xhr.send(CLIENT_GEOLOCATION_API_URL)
+xhr.send(`${CMP_API_BASE_URL}/GetPublicIp`)
 }

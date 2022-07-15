@@ -223,11 +223,11 @@ window.addEventListener("load", function (event) {
     `
   );
 
-  initiateTypeChangeAndBannerShow();
+  // initiateTypeChangeAndBannerShow();
   setTimeout(() => {
-    fetchClientIp().then((location) => {
-      locationData = location;
-      return location;
-    });
+    // fetchClientIp().then((location) => {
+    //   locationData = location;
+    //   return location;
+    // });
   }, 100);
 });

@@ -54,7 +54,7 @@ function timeStamp() {
 
 export let responseJSON = {
   userId: createUUID(),
-  domainId:cmpEncryptedDomainId,
+  domainId: cmpEncryptedDomainId,
   date: timeStamp(),
   acceptedAll: hasAcceptedAll,
   payload: { categories: acceptedCategories, cookies: acceptedCookies },
@@ -262,9 +262,28 @@ export function bindLocaleSwitcher(initialValue) {
   // }
 }
 
+const options = {
+  cookieconsent: CookieConsent,
+  container: document.getElementById("CMP_Selector"),
+  type: "info",
+  regionalLaw: true,
+  // position:"left",
+  legal: "XK",
+  location: true,
+  revokable: true,
+  palette: {
+    categories: {
+      display: "flex",
+      "flex-direction": "column",
+      height: "100vh",
+    },
+  },
+};
+
 fetchClientIp().then((country) => {
   CountryCode = country;
-  ccInstance = new CookieConsent(optionsObj(country, testType));
+  ccInstance = new CookieConsent(options);
+  // ccInstance = new CookieConsent(optionsObj(country, testType));
   ccInstance.autoOpen = true;
   ccInstance
     .on("initialized", function (popup) {

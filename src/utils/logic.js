@@ -3,7 +3,7 @@ import {
   CMP_CARET_DOWN_ICON,
   CMP_IS_LOCALHOST,
 } from "../constants";
-import { categories, saveAllCookies } from "../getDomainsWithCookies";
+import { saveAllCookies } from "../getDomainsWithCookies";
 import {
   fetchDataFromJSONFile,
   cmpDomainId,
@@ -104,21 +104,12 @@ const languageButtonToggle = () => {
  */
 const fillCookiesSettingItem = () => {
   cookies = cmpCookiesPerDomain;
-  categories = cmpDomainCategories;
-  const noCategoryData = document.getElementById("noCategoryData");
-  const noCookieData = document.getElementById("noCookieData");
-  // check if there are no cookies
-  if (cookies.length === 0) {
-    noCookieData.classList.remove("hidden");
-  } else {
-    noCookieData.classList.add("hidden");
-  }
-  // check if there are no categories
-  if (categories.length === 0) {
-    noCategoryData.classList.remove("hidden");
-  } else {
-    noCategoryData.classList.add("hidden");
-  }
+  // const noData = document.getElementById("noData");
+  // if (cookies.length === 0) {
+  //   noData.classList.remove("hidden");
+  // } else {
+  //   noData.classList.add("hidden");
+  // }
 
   setTimeout(() => {
     const customCategoriesBanner = document.getElementById(
@@ -212,14 +203,13 @@ const filteredCookiesPerCategory = (item) => {
 };
 
 const changeTabOnClick = () => {
-  console.log("tab change")
   const tabs = document.querySelectorAll(".tab-item");
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       let cookieId = tab.children[0].dataset.cookieSettingsId;
       const targetCookie = document.getElementById(`cookie-${cookieId}`);
       document.getElementById("cookies-tab").click();
-      targetCookie.scrollIntoView(true, {
+      targetCookie.scrollIntoView( true,{
         behavior: "smooth",
         block: "start",
         inline: "center",

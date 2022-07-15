@@ -54,4 +54,5 @@ module.exports = merge(commonConfig, {
       filename: "main.min.css",
     }),
   ],
+
 });

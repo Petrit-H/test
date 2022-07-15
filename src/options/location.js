@@ -1,11 +1,13 @@
 import axios from "axios";
-import { CLIENT_GEOLOCATION_API_URL } from "../constants";
+import { CMP_API_BASE_URL } from "../constants";
 import { changeBannerTypeOnLocation } from "../initFile";
 let countryCode = "";
 
 const toError = (obj) => {
   setTimeout(() => {
-    let errorMessage = new Error("Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error);
+    let errorMessage = new Error(
+      "Error [" + (obj.code || "UNKNOWN") + "]: " + obj.error
+    );
     return errorMessage;
   }, 200);
 };
@@ -15,15 +17,15 @@ export const fetchClientIp = async () => {
   let data = "";
   let config = {
     method: "get",
-    // url: CLIENT_GEOLOCATION_API_URL,
+    url: `${CMP_API_BASE_URL}/GetPublicIp`,
     headers: {},
   };
   try {
-    // const response = await axios(config);
-    const response = await fetch(CLIENT_GEOLOCATION_API_URL, config);
-    // url = response.data;
-    data = await response.json();
-    countryCode = url.CountryCode;
+    const response = await axios(config);
+    // const response = await fetch(`${CMP_API_BASE_URL}/GetPublicIp`, config);
+    data = response.data;
+    // data = await response.json();
+    countryCode = data.countryCode;
     return countryCode;
   } catch (error) {
     console.error(error.message);
@@ -43,16 +45,16 @@ export default {
       fetchClientIp().then((location) => location);
       // fetchClientIp()
       return {
-        url: CLIENT_GEOLOCATION_API_URL,
+        url: `${CMP_API_BASE_URL}/GetPublicIp`,
         callback: function (done, response) {
           try {
             var json = JSON.parse(response);
-            if (json.CountryCode) {
-              return { code: json.CountryCode };
+            if (json.countryCode) {
+              return { code: json.countryCode };
             }
           } catch (error) {
             return toError({
-              code: json.CountryCode,
+              code: json.countryCode,
               error: "Invalid response (" + error + ")",
             });
           }
