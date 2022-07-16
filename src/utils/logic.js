@@ -209,7 +209,7 @@ const changeTabOnClick = () => {
       let cookieId = tab.children[0].dataset.cookieSettingsId;
       const targetCookie = document.getElementById(`cookie-${cookieId}`);
       document.getElementById("cookies-tab").click();
-      targetCookie.scrollIntoView( true,{
+      targetCookie.scrollIntoView(true, {
         behavior: "smooth",
         block: "start",
         inline: "center",
@@ -249,7 +249,7 @@ const bannerAccordionToggle = function () {
       };
       radioButtonWrapper[i].addEventListener("click", (event) => {
         event.stopPropagation();
-        console.log("toggle", event.target.checked);
+        // console.log("toggle", event.target.checked);
       });
       accordionHeaders[i].addEventListener("click", () => {
         if (
@@ -459,6 +459,9 @@ const fillCategories = function () {
 const acceptAllCookiesWithRadioToggle = function () {
   setTimeout(() => {
     const allowAllCookiesButton = document.querySelector(".allow-all-button");
+    const confirmMyChoicesButton = document.querySelector(
+      ".confirm-my-choices-btn"
+    );
     const radioButtons = document.querySelectorAll(".category-radio-button");
     const cookieRadioButton = document.querySelectorAll(".cc-btn");
     allowAllCookiesButton.addEventListener("click", () => {
@@ -467,6 +470,9 @@ const acceptAllCookiesWithRadioToggle = function () {
         element.checked = true;
         saveAllCookies();
       }
+      fillJSONWithCheckedCategory();
+    });
+    confirmMyChoicesButton.addEventListener("click", () => {
       fillJSONWithCheckedCategory();
     });
   }, 200);

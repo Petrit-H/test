@@ -16,6 +16,30 @@ export let filteredCookiesPerDomain = [];
 let cookiesPerCateroryArr = [];
 let isLocalEnv = getEnvLocal();
 
+/**
+ * save the cookies that are necessary
+ */
+// export const saveNecessaryCookies = () => {
+//   try {
+//     filterCookiesByCategory(cmpCookiesPerDomain, 5, cookiesPerCateroryArr, "filteredCookies");
+//     for (let index = 0; index < DomainCategoriesWithCookies.length; index++) {
+//       const category = DomainCategoriesWithCookies[index];
+//       let {
+//         categoryId,
+//         cookies: { data },
+//       } = category;
+//       if (categoryId === 5) {
+//         for (const cookie of data) {
+//           let { name, plaintext_value, expiration, cookieDomain, path, is_secure } = cookie;
+//           setCookie(name, plaintext_value, expiration, cookieDomain, path, is_secure);
+//         }
+//       }
+//     }
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+
 /**§
  * save the cookies of the specified id/category
  * @param {Integer} id the id of cookie
@@ -99,7 +123,9 @@ export const getCategories = () => {
 
 export const sendAcceptedDataToDb = async (
   id,
-  domainId,
+  domainID,
+  ipAddress,
+  browserAgent,
   date,
   hasAcceptedAll,
   payload
@@ -110,7 +136,9 @@ export const sendAcceptedDataToDb = async (
       url: `${CMP_API_BASE_URL}/AddCookieConsent`,
       data: {
         userId: id,
-        domainId: domainId,
+        domainID: domainID,
+        ipAddress: ipAddress,
+        browserAgent: browserAgent,
         date: date,
         acceptedAll: hasAcceptedAll,
         payload: payload,

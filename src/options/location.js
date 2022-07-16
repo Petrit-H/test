@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CMP_API_BASE_URL } from "../constants";
+import { CLIENT_GEOLOCATION_API_URL, CMP_API_BASE_URL } from "../constants";
 import { changeBannerTypeOnLocation } from "../initFile";
 let countryCode = "";
 
@@ -25,8 +25,10 @@ export const fetchClientIp = async () => {
     // const response = await fetch(`${CMP_API_BASE_URL}/GetPublicIp`, config);
     data = response.data;
     // data = await response.json();
-    countryCode = data.countryCode;
-    return countryCode;
+    console.log(data);
+    // countryCode = data.countryCode;
+    const { countryCode, ipFrom, browser } = data;
+    return { countryCode, ipFrom, browser };
   } catch (error) {
     console.error(error.message);
   }

@@ -1,56 +1,60 @@
-import { CLIENT_GEOLOCATION_API_URL, CMP_API_BASE_URL } from "../constants"
+import { CLIENT_GEOLOCATION_API_URL, CMP_API_BASE_URL } from "../constants";
 
+export const getScript = (url, callback, timeout) => {
+  let timeoutIdx;
+  const scriptTag = document.createElement("script");
 
-export const getScript = ( url, callback, timeout ) => {
-  let timeoutIdx
-  const scriptTag = document.createElement('script')
+  scriptTag.type = "text/" + (url.type || "javascript");
+  scriptTag.src = url.src || url;
+  scriptTag.async = false;
 
-  scriptTag.type = 'text/' + (url.type || 'javascript')
-  scriptTag.src = url.src || url
-  scriptTag.async = false
-
-  scriptTag.onreadystatechange = s.onload = function() {
+  scriptTag.onreadystatechange = s.onload = function () {
     // this code handles two scenarios, whether called by onload or onreadystatechange
-    const state = scriptTag.readyState
+    const state = scriptTag.readyState;
 
-    clearTimeout(timeoutIdx)
+    clearTimeout(timeoutIdx);
 
     if (!callback.done && (!state || /loaded|complete/.test(state))) {
-      callback.done = true
-      callback()
-      scriptTag.onreadystatechange = scriptTag.onload = null
+      callback.done = true;
+      callback();
+      scriptTag.onreadystatechange = scriptTag.onload = null;
     }
-  }
-  document.body.appendChild(scriptTag)
-  timeoutIdx = setTimeout(function() {
-    callback.done = true
-    callback()
-    scriptTag.onreadystatechange = scriptTag.onload = null
-  }, timeout)
-}
+  };
+  document.body.appendChild(scriptTag);
+  timeoutIdx = setTimeout(function () {
+    callback.done = true;
+    callback();
+    scriptTag.onreadystatechange = scriptTag.onload = null;
+  }, timeout);
+};
 
-
-export const makeAsyncRequest = ( url, onComplete, timeout, postData, requestHeaders ) => {
+export const makeAsyncRequest = (
+  url,
+  onComplete,
+  timeout,
+  postData,
+  requestHeaders
+) => {
   const xhr = new (window.XMLHttpRequest || window.ActiveXObject)(
-    'MSXML2.XMLHTTP.3.0'
-  )
-  xhr.open(postData ? 'POST' : 'GET', url, 1)
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    "MSXML2.XMLHTTP.3.0"
+  );
+  xhr.open(postData ? "POST" : "GET", url, 1);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   if (Array.isArray(requestHeaders)) {
     for (let i = 0, l = requestHeaders.length; i < l; ++i) {
-      const split = requestHeaders[i].split(':', 2)
+      const split = requestHeaders[i].split(":", 2);
       xhr.setRequestHeader(
-        split[0].replace(/^\s+|\s+$/g, ''),
-        split[1].replace(/^\s+|\s+$/g, '')
-      )
+        split[0].replace(/^\s+|\s+$/g, ""),
+        split[1].replace(/^\s+|\s+$/g, "")
+      );
     }
   }
-  if (typeof onComplete == 'function') {
-    xhr.onreadystatechange = function() {
+  if (typeof onComplete == "function") {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState > 3) {
-        onComplete(xhr)
+        onComplete(xhr);
       }
-    }
+    };
   }
-xhr.send(`${CMP_API_BASE_URL}/GetPublicIp`)
-}
+  xhr.send(`${CMP_API_BASE_URL}/GetPublicIp`);
+};

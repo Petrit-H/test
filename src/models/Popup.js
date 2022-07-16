@@ -456,7 +456,7 @@ export default class Popup extends Base {
 
     if (btn.classList.contains("cc-btn") && btn.classList.contains("cc-save")) {
       this.setStatuses();
-      fillJSONWithCheckedCategory();
+      // fillJSONWithCheckedCategory();
       setTimeout(() => {
         this.close(true);
       }, 300);
