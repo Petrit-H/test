@@ -23,6 +23,7 @@ import {
   cmpCookiesPerDomain,
   fetchDataFromJSONFile,
   cmpEncryptedDomainId,
+  cmpDomainId,
 } from "./cookies";
 import {
   getCzech,
@@ -57,7 +58,7 @@ function timeStamp() {
 
 export let responseJSON = {
   userId: createUUID(),
-  domainId: cmpEncryptedDomainId,
+  domainId: cmpDomainId,
   ipAddress: clientIpAddress,
   browserAgent: clientBrowserAgent,
   date: timeStamp(),

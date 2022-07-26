@@ -1,9 +1,9 @@
 {
    "complianceType": 0,
    "ipAddressURL": "https://cmp.gjirafa.dev/GetPublicIp",
-   "domainId": 1033,
-   "encryptedId": "CfDJ8Ke3mhaPIRVLswVlSrTIy6eojUDvBlpJmHzaN_cAokLIQR4qb8krv8U3lVVBItXT5UXGFpPAKz0BcIxqNh9Nn3cxQGMZ6TVfRpnEnnOv_2gQkLg5cL4kkaLhxrSz5I_nZg",
-   "domainName": "Adobe",
+   "domainId": 183,
+   "encryptedId": "CfDJ8Ke3mhaPIRVLswVlSrTIy6efnzUzja6pJZC9a6FunG7pP7fFFqR70ovoda-iGJcH49soXgtWO_s9sb_YzFrymKy0RfapAlVhhAQ_aCEillndgdRh6HP4Q6htZ-ZrMtREyg",
+   "domainName": "CMP Portali",
    "domainWebsiteUrl": "adobe.com",
    "consentData": {
       "consentModalMessage": "Cookies used on the website!",
