@@ -25,10 +25,9 @@ export const fetchClientIp = async () => {
     // const response = await fetch(`${CMP_API_BASE_URL}/GetPublicIp`, config);
     data = response.data;
     // data = await response.json();
-    console.log(data);
     // countryCode = data.countryCode;
-    const { countryCode, ipFrom, browser } = data;
-    return { countryCode, ipFrom, browser };
+    const { countryCode, ipFrom, browser, mobile, country, ipToString } = data;
+    return { countryCode, ipFrom, browser, mobile, country, ipToString };
   } catch (error) {
     console.error(error.message);
   }

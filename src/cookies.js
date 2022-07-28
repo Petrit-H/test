@@ -95,7 +95,7 @@ const {
  * fetch all the data from the local file and export them
  * @returns the data from the local JSON
  */
-export const fetchDataFromJSONFile = async () => {
+export const exportGlobalJSON = async () => {
   try {
     cmpDomainId = domainId;
     cmpIpAddressURL = ipAddressURL;

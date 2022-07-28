@@ -5,7 +5,7 @@ import {
 } from "../constants";
 import { saveAllCookies } from "../getDomainsWithCookies";
 import {
-  fetchDataFromJSONFile,
+  exportGlobalJSON,
   cmpDomainId,
   cmpDomainCategories,
   cmpCookiesPerDomain,
@@ -365,7 +365,7 @@ const settingsAccordionToggle = function () {
  * fill the "Cookies Settings Modal" with the categories for all the accordion elements
  */
 const fillCategories = function () {
-  fetchDataFromJSONFile().then((json) => json);
+  exportGlobalJSON().then((json) => json);
   setTimeout(() => {
     const basicCategoriesBanner = document.getElementById(
       "basic-categories-banner"

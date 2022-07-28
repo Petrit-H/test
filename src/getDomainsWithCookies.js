@@ -125,6 +125,10 @@ export const sendAcceptedDataToDb = async (
   id,
   domainID,
   ipAddress,
+  country,
+  device,
+  url,
+  complianceType,
   browserAgent,
   date,
   hasAcceptedAll,
@@ -138,14 +142,18 @@ export const sendAcceptedDataToDb = async (
         userId: id,
         domainID: domainID,
         ipAddress: ipAddress,
-        browserAgent: browserAgent,
-        date: date,
+        country,
+        device,
+        url,
+        complianceType,
+        browserAgent,
+        date,
         acceptedAll: hasAcceptedAll,
-        payload: payload,
+        payload,
       },
     };
     const result = await axios(config);
-    console.log("SEND🟥", result);
+    // console.log("SEND🟥", result);
   } catch (error) {
     console.log(error.message);
   }

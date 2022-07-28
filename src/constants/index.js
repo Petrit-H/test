@@ -1,6 +1,6 @@
 import {
   // DomainCategories,
-  fetchDataFromJSONFile,
+  exportGlobalJSON,
   cmpWidgetImageCircle,
   cmpWidgetImageTriangle,
   cmpIpAddressURL,
@@ -29,7 +29,7 @@ import {
   cmpComplianceType,
   cmpDomainWebsiteUrl,
 } from "../cookies";
-fetchDataFromJSONFile().then((json) => json);
+exportGlobalJSON().then((json) => json);
 
 export const CMP_API_BASE_URL = "https://cmp.gjirafa.dev";
 // export const CONSENT_IMAGE_BASE_URL = "https://tojnhu4mvp.gjirafa.net/CMP";
