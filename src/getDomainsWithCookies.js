@@ -142,7 +142,7 @@ export const sendAcceptedDataToDb = async (
         userId: id,
         domainID: domainID,
         ipAddress: ipAddress,
-        country,
+        userCountry:country,
         device,
         url,
         complianceType,

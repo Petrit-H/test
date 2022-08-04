@@ -44,6 +44,15 @@ let clientIpAddress = "";
 let clientCountry = "";
 let clientDevice = "";
 let clientBrowserAgent = "";
+let consentName = "";
+let consentDescription = "";
+let consentAccept = "";
+
+let consentData = {
+  name: consentName,
+  description: consentDescription,
+  consent: consentAccept,
+};
 
 function timeStamp() {
   const now = new Date();
@@ -70,13 +79,16 @@ export let responseJSON = {
   url: cmpDomainWebsiteUrl,
   complianceType: cmpComplianceType,
   date: timeStamp(),
-  acceptedAll: hasAcceptedAll,
-  payload: { categories: acceptedCategories, cookies: acceptedCookies },
+  acceptedAll: false,
+  // payload: consentData,
+  payload: [],
 };
 
-// console.log(en);
 export const fillJSONWithCheckedCategory = () => {
-  const {
+  // setTimeout(() => {
+  const radioButtons = document.querySelectorAll(".category-radio-button");
+
+  let {
     userId,
     domainId,
     ipAddress,
@@ -90,18 +102,69 @@ export const fillJSONWithCheckedCategory = () => {
     payload,
   } = responseJSON;
   let cookieConsentCheck = 0;
-  const radioButtons = document.querySelectorAll(".category-radio-button");
   if (radioButtons.length !== 0 && radioButtons !== null) {
+    responseJSON = { ...responseJSON, payload: [] };
+    radioButtons.forEach((element) => {
+      consentData = {
+        ...consentData,
+        name: element.name,
+        description: element.description,
+        consent: element.checked ? "yes" : "no",
+      };
+      responseJSON.payload.push(consentData);
+    });
     for (let index = 0; index < radioButtons.length; index++) {
       const element = radioButtons[index];
       if (element.checked) {
         cookieConsentCheck++;
         acceptedCategories.push(element.name);
+        console.log("cat. #", cookieConsentCheck);
       }
     }
+
+    // check the number of checked categories
     if (cookieConsentCheck === radioButtons.length) {
       hasAcceptedAll = true;
-      responseJSON = { ...responseJSON, acceptedAll: hasAcceptedAll };
+
+      cmpDomainCategories.forEach((element) => {
+        consentData = {
+          ...consentData,
+          name: element.name,
+          description: element.description,
+          consent: "yes",
+        };
+        payload.push(consentData);
+      });
+      responseJSON = { ...responseJSON, acceptedAll: true, payload: [] };
+      // console.log(responseJSON);
+
+      sendAcceptedDataToDb(
+        userId,
+        domainId,
+        ipAddress,
+        country,
+        device,
+        url,
+        complianceType,
+        browserAgent,
+        date,
+        (acceptedAll = true),
+        JSON.stringify(payload)
+      );
+    } else {
+      sendAcceptedDataToDb(
+        userId,
+        domainId,
+        ipAddress,
+        country,
+        device,
+        url,
+        complianceType,
+        browserAgent,
+        date,
+        (acceptedAll = false),
+        JSON.stringify(payload)
+      );
     }
 
     for (let index = 0; index < radioButtons.length; index++) {
@@ -114,42 +177,50 @@ export const fillJSONWithCheckedCategory = () => {
         acceptedCookies.push(cookiesOfACategory);
     }
   } else {
+    responseJSON = { ...responseJSON, acceptedAll: true, payload: [] };
+
     for (let index = 0; index < cmpDomainCategories.length; index++) {
       const element = cmpDomainCategories[index];
+      consentData = {
+        ...consentData,
+        name: element.name,
+        description: element.description,
+        consent: element.checked ? "yes" : "no",
+      };
+      payload.push(consentData);
       if (element.checked) {
         acceptedCategories.push(element.name);
         acceptedCookies.push(element);
       }
     }
+    sendAcceptedDataToDb(
+      userId,
+      domainId,
+      ipAddress,
+      country,
+      device,
+      url,
+      complianceType,
+      browserAgent,
+      date,
+      acceptedAll,
+      JSON.stringify(payload)
+    );
   }
-  // console.log("check", cookieConsentCheck);
-  // console.log("check2");
+
+  console.log(payload);
+  console.log(responseJSON);
+  // payload.splice(0, payload.length);
+  payload = [];
   acceptedCategories = [];
   acceptedCookies = [];
-  sendAcceptedDataToDb(
-    userId,
-    domainId,
-    ipAddress,
-    country,
-    device,
-    url,
-    complianceType,
-    browserAgent,
-    date,
-    acceptedAll,
-    JSON.stringify(payload)
-  );
-
+  // }, 100);
 };
 
-// function fn() {
-//   hasAcceptedAll = true;
-//   console.log(hasAcceptedAll);
-//   // return test;
-// }
-
 export const fillJSONWithAllCategories = () => {
-  const {
+  responseJSON = { ...responseJSON, acceptedAll: true, payload: [] };
+  hasAcceptedAll = true;
+  let {
     userId,
     domainId,
     ipAddress,
@@ -162,13 +233,18 @@ export const fillJSONWithAllCategories = () => {
     acceptedAll,
     payload,
   } = responseJSON;
-  hasAcceptedAll = true;
-  responseJSON = { ...responseJSON, acceptedAll: hasAcceptedAll };
-  // fn()
-  // console.log(responseJSON.acceptedAll, hasAcceptedAll);
+
   for (const element of cmpDomainCategories) {
     acceptedCategories.push(element.name);
+    (consentData = {
+      ...consentData,
+      name: element.name,
+      description: element.description,
+      consent: "yes",
+    }),
+      payload.push(consentData);
   }
+
   for (const cookie of cmpCookiesPerDomain) {
     acceptedCookies.push(cookie);
   }
@@ -185,7 +261,11 @@ export const fillJSONWithAllCategories = () => {
     acceptedAll,
     JSON.stringify(payload)
   );
-console.log(responseJSON)
+
+  console.log(payload);
+  console.log(responseJSON);
+  // payload.splice(0, payload.length);
+  payload = [];
   acceptedCategories = [];
   acceptedCookies = [];
 };
@@ -343,44 +423,46 @@ const options = {
   },
 };
 
-fetchClientIp().then(({ countryCode, ipToString, browser, country, mobile }) => {
-  CountryCode = countryCode;
-  responseJSON = {
-    ...responseJSON,
-    ipAddress: ipToString,
-    country: country,
-    device: mobile,
-    browserAgent: browser,
-  };
-  // ccInstance = new CookieConsent(options);
-  ccInstance = new CookieConsent(optionsObj(countryCode, testType));
-  ccInstance.autoOpen = true;
-  ccInstance
-    .on("initialized", function (popup) {
-      // ccInstance.popup?.open()
-      initiateTypeChangeAndBannerShow();
-    })
-    .on("popupOpened", (...args) => {
-      // initiateTypeChangeAndBannerShow();
-      languageButtonToggle();
-      // Init
-      (async function () {
-        i18next.on("languageChanged", (newLanguage) => {
-          document.documentElement.lang = newLanguage;
-          document.documentElement.dir = i18next.dir(newLanguage);
-        });
+fetchClientIp().then(
+  ({ countryCode, ipToString, browser, country, mobile }) => {
+    CountryCode = countryCode;
+    responseJSON = {
+      ...responseJSON,
+      ipAddress: ipToString,
+      country: country,
+      device: mobile,
+      browserAgent: browser,
+    };
+    // ccInstance = new CookieConsent(options);
+    ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+    ccInstance.autoOpen = true;
+    ccInstance
+      .on("initialized", function (popup) {
+        // ccInstance.popup?.open()
+        initiateTypeChangeAndBannerShow();
+      })
+      .on("popupOpened", (...args) => {
+        // initiateTypeChangeAndBannerShow();
+        languageButtonToggle();
+        // Init
+        (async function () {
+          i18next.on("languageChanged", (newLanguage) => {
+            document.documentElement.lang = newLanguage;
+            document.documentElement.dir = i18next.dir(newLanguage);
+          });
 
-        await initI18next();
-        translatePageElements();
-        bindLocaleSwitcher(i18next.resolvedLanguage);
-      })();
-    })
-    .on("popupClosed", (...args) => {
-      // acceptNecessaryCookies();
-      // ccInstance.popup?.close();
-    })
-    .on("error", console.error);
-});
+          await initI18next();
+          translatePageElements();
+          bindLocaleSwitcher(i18next.resolvedLanguage);
+        })();
+      })
+      .on("popupClosed", (...args) => {
+        // acceptNecessaryCookies();
+        // ccInstance.popup?.close();
+      })
+      .on("error", console.error);
+  }
+);
 
 const draw = function (countryCode) {
   // getCategories();

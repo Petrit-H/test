@@ -470,7 +470,7 @@ const acceptAllCookiesWithRadioToggle = function () {
         element.checked = true;
         saveAllCookies();
       }
-      fillJSONWithCheckedCategory();
+      fillJSONWithAllCategories();
     });
     confirmMyChoicesButton.addEventListener("click", () => {
       fillJSONWithCheckedCategory();
