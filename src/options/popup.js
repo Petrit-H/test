@@ -213,7 +213,7 @@ export default {
   // The placeholders {{classes}} and {{children}} both get replaced during initialisation:
   //  - {{classes}} is where additional classes get added
   //  - {{children}} is where the HTML children are placed
-  window: '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cmp-container w-full transform opacity-0  z-50 shadow-3 cc-window {{classes}}">{{children}}</div>',
+  window: '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cmp-container w-full transform z-50 shadow-3 cc-window {{classes}}">{{children}}</div>',
 
   modal: "",
 
