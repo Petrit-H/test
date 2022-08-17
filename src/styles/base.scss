@@ -27,7 +27,7 @@
 /* 2 basic types of window - floating / banner */
 .cc-window.cc-floating {
   padding: 2em;
-  max-width: 100vw; /* 1em == 16px therefore 24em == 384px */
+  max-width: 50vw; /* 1em == 16px therefore 24em == 384px */
   flex-direction: column;
 }
 .cc-window.cc-banner {
