@@ -57,4 +57,5 @@ export const makeAsyncRequest = (
     };
   }
   xhr.send(`${CMP_API_BASE_URL}/GetPublicIp`);
+  // xhr.send(`https://cmp.gjirafa.dev/GetPublicIp`);
 };

@@ -43,7 +43,7 @@ export default {
   // the order that services will be attempted in
   serviceDefinitions: {
     ipinfo: function (options) {
-      fetchClientIp().then((location) => location);
+      // fetchClientIp().then((location) => location);
       // fetchClientIp()
       return {
         url: `${CMP_API_BASE_URL}/GetPublicIp`,
