@@ -7,21 +7,21 @@
     "new-messages_one": "Ty máš {{count}} nová zpráva",
     "new-messages_other": "Ty máš {{count}} nová zprávas"
   },
-  "bannerGlobals": {
+  "BannerGlobals": {
     "privacyPolicy": "Zásady ochrany soukromí",
     "cookiePolicy": "Zásady cookies",
     "acceptAllBtn": "Přijmout vše",
     "cookieSettings": "Nastavení",
     "showCookiesBtn": "Zobrazit cookies"
   },
-  "bannerInfo": {
+  "BannerInfo": {
     "biTitle": "Vážíme si vašeho soukromí",
-    "biDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí.",
-    "biComplianceTypeBtn": "Neprodávejte mé osobní údaje"
+    "BiDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí.",
+    "BiComplianceTypeBtn": "Neprodávejte mé osobní údaje"
   },
-  "bannerCategories": {
-    "bctTitle": "",
-    "bctDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí. Více informací o každé kategorii souborů cookie naleznete níže. Soubory cookie v kategorii „Nezbytné“ jsou nezbytné pro fungování webu a nelze je vypnout. Můžete se však rozhodnout udělit nebo odvolat souhlas povolením / zakázáním všech ostatních kategorií níže. Uvědomte si prosím, že deaktivace některých z těchto kategorií může ovlivnit váš zážitek z prohlížení.",
+  "BannerCategoriesTab": {
+    "BctTitle": "",
+    "BctDescription": "My a naši partneři používáme soubory cookie, značky a další sledovací technologie k přizpůsobení reklam, analýze toho, jak je web používán, k vylepšení personalizace webu a provádění některých dalších nezbytných funkcí. Více informací o každé kategorii souborů cookie naleznete níže. Soubory cookie v kategorii „Nezbytné“ jsou nezbytné pro fungování webu a nelze je vypnout. Můžete se však rozhodnout udělit nebo odvolat souhlas povolením / zakázáním všech ostatních kategorií níže. Uvědomte si prosím, že deaktivace některých z těchto kategorií může ovlivnit váš zážitek z prohlížení.",
     "bctCategoriesTab": "Kategorie",
     "bctCookiesTab": "Soubory cookie",
     "categories": [
@@ -47,11 +47,11 @@
       }
     ]
   },
-  "bannerCookies": {
-    "bcCategory": "Kategorie",
-    "bcDescription": "Popis",
-    "bcName": "Název",
-    "bcDuration": "Doba trvání",
-    "bcHost": "Hostitel"
+  "BannerCookiesTab": {
+    "BcCategory": "Kategorie",
+    "BcDescription": "Popis",
+    "BcName": "Název",
+    "BcDuration": "Doba trvání",
+    "BcHost": "Hostitel"
   }
 }

@@ -131,23 +131,23 @@ const fillCookiesSettingItem = () => {
    </div>
       <ul class="mb-4 transform accordion-content mx-4 h-0 hidden transition-all duration-500 ease-in-out">
         <li class="flex flex-col justify-between mb-4">
-          <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcCategory">Category</span>
+          <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="BannerCookiesTab.BcCategory">Category</span>
           <span class="flex-1 text-small text-blue-500 font-medium" id="cookieCategory" >${item.categoryName}</span>
         </li>
         <li class="flex flex-col justify-between my-4">
-           <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcDescription">Description</span>
+           <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="BannerCookiesTab.BcDescription">Description</span>
            <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDescription" >${item.description}</span>
         </li>
          <li class="flex flex-col justify-between my-4">
-            <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcName">Name</span>
+            <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="BannerCookiesTab.BcName">Name</span>
             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieName" >${item.name}</span>
          </li>
          <li class="flex flex-col justify-between my-4">
-            <span class="flex-1 text-blue-300 text-small font-medium" data-i18n-key="bannerCookies.bcHost">Host</span>
+            <span class="flex-1 text-blue-300 text-small font-medium" data-i18n-key="BannerCookiesTab.BcHost">Host</span>
             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieHost">${item.cookieDomain}</span>
          </li>
          <li class="flex flex-col justify-between my-4">
-            <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="bannerCookies.bcDuration">Duration</span>
+            <span class="flex-1 text-blue-300 text-small font-medium " data-i18n-key="BannerCookiesTab.BcDuration">Duration</span>
             <span class="flex-1 text-small text-blue-500 font-medium" id="cookieDuration">${item.expiration}</span>
          </li>
       </ul>
@@ -382,7 +382,7 @@ const fillCategories = function () {
               <p class=" category-title font-bold text-black-faded" data-i18n-key=${
                 item.id > 5
                   ? item.name
-                  : `bannerCategories.categories.${index}.bctCategoryName`
+                  : `Categories.${item.name}.Categories.BctCategoryName`
               }></p>
               <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${
                 item.name.toLowerCase() === " necessary"
@@ -416,7 +416,7 @@ const fillCategories = function () {
               ? item.description
                 ? item.description
                 : item.name
-              : `bannerCategories.categories.${index}.bctCategoryDescription`
+              : `Categories.${item.name}.Categories.BctCategoryDescription`
           }>${item.description ? item.description : item.name}</p>
                        <button value=${item.id} data-settings-details-id=${
           item.id
@@ -424,7 +424,7 @@ const fillCategories = function () {
                           class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${
                             item.id
                           }>
-                          <span data-i18n-key="bannerGlobals.showCookiesBtn">Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN}
+                          <span data-i18n-key="BannerGlobals.ShowCookiesBtn">Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN}
                              class="toggle-accordion  transition duration-300 ease-in-out transform" alt="show cookies chevron" />
                        </button>
                     </div>

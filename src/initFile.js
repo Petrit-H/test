@@ -14,8 +14,7 @@ import {
   allowAllCookiesAtOnce,
   filterCookiesByCategory,
 } from "./utils/logic";
-import "./lang/en.json";
-import "./lang/cs.json";
+
 // import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import {
@@ -33,6 +32,8 @@ import {
   sendAcceptedDataToDb,
 } from "./getDomainsWithCookies";
 // import { CMP_IS_LOCALHOST } from "./constants";
+import cs from "./lang/cs.json";
+import en from "./lang/en.json";
 
 let ccInstance;
 let testType = "info";
@@ -310,10 +311,12 @@ function loadPath(lng) {
   let path = "";
   switch (lng) {
     case "en":
-      path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+      // path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+      path = `/dist/lang/${lng}.json`;
       break;
     case "cs":
-      path = "https://api.jsonbin.io/v3/b/62cb5cf4f023111c70713c0b";
+      // path = "https://api.jsonbin.io/v3/b/62cb5cf4f023111c70713c0b";
+      path = `/dist/lang/${lng}.json`;
       break;
     default:
       break;
@@ -324,13 +327,13 @@ function loadPath(lng) {
 const loadResources = async (locale) => {
   let path = loadPath(locale);
   if (locale !== "dev")
-    return await axios
-      .get(path)
-      .then(({ data }) => {
-        return data.record;
+    return await fetch(path)
+      .then((data) => {
+        // console.log(data)
+        return data.json();
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
 };
 
@@ -369,6 +372,36 @@ export async function initI18next() {
     });
   // .loadLanguages(["en", "cs"])
 }
+//TODO USE IF NECESSARY FOR API CALL
+/*
+function loadPath(lng) {
+  let path = "";
+  switch (lng) {
+    case "en":
+      path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+      break;
+    case "cs":
+      path = "https://api.jsonbin.io/v3/b/62cb5cf4f023111c70713c0b";
+      break;
+    default:
+      break;
+  }
+  return path;
+}
+
+const loadResources = async (locale) => {
+  let path = loadPath(locale);
+  if (locale !== "dev")
+    return await axios
+      .get(path)
+      .then(({ data }) => {
+        return data.record;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+};
+*/
 
 /**
  * Translate the content page/elements

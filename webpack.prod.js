@@ -6,9 +6,11 @@ const TerserPlugin = require("terser-webpack-plugin");
 const commonConfig = require("./webpack.common");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const glob = require("glob");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(commonConfig, {
   mode: "production",
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -53,12 +55,23 @@ module.exports = merge(commonConfig, {
     }),
   ],
   optimization: {
+    minimize: true,
     minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
       new OptimizeCssAssetsPlugin({
         cssProcessorOptions: {
           map: {
-            inline: false,
-            annotation: true,
+            inline: true,
+            annotation: false,
           },
         },
       }),
