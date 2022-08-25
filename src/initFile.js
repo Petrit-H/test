@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import axios from "axios";
+// import axios from "axios";
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
 import {
@@ -9,34 +9,36 @@ import {
   acceptAllCookiesWithRadioToggle,
   bannerAccordionToggle,
   fillCategories,
-  fillCookiesSettingItem,
+  // fillCookiesSettingItem,
   languageButtonToggle,
   allowAllCookiesAtOnce,
   filterCookiesByCategory,
 } from "./utils/logic";
 
-// import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import {
   cmpDomainCategories,
   cmpCookiesPerDomain,
   exportGlobalJSON,
-  cmpEncryptedDomainId,
+  // cmpEncryptedDomainId,
   cmpDomainId,
   cmpDomainWebsiteUrl,
   cmpComplianceType,
 } from "./cookies";
-import {
-  getCzech,
-  getEnglish,
-  sendAcceptedDataToDb,
-} from "./getDomainsWithCookies";
-// import { CMP_IS_LOCALHOST } from "./constants";
-import cs from "./lang/cs.json";
-import en from "./lang/en.json";
+import { sendAcceptedDataToDb } from "./getDomainsWithCookies";
 
 let ccInstance;
-let testType = "info";
+// let bannerPosition = "top";
+// let bannerPosition = "left";
+// let bannerPosition = "top-left";
+// let bannerPosition = "top-right";
+// let bannerPosition = "right";
+// let bannerPosition = "center";
+// let bannerPosition = "bottom-right";
+let bannerPosition = "bottom";
+// let bannerPosition = "bottom-left";
+
+let bannerType = "info";
 let CountryCode = "";
 let acceptedCategories = [];
 let acceptedCookies = [];
@@ -292,7 +294,7 @@ const optionsObj = (countryCode, type) => {
     container: document.getElementById("CMP_Selector"),
     type: type,
     regionalLaw: true,
-    // position:"left",
+    // position:bannerPosition,
     legal: countryCode,
     location: true,
     revokable: true,
@@ -307,22 +309,22 @@ const optionsObj = (countryCode, type) => {
   return options;
 };
 
-function loadPath(lng) {
-  let path = "";
-  switch (lng) {
-    case "en":
-      // path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
-      path = `/dist/lang/${lng}.json`;
-      break;
-    case "cz":
-      path = `https://cmp.gjirafa.dev/GetTranslations?code=${lng}`;
-      path = `/dist/lang/${lng}.json`;
-      break;
-    default:
-      break;
-  }
-  return path;
-}
+// function loadPath(lng) {
+//   let path = "";
+//   switch (lng) {
+//     case "en":
+//       // path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+//       path = `/dist/lang/${lng}.json`;
+//       break;
+//     case "cz":
+//       path = `https://cmp.gjirafa.dev/GetTranslations?code=${lng}`;
+//       path = `/dist/lang/${lng}.json`;
+//       break;
+//     default:
+//       break;
+//   }
+//   return path;
+// }
 
 const loadResources = async (locale) => {
   // let path = loadPath(locale);
@@ -468,12 +470,14 @@ fetchClientIp().then(
       browserAgent: browser,
     };
     // ccInstance = new CookieConsent(options);
-    ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+    ccInstance = new CookieConsent(optionsObj(countryCode, bannerType));
     ccInstance.autoOpen = true;
     ccInstance
       .on("initialized", function (popup) {
         // ccInstance.popup?.open()
+        languageButtonToggle();
         initiateTypeChangeAndBannerShow();
+
       })
       .on("popupOpened", (...args) => {
         // initiateTypeChangeAndBannerShow();
@@ -500,7 +504,7 @@ fetchClientIp().then(
 
 const draw = function (countryCode) {
   // getCategories();
-  ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+  ccInstance = new CookieConsent(optionsObj(countryCode, bannerType));
   ccInstance.autoOpen = true;
   ccInstance
     .on("initialized", function (popup) {
@@ -508,6 +512,7 @@ const draw = function (countryCode) {
     })
     .on("popupOpened", (...args) => {
       // acceptNecessaryCookies();
+      languageButtonToggle();
       initiateTypeChangeAndBannerShow();
       // Init
       (async function () {
@@ -545,14 +550,14 @@ export function initiateTypeChangeAndBannerShow() {
   for (const typeChangeElement of bannerTypeChangeButtons) {
     typeChangeElement.addEventListener("click", (event) => {
       timeStamp();
-      if (testType === "info") {
-        testType = "categories";
+      if (bannerType === "info") {
+        bannerType = "categories";
         ccInstance.destroy();
         optionsObj(CountryCode, "categories");
         draw(CountryCode);
         setTimeout(() => {
           fillCategories();
-          fillCookiesSettingItem();
+          // fillCookiesSettingItem();
           bannerAccordionToggle();
           acceptAllCookiesWithRadioToggle();
           // acceptNecessaryCookies();

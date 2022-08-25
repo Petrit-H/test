@@ -61,7 +61,8 @@ const switchBannerTabs = () => {
 };
 
 const languageButtonToggle = () => {
-  const checkType = document.querySelector(".cc-type-info");
+  const checkInfoType = document.querySelector(".cc-type-info");
+  const checkCategoriesType = document.querySelector(".cc-type-categories");
   setTimeout(() => {
     const languageButton = document.getElementById("language-icon-button");
     const languageOptionsMenu = document.getElementById("language-options");
@@ -82,7 +83,7 @@ const languageButtonToggle = () => {
     // languageButton.addEventListener("mouseleave",()=>{
     //   languageOptionsMenu.classList.add("hidden")
     // })
-    if (checkType === null) {
+    if ((checkInfoType !== null) | (checkCategoriesType !== null)) {
       languageButton.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -374,63 +375,52 @@ const fillCategories = function () {
       ?.slice(0)
       ?.reverse()
       ?.map((item, index) => {
-        return `<li id=test-${
-          item.id
-        } class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
+        return `<li id=test-${item.id
+          } class="cc-category flex-col  my-0.5 xl:my-2 rounded-md">
         <div class="accordion-header text-small leading w-full flex flex-col justify-between py-3" data-did=${cmpDomainId}>
            <div class="flex items-end justify-between">
-              <p class=" category-title font-bold text-black-faded" data-i18n-key=${
-                item.id > 5
-                  ? item.name
-                  : `Categories.${item.name}.Categories.BctCategoryName`
-              }></p>
-              <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${
-                item.name.toLowerCase() === " necessary"
-                  ? " cursor-not-allowed"
-                  : ""
-              }">
-                 <input type="checkbox" id=${item.id} ${
-          item.checked ? "checked" : ""
-        } data-radio-parent-category-name="${item.name}"
-                    class="category-radio-button ${
-                      item.name.toLowerCase() === " necessary"
-                        ? "cursor-not-allowed"
-                        : ""
-                    }" name="${item.name}" value="${item.name.toLowerCase()}" ${
-          item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
-        } />
+              <p class=" category-title font-bold text-black-faded" data-i18n-key=${item.id > 5
+            ? item.name
+            : `Categories.${item.name}.Categories.BctCategoryName`
+          }></p>
+              <button class="dot-wrapper inline-flex cursor-pointer  relative cc-btn w-auto group  consentButton ${item.name.toLowerCase() === " necessary"
+            ? " cursor-not-allowed"
+            : ""
+          }">
+                 <input type="checkbox" id=${item.id} ${item.checked ? "checked" : ""
+          } data-radio-parent-category-name="${item.name}"
+                    class="category-radio-button ${item.name.toLowerCase() === " necessary"
+            ? "cursor-not-allowed"
+            : ""
+          }" name="${item.name}" value="${item.name.toLowerCase()}" ${item.name.toLowerCase() === "necessary" ? "disabled checked" : ""
+          } />
                  <div class="switch-holder relative block border-1 border-gray-light w-9 h-6 rounded-full transition ">
-                    <div class="${
-                      item.name.toLowerCase() === " necessary"
-                        ? "translate-x-3 transform cursor-not-allowed necessary-category "
-                        : "bg-gray-dark"
-                    }
+                    <div class="${item.name.toLowerCase() === " necessary"
+            ? "translate-x-3 transform cursor-not-allowed necessary-category "
+            : "bg-gray-dark"
+          }
                        bg-gray-dark dot absolute left-1 top-1/2 -translate-y-1/2 my-0 w-4 h-4 rounded-full transition "></div>
                 </div>
 
               </button>
 
           </div>
-          <p class=" category-description max-w-4/5 text-black-faded transition duration-200 ease-in-out transform" data-i18n-key=${
-            item.id > 5
+          <p class=" category-description max-w-4/5 text-black-faded transition duration-200 ease-in-out transform" data-i18n-key=${item.id > 5
+            ? item.description
               ? item.description
-                ? item.description
-                : item.name
-              : `Categories.${item.name}.Categories.BctCategoryDescription`
+              : item.name
+            : `Categories.${item.name}.Categories.BctCategoryDescription`
           }>${item.description ? item.description : item.name}</p>
-                       <button value=${item.id} data-settings-details-id=${
-          item.id
-        }
-                          class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${
-                            item.id
-                          }>
+                       <button value=${item.id} data-settings-details-id=${item.id
+          }
+                          class="cookie-details max-w-max flex items-center text-blue font-medium leading" data-category-id=${item.id
+          }>
                           <span data-i18n-key="BannerGlobals.ShowCookiesBtn">Show Cookies</span> <img src=${CMP_BANNER_CHEVRON_DOWN}
                              class="toggle-accordion  transition duration-300 ease-in-out transform" alt="show cookies chevron" />
                        </button>
                     </div>
-                    <div class="accordion-content h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${
-                      item.id
-                    }">
+                    <div class="accordion-content h-0 hidden transition-all duration-500 ease-in-out " id="CATEGORY_CONTENT_${item.id
+          }">
                        <p>No cookies to show</p>
                     </div>
      </li>`;
@@ -450,7 +440,7 @@ const fillCategories = function () {
       translatePageElements();
       bindLocaleSwitcher(i18next.resolvedLanguage);
     })();
-  }, 0);
+  }, 50);
 };
 
 /**

@@ -5,7 +5,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   // entry: "./src/index.js",
   entry: {
-    "index.min.js": ["./src/initFile.js", "./src/getDomainsWithCookies.js", "./src/cookies.js"],
+    "index.min.js": [
+      "./src/initFile.js",
+      "./src/getDomainsWithCookies.js",
+      "./src/cookies.js",
+    ],
   },
   // watch: true,
   output: {
@@ -23,12 +27,8 @@ module.exports = {
       inject: "body",
       template: path.resolve(__dirname, "./src", "index.html"),
       favicon: path.resolve(__dirname, "./src/assets", "favicon.ico"),
+      scriptLoading: "defer",
     }),
   ],
-  devServer: {
-    port: 8080,
-    contentBase: ["./src", "./dir"], // both src and output dirs
-    inline: true,
-    hot: true,
-  },
+
 };

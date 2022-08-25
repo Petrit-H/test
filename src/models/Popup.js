@@ -337,7 +337,7 @@ export default class Popup extends Base {
 
   getPopupClasses() {
     const opts = this.options;
-    let positionStyle = opts.position == "top" || opts.position == "bottom" ? "banner" : "floating";
+    let positionStyle = opts.position == "top" || opts.position == "bottom" ? "banner" : "";
 
     // if (isMobile() && opts.mobileForceFloat) {
     //   positionStyle = "floating";
