@@ -28,24 +28,11 @@
 .cc-top {
   top: 1em;
 }
-.cc-left,
-.cc-right {
-  // max-width: 24em;
-}
 .cc-left {
   left: 1em;
 }
 .cc-right {
   right: 1em;
-  margin-left: auto;
-  width: auto;
-}
-.cc-center {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  margin: auto;
-  width: 50%;
 }
 .cc-bottom {
   bottom: 1em;
@@ -75,32 +62,16 @@
   left: 0;
   right: 0;
   top: 0;
-  // width: 100vh;
 }
-
-.cc-window.cc-type-categories.cc-bottom,
-.cc-window.cc-type-categories.cc-bottom.cc-right,
-.cc-window.cc-type-categories.cc-bottom.cc-left,
-.cc-window.cc-type-categories.cc-top,
-.cc-window.cc-type-categories.cc-top.cc-right,
-.cc-window.cc-type-categories.cc-top.cc-left {
+.cc-banner.cc-type-categories.cc-bottom {
   left: 0;
   right: 0;
   bottom: 0;
-  width: screen;
-}
-.cc-window.cc-type-info.cc-bottom.cc-right,
-.cc-window.cc-type-info.cc-bottom.cc-left,
-.cc-window.cc-type-info.cc-top.cc-right,
-.cc-window.cc-type-info.cc-top.cc-center,
-.cc-window.cc-type-info.cc-top.cc-left {
-  max-width: 24em;
 }
 .cc-banner.cc-type-info.cc-bottom {
   left: 0;
   right: 0;
   bottom: 8px;
-  // width: 100vh;
 }
 
 .cc-banner .cc-message {

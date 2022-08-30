@@ -353,6 +353,13 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   /* 2 */
 }
 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -526,16 +533,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: sticky;
 }
 
-.top-3 {
-  top: 0.75rem;
+.top-0 {
+  top: 0px;
 }
 
 .right-0 {
   right: 0px;
-}
-
-.top-\[25px\] {
-  top: 25px;
 }
 
 .left-1 {
@@ -546,8 +549,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 50%;
 }
 
-.top-0 {
-  top: 0px;
+.top-\[25px\] {
+  top: 25px;
 }
 
 .left-0 {
@@ -615,10 +618,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.125rem;
 }
 
-.mr-6 {
-  margin-right: 1.5rem;
-}
-
 .mb-9 {
   margin-bottom: 2.25rem;
 }
@@ -645,6 +644,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-1 {
   margin-bottom: 0.25rem;
+}
+
+.mr-6 {
+  margin-right: 1.5rem;
 }
 
 .mb-4 {
@@ -675,16 +678,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-6 {
   height: 1.5rem;
 }
 
 .h-4 {
   height: 1rem;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .h-0 {
@@ -699,14 +702,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100vw;
 }
 
-.w-100 {
-  width: 100px;
-}
-
-.w-full {
-  width: 100%;
-}
-
 .w-auto {
   width: auto;
 }
@@ -717,6 +712,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-4 {
   width: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-100 {
+  width: 100px;
 }
 
 .max-w-6\/10 {
@@ -821,12 +824,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 9999px;
 }
 
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
 .rounded-4 {
   border-radius: 4px;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
 }
 
 .rounded-lg {
@@ -903,11 +906,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-color: rgb(58 129 246 / var(--tw-border-opacity));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-gray-dark {
   --tw-bg-opacity: 1;
   background-color: rgb(202 202 202 / var(--tw-bg-opacity));
@@ -916,6 +914,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-blue-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(58 129 246 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-gray-100 {
@@ -934,11 +937,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .py-2 {
@@ -964,6 +962,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .px-1 {
@@ -1062,11 +1065,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(29 121 242 / var(--tw-text-opacity));
 }
 
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
 .text-black-400 {
   --tw-text-opacity: 1;
   color: rgb(26 26 26 / var(--tw-text-opacity));
@@ -1127,16 +1125,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .transition {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1260,6 +1258,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 75%;
   }
 
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
   .md\:w-full {
     width: 100%;
   }
@@ -1276,6 +1278,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 1024px) {
   .lg\:w-3\/4 {
     width: 75%;
+  }
+
+  .lg\:w-1\/2 {
+    width: 50%;
   }
 }
 
