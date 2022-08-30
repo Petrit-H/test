@@ -263,8 +263,8 @@ export const fillJSONWithAllCategories = () => {
     JSON.stringify(payload)
   );
 
-  console.log(payload);
-  console.log(responseJSON);
+  // console.log(payload);
+  // console.log(responseJSON);
   // payload.splice(0, payload.length);
   payload = [];
   acceptedCategories = [];
