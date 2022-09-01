@@ -5,7 +5,6 @@ import axios from "axios";
 import CookieConsent from "../src/models/CookieConsent";
 import { fetchClientIp } from "./options/location";
 import {
-  // acceptNecessaryCookies,
   acceptAllCookiesWithRadioToggle,
   bannerAccordionToggle,
   fillCategories,
@@ -15,28 +14,24 @@ import {
   filterCookiesByCategory,
 } from "./utils/logic";
 
-// import { cmpDomainCategories } from "./getDomainsWithCookies";
 import "./styles/main.scss";
 import {
   cmpDomainCategories,
   cmpCookiesPerDomain,
   exportGlobalJSON,
-  cmpEncryptedDomainId,
   cmpDomainId,
   cmpDomainWebsiteUrl,
   cmpComplianceType,
+  cmpDomainGUID,
 } from "./cookies";
-import {
-  getCzech,
-  getEnglish,
-  sendAcceptedDataToDb,
-} from "./getDomainsWithCookies";
+import { sendAcceptedDataToDb } from "./getDomainsWithCookies";
 // import { CMP_IS_LOCALHOST } from "./constants";
-import cs from "./lang/cs.json";
-import en from "./lang/en.json";
 
 let ccInstance;
 let testType = "info";
+let Position = "";
+export let consentStyleData = [];
+
 let CountryCode = "";
 let acceptedCategories = [];
 let acceptedCookies = [];
@@ -284,15 +279,17 @@ function createUUID() {
   exportGlobalJSON().then((json) => json);
   return uuid;
 }
+// console.log(position);
 
 //!the config file for the consent manager/library to start
 const optionsObj = (countryCode, type) => {
+  console.log(Position);
   const options = {
     cookieconsent: CookieConsent,
     container: document.getElementById("CMP_Selector"),
     type: type,
     regionalLaw: true,
-    // position:"left",
+    position: consentStyleData?.BannerPosition?.Position,
     legal: countryCode,
     location: true,
     revokable: true,
@@ -307,22 +304,25 @@ const optionsObj = (countryCode, type) => {
   return options;
 };
 
-function loadPath(lng) {
-  let path = "";
-  switch (lng) {
-    case "en":
-      // path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
-      path = `/dist/lang/${lng}.json`;
-      break;
-    case "cz":
-      path = `https://cmp.gjirafa.dev/GetTranslations?code=${lng}`;
-      path = `/dist/lang/${lng}.json`;
-      break;
-    default:
-      break;
-  }
-  return path;
-}
+// getConsentStyle();
+// console.log(data)
+
+// function loadPath(lng) {
+//   let path = "";
+//   switch (lng) {
+//     case "en":
+//       // path = "https://api.jsonbin.io/v3/b/62cb5ce14bccf21c2edad6f7";
+//       path = `/dist/lang/${lng}.json`;
+//       break;
+//     case "cz":
+//       path = `https://cmp.gjirafa.dev/GetTranslations?code=${lng}`;
+//       path = `/dist/lang/${lng}.json`;
+//       break;
+//     default:
+//       break;
+//   }
+//   return path;
+// }
 
 const loadResources = async (locale) => {
   // let path = loadPath(locale);
@@ -459,44 +459,108 @@ const options = {
 
 fetchClientIp().then(
   ({ countryCode, ipToString, browser, country, mobile }) => {
-    CountryCode = countryCode;
-    responseJSON = {
-      ...responseJSON,
-      ipAddress: ipToString,
-      country: country,
-      device: mobile,
-      browserAgent: browser,
+    // let consentStyle={}
+    let config = {
+      method: "get",
+      url: `https://lt3sm91cte.gjirafa.net/GetCSS?guidId=${cmpDomainGUID}`,
     };
-    // ccInstance = new CookieConsent(options);
-    ccInstance = new CookieConsent(optionsObj(countryCode, testType));
-    ccInstance.autoOpen = true;
-    ccInstance
-      .on("initialized", function (popup) {
-        // ccInstance.popup?.open()
-        initiateTypeChangeAndBannerShow();
-      })
-      .on("popupOpened", (...args) => {
-        // initiateTypeChangeAndBannerShow();
-        languageButtonToggle();
-        // Init
-        (async function () {
-          i18next.on("languageChanged", (newLanguage) => {
-            document.documentElement.lang = newLanguage;
-            document.documentElement.dir = i18next.dir(newLanguage);
-          });
+    axios(config)
+      .then(function (response) {
+        for (const item of response.data) {
+          if (item.ActiveTheme===true) {
+            // consentStyle = response.data;
+            consentStyleData = item;
+            Position = item?.BannerPosition?.Position;
+            console.log(consentStyleData);
+            // return consentStyle;}
+          }
 
-          await initI18next();
-          translatePageElements();
-          bindLocaleSwitcher(i18next.resolvedLanguage);
-        })();
+          CountryCode = countryCode;
+          responseJSON = {
+            ...responseJSON,
+            ipAddress: ipToString,
+            country: country,
+            device: mobile,
+            browserAgent: browser,
+          };
+          // ccInstance = new CookieConsent(options);
+          ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+          ccInstance.autoOpen = true;
+          ccInstance
+            .on("initialized", function (popup) {
+              // ccInstance.popup?.open()
+              initiateTypeChangeAndBannerShow();
+            })
+            .on("popupOpened", (...args) => {
+              // initiateTypeChangeAndBannerShow();
+              languageButtonToggle();
+              // Init
+              (async function () {
+                i18next.on("languageChanged", (newLanguage) => {
+                  document.documentElement.lang = newLanguage;
+                  document.documentElement.dir = i18next.dir(newLanguage);
+                });
+
+                await initI18next();
+                translatePageElements();
+                bindLocaleSwitcher(i18next.resolvedLanguage);
+              })();
+            })
+            .on("popupClosed", (...args) => {
+              // acceptNecessaryCookies();
+              // ccInstance.popup?.close();
+            })
+            .on("error", console.error);
+        }
       })
-      .on("popupClosed", (...args) => {
-        // acceptNecessaryCookies();
-        // ccInstance.popup?.close();
-      })
-      .on("error", console.error);
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 );
+
+// fetchClientIp().then(
+//   ({ countryCode, ipToString, browser, country, mobile }) => {
+//     // let consentStyle={}
+
+//     CountryCode = countryCode;
+//     responseJSON = {
+//       ...responseJSON,
+//       ipAddress: ipToString,
+//       country: country,
+//       device: mobile,
+//       browserAgent: browser,
+//     };
+//     // ccInstance = new CookieConsent(options);
+//     ccInstance = new CookieConsent(optionsObj(countryCode, testType));
+//     ccInstance.autoOpen = true;
+//     ccInstance
+//       .on("initialized", function (popup) {
+//         // ccInstance.popup?.open()
+//         initiateTypeChangeAndBannerShow();
+//       })
+//       .on("popupOpened", (...args) => {
+//         // initiateTypeChangeAndBannerShow();
+//         languageButtonToggle();
+//         // Init
+//         (async function () {
+//           i18next.on("languageChanged", (newLanguage) => {
+//             document.documentElement.lang = newLanguage;
+//             document.documentElement.dir = i18next.dir(newLanguage);
+//           });
+
+//           await initI18next();
+//           translatePageElements();
+//           bindLocaleSwitcher(i18next.resolvedLanguage);
+//         })();
+//       })
+//       .on("popupClosed", (...args) => {
+//         // acceptNecessaryCookies();
+//         // ccInstance.popup?.close();
+//       })
+//       .on("error", console.error);
+//   }
+// );
 
 const draw = function (countryCode) {
   // getCategories();

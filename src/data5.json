@@ -2,6 +2,7 @@
    "complianceType": 0,
    "ipAddressURL": "https://cmp.gjirafa.dev/GetPublicIp",
    "domainId": 135,
+   "domainGuidId": "135c20bd495-d629-428c-a8bd-2ae0b598a72e",
    "encryptedId": "CfDJ8Ke3mhaPIRVLswVlSrTIy6eStMxW7haCZsbwzWleEAK4MxXn8ByepFxEDkV5lXwf274Qcam3z3i6Hp7Q4iFfwMM0DpG5xIqKUz9yKX480BYij8dK_KbYkx1xHXQtTZ-3RA",
    "domainName": "Portali Gjirafa",
    "domainWebsiteUrl": "adobe.com",
@@ -44,27 +45,27 @@
    "languagesList": null,
    "domainCategories": [
       {
-         "id": 1,
+         "id": 5,
          "encryptedId": null,
-         "name": "Other",
+         "name": "Necessary",
          "isDeafult": true,
          "isDeleted": false,
          "isEnabled": true,
-         "description": "The other cookies are cookies that have not been classified into a category yet.",
+         "description": "The necessary cookies are needed for the website to function properly and cannot be switched off. Some of the basic features that are enabled through these cookies are logging in, filling in forms, or changing your consent settings.",
          "domainId": null,
          "encryptedDomainId": null,
-         "checked": false,
-         "usedForTracking": true,
-         "preconsent": true
+         "checked": true,
+         "usedForTracking": false,
+         "preconsent": false
       },
       {
-         "id": 2,
+         "id": 4,
          "encryptedId": null,
-         "name": "Marketing",
+         "name": "Preferences",
          "isDeafult": true,
          "isDeleted": false,
          "isEnabled": true,
-         "description": "The targeting cookies are used by us and third parties that represent our advertising partners. These cookies provide our site visitors with custom advertising based on their interests such as the pages they have visited. If not allowed, the site visitor will not be shown advertising tailored to their interests.",
+         "description": "The preference cookies enhance the website’s personalisation based on the user’s preferences. They are set by us or our third-party service providers.",
          "domainId": null,
          "encryptedDomainId": null,
          "checked": true,
@@ -86,13 +87,13 @@
          "preconsent": true
       },
       {
-         "id": 4,
+         "id": 2,
          "encryptedId": null,
-         "name": "Preferences",
+         "name": "Marketing",
          "isDeafult": true,
          "isDeleted": false,
          "isEnabled": true,
-         "description": "The preference cookies enhance the website’s personalisation based on the user’s preferences. They are set by us or our third-party service providers.",
+         "description": "The targeting cookies are used by us and third parties that represent our advertising partners. These cookies provide our site visitors with custom advertising based on their interests such as the pages they have visited. If not allowed, the site visitor will not be shown advertising tailored to their interests.",
          "domainId": null,
          "encryptedDomainId": null,
          "checked": true,
@@ -100,18 +101,18 @@
          "preconsent": true
       },
       {
-         "id": 5,
+         "id": 1,
          "encryptedId": null,
-         "name": "Necessary",
+         "name": "Other",
          "isDeafult": true,
          "isDeleted": false,
          "isEnabled": true,
-         "description": "The necessary cookies are needed for the website to function properly and cannot be switched off. Some of the basic features that are enabled through these cookies are logging in, filling in forms, or changing your consent settings.",
+         "description": "The other cookies are cookies that have not been classified into a category yet.",
          "domainId": null,
          "encryptedDomainId": null,
-         "checked": true,
-         "usedForTracking": false,
-         "preconsent": false
+         "checked": false,
+         "usedForTracking": true,
+         "preconsent": true
       }
    ],
    "domainCookies": [

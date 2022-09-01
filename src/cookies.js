@@ -1,7 +1,7 @@
 import { setCookie } from "./utils/cookie";
 import { fetchClientIp } from "./options/location";
 import jsonData from "./data5.json";
-import { initiateTypeChangeAndBannerShow } from "./initFile";
+import { consentStyleData, initiateTypeChangeAndBannerShow } from "./initFile";
 import { saveAllCookies, saveSpecificCookies } from "./getDomainsWithCookies";
 import { CMP_IS_LOCALHOST } from "./constants";
 import { getEnvLocal } from "./utils/logic";
@@ -14,6 +14,7 @@ export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
 export let cmpIpAddressURL = {};
 export let cmpDomainId = "";
+export let cmpDomainGUID = "";
 export let cmpEncryptedDomainId = "";
 export let cmpDomainName = "";
 export let cmpDomainWebsiteUrl = "";
@@ -53,6 +54,7 @@ export let cmpComplianceType = "";
 const {
   ipAddressURL,
   domainId,
+  domainGuidId,
   encryptedId,
   domainName,
   domainWebsiteUrl,
@@ -98,6 +100,7 @@ const {
 export const exportGlobalJSON = async () => {
   try {
     cmpDomainId = domainId;
+    cmpDomainGUID = domainGuidId;
     cmpIpAddressURL = ipAddressURL;
     cmpEncryptedDomainId = encryptedId;
     cmpDomainName = domainName;
@@ -135,6 +138,7 @@ export const exportGlobalJSON = async () => {
 
     return {
       cmpDomainId,
+      cmpDomainGUID,
       cmpDomainName,
       cmpEncryptedDomainId,
       cmpDomainWebsiteUrl,
@@ -174,6 +178,7 @@ export const exportGlobalJSON = async () => {
   }
   return {
     cmpDomainId,
+    cmpDomainGUID,
     cmpDomainName,
     cmpEncryptedDomainId,
     cmpDomainWebsiteUrl,

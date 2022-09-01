@@ -43,7 +43,7 @@
 .cc-center {
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   margin: auto;
   width: 50%;
 }
@@ -96,6 +96,22 @@
 .cc-window.cc-type-info.cc-top.cc-left {
   max-width: 24em;
 }
+
+.cc-type-info.cc-center .cc-compliance {
+  .cmp-container {
+    display: flex;
+    flex-direction: column !important;
+    .banner-wrapper-controls {
+      margin-top: 20px;
+      flex-direction: inherit;
+      & > * {
+        width: 100%;
+        margin: 2px 0;
+      }
+    }
+  }
+}
+
 .cc-banner.cc-type-info.cc-bottom {
   left: 0;
   right: 0;

@@ -7,9 +7,11 @@ import {
   cmpDomainCategoriesWithCookies,
   cmpDomainId,
   cmpCookiesPerDomain,
+  cmpDomainGUID,
 } from "./cookies";
 
 export let categories = [];
+export let consentStyle = {};
 export let responseData = [];
 export let cookiesPerCategory = [];
 export let filteredCookiesPerDomain = [];
@@ -96,6 +98,27 @@ export const getCategories = () => {
     });
   return categories;
 };
+/**
+ * fetch data from the CATEGORIES endpoint
+ * @returns the array of the categories
+ */
+export const getConsentStyle = () => {
+  let config = {
+    method: "get",
+    // url: `${CMP_API_BASE_URL}/GetCSS?guidId=${cmpDomainGUID}`,
+    url: `https://lt3sm91cte.gjirafa.net/GetCSS?guidId=${cmpDomainGUID}`,
+  };
+  axios(config)
+    .then(function (response) {
+      consentStyle = response.data;
+      console.log(response.data);
+      return consentStyle;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return consentStyle;
+};
 
 export const sendAcceptedDataToDb = async (
   id,
@@ -118,7 +141,7 @@ export const sendAcceptedDataToDb = async (
         userId: id,
         domainID: domainID,
         ipAddress: ipAddress,
-        userCountry:country,
+        userCountry: country,
         device,
         url,
         complianceType,
